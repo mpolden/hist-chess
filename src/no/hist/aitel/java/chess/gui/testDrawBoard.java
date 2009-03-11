@@ -7,7 +7,6 @@ import java.awt.Color;
 import java.awt.Insets;
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 
 /**
  *
@@ -25,9 +24,11 @@ public class testDrawBoard extends JFrame {
         setSize(1200, 1000);
         setBackground (Color.lightGray);
         board = new drawBoard();
-        setLayout(new BorderLayout(10,10));
+        setLayout(new BorderLayout());
+        
         add("Center", board);
-        add("South", newGame);
+        
+        
         
 
     }
