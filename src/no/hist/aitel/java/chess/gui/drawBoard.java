@@ -3,19 +3,24 @@
 package no.hist.aitel.java.chess.gui;
 import java.awt.Color;
 import java.awt.Graphics;
+import javax.swing.JPanel;
 
 /**
  *
  * @author Vegard
  */
-public class drawBoard extends java.awt.Canvas {
+public class drawBoard extends JPanel {
     static final int width = 80;
     static final int hight = 80;
     static final Color dunkel = new Color (0x999999);
     static final Color hell = new Color (0xFFFFCC);
     
-    public drawBoard() {            
-        Graphics g = getGraphics();
+    public drawBoard() {        
+    }
+
+    @Override
+    public void paintComponent(Graphics g) {
+        g = getGraphics();
         int y = 1;     
 
         boolean inverse = false;
