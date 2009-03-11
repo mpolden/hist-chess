@@ -25,7 +25,7 @@ public class testDrawBoard extends JFrame  {
         layeredPane.setPreferredSize(boardSize);
         chessBoard = new drawBoard();
         layeredPane.add(chessBoard, JLayeredPane.DEFAULT_LAYER);
-        chessBoard.setLayout( new GridLayout(8, 8) );
+        chessBoard.setLayout(new GridLayout(8, 8));
         chessBoard.setPreferredSize( boardSize );
         chessBoard.setBounds(0, 0, boardSize.width, boardSize.height);                     
     }   
