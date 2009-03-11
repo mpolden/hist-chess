@@ -7,6 +7,7 @@ import java.awt.Color;
 import java.awt.Insets;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 
 /**
  *
@@ -15,7 +16,8 @@ import javax.swing.JFrame;
 
 public class testDrawBoard extends JFrame {
     drawBoard board;
-    JButton newGame = new JButton("New game");
+    JButton newGame = new JButton("New game");    
+    
 
     public testDrawBoard(String title) {
         super(title);
