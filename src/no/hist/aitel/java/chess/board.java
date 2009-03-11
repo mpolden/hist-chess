@@ -20,41 +20,50 @@ public class board extends java.awt.Canvas  {
     public void newgame () {
         return;
     }
-
+    
     @Override
     public void paint(Graphics g) {
-        for ( int i = 1; i <= 64; i++)
-        {
-            paintField(i);
-        }
-    }
 
-    public void paintField(int index) {
-        Graphics g = getGraphics(); 
-        int x = index % 10;
-        int y = index / 10;
-        boolean inverse = false;
+        paintField();
+    }
+    
+
+    public void paintField() {
+        Graphics g = getGraphics();
+        int y = 1;
         
-            if (!inverse) {
-                if (index % 2 == 0) {
+      
+        boolean inverse = false;
+        boolean evenNum;
+        for (int i = 1; i<=64; i++) {
+            int x = i%8;
+            
+
+            if (!inverse) { // Sjekker om vi har byttet om på rekkefølgen
+                    evenNum = (i % 2 == 0);
+                } else {
+                    evenNum = !(i % 2 == 0);
+                }
+
+                if (evenNum) {
                     g.setColor(dunkel);
+
                 } else {
                     g.setColor(hell);
-                }
-            } else {
-                if (index % 2 == 0) {
-                    g.setColor(hell);                    
-                }
-                 else {
-                    g.setColor(dunkel);
-                 }
-            }
 
-            if (index % 8 == 0) {
-                inverse = !inverse;
+                }
+                g.fillRect(x*80, y*80, 80, 80);
+
+                if (i % 8 == 0) { // Står nå på den siste ruta i linja
+                    inverse = !inverse;
+                    y+=1;
+                    //x+=1;
+
+                }
+
+            
             }
-        g.fillRect ( x * 40, y * 40, 40, 40);
-        }
+    }
     public void run() {
         
     }
