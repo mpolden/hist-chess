@@ -26,13 +26,15 @@ public class testDrawBoard extends JFrame {
         board = new drawBoard();
         setLayout(new BorderLayout());
         
-        add("Center", board);   
-               
+        add("Center", board);
+                      
 
     }
     public Insets insets () {
         return new Insets (10,10,10,10);
     }
+
+    
 
     public static void main(String[] args) {
         testDrawBoard drawedBoard = new testDrawBoard("Chess");
