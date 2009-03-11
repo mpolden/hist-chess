@@ -26,10 +26,8 @@ public class testDrawBoard extends JFrame {
         board = new drawBoard();
         setLayout(new BorderLayout());
         
-        add("Center", board);
-        
-        
-        
+        add("Center", board);   
+               
 
     }
     public Insets insets () {
