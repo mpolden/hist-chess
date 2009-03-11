@@ -2,7 +2,6 @@
  * Test2.java
  * 
  */
-
 package no.hist.aitel.java.chess;
 
 /**
@@ -10,27 +9,31 @@ package no.hist.aitel.java.chess;
  * @author martin
  */
 public class Test2 {
+
+    /**
+     * Eksempel på utskriving av et sjakkbrett
+     * @param args
+     */
     public static void main(String[] args) {
 
         boolean inverse = false;
+        boolean evenNum;
         for (int i = 1; i <= 64; i++) {
 
-            if (!inverse) {
-                if (i % 2 == 0) {
-                    System.out.print(i + ":white ");
-                } else {
-                    System.out.print(i + ":black ");
-                }
+            if (!inverse) { // Sjekker om vi har byttet om på rekkefølgen
+                evenNum = (i % 2 == 0);
             } else {
-                if (i % 2 == 0) {
-                    System.out.print(i + ":black ");
-                } else {
-                    System.out.print(i + ":white ");
-                }
+                evenNum = !(i % 2 == 0);
             }
 
-            if (i % 8 == 0) {
-                inverse = !inverse;
+            if (evenNum) {
+                System.out.print(i + ":white ");
+            } else {
+                System.out.print(i + ":black ");
+            }
+
+            if (i % 8 == 0) { // Står nå på den siste ruta i linja
+                inverse = !inverse; // Bytter rekkefølge på hvit og svart
                 System.out.println("");
             }
 
