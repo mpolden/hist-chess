@@ -15,7 +15,8 @@ public class drawBoard extends JPanel {
     static final Color dunkel = new Color (0x999999);
     static final Color hell = new Color (0xFFFFCC);
     
-    public drawBoard() {        
+    public drawBoard() {
+        
     }
 
     @Override
@@ -45,6 +46,7 @@ public class drawBoard extends JPanel {
                 y+=1;
             }
         }
+        
     }
 }
     
