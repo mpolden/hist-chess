@@ -2,7 +2,7 @@
 
 package no.hist.aitel.java.chess.gui;
 
-import java.awt.BorderLayout;
+import java.awt.Container;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 
@@ -12,25 +12,24 @@ import javax.swing.JFrame;
  */
 public class testDrawBoard {
     public static void main(String[] args) {
-        Window window = new Window("Chess");
+        Window window = new Window();
         window.setVisible(true);
     }
 }
 
-class Window extends JFrame {
-    //private drawBoard chessBoard = new drawBoard();
-    private JButton button = new JButton("New game");
+class Window extends JFrame  {    
     
-    public Window(String title) {
-        setTitle(title);
-        setDefaultCloseOperation(EXIT_ON_CLOSE);        
+    drawBoard draw = new drawBoard();
+    private JButton button = new JButton("New game");
 
-        //setBackground (Color.lightGray);
-        setLayout (new BorderLayout (10,10));
-
-        //add("Center", chessBoard);
-        add("South", button);
-        pack();
+    public Window() {
+        super("My Simple Frame");
+        
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        Container con = this.getContentPane();
+        //con.add(draw);
+        con.add(button);
+               
     }
 
 }
