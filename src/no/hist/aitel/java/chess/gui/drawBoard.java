@@ -11,10 +11,11 @@ import java.awt.Graphics;
 public class drawBoard extends java.awt.Canvas {
     static final int width = 80;
     static final int hight = 80;
+    static final Color dunkel = new Color (0x999999);
+    static final Color hell = new Color (0xFFFFCC);
     
     public drawBoard() {
-        Color dunkel = new Color (0x999999);
-        Color hell = new Color (0xFFFFCC);    
+            
         Graphics g = getGraphics();
         int y = 1;        
 
