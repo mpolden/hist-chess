@@ -30,14 +30,12 @@ public class board extends java.awt.Canvas  {
 
     public void paintField() {
         Graphics g = getGraphics();
-        int y = 1;
-        
+        int y = 1;        
       
         boolean inverse = false;
         boolean evenNum;
         for (int i = 1; i<=64; i++) {
-            int x = i%8;
-            
+            int x = i%8;            
 
             if (!inverse) { // Sjekker om vi har byttet om på rekkefølgen
                     evenNum = (i % 2 == 0);
@@ -56,48 +54,10 @@ public class board extends java.awt.Canvas  {
 
                 if (i % 8 == 0) { // Står nå på den siste ruta i linja
                     inverse = !inverse;
-                    y+=1;
-                    //x+=1;
-
-                }
-
-            
+                    y+=1;                
+                }            
             }
     }
-    public void run() {
-        
+    public void run() {        
     }
-    
-    }
-
-
-
-   /* public void paintBoard(Graphics g) {
-        g = getGraphics();        
-        
-        boolean inverse = false;
-        for (int i = 1; i <= 64; i++) {
-            if (!inverse) {
-                if (i % 2 == 0) {
-                    g.setColor(dunkel);
-
-                } else {
-                    g.setColor(hell);
-                }
-            } else {
-                if (i % 2 == 0) {
-                    g.setColor(hell);
-                } else {
-                    g.setColor(dunkel);
-                }
-            }
-
-            if (i % 8 == 0) {
-                inverse = !inverse;                
-            }
-        }
-        g.fillRect (x, y, 40, 40);
-        x++;
-        y++;
-    }
-*/
+}
