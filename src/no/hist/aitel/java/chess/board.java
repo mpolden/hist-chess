@@ -52,7 +52,6 @@ public class board extends java.awt.Canvas  {
         y++;
     }
 
-    public void run() {
-        
+    public void run() {        
     }
 }
