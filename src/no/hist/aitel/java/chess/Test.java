@@ -18,6 +18,7 @@ public class Test {
         // TODO code application logic here
         System.out.println("Test");
         System.out.println("hei!");
+        System.out.println("sdf");
     }
 
 }
