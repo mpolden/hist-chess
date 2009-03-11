@@ -14,10 +14,9 @@ public class drawBoard extends java.awt.Canvas {
     static final Color dunkel = new Color (0x999999);
     static final Color hell = new Color (0xFFFFCC);
     
-    public drawBoard() {
-            
+    public drawBoard() {            
         Graphics g = getGraphics();
-        int y = 1;        
+        int y = 1;     
 
         boolean inverse = false;
         boolean evenNum;
