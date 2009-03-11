@@ -1,7 +1,6 @@
 
 
 package no.hist.aitel.java.chess.gui;
-
 import java.awt.Color;
 import java.awt.Graphics;
 
@@ -26,26 +25,24 @@ public class drawBoard extends java.awt.Canvas {
             int x = i%8;
 
             if (!inverse) { // Sjekker om vi har byttet om på rekkefølgen
-                    evenNum = (i % 2 == 0);
-                } else {
-                    evenNum = !(i % 2 == 0);
-                }
-
-                if (evenNum) {
-                    g.setColor(dunkel);                    
-
-                } else {
-                    g.setColor(hell);
-
-                }
-                g.fillRect(x*width, y*hight, width, hight);
-
-                if (i % 8 == 0) { // Står nå på den siste ruta i linja
-                    inverse = !inverse;
-                    y+=1;
-                }
+                evenNum = (i % 2 == 0);
+            } else {
+                evenNum = !(i % 2 == 0);
+            }
+            if (evenNum) {
+                g.setColor(dunkel);                  
+            } else {
+                g.setColor(hell);
+            }
+            g.fillRect(x*width, y*hight, width, hight);
+            if (i % 8 == 0) { // Står nå på den siste ruta i linja
+                inverse = !inverse;
+                y+=1;
+            }
         }
     }
 }
+ 
+
                     
 
