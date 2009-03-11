@@ -2,11 +2,12 @@
 
 package no.hist.aitel.java.chess.gui;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.GridLayout;
 import java.awt.Insets;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLayeredPane;
 
 /**
  *
@@ -14,30 +15,30 @@ import javax.swing.JFrame;
  */
 
 public class testDrawBoard extends JFrame {
-    drawBoard board;
+    JLayeredPane layeredPane;
+    drawBoard chessBoard;
     JButton newGame = new JButton("New game");    
     
 
     public testDrawBoard(String title) {
         super(title);
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setSize(1200, 1000);
-        setBackground (Color.lightGray);
-        board = new drawBoard();
-        setLayout(new BorderLayout());
-        
-        add("Center", board);
-                      
-
-    }
-    public Insets insets () {
-        return new Insets (10,10,10,10);
-    }
-
+        Dimension boardSize = new Dimension(600, 600);
+        layeredPane = new JLayeredPane();
+        getContentPane().add(layeredPane);
+        layeredPane.setPreferredSize(boardSize);
+        chessBoard = new drawBoard();
+        layeredPane.add(chessBoard, JLayeredPane.DEFAULT_LAYER);
+        chessBoard.setLayout( new GridLayout(8, 8) );
+        chessBoard.setPreferredSize( boardSize );
+        chessBoard.setBounds(0, 0, boardSize.width, boardSize.height);                     
+    }   
     
-
     public static void main(String[] args) {
-        testDrawBoard drawedBoard = new testDrawBoard("Chess");
-        drawedBoard.setVisible(true);
+        JFrame frame = new testDrawBoard("Chess");        
+        frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        frame.pack();
+        frame.setResizable(true);
+        frame.setLocationRelativeTo(null);
+        frame.setVisible(true);
     }
 }
