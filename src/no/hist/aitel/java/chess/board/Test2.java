@@ -17,7 +17,7 @@ public class Test2 {
     public static void main(String[] args) {
 
         boolean inverse = false;
-        boolean evenNum;
+        boolean evenNum; //
         for (int i = 1; i <= 64; i++) {
 
             if (!inverse) { // Sjekker om vi har byttet om på rekkefølgen
