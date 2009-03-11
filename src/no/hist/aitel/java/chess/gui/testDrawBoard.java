@@ -1,5 +1,3 @@
-
-
 package no.hist.aitel.java.chess.gui;
 
 import java.awt.Dimension;
