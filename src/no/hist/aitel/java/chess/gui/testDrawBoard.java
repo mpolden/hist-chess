@@ -14,7 +14,7 @@ import javax.swing.JLayeredPane;
  * @author Vegard
  */
 
-public class testDrawBoard extends JFrame {
+public class testDrawBoard extends JFrame  {
     JLayeredPane layeredPane;
     drawBoard chessBoard;
     JButton newGame = new JButton("New game");    
