@@ -38,7 +38,7 @@ public class drawBoard extends JPanel {
                 g.setColor(hell);
             }
             g.fillRect(x*width, y*hight, width, hight);
-            if (i % 8 == 0) { // Står nå på den siste ruta i linja
+            if (i % 8 == 0) { // Står nå på den siste ruten i linja
                 inverse = !inverse;
                 y+=1;
             }
