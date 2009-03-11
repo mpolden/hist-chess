@@ -1,6 +1,6 @@
 
 
-package no.hist.aitel.java.chess;
+package no.hist.aitel.java.chess.gui;
 
 import java.applet.Applet;
 import java.awt.BorderLayout;
