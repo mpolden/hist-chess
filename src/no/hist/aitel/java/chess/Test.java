@@ -3,13 +3,13 @@
  * 
  */
 
-package chess;
+package no.hist.aitel.java.chess;
 
 /**
  *
  * @author martin
  */
-public class Main {
+public class Test {
 
     /**
      * @param args the command line arguments
@@ -19,4 +19,5 @@ public class Main {
         System.out.println("Test");
         System.out.println("hei!");
     }
+
 }
