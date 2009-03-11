@@ -34,6 +34,7 @@ public class test4 extends Applet {
 
         add ("Center", board);
         add ("South", newgame);
+        
 
     }
 
