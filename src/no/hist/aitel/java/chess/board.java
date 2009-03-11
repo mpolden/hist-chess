@@ -21,11 +21,51 @@ public class board extends java.awt.Canvas  {
         return;
     }
 
-    public void paintBoard(Graphics g) {
-        g = getGraphics();
-        g.fillRect (3, 5, 40, 40);
-        int x = 1;
-        int y = 1;
+    @Override
+    public void paint(Graphics g) {
+        for ( int i = 1; i <= 64; i++)
+        {
+            paintField(i);
+        }
+    }
+
+    public void paintField(int index) {
+        Graphics g = getGraphics(); 
+        int x = index % 10;
+        int y = index / 10;
+        boolean inverse = false;
+        
+            if (!inverse) {
+                if (index % 2 == 0) {
+                    g.setColor(dunkel);
+                } else {
+                    g.setColor(hell);
+                }
+            } else {
+                if (index % 2 == 0) {
+                    g.setColor(hell);                    
+                }
+                 else {
+                    g.setColor(dunkel);
+                 }
+            }
+
+            if (index % 8 == 0) {
+                inverse = !inverse;
+            }
+        g.fillRect ( x * 40, y * 40, 40, 40);
+        }
+    public void run() {
+        
+    }
+    
+    }
+
+
+
+   /* public void paintBoard(Graphics g) {
+        g = getGraphics();        
+        
         boolean inverse = false;
         for (int i = 1; i <= 64; i++) {
             if (!inverse) {
@@ -51,7 +91,4 @@ public class board extends java.awt.Canvas  {
         x++;
         y++;
     }
-
-    public void run() {        
-    }
-}
+*/
