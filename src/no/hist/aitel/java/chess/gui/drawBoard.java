@@ -1,5 +1,3 @@
-
-
 package no.hist.aitel.java.chess.gui;
 import java.awt.Color;
 import java.awt.Graphics;
@@ -15,10 +13,9 @@ public class drawBoard extends JPanel {
     static final Color dunkel = new Color (0x999999);
     static final Color hell = new Color (0xFFFFCC);
     
-    public drawBoard() {
-        
+    public drawBoard() {        
     }
-
+    
     @Override
     public void paintComponent(Graphics g) {
         g = getGraphics();
