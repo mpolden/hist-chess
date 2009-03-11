@@ -3,6 +3,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import javax.swing.JPanel;
 
+
 /**
  *
  * @author Vegard
@@ -12,6 +13,7 @@ public class drawBoard extends JPanel {
     static final int hight = 80;
     static final Color dunkel = new Color (0x999999);
     static final Color hell = new Color (0xFFFFCC);
+    
     
     public drawBoard() {        
     }
@@ -36,7 +38,7 @@ public class drawBoard extends JPanel {
                 g.setColor(dunkel);                  
             } else {
                 g.setColor(hell);
-            }
+            }            
             g.fillRect(x*width, y*hight, width, hight);
             if (i % 8 == 0) { // Står nå på den siste ruten i linja
                 inverse = !inverse;
