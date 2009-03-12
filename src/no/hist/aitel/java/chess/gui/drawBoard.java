@@ -20,7 +20,8 @@ public class drawBoard extends JPanel {
     
     @Override
     public void paintComponent(Graphics g) {
-        g = getGraphics();
+        super.paintComponent(g);
+        g.drawString("Chess board", 40, 100);
         int y = 1;     
 
         boolean inverse = false;
