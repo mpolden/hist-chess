@@ -9,10 +9,10 @@ import javax.swing.JFrame;
 
 public class testDrawBoard {
     JFrame frame = new JFrame("Chess Board");
-    drawBoard chesspanel = new drawBoard();
+    drawBoard boardPaint = new drawBoard();
 
     public testDrawBoard() {
-        frame.getContentPane().add(chesspanel);
+        frame.getContentPane().add(boardPaint);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(800, 800);
         frame.setVisible(true);
