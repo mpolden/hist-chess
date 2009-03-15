@@ -1,6 +1,10 @@
 package no.hist.aitel.java.chess.gui;
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.net.URL;
+import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
 
@@ -9,6 +13,7 @@ import javax.swing.JPanel;
  * @author Vegard
  */
 public class drawBoard extends JPanel {
+    private BufferedImage bi;
     static final int width = 80;
     static final int hight = 80;
     static final Color dunkel = new Color (0x999999);
@@ -21,7 +26,7 @@ public class drawBoard extends JPanel {
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        g.drawString("Chess board", 40, 100);
+        
         int y = 1;     
 
         boolean inverse = false;
@@ -46,9 +51,27 @@ public class drawBoard extends JPanel {
                 y+=1;
             }
         }
+        try {
+            URL imageSrc = new URL("C:/Users/Vegard/Documents/Skole/1ing/Programmeringsprosjekt/Chess pieces gif/kingw.gif");
+            bi = ImageIO.read(imageSrc);
+        }
+
+        catch (IOException e) {
+            System.out.println("Image could not be read");
+        }
+
+       
+        for(int i=1; i<8; i++) {
+            g.drawImage(bi, 40*i, 40, this);
+        }
         
     }
+    
 }
+
+
+    
+
     
  
 
