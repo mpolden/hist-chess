@@ -32,7 +32,7 @@ public class drawBoard extends JPanel {
         boolean inverse = false;
         boolean evenNum;
         
-        /*for (int i = 1; i<=64; i++) {
+        for (int i = 1; i<=64; i++) {
             int x = i%8;
 
             if (!inverse) { // Sjekker om vi har byttet om på rekkefølgen
@@ -50,9 +50,9 @@ public class drawBoard extends JPanel {
                 inverse = !inverse;
                 y+=1;
             }
-        }*/
+        }
         try {
-            URL imageSrc = new URL("C:/Users/Vegard/Documents/Skole/1ing/Programmeringsprosjekt/Chess pieces gif/kingw.gif");
+            URL imageSrc = new URL("http://www.chessvariants.com/d.pieces/kingw.gif");
             bi = ImageIO.read(imageSrc);
         }
 
