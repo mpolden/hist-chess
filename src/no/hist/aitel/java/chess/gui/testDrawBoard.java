@@ -1,6 +1,8 @@
 package no.hist.aitel.java.chess.gui;
 
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+
 
 /**
  *
@@ -8,11 +10,14 @@ import javax.swing.JFrame;
  */
 
 public class testDrawBoard {
-    JFrame frame = new JFrame("Chess Board");
-    drawBoard boardPaint = new drawBoard();
+    private JLabel wpawn = new JLabel();
+    private Images newBoard = new Images();
+    private JFrame frame = new JFrame("Chess Board");
+    private drawBoard boardPaint = new drawBoard();
 
     public testDrawBoard() {
-        frame.getContentPane().add(boardPaint);
+        wpawn.setIcon(newBoard.getPieceIcon(0));        
+        frame.add(boardPaint);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(800, 800);
         frame.setVisible(true);
@@ -22,3 +27,4 @@ public class testDrawBoard {
         new testDrawBoard();
     }
 }
+
