@@ -35,7 +35,6 @@ class Mainwindow extends JFrame {
             JButton buttonTwo = new JButton("Angre trekk");
             add(buttonTwo);
 
-
             JButton buttonThree = new JButton("Highscore");
             add(buttonThree);
             JButton buttonFour = new JButton("Lagre spill");
@@ -45,8 +44,6 @@ class Mainwindow extends JFrame {
             buttonTwo.addActionListener(listener);
             buttonThree.addActionListener(listener);
             buttonFour.addActionListener(listener);
-
-
         }
     }
 
