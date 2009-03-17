@@ -51,18 +51,22 @@ class Mainwindow extends JFrame {
 
         private JLayeredPane layeredPane;
         private drawBoard chessBoard;
+        private drawStartPos startPos;
 
         public Chessboard() {
-            Dimension boardSize = new Dimension(400, 500);
+            Dimension boardSize = new Dimension(1200, 1000);
             layeredPane = new JLayeredPane();
             getContentPane().add(layeredPane);
             layeredPane.setPreferredSize(boardSize);
             chessBoard = new drawBoard();
+            startPos = new drawStartPos();
             layeredPane.add(chessBoard, JLayeredPane.DEFAULT_LAYER);
-            chessBoard.setLayout(new GridLayout(8, 8));
-            chessBoard.setPreferredSize(boardSize);
-            chessBoard.setBounds(10, 0, boardSize.width, boardSize.height);
-            add(chessBoard);
+            layeredPane.add(startPos, JLayeredPane.PALETTE_LAYER);
+            chessBoard.setLayout(new GridLayout(8, 8));            
+            chessBoard.setPreferredSize(boardSize);            
+            chessBoard.setBounds(10, 0, boardSize.width, boardSize.height);            
+            add(layeredPane);            
+            
         }
     }
     /*
@@ -83,7 +87,7 @@ class Mainwindow extends JFrame {
 
     private class Buttonlistener implements ActionListener {
 
-        public void actionPerformed(ActionEvent hendelse) {
+        public void actionPerformed(ActionEvent event) {
         }
     }
 }
