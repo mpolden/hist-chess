@@ -10,8 +10,8 @@ import javax.swing.*;
 
 class Mainwindow extends JFrame {
 
-    public Mainwindow(String tittel) {
-        setTitle(tittel);
+    public Mainwindow(String title) {
+        setTitle(title);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
 
@@ -28,13 +28,13 @@ class Mainwindow extends JFrame {
 
             setLayout(new FlowLayout());
 
-            JButton buttonOne = new JButton("Nytt spill");
+            JButton buttonOne = new JButton("New game");
             add(buttonOne);
-            JButton buttonTwo = new JButton("Angre trekk");
+            JButton buttonTwo = new JButton("Undo move");
             add(buttonTwo);
             JButton buttonThree = new JButton("Highscore");
             add(buttonThree);
-            JButton buttonFour = new JButton("Lagre spill");
+            JButton buttonFour = new JButton("Save game");
             add(buttonFour);
 
             buttonOne.addActionListener(listener);
@@ -79,17 +79,17 @@ class Mainwindow extends JFrame {
         public void actionPerformed(ActionEvent hendelse) {
             String kommando = hendelse.getActionCommand();
 
-            if (kommando.equals("Nytt spill")) {
-                if (JOptionPane.YES_OPTION == JOptionPane.showConfirmDialog(null, "Er du sikker på at du vil avslutte?")) {
+            if (kommando.equals("New game")) {
+                if (JOptionPane.YES_OPTION == JOptionPane.showConfirmDialog(null, "Are you sure you want to quit?")) {
                     Chessboard newboard = new Chessboard();
                     newboard.newgame();
                 }
-            } else if (kommando.equals("Angre trekk")) {
+            } else if (kommando.equals("Undo")) {
                 JOptionPane.showMessageDialog(null, "Du angret et trekk");
             } else if (kommando.equals("Highscore")) {
-                JOptionPane.showMessageDialog(null, "Her er highscore");
-            } else if (kommando.equals("Lagre spill")) {
-                JOptionPane.showMessageDialog(null, "Du lagret spill");
+                JOptionPane.showMessageDialog(null, "Highscore:");
+            } else if (kommando.equals("Save game")) {
+                JOptionPane.showMessageDialog(null, "Game saved");
             }
         }
         
