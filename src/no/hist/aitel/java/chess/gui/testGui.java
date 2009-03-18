@@ -32,7 +32,6 @@ class Mainwindow extends JFrame {
             add(buttonOne);
             JButton buttonTwo = new JButton("Angre trekk");
             add(buttonTwo);
-
             JButton buttonThree = new JButton("Highscore");
             add(buttonThree);
             JButton buttonFour = new JButton("Lagre spill");
@@ -71,21 +70,6 @@ class Mainwindow extends JFrame {
 
         }
     }
-    /*
-    private void knappEn() {
-
-    btnNewGame.addMouseListener(new java.awt.event.MouseAdapter() {
-
-    public void mouseReleased(java.awt.event.MouseEvent e) {
-    if (JOptionPane.YES_OPTION == JOptionPane.showConfirmDialog(null, "Are you sure you wish to end this game?")) {
-    newGame();
-    }
-    }
-    });
-    return btnNewGame;
-
-    }
-     */
 
     private class Buttonlistener implements ActionListener {
 
@@ -94,7 +78,8 @@ class Mainwindow extends JFrame {
 
             if (kommando.equals("Nytt spill")) {
                 if (JOptionPane.YES_OPTION == JOptionPane.showConfirmDialog(null, "Er du sikker på at du vil avslutte?")) {
-                    JOptionPane.showMessageDialog(null, "Du valgte et nytt spill");
+                    board newboard = new board();
+                    newboard.newgame();
                 }
             } else if (kommando.equals("Angre trekk")) {
                 JOptionPane.showMessageDialog(null, "Du angret et trekk");
