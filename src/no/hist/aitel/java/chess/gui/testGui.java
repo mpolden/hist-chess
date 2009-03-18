@@ -51,7 +51,7 @@ class Mainwindow extends JFrame {
         private drawStartPos startPos;
 
         public Chessboard() {
-            Dimension boardSize = new Dimension(1200, 1000);
+            Dimension boardSize = new Dimension(1200, 1050);
             layeredPane = new JLayeredPane();
             getContentPane().add(layeredPane);
             layeredPane.setPreferredSize(boardSize);
