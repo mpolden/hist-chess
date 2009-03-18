@@ -80,12 +80,12 @@ class Mainwindow extends JFrame {
             String kommando = hendelse.getActionCommand();
 
             if (kommando.equals("New game")) {
-                if (JOptionPane.YES_OPTION == JOptionPane.showConfirmDialog(null, "Are you sure you want to quit?")) {
+                if (JOptionPane.YES_OPTION == JOptionPane.showConfirmDialog(null, "Are you sure you want to create a new game?\nUnsaved progress will be lost.")) {
                     Chessboard newboard = new Chessboard();
                     newboard.newgame();
                 }
-            } else if (kommando.equals("Undo")) {
-                JOptionPane.showMessageDialog(null, "Du angret et trekk");
+            } else if (kommando.equals("Undo move")) {
+                //JOptionPane.showMessageDialog(null, "Du angret et trekk");
             } else if (kommando.equals("Highscore")) {
                 JOptionPane.showMessageDialog(null, "Highscore:");
             } else if (kommando.equals("Save game")) {
@@ -105,7 +105,5 @@ class testGui {
         frame.setResizable(false);
         frame.setLocationRelativeTo(null);
         frame.pack();
-
-
     }
 }
