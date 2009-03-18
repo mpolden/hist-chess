@@ -30,9 +30,28 @@ public class Board {
         return board[index];
     }
 
-    public void movePiece(int index, int position) {
-        p.setPiece(board[index]);
-        p.setPosition(position);
+    /**
+     * Moves a piece from an old position to a new position
+     * @param oldPosition
+     * @param newPosition
+     */
+    public void movePiece(int oldPosition, int newPosition) {
+        p.setOldPiece(board[oldPosition]);
+        p.setNewPiece(board[newPosition]);
+
+        if (p.isValidMove()) {
+            System.out.println("-- Moving piece from " + oldPosition + " to " + newPosition + ":");
+            System.out.println(board[oldPosition].toString());
+            System.out.println("-- Finished");
+            if (!board[newPosition].isEmpty()) {
+                System.out.println("-- Piece was captured in " + newPosition + ":");
+                System.out.println(board[newPosition].toString());
+                System.out.println("-- Finished");
+            }
+            board[newPosition] = board[oldPosition];
+            board[oldPosition] = null;
+            board[newPosition].setPosition(newPosition);
+        }
     }
 
     // Fill board with pieces
@@ -45,61 +64,54 @@ public class Board {
     // Get color from (initial) position
     private int getColor(int pos) {
         if (pos <= 15) {
-            return 0;
-        } else {
-            return 1;
+            return 0; // White
+        } else if (pos >= 48) {
+            return 1; // Black
         }
+        return -1; // Empty
     }
 
     // Get piece type from (initial) position
-    private int getType(int pos) {
-        // Empty = 0
-        // Pawn = 1
-        // Bishop = 2
-        // Knight = 3
-        // Rook = 4
-        // Queen = 5
-        // King = 6
-
-        switch (pos) {
+    private int getType(int position) {
+        switch (position) {
             // 0   1   2   3   4   5   6   7
             // 56  57  58  59  60  61  62  63
-            // = Rook (4) Knight (3) Bishop(2) Queen (5) King (6) Bishop(2) Knight(3) Rook(4)
+            // = Rook (3) Knight (2) Bishop(1) Queen (4) King (5) Bishop(1) Knight(2) Rook(3)
             case 0:
             case 56: {
-                return 4;
+                return 3;
             }
             case 1:
             case 57: {
-                return 3;
+                return 2;
             }
             case 2:
             case 58: {
-                return 2;
+                return 1;
             }
             case 3:
             case 59: {
-                return 5;
+                return 4;
             }
             case 4:
             case 60: {
-                return 6;
+                return 5;
             }
             case 5:
             case 61: {
-                return 2;
+                return 1;
             }
             case 6:
             case 62: {
-                return 3;
+                return 2;
             }
             case 7:
             case 63: {
-                return 4;
+                return 3;
             }
             // 8   9   10  11  12  13  14  15
             // 48  49  50  51  52  53  54  55
-            // = Pawn (1)
+            // = Pawn (0)
             case 8:
             case 9:
             case 10:
@@ -116,12 +128,16 @@ public class Board {
             case 53:
             case 54:
             case 55: {
-                return 1;
+                return 0;
             }
         }
-        return 0; // Empty position
+        return -1; // Empty position
     }
 
+    /**
+     * Produces a string representation of the chess board.
+     * @return A string containing the board and types.
+     */
     @Override
     public String toString() {
         String out = "";

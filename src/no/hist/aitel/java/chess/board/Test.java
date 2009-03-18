@@ -17,7 +17,7 @@ public class Test {
     public static void main(String[] args) {
         Board b  = new Board();
 
-        Piece[] p = b.getBoard();
+//        Piece[] p = b.getBoard();
 
         // 56  57  58  59  60  61  62  63
         // 48  49  50  51  52  53  54  55
@@ -28,13 +28,13 @@ public class Test {
         // 8   9   10  11  12  13  14  15
         // 0   1   2   3   4   5   6   7
 
-        System.out.println(p[8].toString());
 
-        p[8].setPosition(16);
 
-        System.out.println(p[8]);
-        System.out.println(p[16].toString());
 
+        System.out.println(b.getPiece(6).toString());
+
+        //b.movePiece(9, 17);
+//        b.mo
 
     }
 
