@@ -3,7 +3,7 @@
 package no.hist.aitel.java.chess.gui;
 
 import javax.swing.ImageIcon;
-import no.hist.aitel.java.chess.pieces.Piece;
+import no.hist.aitel.java.chess.board.Piece;
 
 /**
  *
