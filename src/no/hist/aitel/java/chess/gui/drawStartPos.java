@@ -84,8 +84,8 @@ public class drawStartPos extends JPanel {
         }
         j=0;
         for(int i=0; i<2; i++) {
-            g.drawImage(knightb, width*j, height, this);
-            g.drawImage(knightw, width*j, height*8, this);
+            g.drawImage(rookb, width*j, height, this);
+            g.drawImage(rookw, width*j, height*8, this);
             j+=7;
         }
 
