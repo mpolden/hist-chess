@@ -62,7 +62,9 @@ class Mainwindow extends JFrame {
             chessBoard.setPreferredSize(boardSize);
             startPos.setBounds(10, 0, boardSize.width, boardSize.height);
             chessBoard.setBounds(10, 0, boardSize.width, boardSize.height);
+            chessBoard.setOpaque(true);
             layeredPane.add(chessBoard, JLayeredPane.DEFAULT_LAYER);
+            startPos.setOpaque(false);
             layeredPane.add(startPos, JLayeredPane.PALETTE_LAYER);
             add(layeredPane);
                       
