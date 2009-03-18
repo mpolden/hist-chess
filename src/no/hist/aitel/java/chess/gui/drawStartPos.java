@@ -24,6 +24,8 @@ public class drawStartPos extends JPanel {
     private BufferedImage knightw;
     private BufferedImage rookb;
     private BufferedImage rookw;
+    private BufferedImage bishopb;
+    private BufferedImage bishopw;
     static final int width = 117;
     static final int height = 117;
 
@@ -46,6 +48,8 @@ public class drawStartPos extends JPanel {
             URL url_knightw = new URL("http://www.chessvariants.com/d.pieces/knightw.gif");
             URL url_rookb = new URL("http://www.chessvariants.com/d.pieces/rookb.gif");
             URL url_rookw = new URL("http://www.chessvariants.com/d.pieces/rookw.gif");
+            URL url_bishopb = new URL("http://www.chessvariants.com/d.pieces/bishopb.gif");
+            URL url_bishopw = new URL("http://www.chessvariants.com/d.pieces/bishopw.gif");
             pawnb = ImageIO.read(url_pawnb);
             pawnw = ImageIO.read(url_pawnw);
             kingb = ImageIO.read(url_kingb);
@@ -56,6 +60,8 @@ public class drawStartPos extends JPanel {
             knightw = ImageIO.read(url_knightw);
             rookb = ImageIO.read(url_rookb);
             rookw = ImageIO.read(url_rookw);
+            bishopb = ImageIO.read(url_bishopb);
+            bishopw = ImageIO.read(url_bishopw);
 
         }
 
@@ -80,13 +86,19 @@ public class drawStartPos extends JPanel {
         for(int i=0; i<2; i++) {            
             g.drawImage(knightb, width*j, height, this);
             g.drawImage(knightw, width*j, height*8, this);
-            j+=5;
+            j=6;
         }
         j=0;
         for(int i=0; i<2; i++) {
             g.drawImage(rookb, width*j, height, this);
             g.drawImage(rookw, width*j, height*8, this);
-            j+=7;
+            j=7;
+        }
+        j=2;
+        for(int i=0; i<2; i++) {
+            g.drawImage(bishopb, width*j, height, this);
+            g.drawImage(bishopw, width*j, height*8, this);
+            j=5;
         }
 
     }
