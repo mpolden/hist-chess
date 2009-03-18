@@ -8,9 +8,12 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
-class Mainwindow extends JFrame {
+
+class Mainwindow extends JFrame implements MouseListener, MouseMotionListener {
 
     public Mainwindow(String title) {
+        this.addMouseListener(this);
+        this.addMouseMotionListener(this);
         setTitle(title);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
@@ -19,6 +22,33 @@ class Mainwindow extends JFrame {
         add(new Chessboard(), BorderLayout.CENTER);
 
         pack();
+    }
+
+
+    public void mousePressed(MouseEvent e) {
+        int x = e.getX();
+        int y = e.getY();
+        System.out.println(x+" "+y);
+    }
+    public void mouseDragged(MouseEvent e) {        
+    }
+
+    public void mouseReleased(MouseEvent e) {        
+    }
+
+    public void mouseEntered(MouseEvent e) {
+        
+    }
+
+    public void mouseExited(MouseEvent e) {
+        
+    }
+    public void mouseClicked(MouseEvent e) {
+        
+    }
+
+    public void mouseMoved(MouseEvent e) {
+        
     }
 
     public class Buttons extends JPanel {
@@ -99,7 +129,6 @@ class Mainwindow extends JFrame {
         
     }
 }
-
 class testGui {
 
     public static void main(String[] args) {
