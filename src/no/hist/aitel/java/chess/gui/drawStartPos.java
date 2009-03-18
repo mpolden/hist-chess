@@ -30,9 +30,7 @@ public class drawStartPos extends JPanel {
     static final int height = 117;
 
     public drawStartPos() {        
-    }
-
-    
+    }    
     
     @Override
     public void paintComponent(Graphics g) {
@@ -62,7 +60,6 @@ public class drawStartPos extends JPanel {
             rookw = ImageIO.read(url_rookw);
             bishopb = ImageIO.read(url_bishopb);
             bishopw = ImageIO.read(url_bishopw);
-
         }
 
         catch (IOException e) {
@@ -73,7 +70,6 @@ public class drawStartPos extends JPanel {
         for(int i=0; i<8; i++) {
             g.drawImage(pawnb, width*i, height*2, this);
             g.drawImage(pawnw, width*i, height*7, this);
-
         }
         //draw kings
         g.drawImage(kingb, width*4, height, this);
@@ -88,12 +84,14 @@ public class drawStartPos extends JPanel {
             g.drawImage(knightw, width*j, height*8, this);
             j=6;
         }
+        //draw rooks
         j=0;
         for(int i=0; i<2; i++) {
             g.drawImage(rookb, width*j, height, this);
             g.drawImage(rookw, width*j, height*8, this);
             j=7;
         }
+        //draw bishops
         j=2;
         for(int i=0; i<2; i++) {
             g.drawImage(bishopb, width*j, height, this);
