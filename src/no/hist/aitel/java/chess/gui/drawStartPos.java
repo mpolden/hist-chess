@@ -2,8 +2,11 @@
 
 package no.hist.aitel.java.chess.gui;
 
+
+
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import javax.imageio.ImageIO;
@@ -15,7 +18,7 @@ import javax.swing.JPanel;
  */
 public class drawStartPos extends JPanel {
     private int boardSize = 64;
-    private Object[] pieces;
+    private Object[] pieces;    
     private BufferedImage pawnb;
     private BufferedImage pawnw;
     private BufferedImage kingb;
@@ -49,36 +52,36 @@ public class drawStartPos extends JPanel {
     
     @Override
     public void paintComponent(Graphics g) {
-        super.paintComponent(g);
+        super.paintComponent(g);        
         try {
-            URL url_pawnb = new URL("http://www.chessvariants.com/d.pieces/pawnb.gif");
-            URL url_pawnw = new URL("http://www.chessvariants.com/d.pieces/pawnw.gif");
-            URL url_kingb = new URL("http://www.chessvariants.com/d.pieces/kingb.gif");
-            URL url_kingw = new URL("http://www.chessvariants.com/d.pieces/kingw.gif");
-            URL url_queenb = new URL("http://www.chessvariants.com/d.pieces/queenb.gif");
-            URL url_queenw = new URL("http://www.chessvariants.com/d.pieces/queenw.gif");
-            URL url_knightb = new URL("http://www.chessvariants.com/d.pieces/knightb.gif");
-            URL url_knightw = new URL("http://www.chessvariants.com/d.pieces/knightw.gif");
-            URL url_rookb = new URL("http://www.chessvariants.com/d.pieces/rookb.gif");
-            URL url_rookw = new URL("http://www.chessvariants.com/d.pieces/rookw.gif");
-            URL url_bishopb = new URL("http://www.chessvariants.com/d.pieces/bishopb.gif");
-            URL url_bishopw = new URL("http://www.chessvariants.com/d.pieces/bishopw.gif");
-            pawnb = ImageIO.read(url_pawnb);
-            pawnw = ImageIO.read(url_pawnw);
-            kingb = ImageIO.read(url_kingb);
-            kingw = ImageIO.read(url_kingw);
-            queenb = ImageIO.read(url_queenb);
-            queenw = ImageIO.read(url_queenw);
-            knightb = ImageIO.read(url_knightb);
-            knightw = ImageIO.read(url_knightw);
-            rookb = ImageIO.read(url_rookb);
-            rookw = ImageIO.read(url_rookw);
-            bishopb = ImageIO.read(url_bishopb);
-            bishopw = ImageIO.read(url_bishopw);
+            File file_pawnb = new File("./src/no/hist/aitel/java/chess/board/images/pawnb.gif");
+            File file_pawnw = new File("./src/no/hist/aitel/java/chess/board/images/pawnw.gif");
+            File file_kingb = new File("./src/no/hist/aitel/java/chess/board/images/kingb.gif");
+            File file_kingw = new File("./src/no/hist/aitel/java/chess/board/images/kingw.gif");
+            File file_queenb = new File("./src/no/hist/aitel/java/chess/board/images/queenb.gif");
+            File file_queenw = new File("./src/no/hist/aitel/java/chess/board/images/queenw.gif");
+            File file_knightb = new File("./src/no/hist/aitel/java/chess/board/images/knightb.gif");
+            File file_knightw = new File("./src/no/hist/aitel/java/chess/board/images/knightw.gif");
+            File file_rookb = new File("./src/no/hist/aitel/java/chess/board/images/rookb.gif");
+            File file_rookw = new File("./src/no/hist/aitel/java/chess/board/images/rookw.gif");
+            File file_bishopb = new File("./src/no/hist/aitel/java/chess/board/images/bishopb.gif");
+            File file_bishopw = new File("./src/no/hist/aitel/java/chess/board/images/bishopw.gif");
+            pawnb = ImageIO.read(file_pawnb);
+            pawnw = ImageIO.read(file_pawnw);
+            kingb = ImageIO.read(file_kingb);
+            kingw = ImageIO.read(file_kingw);
+            queenb = ImageIO.read(file_queenb);
+            queenw = ImageIO.read(file_queenw);
+            knightb = ImageIO.read(file_knightb);
+            knightw = ImageIO.read(file_knightw);
+            rookb = ImageIO.read(file_rookb);
+            rookw = ImageIO.read(file_rookw);
+            bishopb = ImageIO.read(file_bishopb);
+            bishopw = ImageIO.read(file_bishopw);
         }
 
         catch (IOException e) {
-            System.out.println("Image could not be read");
+            System.out.println("Image could not be read\n"+e);
         }
 
         //draw pawns
@@ -130,5 +133,13 @@ public class drawStartPos extends JPanel {
         pieces[58] = g.drawImage(bishopw, width*j, height*8, this);
         j=5;
         pieces[61] = g.drawImage(bishopw, width*j, height*8, this);
+    }
+    public static void main(String[] args ){
+        try {
+           File f = new File(".");
+           System.out.println(f.getCanonicalPath());
+        }catch (IOException e) {
+            System.out.println("Image could not be read\n"+e);
+        }
     }
 }
