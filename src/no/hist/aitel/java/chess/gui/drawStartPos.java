@@ -44,6 +44,8 @@ public class drawStartPos extends JPanel {
             URL url_queenw = new URL("http://www.chessvariants.com/d.pieces/queenw.gif");
             URL url_knightb = new URL("http://www.chessvariants.com/d.pieces/knightb.gif");
             URL url_knightw = new URL("http://www.chessvariants.com/d.pieces/knightw.gif");
+            URL url_rookb = new URL("http://www.chessvariants.com/d.pieces/rookb.gif");
+            URL url_rookw = new URL("http://www.chessvariants.com/d.pieces/rookw.gif");
             pawnb = ImageIO.read(url_pawnb);
             pawnw = ImageIO.read(url_pawnw);
             kingb = ImageIO.read(url_kingb);
@@ -52,6 +54,8 @@ public class drawStartPos extends JPanel {
             queenw = ImageIO.read(url_queenw);
             knightb = ImageIO.read(url_knightb);
             knightw = ImageIO.read(url_knightw);
+            rookb = ImageIO.read(url_rookb);
+            rookw = ImageIO.read(url_rookw);
 
         }
 
@@ -78,7 +82,12 @@ public class drawStartPos extends JPanel {
             g.drawImage(knightw, width*j, height*8, this);
             j+=5;
         }
-
+        j=0;
+        for(int i=0; i<2; i++) {
+            g.drawImage(knightb, width*j, height, this);
+            g.drawImage(knightw, width*j, height*8, this);
+            j+=7;
+        }
 
     }
 }
