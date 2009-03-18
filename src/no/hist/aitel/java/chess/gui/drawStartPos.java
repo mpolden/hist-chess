@@ -14,6 +14,8 @@ import javax.swing.JPanel;
  * @author Vegard
  */
 public class drawStartPos extends JPanel {
+    private int boardSize = 64;
+    private Object[] pieces;
     private BufferedImage pawnb;
     private BufferedImage pawnw;
     private BufferedImage kingb;
@@ -27,10 +29,23 @@ public class drawStartPos extends JPanel {
     private BufferedImage bishopb;
     private BufferedImage bishopw;
     static final int width = 117;
-    static final int height = 117;
+    static final int height = 117;    
 
-    public drawStartPos() {        
-    }    
+    public drawStartPos() {
+        pieces = new Object[boardSize];
+        // 56  57  58  59  60  61  62  63
+        // 48  49  50  51  52  53  54  55
+        // 40  41  42  43  44  45  46  47
+        // 32  33  34  35  36  37  38  39
+        // 24  25  26  27  28  29  30  31
+        // 16  17  18  19  20  21  22  23
+        // 8   9   10  11  12  13  14  15
+        // 0   1   2   3   4   5   6   7
+    }
+
+    public Object[] getPieces() {
+        return pieces;
+    }
     
     @Override
     public void paintComponent(Graphics g) {
@@ -67,37 +82,53 @@ public class drawStartPos extends JPanel {
         }
 
         //draw pawns
-        for(int i=0; i<8; i++) {
-            g.drawImage(pawnb, width*i, height*2, this);
-            g.drawImage(pawnw, width*i, height*7, this);
+        int j=0;
+        for(int i=8; i<16; i++) {
+            pieces[i] = g.drawImage(pawnw, width*j, height*7, this);
+            j++;
+        }
+        j=0;
+        for(int i=48; i<56; i++) {
+            pieces[i] = g.drawImage(pawnb, width*j, height*2, this);
+            j++;
+
         }
         //draw kings
-        g.drawImage(kingb, width*4, height, this);
-        g.drawImage(kingw, width*4, height*8, this);
+        pieces[60] = g.drawImage(kingb, width*4, height, this);
+        pieces[4] = g.drawImage(kingw, width*4, height*8, this);
         //draw queens
-        g.drawImage(queenb, width*3, height, this);
-        g.drawImage(queenw, width*3, height*8, this);
+        pieces[59] = g.drawImage(queenb, width*3, height, this);
+        pieces[3] = g.drawImage(queenw, width*3, height*8, this);
         //draw knights
-        int j=1;
+        j=1;
         for(int i=0; i<2; i++) {            
-            g.drawImage(knightb, width*j, height, this);
-            g.drawImage(knightw, width*j, height*8, this);
+            pieces[j] = g.drawImage(knightw, width*j, height*8, this);
             j=6;
         }
+        j=1;        
+        pieces[57] = g.drawImage(knightb, width*j, height, this);
+        j=6;
+        pieces[62] = g.drawImage(knightb, width*j, height, this);
+        
         //draw rooks
         j=0;
         for(int i=0; i<2; i++) {
-            g.drawImage(rookb, width*j, height, this);
-            g.drawImage(rookw, width*j, height*8, this);
+            pieces[j] = g.drawImage(rookw, width*j, height*8, this);
             j=7;
         }
+        j=0;
+        pieces[56] = g.drawImage(rookb, width*j, height, this);
+        j=7;
+        pieces[63] = g.drawImage(rookb, width*j, height, this);
         //draw bishops
         j=2;
         for(int i=0; i<2; i++) {
-            g.drawImage(bishopb, width*j, height, this);
-            g.drawImage(bishopw, width*j, height*8, this);
+            pieces[j] = g.drawImage(bishopb, width*j, height, this);
             j=5;
         }
-
+        j=2;
+        pieces[58] = g.drawImage(bishopw, width*j, height*8, this);
+        j=5;
+        pieces[61] = g.drawImage(bishopw, width*j, height*8, this);
     }
 }
