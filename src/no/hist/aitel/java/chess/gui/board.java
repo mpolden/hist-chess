@@ -13,6 +13,10 @@ public class board extends java.awt.Canvas  {
     Color dunkel = new Color (0x999999);
 	Color hell = new Color (0xFFFFCC);
 
+    public board() {
+        
+    }
+
     public board(java.applet.Applet ref) {
         super();
     }
