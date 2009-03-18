@@ -49,6 +49,9 @@ public class drawBoard extends JPanel {
                 y+=1;
             }
         }
+        for (int i = 0; i<8; i++) {
+            g.drawString("1", i*width, (y+1)*height);
+        }
     }  
 }
 
