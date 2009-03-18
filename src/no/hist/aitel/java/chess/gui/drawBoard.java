@@ -67,7 +67,7 @@ public class drawBoard extends JPanel {
             letter = abcdefgh.substring(i, i+1);
             g.setFont(arial);
             g.setColor(black);
-            g.drawString(letter, (width*i)+(width-15), (height*9)-8);
+            g.drawString(letter, (width*i)+(width-15), (height*9)-14);
         }
 
     }  
