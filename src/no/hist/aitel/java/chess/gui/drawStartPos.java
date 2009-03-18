@@ -20,6 +20,8 @@ public class drawStartPos extends JPanel {
     private BufferedImage kingw;
     private BufferedImage queenb;
     private BufferedImage queenw;
+    private BufferedImage knightb;
+    private BufferedImage knightw;
     private BufferedImage rookb;
     private BufferedImage rookw;
     static final int width = 117;
@@ -40,12 +42,16 @@ public class drawStartPos extends JPanel {
             URL url_kingw = new URL("http://www.chessvariants.com/d.pieces/kingw.gif");
             URL url_queenb = new URL("http://www.chessvariants.com/d.pieces/queenb.gif");
             URL url_queenw = new URL("http://www.chessvariants.com/d.pieces/queenw.gif");
+            URL url_knightb = new URL("http://www.chessvariants.com/d.pieces/knightb.gif");
+            URL url_knightw = new URL("http://www.chessvariants.com/d.pieces/knightw.gif");
             pawnb = ImageIO.read(url_pawnb);
             pawnw = ImageIO.read(url_pawnw);
             kingb = ImageIO.read(url_kingb);
             kingw = ImageIO.read(url_kingw);
             queenb = ImageIO.read(url_queenb);
             queenw = ImageIO.read(url_queenw);
+            knightb = ImageIO.read(url_knightb);
+            knightw = ImageIO.read(url_knightw);
 
         }
 
@@ -65,6 +71,14 @@ public class drawStartPos extends JPanel {
         //draw queens
         g.drawImage(queenb, width*3, height, this);
         g.drawImage(queenw, width*3, height*8, this);
+        //draw knights
+        int j=1;
+        for(int i=0; i<2; i++) {            
+            g.drawImage(knightb, width*j, height, this);
+            g.drawImage(knightw, width*j, height*8, this);
+            j+=5;
+        }
+
 
     }
 }
