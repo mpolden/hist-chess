@@ -63,9 +63,12 @@ class Mainwindow extends JFrame {
             chessBoard.setBounds(5, 5, boardSize.width, boardSize.height);
             chessBoard.setOpaque(true);
             layeredPane.add(chessBoard, JLayeredPane.DEFAULT_LAYER);
-            startPos.setOpaque(false);
+            startPos.setOpaque(false);        
+            
             layeredPane.add(startPos, JLayeredPane.PALETTE_LAYER);
             add(layeredPane);
+            Object test = startPos.getPieces()[1];
+
                       
 
         }
@@ -85,6 +88,7 @@ class Mainwindow extends JFrame {
                     newboard.newgame();
                 }
             } else if (kommando.equals("Undo move")) {
+
                 //JOptionPane.showMessageDialog(null, "Du angret et trekk");
             } else if (kommando.equals("Highscore")) {
                 JOptionPane.showMessageDialog(null, "Highscore:");
