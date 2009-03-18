@@ -4,11 +4,9 @@ package no.hist.aitel.java.chess.gui;
  *
  * @author lgreger_89
  */
-
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
-
 
 class Mainwindow extends JFrame {
 
@@ -62,30 +60,30 @@ class Mainwindow extends JFrame {
             startPos = new drawStartPos();
             layeredPane.add(chessBoard, JLayeredPane.DEFAULT_LAYER);
             layeredPane.add(startPos, JLayeredPane.PALETTE_LAYER);
-            chessBoard.setLayout(new GridLayout(8, 8));            
-            chessBoard.setPreferredSize(boardSize);            
-            chessBoard.setBounds(10, 0, boardSize.width, boardSize.height);            
-            add(layeredPane);            
-            
+            chessBoard.setLayout(new GridLayout(8, 8));
+            chessBoard.setPreferredSize(boardSize);
+            chessBoard.setBounds(10, 0, boardSize.width, boardSize.height);
+            add(layeredPane);
+
         }
     }
     /*
     private void knappEn() {
 
-            btnNewGame.addMouseListener(new java.awt.event.MouseAdapter() {
+    btnNewGame.addMouseListener(new java.awt.event.MouseAdapter() {
 
-                public void mouseReleased(java.awt.event.MouseEvent e) {
-                    if (JOptionPane.YES_OPTION == JOptionPane.showConfirmDialog(null, "Are you sure you wish to end this game?")) {
-                        newGame();
-                    }
-                }
-            });
-                    return btnNewGame;
+    public void mouseReleased(java.awt.event.MouseEvent e) {
+    if (JOptionPane.YES_OPTION == JOptionPane.showConfirmDialog(null, "Are you sure you wish to end this game?")) {
+    newGame();
+    }
+    }
+    });
+    return btnNewGame;
 
-        }
-    */
+    }
+     */
 
-   private class Buttonlistener implements ActionListener {
+    private class Buttonlistener implements ActionListener {
 
         public void actionPerformed(ActionEvent hendelse) {
             String kommando = hendelse.getActionCommand();
@@ -111,7 +109,7 @@ class testGui {
 
         JFrame frame = new Mainwindow("Chess");
         frame.setVisible(true);
-        frame.setResizable(true);
+        frame.setResizable(false);
         frame.setLocationRelativeTo(null);
         frame.pack();
 
