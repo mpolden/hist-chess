@@ -49,6 +49,7 @@ public class drawStartPos extends JPanel {
     public Object[] getPieces() {
         return pieces;
     }
+
     
     @Override
     public void paintComponent(Graphics g) {
