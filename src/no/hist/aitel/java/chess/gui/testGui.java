@@ -69,7 +69,7 @@ class Mainwindow extends JFrame {
                       
 
         }
-        public void newgame() {
+        public void newgame() {            
             new Mainwindow("Chess");
         }
     }
