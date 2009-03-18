@@ -85,9 +85,22 @@ class Mainwindow extends JFrame {
         }
     */
 
-    private class Buttonlistener implements ActionListener {
+   private class Buttonlistener implements ActionListener {
 
-        public void actionPerformed(ActionEvent event) {
+        public void actionPerformed(ActionEvent hendelse) {
+            String kommando = hendelse.getActionCommand();
+
+            if (kommando.equals("Nytt spill")) {
+                if (JOptionPane.YES_OPTION == JOptionPane.showConfirmDialog(null, "Er du sikker på at du vil avslutte?")) {
+                    JOptionPane.showMessageDialog(null, "Du valgte et nytt spill");
+                }
+            } else if (kommando.equals("Angre trekk")) {
+                JOptionPane.showMessageDialog(null, "Du angret et trekk");
+            } else if (kommando.equals("Highscore")) {
+                JOptionPane.showMessageDialog(null, "Her er highscore");
+            } else if (kommando.equals("Lagre spill")) {
+                JOptionPane.showMessageDialog(null, "Du lagret spill");
+            }
         }
     }
 }
