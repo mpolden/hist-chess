@@ -69,6 +69,9 @@ class Mainwindow extends JFrame {
                       
 
         }
+        public void newgame() {
+            new Mainwindow("Chess");
+        }
     }
 
     private class Buttonlistener implements ActionListener {
@@ -78,7 +81,7 @@ class Mainwindow extends JFrame {
 
             if (kommando.equals("Nytt spill")) {
                 if (JOptionPane.YES_OPTION == JOptionPane.showConfirmDialog(null, "Er du sikker på at du vil avslutte?")) {
-                    board newboard = new board();
+                    Chessboard newboard = new Chessboard();
                     newboard.newgame();
                 }
             } else if (kommando.equals("Angre trekk")) {
@@ -89,6 +92,7 @@ class Mainwindow extends JFrame {
                 JOptionPane.showMessageDialog(null, "Du lagret spill");
             }
         }
+        
     }
 }
 
