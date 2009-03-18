@@ -60,10 +60,10 @@ public class drawStartPos extends JPanel {
 
         }
         //draw kings
-        g.drawImage(kingb, width*3, height, this);
+        g.drawImage(kingb, width*4, height, this);
         g.drawImage(kingw, width*4, height*8, this);
         //draw queens
-        g.drawImage(queenb, width*4, height, this);
+        g.drawImage(queenb, width*3, height, this);
         g.drawImage(queenw, width*3, height*8, this);
 
     }
