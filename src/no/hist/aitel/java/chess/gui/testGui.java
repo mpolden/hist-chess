@@ -30,9 +30,13 @@ class Mainwindow extends JFrame implements MouseListener, MouseMotionListener {
 
     //test
     public void mousePressed(MouseEvent e) {
-        canDrag=true;
         int x = e.getX();
         int y = e.getY();
+        for(int i=0; i<64; i++){
+
+        }
+        canDrag=true;
+        
         System.out.println(x+" "+y);
         
     }
