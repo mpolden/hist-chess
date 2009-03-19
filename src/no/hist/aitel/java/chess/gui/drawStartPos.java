@@ -18,7 +18,8 @@ import javax.swing.JPanel;
  */
 public class drawStartPos extends JPanel {
     private int boardSize = 64;
-    private Object[] pieces;    
+    private int[] x_coords;
+    private int[] y_coords;
     private BufferedImage pawnb;
     private BufferedImage pawnw;
     private BufferedImage kingb;
@@ -36,7 +37,8 @@ public class drawStartPos extends JPanel {
 
 
     public drawStartPos() {
-        pieces = new Object[boardSize];
+        x_coords = new int[boardSize];
+        y_coords = new int[boardSize];
         // 56  57  58  59  60  61  62  63
         // 48  49  50  51  52  53  54  55
         // 40  41  42  43  44  45  46  47
@@ -47,10 +49,12 @@ public class drawStartPos extends JPanel {
         // 0   1   2   3   4   5   6   7
     }
 
-    public Object[] getPieces() {
-        return pieces;
+    public int[] getXcoords() {
+        return x_coords;
     }
-
+    public int[] getYcoords() {
+        return y_coords;
+    }
     
     @Override
     public void paintComponent(Graphics g) {
@@ -89,52 +93,81 @@ public class drawStartPos extends JPanel {
         //draw pawns
         int j=0;
         for(int i=8; i<16; i++) {
-            pieces[i] = g.drawImage(pawnw, width*j, height*7, this);
+            g.drawImage(pawnw, width*j, height*7, this);
+            x_coords[i] = width*j;
+            y_coords[i] = height*7;
             j++;
         }
         j=0;
         for(int i=48; i<56; i++) {
-            pieces[i] = g.drawImage(pawnb, width*j, height*2, this);
+            g.drawImage(pawnb, width*j, height*2, this);
+            x_coords[i] = width*j;
+            y_coords[i] = height*2;
             j++;
 
         }
         //draw kings
-        pieces[60] = g.drawImage(kingb, width*4, height, this);
-        pieces[4] = g.drawImage(kingw, width*4, height*8, this);
+        g.drawImage(kingb, width*4, height, this);
+        x_coords[60] = width*4;
+        y_coords[60] = height;
+        g.drawImage(kingw, width*4, height*8, this);
+        x_coords[4] = width*4;
+        y_coords[4] = height*8;
         //draw queens
-        pieces[59] = g.drawImage(queenb, width*3, height, this);
-        pieces[3] = g.drawImage(queenw, width*3, height*8, this);
+        g.drawImage(queenb, width*3, height, this);
+        x_coords[59] = width*3;
+        y_coords[59] = height;
+        g.drawImage(queenw, width*3, height*8, this);
+        x_coords[3] = width*3;
+        y_coords[3] = height*8;
         //draw knights
         j=1;
         for(int i=0; i<2; i++) {            
-            pieces[j] = g.drawImage(knightw, width*j, height*8, this);
+            g.drawImage(knightw, width*j, height*8, this);
+            x_coords[j] = width*j;
+            y_coords[j] = height*8;
             j=6;
         }
         j=1;        
-        pieces[57] = g.drawImage(knightb, width*j, height, this);
+        g.drawImage(knightb, width*j, height, this);
+        x_coords[57] = width*j;
+        y_coords[57] = height;
         j=6;
-        pieces[62] = g.drawImage(knightb, width*j, height, this);
-        
+        g.drawImage(knightb, width*j, height, this);
+        x_coords[62] = width*j;
+        y_coords[62] = height;
         //draw rooks
         j=0;
         for(int i=0; i<2; i++) {
-            pieces[j] = g.drawImage(rookw, width*j, height*8, this);
+            g.drawImage(rookw, width*j, height*8, this);
+            x_coords[j] = width*j;
+            y_coords[j] = height*8;
             j=7;
         }
         j=0;
-        pieces[56] = g.drawImage(rookb, width*j, height, this);
+        g.drawImage(rookb, width*j, height, this);
+        x_coords[56] = width*j;
+        y_coords[56] = height;
         j=7;
-        pieces[63] = g.drawImage(rookb, width*j, height, this);
+        g.drawImage(rookb, width*j, height, this);
+        x_coords[63] = width*j;
+        y_coords[63] = height;
         //draw bishops
         j=2;
         for(int i=0; i<2; i++) {
-            pieces[j] = g.drawImage(bishopb, width*j, height, this);
+            g.drawImage(bishopb, width*j, height, this);
+            x_coords[j] = width*j;
+            y_coords[j] = height;
             j=5;
         }
         j=2;
-        pieces[58] = g.drawImage(bishopw, width*j, height*8, this);
+        g.drawImage(bishopw, width*j, height*8, this);
+        x_coords[58] = width*j;
+        y_coords[58] = height*8;
         j=5;
-        pieces[61] = g.drawImage(bishopw, width*j, height*8, this);
+        g.drawImage(bishopw, width*j, height*8, this);
+        x_coords[61] = width*j;
+        y_coords[61] = height*8;
     }
     public static void main(String[] args ){
         try {
