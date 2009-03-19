@@ -16,7 +16,7 @@ class Mainwindow extends JFrame implements MouseListener, MouseMotionListener {
     private int[] y_coords = board.getYcoords();
     private int dragFromX = 0;
     private int dragFromY = 0;
-    private int movingPiece;
+    private int movingPiece = -1;
     int x;
     int y;
     
@@ -33,9 +33,13 @@ class Mainwindow extends JFrame implements MouseListener, MouseMotionListener {
         pack();
     }
     public void undoMove() {
-        x_coords[movingPiece] = x - dragFromX;
-        y_coords[movingPiece] = y -dragFromY;
-        this.repaint();
+        try {
+            x_coords[movingPiece] = x - dragFromX;
+            y_coords[movingPiece] = y - dragFromY;
+            this.repaint();
+        }
+        catch (ArrayIndexOutOfBoundsException e) {
+        }        
     }
     
     public void mousePressed(MouseEvent e) {
@@ -77,8 +81,7 @@ class Mainwindow extends JFrame implements MouseListener, MouseMotionListener {
     }
     public void mouseEntered(MouseEvent e) {        
     }
-    public void mouseExited(MouseEvent e) {
-        
+    public void mouseExited(MouseEvent e) {        
         canDrag = false;        
     }
     public void mouseClicked(MouseEvent e) {        
