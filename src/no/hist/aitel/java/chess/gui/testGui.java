@@ -17,6 +17,8 @@ class Mainwindow extends JFrame implements MouseListener, MouseMotionListener {
     private int dragFromX = 0;
     private int dragFromY = 0;
     private int movingPiece;
+    int x;
+    int y;
     
     public Mainwindow(String title) {        
         this.addMouseListener(this);
@@ -30,10 +32,15 @@ class Mainwindow extends JFrame implements MouseListener, MouseMotionListener {
         
         pack();
     }
+    public void undoMove() {
+        x_coords[movingPiece] = x - dragFromX;
+        y_coords[movingPiece] = y -dragFromY;
+        this.repaint();
+    }
     
     public void mousePressed(MouseEvent e) {
-        int x = e.getX();
-        int y = e.getY();
+        x = e.getX();
+        y = e.getY();
         for(int i=0; i<64; i++){
             if(x>=x_coords[i] && x<=x_coords[i]+80 && y>= y_coords[i] && y<=y_coords[i]+80){
                 movingPiece = i;
@@ -48,6 +55,7 @@ class Mainwindow extends JFrame implements MouseListener, MouseMotionListener {
         }        
         
         System.out.println(x+" "+y);
+        System.out.println(dragFromX+" "+dragFromY);
         
     }
     public void mouseDragged(MouseEvent e) {
@@ -61,11 +69,8 @@ class Mainwindow extends JFrame implements MouseListener, MouseMotionListener {
             y_coords[movingPiece] = Math.max(y_coords[movingPiece], 0);
             y_coords[movingPiece] = Math.min(y_coords[movingPiece], getWidth());
             
-            this.repaint();
-            
-        }
-        int x = e.getX();
-        System.out.println(x);
+            this.repaint();            
+        }        
     }
 
     public void mouseReleased(MouseEvent e) {        
@@ -73,9 +78,8 @@ class Mainwindow extends JFrame implements MouseListener, MouseMotionListener {
     public void mouseEntered(MouseEvent e) {        
     }
     public void mouseExited(MouseEvent e) {
-        canDrag = false;
-        dragFromX = 0;
-        dragFromY = 0;
+        
+        canDrag = false;        
     }
     public void mouseClicked(MouseEvent e) {        
     }
@@ -126,8 +130,7 @@ class Mainwindow extends JFrame implements MouseListener, MouseMotionListener {
             chessBoard.setBounds(5, 5, boardSize.width, boardSize.height);
             chessBoard.setOpaque(true);
             layeredPane.add(chessBoard, JLayeredPane.DEFAULT_LAYER);
-            startPos.setOpaque(false);        
-            
+            startPos.setOpaque(false);    
             layeredPane.add(startPos, JLayeredPane.PALETTE_LAYER);
             add(layeredPane);          
                     
@@ -145,20 +148,20 @@ class Mainwindow extends JFrame implements MouseListener, MouseMotionListener {
     }
 
     private class Buttonlistener implements ActionListener {
-        public void actionPerformed(ActionEvent hendelse) {
-            String kommando = hendelse.getActionCommand();
+        public void actionPerformed(ActionEvent event) {
+            String commando = event.getActionCommand();
 
-            if (kommando.equals("New game")) {
+            if (commando.equals("New game")) {
                 if (JOptionPane.YES_OPTION == JOptionPane.showConfirmDialog(null, "Are you sure you want to create a new game?\nUnsaved progress will be lost.")) {
                     Chessboard newboard = new Chessboard();
                     newboard.newgame();
                 }
-            } else if (kommando.equals("Undo move")) {
-
+            } else if (commando.equals("Undo move")) {
+                undoMove();
                 //JOptionPane.showMessageDialog(null, "Du angret et trekk");
-            } else if (kommando.equals("Highscore")) {
+            } else if (commando.equals("Highscore")) {
                 JOptionPane.showMessageDialog(null, "Highscore:");
-            } else if (kommando.equals("Save game")) {
+            } else if (commando.equals("Save game")) {
                 JOptionPane.showMessageDialog(null, "Game saved");
             }
         }        
