@@ -10,6 +10,8 @@ import javax.swing.*;
 
 
 class Mainwindow extends JFrame implements MouseListener, MouseMotionListener {
+    private boolean canDrag = false;
+    private Chessboard board = new Chessboard();
 
     public Mainwindow(String title) {
         this.addMouseListener(this);
@@ -19,8 +21,8 @@ class Mainwindow extends JFrame implements MouseListener, MouseMotionListener {
         setLayout(new BorderLayout());
 
         add(new Buttons(), BorderLayout.SOUTH);
-        add(new Chessboard(), BorderLayout.CENTER);
-
+        add(board, BorderLayout.CENTER);        
+        
         pack();
     }
 
@@ -75,15 +77,16 @@ class Mainwindow extends JFrame implements MouseListener, MouseMotionListener {
 
         private JLayeredPane layeredPane;
         private drawBoard chessBoard;
-        private drawStartPos startPos;
+        private drawStartPos startPos = new drawStartPos();
+        private int[] x_coords = startPos.getXcoords();
+        private int[] y_coords = startPos.getYcoords();
 
         public Chessboard() {
             Dimension boardSize = new Dimension(1200, 1050);
             layeredPane = new JLayeredPane();
             getContentPane().add(layeredPane);
             layeredPane.setPreferredSize(boardSize);
-            chessBoard = new drawBoard();
-            startPos = new drawStartPos();
+            chessBoard = new drawBoard();            
             chessBoard.setLayout(new GridLayout(8, 8));
             chessBoard.setPreferredSize(boardSize);
             startPos.setBounds(5, 5, boardSize.width, boardSize.height);
@@ -93,15 +96,18 @@ class Mainwindow extends JFrame implements MouseListener, MouseMotionListener {
             startPos.setOpaque(false);        
             
             layeredPane.add(startPos, JLayeredPane.PALETTE_LAYER);
-            add(layeredPane);
-            Object test = startPos.getPieces()[1];
-
-
-                      
+            add(layeredPane);          
+                    
 
         }
         public void newgame() {            
             new Mainwindow("Chess");
+        }
+        public int[] getXcoords() {
+            return x_coords;
+        }
+        public int[] getYcoords() {
+            return y_coords;
         }
     }
 
