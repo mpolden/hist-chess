@@ -12,8 +12,10 @@ import javax.swing.*;
 class Mainwindow extends JFrame implements MouseListener, MouseMotionListener {
     private boolean canDrag = false;
     private Chessboard board = new Chessboard();
+    private int[] x_coords = board.getXcoords();
+    private int[] y_coords = board.getYcoords();
 
-    public Mainwindow(String title) {
+    public Mainwindow(String title) {        
         this.addMouseListener(this);
         this.addMouseMotionListener(this);
         setTitle(title);
@@ -26,7 +28,7 @@ class Mainwindow extends JFrame implements MouseListener, MouseMotionListener {
         pack();
     }
 
-
+    //test
     public void mousePressed(MouseEvent e) {
         int x = e.getX();
         int y = e.getY();
@@ -36,14 +38,19 @@ class Mainwindow extends JFrame implements MouseListener, MouseMotionListener {
         }
     }
     public void mouseDragged(MouseEvent e) {
-
+        if(canDrag) {
+            //
+        }
+        int x = e.getX();
+        System.out.println(x);
     }
 
     public void mouseReleased(MouseEvent e) {        
     }
     public void mouseEntered(MouseEvent e) {        
     }
-    public void mouseExited(MouseEvent e) {        
+    public void mouseExited(MouseEvent e) {
+        canDrag = false;
     }
     public void mouseClicked(MouseEvent e) {        
     }
