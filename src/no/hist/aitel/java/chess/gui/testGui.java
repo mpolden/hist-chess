@@ -148,7 +148,7 @@ class Mainwindow extends JFrame implements MouseListener, MouseMotionListener {
                 }
             } else if (kommando.equals("Undo move")) {
 
-                //JOptionPane.showMessageDialog(null, "Du angret et trekk");
+                
             } else if (kommando.equals("Highscore")) {
                 JOptionPane.showMessageDialog(null, "Highscore:");
             } else if (kommando.equals("Save game")) {
