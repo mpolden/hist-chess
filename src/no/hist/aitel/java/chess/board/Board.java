@@ -13,6 +13,7 @@ public class Board {
     final private int size = 64;
     private Piece[] board = new Piece[size];
     private Position p = new Position();
+    private int turn = 0; // White always begins
 
     public Board() {
         fillBoard();
@@ -35,22 +36,36 @@ public class Board {
      * @param oldPosition
      * @param newPosition
      */
-    public void movePiece(int oldPosition, int newPosition) {
-        p.setOldPiece(board[oldPosition]);
-        p.setNewPiece(board[newPosition]);
+    public void movePiece(int oldPos, int newPos) {
+        
+        // Check whos turn it is
+        int color = getPiece(oldPos).getColor();
+        if (color > -1 && !isValidTurn(color)) {
+            throw new IllegalTurnException("It's not your turn!");
+        }
+
+        p.setOldPiece(board[oldPos]);
+        p.setNewPiece(board[newPos]);
 
         if (p.isValidMove()) {
-            System.out.println("-- Moving piece from " + oldPosition + " to " + newPosition + ":");
-            System.out.println(board[oldPosition].toString());
-            System.out.println("-- Finished");
-            if (!board[newPosition].isEmpty()) {
-                System.out.println("-- Piece was captured in " + newPosition + ":");
-                System.out.println(board[newPosition].toString());
-                System.out.println("-- Finished");
-            }
-            board[newPosition] = board[oldPosition];
-            board[oldPosition] = null;
-            board[newPosition].setPosition(newPosition);
+            board[newPos] = board[oldPos]; // Move the piece in the table
+            board[oldPos] = new Piece(oldPos, -1, -1); // Place empty piece in old position
+            board[newPos].setPosition(newPos); // Update position in new piece
+            switchTurn(); // Switch turn
+        }
+    }
+
+    // Check if color can move pieces
+    private boolean isValidTurn(int color) {
+        return (color == turn);
+    }
+
+    // Switch turn
+    private void switchTurn() {
+        if (turn == 0) {
+            turn = 1;
+        } else {
+            turn = 0;
         }
     }
 
@@ -68,7 +83,7 @@ public class Board {
         } else if (pos >= 48) {
             return 1; // Black
         }
-        return -1; // Empty
+        return -1; // Initially empty position
     }
 
     // Get piece type from (initial) position
@@ -130,8 +145,10 @@ public class Board {
             case 55: {
                 return 0;
             }
+            default: {
+                return -1; // Initially empty position
+            }
         }
-        return -1; // Empty position
     }
 
     /**
@@ -140,19 +157,24 @@ public class Board {
      */
     @Override
     public String toString() {
-        String out = "";
-
-        for (int i = board.length - 1; i >= 0; i--) {
-            if ((i + 1) % 8 == 0) {
-                out = out.trim() + "\n";
+        String out = ""; 
+        for (int i = 0; i < board.length; i++) {
+            if (i % 8 == 0) {
+                out = out + "\n";
             }
-            if (board[i] != null) {
-                out += board[i].getType() + " ";
+            int type = board[i].getType();
+            if (type == -1) {
+                out += "x ";
             } else {
-                out += 0 + " ";
+                out += type + " ";
             }
         }
-
+        String[] outArr = out.split("\n");
+        out = "+-----------------+\n";
+        for (int i = outArr.length - 1; i > 0; i--) {
+            out += "| " + outArr[i] + "|\n";
+        }
+        out += "+-----------------+";
         return out;
     }
 }

@@ -65,11 +65,11 @@ public class Piece {
     }
 
     /**
-     * Check if position is empty
+     * Check if position is empty (type and color is undefined)
      * @return True if position is empty and false otherwise.
      */
     public boolean isEmpty() {
-        if (type == -1) {
+        if (type == -1 && color == -1) {
             return true;
         }
         return false;
@@ -98,8 +98,10 @@ public class Piece {
             case 1: {
                 return "Black";
             }
+            default: {
+                return null;
+            }
         }
-        return null;
     }
 
     // Helper method for toString()
@@ -126,8 +128,10 @@ public class Piece {
             case 5: {
                 return "King";
             }
+            default: {
+                return null;
+            }
         }
-        return null;
     }
 
 }

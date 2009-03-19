@@ -31,11 +31,15 @@ public class Test {
 
 
 
-        System.out.println(b.getPiece(6).toString());
+        b.movePiece(8, 24);
+        b.movePiece(48, 40);
 
-        //b.movePiece(9, 17);
-//        b.mo
-
+//        b.movePiece(16, 24);
+//        System.out.println(b.getPiece(8).toString());
+//        System.out.println(b.getPiece(24).toString());
+        System.out.println(b.toString());
     }
 
+
 }
+
