@@ -2,23 +2,18 @@ package no.hist.aitel.java.chess.gui;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
-import java.awt.image.BufferedImage;
 import javax.swing.JPanel;
-
-
 /**
  *
  * @author Vegard
  */
-public class drawBoard extends JPanel {
-    private BufferedImage pawnb;
-    private BufferedImage pawnw;
-    private static final int width = 117;
-    private static final int height = 117;
+public class drawBoard extends JPanel {   
+    private static final int width = 80;
+    private static final int height = 80;
     static final Color dunkel = new Color (0x999999);
     static final Color hell = new Color (0xFFFFCC);
     static final Color black = new Color (0x000000);
-    private Font arial = new Font("Arial", Font.PLAIN, 18);    
+    private Font arial = new Font("Arial", Font.PLAIN, 16);
     
     
     public drawBoard() {        
@@ -58,7 +53,7 @@ public class drawBoard extends JPanel {
             number = String.valueOf(j);
             g.setFont(arial);
             g.setColor(black);
-            g.drawString(number, 2, ((i+2)*height)-8);
+            g.drawString(number, 2, ((i+2)*height)-5);
             j--;
         }
         String abcdefgh = "abcdefgh";
@@ -67,7 +62,7 @@ public class drawBoard extends JPanel {
             letter = abcdefgh.substring(i, i+1);
             g.setFont(arial);
             g.setColor(black);
-            g.drawString(letter, (width*i)+(width-15), (height*9)-14);
+            g.drawString(letter, (width*i)+(width-15), (height*9)-5);
         }
 
     }  
