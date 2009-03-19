@@ -8,9 +8,9 @@ import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.net.URL;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
+
 
 /**
  *
@@ -32,7 +32,8 @@ public class drawStartPos extends JPanel {
     private BufferedImage bishopb;
     private BufferedImage bishopw;
     static final int width = 117;
-    static final int height = 117;    
+    static final int height = 117;
+
 
     public drawStartPos() {
         pieces = new Object[boardSize];
@@ -78,7 +79,7 @@ public class drawStartPos extends JPanel {
             rookb = ImageIO.read(file_rookb);
             rookw = ImageIO.read(file_rookw);
             bishopb = ImageIO.read(file_bishopb);
-            bishopw = ImageIO.read(file_bishopw);
+            bishopw = ImageIO.read(file_bishopw);           
         }
 
         catch (IOException e) {
