@@ -14,7 +14,10 @@ class Mainwindow extends JFrame implements MouseListener, MouseMotionListener {
     private Chessboard board = new Chessboard();
     private int[] x_coords = board.getXcoords();
     private int[] y_coords = board.getYcoords();
-
+    private int dragFromX = 0;
+    private int dragFromY = 0;
+    private int movingPiece;
+    
     public Mainwindow(String title) {        
         this.addMouseListener(this);
         this.addMouseMotionListener(this);
@@ -33,20 +36,25 @@ class Mainwindow extends JFrame implements MouseListener, MouseMotionListener {
         int x = e.getX();
         int y = e.getY();
         for(int i=0; i<64; i++){
-
-        }
-        canDrag=true;
+            if(x>=x_coords[i] && x<=x_coords[i]+79 && y>= y_coords[i] && y<=y_coords[i]+79){
+                movingPiece = i;
+                canDrag=true;
+                dragFromX = x - x_coords[i];
+                dragFromY = y - y_coords[i];
+            }
+            
+        }        
         
         System.out.println(x+" "+y);
         
     }
     public void mouseDragged(MouseEvent e) {
         if(canDrag) {
-            x_coords[8] = e.getX();
-            y_coords[8] = e.getY();
+            x_coords[movingPiece] = e.getX() - dragFromX;
+            y_coords[movingPiece] = e.getY() - dragFromY;
 
-            x_coords[8] = Math.max(x_coords[8], 0);
-            x_coords[8] = Math.min(x_coords[8], getWidth());
+            x_coords[movingPiece] = Math.max(x_coords[movingPiece], 0);
+            x_coords[movingPiece] = Math.min(x_coords[movingPiece], getWidth());
             
             this.repaint();
             
