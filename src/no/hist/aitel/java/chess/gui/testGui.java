@@ -30,8 +30,7 @@ class Mainwindow extends JFrame implements MouseListener, MouseMotionListener {
         
         pack();
     }
-
-    //test
+    
     public void mousePressed(MouseEvent e) {
         int x = e.getX();
         int y = e.getY();
@@ -45,8 +44,7 @@ class Mainwindow extends JFrame implements MouseListener, MouseMotionListener {
             }           
             else{
                 canDrag=false;
-            }   
-                       
+            }                       
         }        
         
         System.out.println(x+" "+y);
