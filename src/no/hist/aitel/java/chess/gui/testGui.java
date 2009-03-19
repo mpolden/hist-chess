@@ -89,7 +89,7 @@ class Mainwindow extends JFrame implements MouseListener, MouseMotionListener {
         private int[] y_coords = startPos.getYcoords();
 
         public Chessboard() {
-            Dimension boardSize = new Dimension(1200, 1050);
+            Dimension boardSize = new Dimension(1024, 768);
             layeredPane = new JLayeredPane();
             getContentPane().add(layeredPane);
             layeredPane.setPreferredSize(boardSize);
