@@ -10,7 +10,7 @@ import javax.swing.*;
 
 
 class Mainwindow extends JFrame implements MouseListener, MouseMotionListener {
-    private boolean canDrag = false;
+    private boolean canDrag = true;
     private Chessboard board = new Chessboard();
     private int[] x_coords = board.getXcoords();
     private int[] y_coords = board.getYcoords();
@@ -30,16 +30,22 @@ class Mainwindow extends JFrame implements MouseListener, MouseMotionListener {
 
     //test
     public void mousePressed(MouseEvent e) {
+        canDrag=true;
         int x = e.getX();
         int y = e.getY();
         System.out.println(x+" "+y);
-        if(x>365 && y>965 && x<478 && y<855) {
-            new draw(x, y);
-        }
+        
     }
     public void mouseDragged(MouseEvent e) {
         if(canDrag) {
-            //
+            x_coords[8] = e.getX();
+            y_coords[8] = e.getY();
+
+            x_coords[8] = Math.max(x_coords[8], 0);
+            x_coords[8] = Math.min(x_coords[8], getWidth());
+            
+            this.repaint();
+            
         }
         int x = e.getX();
         System.out.println(x);
@@ -96,6 +102,7 @@ class Mainwindow extends JFrame implements MouseListener, MouseMotionListener {
             chessBoard = new drawBoard();            
             chessBoard.setLayout(new GridLayout(8, 8));
             chessBoard.setPreferredSize(boardSize);
+            startPos.initStartCoords();
             startPos.setBounds(5, 5, boardSize.width, boardSize.height);
             chessBoard.setBounds(5, 5, boardSize.width, boardSize.height);
             chessBoard.setOpaque(true);
