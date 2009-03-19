@@ -36,13 +36,17 @@ class Mainwindow extends JFrame implements MouseListener, MouseMotionListener {
         int x = e.getX();
         int y = e.getY();
         for(int i=0; i<64; i++){
-            if(x>=x_coords[i] && x<=x_coords[i]+79 && y>= y_coords[i] && y<=y_coords[i]+79){
+            if(x>=x_coords[i] && x<=x_coords[i]+80 && y>= y_coords[i] && y<=y_coords[i]+80){
                 movingPiece = i;
                 canDrag=true;
                 dragFromX = x - x_coords[i];
                 dragFromY = y - y_coords[i];
-            }
-            
+                break;
+            }           
+            else{
+                canDrag=false;
+            }   
+                       
         }        
         
         System.out.println(x+" "+y);
@@ -55,6 +59,9 @@ class Mainwindow extends JFrame implements MouseListener, MouseMotionListener {
 
             x_coords[movingPiece] = Math.max(x_coords[movingPiece], 0);
             x_coords[movingPiece] = Math.min(x_coords[movingPiece], getWidth());
+
+            y_coords[movingPiece] = Math.max(y_coords[movingPiece], 0);
+            y_coords[movingPiece] = Math.min(y_coords[movingPiece], getWidth());
             
             this.repaint();
             
@@ -69,6 +76,8 @@ class Mainwindow extends JFrame implements MouseListener, MouseMotionListener {
     }
     public void mouseExited(MouseEvent e) {
         canDrag = false;
+        dragFromX = 0;
+        dragFromY = 0;
     }
     public void mouseClicked(MouseEvent e) {        
     }
@@ -79,7 +88,7 @@ class Mainwindow extends JFrame implements MouseListener, MouseMotionListener {
 
         public Buttons() {
             Buttonlistener listener = new Buttonlistener();
-
+            
             setLayout(new FlowLayout());
 
             JButton buttonOne = new JButton("New game");
@@ -148,7 +157,7 @@ class Mainwindow extends JFrame implements MouseListener, MouseMotionListener {
                 }
             } else if (kommando.equals("Undo move")) {
 
-                
+                //JOptionPane.showMessageDialog(null, "Du angret et trekk");
             } else if (kommando.equals("Highscore")) {
                 JOptionPane.showMessageDialog(null, "Highscore:");
             } else if (kommando.equals("Save game")) {
