@@ -29,8 +29,12 @@ class Mainwindow extends JFrame implements MouseListener, MouseMotionListener {
         int x = e.getX();
         int y = e.getY();
         System.out.println(x+" "+y);
+        if(x>365 && y>965 && x<478 && y<855) {
+            new draw(x, y);
+        }
     }
-    public void mouseDragged(MouseEvent e) {     
+    public void mouseDragged(MouseEvent e) {
+
     }
 
     public void mouseReleased(MouseEvent e) {        
@@ -91,6 +95,7 @@ class Mainwindow extends JFrame implements MouseListener, MouseMotionListener {
             layeredPane.add(startPos, JLayeredPane.PALETTE_LAYER);
             add(layeredPane);
             Object test = startPos.getPieces()[1];
+
 
                       
 
