@@ -119,7 +119,6 @@ class Mainwindow extends JFrame implements MouseListener, MouseMotionListener {
     }
 
     private class Buttonlistener implements ActionListener {
-
         public void actionPerformed(ActionEvent hendelse) {
             String kommando = hendelse.getActionCommand();
 
@@ -136,8 +135,7 @@ class Mainwindow extends JFrame implements MouseListener, MouseMotionListener {
             } else if (kommando.equals("Save game")) {
                 JOptionPane.showMessageDialog(null, "Game saved");
             }
-        }
-        
+        }        
     }
 }
 class testGui {
