@@ -22,7 +22,7 @@ class Mainwindow extends JFrame implements MouseListener, MouseMotionListener {
     private int[] y_start_coords = y_coords;
     private int dragFromX = 0;
     private int dragFromY = 0;  
-    private int movingPiece = -1;
+    private int movingPiece;
     private int x_coordStartPos = -1;
     private int y_coordStartPos = -1;
     int x;
@@ -48,6 +48,7 @@ class Mainwindow extends JFrame implements MouseListener, MouseMotionListener {
             x_coords[movingPiece] = x - dragFromX;
             y_coords[movingPiece] = y - dragFromY;
             this.repaint();
+            board.switchTurn();
         }
         catch (ArrayIndexOutOfBoundsException e) {
         }        
@@ -68,6 +69,7 @@ class Mainwindow extends JFrame implements MouseListener, MouseMotionListener {
     public void mousePressed(MouseEvent e) {        
         x = e.getX();
         y = e.getY();
+        
         for(int i=0; i<64; i++){
             if(x>=x_coords[i] && x<=x_coords[i]+80 && y>= y_coords[i] && y<=y_coords[i]+80){
                 movingPiece = i;
@@ -116,16 +118,15 @@ class Mainwindow extends JFrame implements MouseListener, MouseMotionListener {
             y_coords[movingPiece] = getRect.getRectCoordY(toPos);
         } catch(IllegalPositionException posE) {            
             x_coords[movingPiece] = getRect.getRectCoordX(fromPos);
-            x_coords[movingPiece] = getRect.getRectCoordY(fromPos);
+            y_coords[movingPiece] = getRect.getRectCoordY(fromPos);
         } catch(IllegalTurnException turnE) {            
             x_coords[movingPiece] = getRect.getRectCoordX(fromPos);
-            x_coords[movingPiece] = getRect.getRectCoordY(fromPos);
+            y_coords[movingPiece] = getRect.getRectCoordY(fromPos);
         } catch(ArrayIndexOutOfBoundsException outOfBoundsE) {
             
         }
         
-        this.repaint();
-        System.out.println(fromPos+" "+toPos);
+        this.repaint();        
         System.out.println(board.toString());        
        
     }
