@@ -22,7 +22,7 @@ class Mainwindow extends JFrame implements MouseListener, MouseMotionListener {
     private int[] y_start_coords = y_coords;
     private int dragFromX = 0;
     private int dragFromY = 0;  
-    private int movingPiece = 25;
+    private int movingPiece = -1;
     private int x_coordStartPos = -1;
     private int y_coordStartPos = -1;
     int x;
@@ -69,22 +69,28 @@ class Mainwindow extends JFrame implements MouseListener, MouseMotionListener {
     public void mousePressed(MouseEvent e) {        
         x = e.getX();
         y = e.getY();
-        
-        for(int i=0; i<64; i++){
+        try {
+            for(int i=0; i<64; i++){
             if(x>=x_coords[i] && x<=x_coords[i]+80 && y>= y_coords[i] && y<=y_coords[i]+80){
                 movingPiece = i;
                 canDrag=true;
                 dragFromX = x - x_coords[i];
                 dragFromY = y - y_coords[i];
                 break;
-            }           
+            }
             else{
+                movingPiece = -1;
                 canDrag=false;
-            }                       
-        }        
-        x_coordStartPos = x;
-        y_coordStartPos = y;
-        System.out.println("x: "+x+" y: "+y);
+            }
+        }
+            x_coordStartPos = x;
+            y_coordStartPos = y;
+            System.out.println("x: "+x+" y: "+y);
+
+        }catch(ArrayIndexOutOfBoundsException test) {
+            
+        }
+        
     }
           
     public void mouseDragged(MouseEvent e) {
@@ -124,15 +130,19 @@ class Mainwindow extends JFrame implements MouseListener, MouseMotionListener {
             System.out.println(turnE);
             x_coords[movingPiece] = getRect.getRectCoordX(fromPos);
             y_coords[movingPiece] = getRect.getRectCoordY(fromPos);
-        } 
+        } catch(ArrayIndexOutOfBoundsException test) {
+            System.out.println("test");
+        }
         
-        this.repaint();        
+        this.repaint();
+        movingPiece = -1;
         System.out.println(board.toString());        
        
     }
     public void mouseEntered(MouseEvent e) {        
     }
-    public void mouseExited(MouseEvent e) {        
+    public void mouseExited(MouseEvent e) {
+        
         canDrag = false;        
     }
     public void mouseClicked(MouseEvent e) {        
