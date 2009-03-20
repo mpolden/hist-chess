@@ -3,16 +3,16 @@
  * and open the template in the editor.
  */
 
-package no.hist.aitel.java.chess.board;
+package no.hist.aitel.chess.board;
 
 /**
  *
  * @author Martin
  */
-public class IllegalTurnException extends IllegalArgumentException {
+public class IllegalPositionException extends IllegalArgumentException {
 
-    public IllegalTurnException(String s) {
+    public IllegalPositionException(String s) {
         super(s);
     }
-    
+
 }

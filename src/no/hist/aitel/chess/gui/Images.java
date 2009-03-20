@@ -1,9 +1,9 @@
 
 
-package no.hist.aitel.java.chess.gui;
+package no.hist.aitel.chess.gui;
 
 import javax.swing.ImageIcon;
-import no.hist.aitel.java.chess.board.Piece;
+import no.hist.aitel.chess.board.Piece;
 
 /**
  *

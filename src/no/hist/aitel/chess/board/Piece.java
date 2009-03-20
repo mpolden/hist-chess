@@ -3,7 +3,7 @@
  * 
  */
 
-package no.hist.aitel.java.chess.board;
+package no.hist.aitel.chess.board;
 
 /**
  *

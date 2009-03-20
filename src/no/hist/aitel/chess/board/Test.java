@@ -3,7 +3,7 @@
  * 
  */
 
-package no.hist.aitel.java.chess.board;
+package no.hist.aitel.chess.board;
 
 /**
  *
@@ -31,12 +31,24 @@ public class Test {
 
 
 
-        b.movePiece(8, 24);
+        b.movePiece(8, 16);
+        b.movePiece(49, 41);
+        b.movePiece(9, 17);
         b.movePiece(48, 40);
+        b.movePiece(17, 25);
+        b.movePiece(40, 32);
+        b.movePiece(25, 32);
+        b.movePiece(41, 32);
+        b.movePiece(12, 28);
+        b.movePiece(51, 43);
+        b.movePiece(2, 9);
+        b.movePiece(58, 49);
+        b.movePiece(9, 54);
+        b.movePiece(61, 53);
 
-//        b.movePiece(16, 24);
-//        System.out.println(b.getPiece(8).toString());
-//        System.out.println(b.getPiece(24).toString());
+
+//        System.out.println(b.getCaptured(1));
+
         System.out.println(b.toString());
     }
 

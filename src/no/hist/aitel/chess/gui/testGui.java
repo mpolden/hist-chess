@@ -1,9 +1,10 @@
-package no.hist.aitel.java.chess.gui;
+package no.hist.aitel.chess.gui;
 
 /**
  *
  * @author lgreger_89
  */
+import no.hist.aitel.java.chess.gui.*;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;

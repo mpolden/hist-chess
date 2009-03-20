@@ -3,15 +3,19 @@
  * 
  */
 
-package no.hist.aitel.java.chess.board;
+package no.hist.aitel.chess.board;
+
+import java.util.ArrayList;
 
 /**
  *
  * @author martin
  */
 public class Board {
+
     final private int size = 64;
     private Piece[] board = new Piece[size];
+    private ArrayList<Piece> captured = new ArrayList<Piece>();
     private Position p = new Position();
     private int turn = 0; // White always begins
 
@@ -36,23 +40,32 @@ public class Board {
      * @param oldPosition
      * @param newPosition
      */
-    public void movePiece(int oldPos, int newPos) {
+    public void movePiece(int fromPos, int toPos) {
         
         // Check whos turn it is
-        int color = getPiece(oldPos).getColor();
+        int color = getPiece(fromPos).getColor();
         if (color > -1 && !isValidTurn(color)) {
             throw new IllegalTurnException("It's not your turn!");
         }
 
-        p.setOldPiece(board[oldPos]);
-        p.setNewPiece(board[newPos]);
+        p.setFrom(board[fromPos]);
+        p.setTo(board[toPos]);
 
         if (p.isValidMove()) {
-            board[newPos] = board[oldPos]; // Move the piece in the table
-            board[oldPos] = new Piece(oldPos, -1, -1); // Place empty piece in old position
-            board[newPos].setPosition(newPos); // Update position in new piece
+            // Save captured piece
+            if (!board[toPos].isEmpty()) {
+                captured.add(board[toPos]);
+            }
+
+            board[toPos] = board[fromPos]; // Move the piece in the table
+            board[fromPos] = new Piece(fromPos, -1, -1); // Place empty piece in old position
+            board[toPos].setPosition(toPos); // Update position in new piece
             switchTurn(); // Switch turn
         }
+    }
+
+    public Piece getCaptured(int index) {
+        return captured.get(index);
     }
 
     // Check if color can move pieces
@@ -163,18 +176,27 @@ public class Board {
                 out = out + "\n";
             }
             int type = board[i].getType();
+            int color = board[i].getColor();
+            if (color == 0) {
+                out += "W";
+            } else if (color == 1) {
+                out += "B";
+            } else {
+                out += "x";
+            }
             if (type == -1) {
                 out += "x ";
             } else {
                 out += type + " ";
             }
         }
+        // Reverse output
         String[] outArr = out.split("\n");
-        out = "+-----------------+\n";
+        out = "+-------------------------+\n";
         for (int i = outArr.length - 1; i > 0; i--) {
             out += "| " + outArr[i] + "|\n";
         }
-        out += "+-----------------+";
+        out += "+-------------------------+";
         return out;
     }
 }

@@ -1,6 +1,6 @@
 
 
-package no.hist.aitel.java.chess.gui;
+package no.hist.aitel.chess.gui;
 
 
 
