@@ -134,18 +134,18 @@ public class drawStartPos extends JPanel {
     public void paintComponent(Graphics g) {
         super.paintComponent(g);        
         try {
-            File file_pawnb = new File("./src/no/hist/aitel/java/chess/board/images/pawnb.gif");
-            File file_pawnw = new File("./src/no/hist/aitel/java/chess/board/images/pawnw.gif");
-            File file_kingb = new File("./src/no/hist/aitel/java/chess/board/images/kingb.gif");
-            File file_kingw = new File("./src/no/hist/aitel/java/chess/board/images/kingw.gif");
-            File file_queenb = new File("./src/no/hist/aitel/java/chess/board/images/queenb.gif");
-            File file_queenw = new File("./src/no/hist/aitel/java/chess/board/images/queenw.gif");
-            File file_knightb = new File("./src/no/hist/aitel/java/chess/board/images/knightb.gif");
-            File file_knightw = new File("./src/no/hist/aitel/java/chess/board/images/knightw.gif");
-            File file_rookb = new File("./src/no/hist/aitel/java/chess/board/images/rookb.gif");
-            File file_rookw = new File("./src/no/hist/aitel/java/chess/board/images/rookw.gif");
-            File file_bishopb = new File("./src/no/hist/aitel/java/chess/board/images/bishopb.gif");
-            File file_bishopw = new File("./src/no/hist/aitel/java/chess/board/images/bishopw.gif");
+            File file_pawnb = new File("./src/no/hist/aitel/chess/resources/pawnb.gif");
+            File file_pawnw = new File("./src/no/hist/aitel/chess/resources/pawnw.gif");
+            File file_kingb = new File("./src/no/hist/aitel/chess/resources/kingb.gif");
+            File file_kingw = new File("./src/no/hist/aitel/chess/resources/kingw.gif");
+            File file_queenb = new File("./src/no/hist/aitel/chess/resources/queenb.gif");
+            File file_queenw = new File("./src/no/hist/aitel/chess/resources/queenw.gif");
+            File file_knightb = new File("./src/no/hist/aitel/chess/resources/knightb.gif");
+            File file_knightw = new File("./src/no/hist/aitel/chess/resources/knightw.gif");
+            File file_rookb = new File("./src/no/hist/aitel/chess/resources/rookb.gif");
+            File file_rookw = new File("./src/no/hist/aitel/chess/resources/rookw.gif");
+            File file_bishopb = new File("./src/no/hist/aitel/chess/resources/bishopb.gif");
+            File file_bishopw = new File("./src/no/hist/aitel/chess/resources/bishopw.gif");
             pawnb = ImageIO.read(file_pawnb);
             pawnw = ImageIO.read(file_pawnw);
             kingb = ImageIO.read(file_kingb);
