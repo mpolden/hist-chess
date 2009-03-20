@@ -118,10 +118,9 @@ class Mainwindow extends JFrame implements MouseListener, MouseMotionListener {
     public void mouseEntered(MouseEvent e) {        
     }
     public void mouseExited(MouseEvent e) {
-        int x = e.getX();
-        int y = e.getY();
+        
         canDrag = false;
-        //System.out.println(board.toString());
+        System.out.println(board.toString());
     }
     public void mouseClicked(MouseEvent e) {        
     }
