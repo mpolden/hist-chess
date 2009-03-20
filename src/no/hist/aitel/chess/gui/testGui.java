@@ -65,8 +65,7 @@ class Mainwindow extends JFrame implements MouseListener, MouseMotionListener {
             this.repaint();
     }
     
-    public void mousePressed(MouseEvent e) {
-        
+    public void mousePressed(MouseEvent e) {        
         x = e.getX();
         y = e.getY();
         for(int i=0; i<64; i++){
