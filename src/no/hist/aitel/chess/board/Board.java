@@ -16,7 +16,7 @@ public class Board {
     final private int size = 64;
     private Piece[] board = new Piece[size];
     private ArrayList<Piece> captured = new ArrayList<Piece>();
-    private Position p = new Position();
+    private Position p = new Position(this);
     private int turn = 0; // White always begins
 
     /**
@@ -49,6 +49,13 @@ public class Board {
      * @param toPos
      */
     public void movePiece(int fromPos, int toPos) {
+
+        // Check if any of the positions are outside the board
+        if ((fromPos < 0 || fromPos > 63) || (toPos < 0 || fromPos > 63)) {
+            throw new IllegalPieceException("Can't move pieces outside of the board.\n"
+                    + "\nFrom: " + fromPos
+                    + "\nTo: " + toPos);
+        }
         
         // Check whos turn it is
         int color = getPiece(fromPos).getColor();
@@ -56,17 +63,17 @@ public class Board {
             throw new IllegalTurnException("It's not your turn!");
         }
 
-        p.setFrom(board[fromPos]);
-        p.setTo(board[toPos]);
+        p.setFrom(fromPos);
+        p.setTo(toPos);
 
         if (p.isValidMove()) {
-            System.out.println("-- " + board[fromPos].getColorStr() + " moved " +
-                    board[fromPos].getTypeStr() + " from " + fromPos + " to " + toPos);
+//            System.out.println("-- " + board[fromPos].getColorStr() + " moved " +
+//                    board[fromPos].getTypeStr() + " from " + fromPos + " to " + toPos);
             // Save captured piece
             if (!board[toPos].isEmpty()) {
                 captured.add(board[toPos]);
-                System.out.println("** " + board[fromPos].getColorStr() + " captured " +
-                        board[toPos].getTypeStr() + " in " + toPos);
+//                System.out.println("** " + board[fromPos].getColorStr() + " captured " +
+//                        board[toPos].getTypeStr() + " in " + toPos);
             }
 
             board[toPos] = board[fromPos]; // Move the piece in the table
