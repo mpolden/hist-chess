@@ -80,8 +80,8 @@ class Mainwindow extends JFrame implements MouseListener, MouseMotionListener {
                 canDrag=false;
             }                       
         }        
-        x_coordStartPos = x_coords[movingPiece];
-        y_coordStartPos = y_coords[movingPiece];
+        x_coordStartPos = x;
+        y_coordStartPos = y;
     }
           
     public void mouseDragged(MouseEvent e) {
@@ -92,10 +92,10 @@ class Mainwindow extends JFrame implements MouseListener, MouseMotionListener {
             y_coords[movingPiece] = e.getY() - dragFromY;
 
             x_coords[movingPiece] = Math.max(x_coords[movingPiece], 0);
-            x_coords[movingPiece] = Math.min(x_coords[movingPiece], getWidth() - 40);
+            x_coords[movingPiece] = Math.min(x_coords[movingPiece], getWidth() - 80);
 
             y_coords[movingPiece] = Math.max(y_coords[movingPiece], 0);
-            y_coords[movingPiece] = Math.min(y_coords[movingPiece], getWidth() - 40);
+            y_coords[movingPiece] = Math.min(y_coords[movingPiece], getWidth() - 80);
 
             System.out.println(e.getX()+" "+e.getY());
 
@@ -104,22 +104,31 @@ class Mainwindow extends JFrame implements MouseListener, MouseMotionListener {
     }
 
 
-    public void mouseReleased(MouseEvent e) {       
-        x_coords[movingPiece] = x_coordStartPos;
-        y_coords[movingPiece] = y_coordStartPos - 80;
-        System.out.println(getRect.getRectNumber(e.getX(), e.getY()));
+    public void mouseReleased(MouseEvent e) {
+        int x_on_release = e.getX();
+        int y_on_release = e.getY();
+        int fromPos = getRect.getRectNumber(x_coordStartPos, y_coordStartPos);
+        int toPos = getRect.getRectNumber(x_on_release, y_on_release);
+        try {
+            board.movePiece(fromPos, toPos);
+            x_coords[movingPiece] = getRect.getRectCoordX(toPos);
+            y_coords[movingPiece] = getRect.getRectCoordY(toPos);
+        } catch(IllegalPositionException posE) {
+            x_coords[movingPiece] = getRect.getRectCoordX(fromPos);
+            x_coords[movingPiece] = getRect.getRectCoordY(fromPos);
+        } catch(IllegalTurnException turnE) {
+            x_coords[movingPiece] = getRect.getRectCoordX(fromPos);
+            x_coords[movingPiece] = getRect.getRectCoordY(fromPos);
+        }       
+        
         this.repaint();
-        
-        
-        //System.out.println(e.getX()+" "+e.getY());
-
+        System.out.println(board.toString());        
+       
     }
     public void mouseEntered(MouseEvent e) {        
     }
-    public void mouseExited(MouseEvent e) {
-        
-        canDrag = false;
-        System.out.println(board.toString());
+    public void mouseExited(MouseEvent e) {        
+        canDrag = false;        
     }
     public void mouseClicked(MouseEvent e) {        
     }
