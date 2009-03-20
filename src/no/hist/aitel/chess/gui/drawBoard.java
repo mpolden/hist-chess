@@ -13,6 +13,7 @@ public class drawBoard extends JPanel {
     static final Color dunkel = new Color (0x999999);
     static final Color hell = new Color (0xFFFFCC);
     static final Color black = new Color (0x000000);
+    static final Color pink = new Color (0xFFC0CB);
     private Font arial = new Font("Arial", Font.PLAIN, 16);
     
     
@@ -37,9 +38,9 @@ public class drawBoard extends JPanel {
                 evenNum = !(i % 2 == 0);
             }
             if (evenNum) {
-                g.setColor(dunkel);                  
+                g.setColor(black);
             } else {
-                g.setColor(hell);
+                g.setColor(pink);
             }            
             g.fillRect(x*width, y*height, width, height);
             if (i % 8 == 0) { // Står nå på den siste ruten i linja
