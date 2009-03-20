@@ -205,7 +205,8 @@ public class drawStartPos extends JPanel {
     public static void main(String[] args ){
         drawStartPos test = new drawStartPos();
         test.initStartCoords();
-        System.out.println(test.getXcoords()[60]);      
+        System.out.println(test.getXcoords()[8]);
+        System.out.println(test.getYcoords()[8]);
         
     }
 }
