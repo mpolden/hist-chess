@@ -85,12 +85,8 @@ class Mainwindow extends JFrame implements MouseListener, MouseMotionListener {
         }
             x_coordStartPos = x;
             y_coordStartPos = y;
-            System.out.println("x: "+x+" y: "+y);
-
-        }catch(ArrayIndexOutOfBoundsException test) {
-            
-        }
-        
+        }catch(ArrayIndexOutOfBoundsException test) {            
+        }        
     }
           
     public void mouseDragged(MouseEvent e) {
@@ -101,10 +97,10 @@ class Mainwindow extends JFrame implements MouseListener, MouseMotionListener {
             y_coords[movingPiece] = e.getY() - dragFromY;
 
             x_coords[movingPiece] = Math.max(x_coords[movingPiece], 0);
-            x_coords[movingPiece] = Math.min(x_coords[movingPiece], getWidth() - 80);
+            x_coords[movingPiece] = Math.min(x_coords[movingPiece], getWidth() - 450);
 
-            y_coords[movingPiece] = Math.max(y_coords[movingPiece], 0);
-            y_coords[movingPiece] = Math.min(y_coords[movingPiece], getWidth() - 80);
+            y_coords[movingPiece] = Math.max(y_coords[movingPiece], 50);
+            y_coords[movingPiece] = Math.min(y_coords[movingPiece], getWidth() - 400);
 
             System.out.println(e.getX()+" "+e.getY());
 
@@ -139,6 +135,8 @@ class Mainwindow extends JFrame implements MouseListener, MouseMotionListener {
                 System.out.println(test);
             }               
         } catch(ArrayIndexOutOfBoundsException test) {
+            x_coords[movingPiece] = getRect.getRectCoordX(fromPos);
+            y_coords[movingPiece] = getRect.getRectCoordY(fromPos);
             System.out.println("test");
         }        
         this.repaint();
