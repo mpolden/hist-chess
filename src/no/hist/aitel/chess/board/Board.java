@@ -98,7 +98,7 @@ public class Board {
     /**
      * Switches turn
      */
-    private void switchTurn() {
+    public void switchTurn() {
         if (turn == 0) {
             turn = 1;
         } else {
