@@ -38,7 +38,7 @@ public class drawBoard extends JPanel {
                 evenNum = !(i % 2 == 0);
             }
             if (evenNum) {
-                g.setColor(black);
+                g.setColor(hell);
             } else {
                 g.setColor(pink);
             }            
