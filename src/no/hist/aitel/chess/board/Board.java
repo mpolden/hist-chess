@@ -27,8 +27,8 @@ public class Board {
     }
 
     /**
-     * Returns the current board
-     * @return A Piece[] array which represents the current board
+     * Get board
+     * @return The current board
      */
     public Piece[] getBoard() {
         return board;
@@ -37,14 +37,14 @@ public class Board {
     /**
      * Get piece
      * @param position
-     * @return A Piece object
+     * @return The piece in the given position
      */
     public Piece getPiece(int position) {
         return board[position];
     }
 
     /**
-     * Moves a piece from an old position to a new position
+     * Move a piece from an old position to a new position
      * @param fromPos
      * @param toPos
      */
@@ -74,7 +74,7 @@ public class Board {
 
     /**
      * Get the captured pieces
-     * @return An ArrayList<Piece> containg the captured pieces
+     * @return The captured pieces
      */
     public ArrayList<Piece> getCaptured() {
         return captured;
@@ -112,7 +112,7 @@ public class Board {
     /**
      * Get the color for a position
      * @param position
-     * @return Integer representing the color
+     * @return The color
      */
     private int getColor(int position) {
         if (position <= 15) {
@@ -126,7 +126,7 @@ public class Board {
     /**
      * Get the type for a position
      * @param position
-     * @return Integer representing the type
+     * @return The type
      */
     private int getType(int position) {
         switch (position) {
@@ -194,7 +194,7 @@ public class Board {
 
     /**
      * Produces a string representation of the chess board
-     * @return String containing fancy ascii drawing of the board, colors and types
+     * @return Fancy ascii drawing of the board, colors and types
      */
     @Override
     public String toString() {

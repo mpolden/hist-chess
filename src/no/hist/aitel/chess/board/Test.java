@@ -40,6 +40,10 @@ public class Test {
         b.movePiece(58, 49);
         b.movePiece(9, 54);
         b.movePiece(61, 54);
+        b.movePiece(16, 24);
+        b.movePiece(49, 42);
+        b.movePiece(1, 16);
+//        b.getPiece(61).get
 
         System.out.println(b.toString());
     }

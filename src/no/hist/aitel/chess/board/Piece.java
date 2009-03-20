@@ -28,24 +28,24 @@ public class Piece {
     }
 
     /**
-     * Get the piece color
-     * @return A number which represents the piece color:<br />-1: Undefined<br />&nbsp;0: White<br />&nbsp;1: Black
+     * Get piece color
+     * @return The piece color:<br />-1 (Undefined)<br />&nbsp;0 (White)<br />&nbsp;1 (Black)
      */
     public int getColor() {
         return color;
     }
 
     /**
-     * Get the piece type
-     * @return A number which represents the piece type:<br />-1: Undefined<br />&nbsp;0: Pawn<br />&nbsp;1: Bishop<br />&nbsp;2: Knight<br />&nbsp;3: Rook<br />&nbsp;4: Queen<br />&nbsp;5: King
+     * Get piece type
+     * @return The piece type which can be:<br />-1 (Undefined)<br />&nbsp;0 (Pawn)<br />&nbsp;1 (Bishop)<br />&nbsp;2 (Knight)<br />&nbsp;3 (Rook)<br />&nbsp;4 (Queen)<br />&nbsp;5 (King)
      */
     public int getType() {
         return type;
     }
 
     /**
-     * Get the piece position
-     * @return Number which represents the piece position:<br />0-63: Index in the board array
+     * Get piece position
+     * @return The piece position which can be any number from 0 to 63
      */
     public int getPosition() {
         return position;
@@ -71,7 +71,7 @@ public class Piece {
     }
 
     /**
-     * Returns a string representation of this piece
+     * Get a string representation of this piece
      * @return A string containing piece position, color and type
      */
     @Override
@@ -82,8 +82,8 @@ public class Piece {
     }
 
     /**
-     * Returns a string representation of the current color
-     * @return Color as a string
+     * Get piece color
+     * @return The piece color
      */
     private String getColorStr() {
         switch (color) {
@@ -103,8 +103,8 @@ public class Piece {
     }
 
     /**
-     * Returns a string representation of the current type
-     * @return Type as a string
+     * Get piece type
+     * @return The piece type
      */
     private String getTypeStr() {
         switch (type) {

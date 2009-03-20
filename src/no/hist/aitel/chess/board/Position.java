@@ -83,16 +83,12 @@ public class Position {
                                         "Type: " + from.getType() +
                                         "\nFrom: " + fromPos +
                                         "\nTo: " + toPos);
-                            } else {
-                                return true;
                             }
                         } else if (diffPos != 8) { // Pawn can always move 1 field forward
                             throw new IllegalPositionException("Can only move one field forward.\n" +
                                     "Type: " + from.getType() +
                                     "\nFrom: " + fromPos +
                                     "\nTo: " + toPos);
-                        } else {
-                            return true; // Valid move
                         }
                     } else if (from.getColor() == 1) { // Black piece
                         if (fromPos >= 48 && fromPos <= 55) { // Same as above
@@ -101,49 +97,28 @@ public class Position {
                                         "Type: " + from.getType() +
                                         "\nFrom: " + fromPos +
                                         "\nTo: " + toPos);
-                            } else {
-                                return true;
                             }
-                        } else if (diffPos != -8) { // Same as above
+                        } else if (diffPos != -8) {
                             throw new IllegalPositionException("Can only move one field forward.\n" +
                                     "Type: " + from.getType() +
                                     "\nFrom: " + fromPos +
                                     "\nTo: " + toPos);
-                        } else {
-                            return true; // Valid move
                         }
-                    } else {
-                        throw new IllegalPositionException("Can't move empty piece. First check failed? :(\n" +
+                    }
+                } else {
+                    if (from.getColor() == 0 && diffPos != 9 && diffPos != 7) {
+                        throw new IllegalPositionException("Can't move forward because 'to' position isn't empty.\n" +
                                 "Type: " + from.getType() +
                                 "\nFrom: " + fromPos +
                                 "\nTo: " + toPos);
-                    }
-                } else {
-                    if (from.getColor() == 0) {
-                        if (diffPos != 9 && diffPos != 7) {
-                            throw new IllegalPositionException("Can't move forward because 'to' position isn't empty.\n" +
-                                    "Type: " + from.getType() +
-                                    "\nFrom: " + fromPos +
-                                    "\nTo: " + toPos);
-                        } else {
-                            return true; // Valid move
-                        }
-                    } else if (from.getColor() == 1) {
-                        if (diffPos != -9 && diffPos != -7) {
-                            throw new IllegalPositionException("Can't move forward because 'to' position isn't empty.\n" +
-                                    "Type: " + from.getType() +
-                                    "\nFrom: " + fromPos +
-                                    "\nTo: " + toPos);
-                        } else {
-                            return true; // Valid move
-                        }
-                    } else {
-                        throw new IllegalPositionException("Can't move empty piece. First check failed? :(\n" +
+                    } else if (from.getColor() == 1 && diffPos != -9 && diffPos != -7) {
+                        throw new IllegalPositionException("Can't move forward because 'to' position isn't empty.\n" +
                                 "Type: " + from.getType() +
                                 "\nFrom: " + fromPos +
                                 "\nTo: " + toPos);
                     }
                 }
+                return true;
             }
             // Bishop
             case 1: {
@@ -152,26 +127,41 @@ public class Position {
                             "Type: " + from.getType() +
                             "\nFrom: " + fromPos +
                             "\nTo: " + toPos);
-                } else {
-                    return true;
-
                 }
+                return true;
             }
             // Knight
-//            case 2: {
-//                break;
-//            }
+            case 2: {
+                switch (diffPos) {
+                    case -10:
+                    case -17:
+                    case -15:
+                    case -6:
+                    case 10:
+                    case 17:
+                    case 15:
+                    case 6: {
+                        return true;
+                    }
+                    default: {
+                        throw new IllegalPositionException("Can only move one field diagonally + one forward.\n" +
+                                "Type: " + from.getType() +
+                                "\nFrom: " + fromPos +
+                                "\nTo: " + toPos);
+                    }
+                }
+            }
 //            // Rook
 //            case 3: {
-//                break;
+//                return true;
 //            }
 //            // Queen
 //            case 4: {
-//                break;
+//                return true;
 //            }
 //            // King
 //            case 5: {
-//                break;
+//                return true;
 //            }
             default: {
                 throw new IllegalPositionException("Move not implemented yet.");
