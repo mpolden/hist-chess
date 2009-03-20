@@ -18,10 +18,10 @@ class Mainwindow extends JFrame implements MouseListener, MouseMotionListener {
     private getRect getRect = new getRect();
     private int[] x_coords = boardGui.getXcoords();
     private int[] y_coords = boardGui.getYcoords();
+    private int[] x_start_coords = x_coords;
+    private int[] y_start_coords = y_coords;
     private int dragFromX = 0;
-    private int dragFromY = 0;
-    private int dragToX = 0;
-    private int dragToY = 0;
+    private int dragFromY = 0;  
     private int movingPiece = -1;
     private int x_coordStartPos;
     private int y_coordStartPos;
@@ -40,6 +40,9 @@ class Mainwindow extends JFrame implements MouseListener, MouseMotionListener {
         
         pack();
     }
+    public Chessboard getBoard() {
+        return boardGui;
+    }
     public void undoMove() {
         try {
             x_coords[movingPiece] = x - dragFromX;
@@ -48,6 +51,18 @@ class Mainwindow extends JFrame implements MouseListener, MouseMotionListener {
         }
         catch (ArrayIndexOutOfBoundsException e) {
         }        
+    }
+
+    public void setXcoords(int[] newCoords) {
+            x_coords = newCoords;
+    }
+    public void setYcoords(int[] newCoords) {
+            y_coords = newCoords;
+    }
+    public void newgame() {
+            setXcoords(x_start_coords);
+            setYcoords(y_start_coords);
+            this.repaint();
     }
     
     public void mousePressed(MouseEvent e) {
@@ -68,10 +83,8 @@ class Mainwindow extends JFrame implements MouseListener, MouseMotionListener {
         }        
         x_coordStartPos = x_coords[movingPiece];
         y_coordStartPos = y_coords[movingPiece];
-        System.out.println(x+" "+y);
-        
-        
     }
+          
     public void mouseDragged(MouseEvent e) {
         
         if(canDrag) {
@@ -161,29 +174,27 @@ class Mainwindow extends JFrame implements MouseListener, MouseMotionListener {
             layeredPane.add(chessBoard, JLayeredPane.DEFAULT_LAYER);
             startPos.setOpaque(false);    
             layeredPane.add(startPos, JLayeredPane.PALETTE_LAYER);
-            add(layeredPane);          
+            add(layeredPane);       
                     
-
         }
-        public void newgame() {            
-            new Mainwindow("Chess");
-        }
+        
         public int[] getXcoords() {
             return x_coords;
         }
         public int[] getYcoords() {
             return y_coords;
         }
+        
     }
 
     private class Buttonlistener implements ActionListener {
         public void actionPerformed(ActionEvent event) {
+            
             String commando = event.getActionCommand();
 
             if (commando.equals("New game")) {
                 if (JOptionPane.YES_OPTION == JOptionPane.showConfirmDialog(null, "Are you sure you want to create a new game?\nUnsaved progress will be lost.")) {
-                    Chessboard newboard = new Chessboard();
-                    newboard.newgame();
+                    newgame();
                 }
             } else if (commando.equals("Undo move")) {
                 undoMove();
