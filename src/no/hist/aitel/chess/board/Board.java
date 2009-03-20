@@ -19,26 +19,34 @@ public class Board {
     private Position p = new Position();
     private int turn = 0; // White always begins
 
+    /**
+     * Creates the board and makes it ready for a new game
+     */
     public Board() {
         fillBoard();
     }
 
     /**
      * Returns the current board
-     * @return An Piece[] array which represents the current board
+     * @return A Piece[] array which represents the current board
      */
     public Piece[] getBoard() {
         return board;
     }
 
-    public Piece getPiece(int index) {
-        return board[index];
+    /**
+     * Get piece
+     * @param position
+     * @return A Piece object
+     */
+    public Piece getPiece(int position) {
+        return board[position];
     }
 
     /**
      * Moves a piece from an old position to a new position
-     * @param oldPosition
-     * @param newPosition
+     * @param fromPos
+     * @param toPos
      */
     public void movePiece(int fromPos, int toPos) {
         
@@ -64,16 +72,26 @@ public class Board {
         }
     }
 
-    public Piece getCaptured(int index) {
-        return captured.get(index);
+    /**
+     * Get the captured pieces
+     * @return An ArrayList<Piece> containg the captured pieces
+     */
+    public ArrayList<Piece> getCaptured() {
+        return captured;
     }
 
-    // Check if color can move pieces
+    /**
+     * Check whos turn it is
+     * @param color
+     * @return True if color can move and false otherwise
+     */
     private boolean isValidTurn(int color) {
         return (color == turn);
     }
 
-    // Switch turn
+    /**
+     * Switches turn
+     */
     private void switchTurn() {
         if (turn == 0) {
             turn = 1;
@@ -82,24 +100,34 @@ public class Board {
         }
     }
 
-    // Fill board with pieces
+    /**
+     * Fills the board with pieces in their initial positions
+     */
     private void fillBoard() {
         for (int i = 0; i < board.length; i++) {
             board[i] = new Piece(i, getColor(i), getType(i));
         }
     }
 
-    // Get color from (initial) position
-    private int getColor(int pos) {
-        if (pos <= 15) {
+    /**
+     * Get the color for a position
+     * @param position
+     * @return Integer representing the color
+     */
+    private int getColor(int position) {
+        if (position <= 15) {
             return 0; // White
-        } else if (pos >= 48) {
+        } else if (position >= 48) {
             return 1; // Black
         }
         return -1; // Initially empty position
     }
 
-    // Get piece type from (initial) position
+    /**
+     * Get the type for a position
+     * @param position
+     * @return Integer representing the type
+     */
     private int getType(int position) {
         switch (position) {
             // 0   1   2   3   4   5   6   7
@@ -165,8 +193,8 @@ public class Board {
     }
 
     /**
-     * Produces a string representation of the chess board.
-     * @return A string containing the board and types.
+     * Produces a string representation of the chess board
+     * @return String containing fancy ascii drawing of the board, colors and types
      */
     @Override
     public String toString() {

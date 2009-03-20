@@ -13,20 +13,23 @@ public class Position {
     private Piece from;
     private Piece to;
 
+    /**
+     * Creates a position object which is used to validate moves
+     */
     public Position() {
     }
 
     /**
-     * Sets the destination piece.
-     * @param Destination piece object.
+     * Sets the destination piece
+     * @param to
      */
     public void setTo(Piece to) {
         this.to = to;
     }
 
     /**
-     * Sets the piece that should be moved.
-     * @param Piece object that should be moved.
+     * Sets the piece that should be moved
+     * @param from
      */
     public void setFrom(Piece from) {
         this.from = from;
@@ -34,7 +37,7 @@ public class Position {
 
     /**
      * Checks if a move is valid
-     * @return True if the move is valid and false otherwise.
+     * @return True if the move is valid and false otherwise
      */
     public boolean isValidMove() {
         // Get positions

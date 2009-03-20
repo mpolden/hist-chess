@@ -11,6 +11,10 @@ package no.hist.aitel.chess.board;
  */
 public class IllegalPositionException extends IllegalArgumentException {
 
+    /**
+     * This exception is thrown when an illegal move is attempted
+     * @param s
+     */
     public IllegalPositionException(String s) {
         super(s);
     }

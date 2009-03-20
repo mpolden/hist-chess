@@ -15,6 +15,12 @@ public class Piece {
     final private int color;
     final private int type;
 
+    /**
+     * Creates a new piece.
+     * @param position
+     * @param color
+     * @param type
+     */
     public Piece(int position, int color, int type) {
         this.position = position;
         this.color = color;
@@ -23,10 +29,7 @@ public class Piece {
 
     /**
      * Get the piece color
-     * @return A number which represents the piece color:
-     * @return <br />-1: Undefined (piece is empty)
-     * @return <br />&nbsp;0: White
-     * @return <br />&nbsp;1: Black
+     * @return A number which represents the piece color:<br />-1: Undefined<br />&nbsp;0: White<br />&nbsp;1: Black
      */
     public int getColor() {
         return color;
@@ -34,14 +37,7 @@ public class Piece {
 
     /**
      * Get the piece type
-     * @return A number which represents the piece type:
-     * @return <br />-1: Undefined (empty piece)
-     * @return <br />&nbsp;0: Pawn
-     * @return <br />&nbsp;1: Bishop
-     * @return <br />&nbsp;2: Knight
-     * @return <br />&nbsp;3: Rook
-     * @return <br />&nbsp;4: Queen
-     * @return <br />&nbsp;5: King
+     * @return A number which represents the piece type:<br />-1: Undefined<br />&nbsp;0: Pawn<br />&nbsp;1: Bishop<br />&nbsp;2: Knight<br />&nbsp;3: Rook<br />&nbsp;4: Queen<br />&nbsp;5: King
      */
     public int getType() {
         return type;
@@ -49,8 +45,7 @@ public class Piece {
 
     /**
      * Get the piece position
-     * @return Number which represents the piece position:
-     * @retrun <br />0-63: Index in the board array
+     * @return Number which represents the piece position:<br />0-63: Index in the board array
      */
     public int getPosition() {
         return position;
@@ -65,8 +60,8 @@ public class Piece {
     }
 
     /**
-     * Check if position is empty (type and color is undefined)
-     * @return True if position is empty and false otherwise.
+     * Check if position is empty
+     * @return True if position is empty and false otherwise
      */
     public boolean isEmpty() {
         if (type == -1 && color == -1) {
@@ -76,17 +71,20 @@ public class Piece {
     }
 
     /**
-     * Returns a string representation of this piece.
-     * @return A string containing position, color and type.
+     * Returns a string representation of this piece
+     * @return A string containing piece position, color and type
      */
     @Override
     public String toString() {
-        String out = "Position: " + position + "\nColor: " + getColorStr() + "\nType: "
-                + getTypeStr();
+        String out = "Position: " + position + "\nColor: " + getColor() + " (" + getColorStr() +
+                ")\nType: " + getType() + " (" + getTypeStr() + ")";
         return out;
     }
 
-    // Helper method for toString()
+    /**
+     * Returns a string representation of the current color
+     * @return Color as a string
+     */
     private String getColorStr() {
         switch (color) {
             case -1: {
@@ -104,7 +102,10 @@ public class Piece {
         }
     }
 
-    // Helper method for toString()
+    /**
+     * Returns a string representation of the current type
+     * @return Type as a string
+     */
     private String getTypeStr() {
         switch (type) {
             case -1: {
