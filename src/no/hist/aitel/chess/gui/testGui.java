@@ -22,7 +22,7 @@ class Mainwindow extends JFrame implements MouseListener, MouseMotionListener {
     private int[] y_start_coords = y_coords;
     private int dragFromX = 0;
     private int dragFromY = 0;  
-    private int movingPiece = 0;
+    private int movingPiece = 25;
     private int x_coordStartPos = -1;
     private int y_coordStartPos = -1;
     int x;
@@ -116,15 +116,15 @@ class Mainwindow extends JFrame implements MouseListener, MouseMotionListener {
             board.movePiece(fromPos, toPos);
             x_coords[movingPiece] = getRect.getRectCoordX(toPos);
             y_coords[movingPiece] = getRect.getRectCoordY(toPos);
-        } catch(IllegalPositionException posE) {            
+        } catch(IllegalPositionException posE) {
+            System.out.println(posE);
             x_coords[movingPiece] = getRect.getRectCoordX(fromPos);
             y_coords[movingPiece] = getRect.getRectCoordY(fromPos);
-        } catch(IllegalTurnException turnE) {            
+        } catch(IllegalTurnException turnE) {
+            System.out.println(turnE);
             x_coords[movingPiece] = getRect.getRectCoordX(fromPos);
             y_coords[movingPiece] = getRect.getRectCoordY(fromPos);
-        } catch(ArrayIndexOutOfBoundsException outOfBoundsE) {
-            
-        }
+        } 
         
         this.repaint();        
         System.out.println(board.toString());        
