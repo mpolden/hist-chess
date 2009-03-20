@@ -15,6 +15,7 @@ class Mainwindow extends JFrame implements MouseListener, MouseMotionListener {
     private boolean canDrag = true;
     private Chessboard boardGui = new Chessboard();
     private Board board = new Board();
+    private getRect getRect = new getRect();
     private int[] x_coords = boardGui.getXcoords();
     private int[] y_coords = boardGui.getYcoords();
     private int dragFromX = 0;
@@ -68,7 +69,7 @@ class Mainwindow extends JFrame implements MouseListener, MouseMotionListener {
         x_coordStartPos = x_coords[movingPiece];
         y_coordStartPos = y_coords[movingPiece];
         System.out.println(x+" "+y);
-        System.out.println(dragFromX+" "+dragFromY);
+        
         
     }
     public void mouseDragged(MouseEvent e) {
@@ -94,6 +95,7 @@ class Mainwindow extends JFrame implements MouseListener, MouseMotionListener {
     public void mouseReleased(MouseEvent e) {       
         x_coords[movingPiece] = x_coordStartPos;
         y_coords[movingPiece] = y_coordStartPos - 80;
+        System.out.println(getRect.getRectNumber(e.getX(), e.getY()));
         this.repaint();
         
         
@@ -106,7 +108,7 @@ class Mainwindow extends JFrame implements MouseListener, MouseMotionListener {
         int x = e.getX();
         int y = e.getY();
         canDrag = false;
-        System.out.println(board.toString());        
+        //System.out.println(board.toString());
     }
     public void mouseClicked(MouseEvent e) {        
     }
@@ -153,8 +155,8 @@ class Mainwindow extends JFrame implements MouseListener, MouseMotionListener {
             chessBoard.setLayout(new GridLayout(8, 8));
             chessBoard.setPreferredSize(boardSize);
             startPos.initStartCoords();
-            startPos.setBounds(0, 0, boardSize.width, boardSize.height);
-            chessBoard.setBounds(0, 0, boardSize.width, boardSize.height);
+            startPos.setBounds(5, 0, boardSize.width, boardSize.height);
+            chessBoard.setBounds(5, 0, boardSize.width, boardSize.height);
             chessBoard.setOpaque(true);
             layeredPane.add(chessBoard, JLayeredPane.DEFAULT_LAYER);
             startPos.setOpaque(false);    
