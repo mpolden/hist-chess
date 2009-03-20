@@ -151,20 +151,60 @@ public class Position {
                     }
                 }
             }
-//            // Rook
-//            case 3: {
-//                return true;
-//            }
-//            // Queen
-//            case 4: {
-//                return true;
-//            }
-//            // King
-//            case 5: {
-//                return true;
-//            }
+            // Rook
+            case 3: {
+                if (diffPos % 7 == 0 || diffPos % 9 == 0) {
+                    throw new IllegalPositionException("Can't move diagonally.\n" +
+                            "Type: " + from.getType() +
+                            "\nFrom: " + fromPos +
+                            "\nTo: " + toPos);
+                }
+                return true;
+            }
+            // Queen
+            case 4: {
+                switch (diffPos) {
+                    case -10:
+                    case -17:
+                    case -15:
+                    case -6:
+                    case 10:
+                    case 17:
+                    case 15:
+                    case 6: {
+                        throw new IllegalPositionException("Can't move one field diagonally + one forward.\n" +
+                                "Type: " + from.getType() +
+                                "\nFrom: " + fromPos +
+                                "\nTo: " + toPos);
+                    }
+                    default: {
+                        return true;
+                    }
+                }
+            }
+            // King
+            case 5: {
+                switch (diffPos) {
+                    case -1:
+                    case -7:
+                    case -8:
+                    case -9:
+                    case 1:
+                    case 7:
+                    case 8:
+                    case 9: {
+                        return true;
+                    }
+                    default: {
+                        throw new IllegalPositionException("Can only move one field in any direction.\n" +
+                                "Type: " + from.getType() +
+                                "\nFrom: " + fromPos +
+                                "\nTo: " + toPos);
+                    }
+                }
+            }
             default: {
-                throw new IllegalPositionException("Move not implemented yet.");
+                throw new IllegalPositionException("Move not implemented.");
             }
         }
     }

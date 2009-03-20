@@ -60,15 +60,21 @@ public class Board {
         p.setTo(board[toPos]);
 
         if (p.isValidMove()) {
+            System.out.println("-- " + board[fromPos].getColorStr() + " moved " +
+                    board[fromPos].getTypeStr() + " from " + fromPos + " to " + toPos);
             // Save captured piece
             if (!board[toPos].isEmpty()) {
                 captured.add(board[toPos]);
+                System.out.println("** " + board[fromPos].getColorStr() + " captured " +
+                        board[toPos].getTypeStr() + " in " + toPos);
             }
 
             board[toPos] = board[fromPos]; // Move the piece in the table
             board[fromPos] = new Piece(fromPos, -1, -1); // Place empty piece in old position
             board[toPos].setPosition(toPos); // Update position in new piece
             switchTurn(); // Switch turn
+
+
         }
     }
 
@@ -105,16 +111,16 @@ public class Board {
      */
     private void fillBoard() {
         for (int i = 0; i < board.length; i++) {
-            board[i] = new Piece(i, getColor(i), getType(i));
+            board[i] = new Piece(i, getInitColor(i), getInitType(i));
         }
     }
 
     /**
-     * Get the color for a position
+     * Get the color for an initial position
      * @param position
      * @return The color
      */
-    private int getColor(int position) {
+    private int getInitColor(int position) {
         if (position <= 15) {
             return 0; // White
         } else if (position >= 48) {
@@ -124,11 +130,11 @@ public class Board {
     }
 
     /**
-     * Get the type for a position
+     * Get the type for an initial position
      * @param position
      * @return The type
      */
-    private int getType(int position) {
+    private int getInitType(int position) {
         switch (position) {
             // 0   1   2   3   4   5   6   7
             // 56  57  58  59  60  61  62  63

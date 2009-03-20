@@ -1,5 +1,5 @@
 /*
- * Main.java
+ * Test.java
  * 
  */
 
@@ -43,7 +43,12 @@ public class Test {
         b.movePiece(16, 24);
         b.movePiece(49, 42);
         b.movePiece(1, 16);
-//        b.getPiece(61).get
+        b.movePiece(60, 51);
+        b.movePiece(0, 8);
+        b.movePiece(56, 40);
+        b.movePiece(8, 9);
+        b.movePiece(52, 44);
+        b.movePiece(9, 57);
 
         System.out.println(b.toString());
     }

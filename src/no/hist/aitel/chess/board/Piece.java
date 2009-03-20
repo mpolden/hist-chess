@@ -85,7 +85,7 @@ public class Piece {
      * Get piece color
      * @return The piece color
      */
-    private String getColorStr() {
+    public String getColorStr() {
         switch (color) {
             case -1: {
                 return "Undefined";
@@ -106,7 +106,7 @@ public class Piece {
      * Get piece type
      * @return The piece type
      */
-    private String getTypeStr() {
+    public String getTypeStr() {
         switch (type) {
             case -1: {
                 return "Undefined";
