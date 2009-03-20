@@ -85,14 +85,13 @@ class Mainwindow extends JFrame implements MouseListener, MouseMotionListener {
         }
             x_coordStartPos = x;
             y_coordStartPos = y;
-        }catch(ArrayIndexOutOfBoundsException test) {            
+        }catch(ArrayIndexOutOfBoundsException test) {
+            System.out.println("test");
         }        
     }
           
-    public void mouseDragged(MouseEvent e) {
-        
-        if(canDrag) {
-            
+    public void mouseDragged(MouseEvent e) {        
+        if(canDrag) {            
             x_coords[movingPiece] = e.getX() - dragFromX;
             y_coords[movingPiece] = e.getY() - dragFromY;
 
@@ -100,48 +99,49 @@ class Mainwindow extends JFrame implements MouseListener, MouseMotionListener {
             x_coords[movingPiece] = Math.min(x_coords[movingPiece], getWidth() - 450);
 
             y_coords[movingPiece] = Math.max(y_coords[movingPiece], 50);
-            y_coords[movingPiece] = Math.min(y_coords[movingPiece], getWidth() - 400);
-
-            System.out.println(e.getX()+" "+e.getY());
+            y_coords[movingPiece] = Math.min(y_coords[movingPiece], getWidth() - 400);            
 
             this.repaint();            
         }        
     }
 
 
-    public void mouseReleased(MouseEvent e) {        
-        int x_on_release = e.getX();
+    public void mouseReleased(MouseEvent e) {
+        if(canDrag) {
+           int x_on_release = e.getX();
         int y_on_release = e.getY();
         int fromPos = getRect.getRectNumber(x_coordStartPos, y_coordStartPos);
         int toPos = getRect.getRectNumber(x_on_release, y_on_release);
         try {
             board.movePiece(fromPos, toPos);
             x_coords[movingPiece] = getRect.getRectCoordX(toPos);
-            y_coords[movingPiece] = getRect.getRectCoordY(toPos);            
+            y_coords[movingPiece] = getRect.getRectCoordY(toPos);
         } catch(IllegalPositionException posE) {
             System.out.println(posE);
             try{
                 x_coords[movingPiece] = getRect.getRectCoordX(fromPos);
                 y_coords[movingPiece] = getRect.getRectCoordY(fromPos);
-            } catch(ArrayIndexOutOfBoundsException test) {
-                System.out.println(test);
-            }            
+            } catch(ArrayIndexOutOfBoundsException outOfBoundsException) {
+                System.out.println(outOfBoundsException);
+            }
         } catch(IllegalTurnException turnE) {
             System.out.println(turnE);
             try{
                 x_coords[movingPiece] = getRect.getRectCoordX(fromPos);
                 y_coords[movingPiece] = getRect.getRectCoordY(fromPos);
-            } catch(ArrayIndexOutOfBoundsException test) {
-                System.out.println(test);
-            }               
-        } catch(ArrayIndexOutOfBoundsException test) {
+            } catch(ArrayIndexOutOfBoundsException outOfBoundsException) {
+                System.out.println(outOfBoundsException);
+            }
+        } catch(ArrayIndexOutOfBoundsException outOfBoundsException) {
             x_coords[movingPiece] = getRect.getRectCoordX(fromPos);
             y_coords[movingPiece] = getRect.getRectCoordY(fromPos);
-            System.out.println("test");
-        }        
+            System.out.println(outOfBoundsException);
+        }
         this.repaint();
         movingPiece = -1;
-        System.out.println(board.toString());       
+        System.out.println(board.toString());  
+        }
+             
     }
     public void mouseEntered(MouseEvent e) {        
     }
