@@ -23,8 +23,8 @@ class Mainwindow extends JFrame implements MouseListener, MouseMotionListener {
     private int dragFromX = 0;
     private int dragFromY = 0;  
     private int movingPiece = -1;
-    private int x_coordStartPos;
-    private int y_coordStartPos;
+    private int x_coordStartPos = -1;
+    private int y_coordStartPos = -1;
     int x;
     int y;
     
@@ -82,6 +82,7 @@ class Mainwindow extends JFrame implements MouseListener, MouseMotionListener {
         }        
         x_coordStartPos = x;
         y_coordStartPos = y;
+        System.out.println("x: "+x+" y: "+y);
     }
           
     public void mouseDragged(MouseEvent e) {
@@ -113,15 +114,18 @@ class Mainwindow extends JFrame implements MouseListener, MouseMotionListener {
             board.movePiece(fromPos, toPos);
             x_coords[movingPiece] = getRect.getRectCoordX(toPos);
             y_coords[movingPiece] = getRect.getRectCoordY(toPos);
-        } catch(IllegalPositionException posE) {
+        } catch(IllegalPositionException posE) {            
             x_coords[movingPiece] = getRect.getRectCoordX(fromPos);
             x_coords[movingPiece] = getRect.getRectCoordY(fromPos);
-        } catch(IllegalTurnException turnE) {
+        } catch(IllegalTurnException turnE) {            
             x_coords[movingPiece] = getRect.getRectCoordX(fromPos);
             x_coords[movingPiece] = getRect.getRectCoordY(fromPos);
-        }       
+        } catch(ArrayIndexOutOfBoundsException outOfBoundsE) {
+            
+        }
         
         this.repaint();
+        System.out.println(fromPos+" "+toPos);
         System.out.println(board.toString());        
        
     }
@@ -204,7 +208,11 @@ class Mainwindow extends JFrame implements MouseListener, MouseMotionListener {
                     newgame();
                 }
             } else if (commando.equals("Undo move")) {
-                undoMove();
+                try{
+                    undoMove();
+                } catch(ArrayIndexOutOfBoundsException outOfBoundsException) {                
+                }
+                
                 //JOptionPane.showMessageDialog(null, "Du angret et trekk");
             } else if (commando.equals("Highscore")) {
                 JOptionPane.showMessageDialog(null, "Highscore:");
