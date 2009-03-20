@@ -105,13 +105,14 @@ class Mainwindow extends JFrame implements MouseListener, MouseMotionListener {
         }        
     }
 
-
     public void mouseReleased(MouseEvent e) {
         if(canDrag) {
-           int x_on_release = e.getX();
+        int x_on_release = e.getX();
         int y_on_release = e.getY();
+        System.out.println(x_on_release + " " + y_on_release);
         int fromPos = getRect.getRectNumber(x_coordStartPos, y_coordStartPos);
         int toPos = getRect.getRectNumber(x_on_release, y_on_release);
+        
         try {
             board.movePiece(fromPos, toPos);
             x_coords[movingPiece] = getRect.getRectCoordX(toPos);
