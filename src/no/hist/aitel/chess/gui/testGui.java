@@ -22,7 +22,7 @@ class Mainwindow extends JFrame implements MouseListener, MouseMotionListener {
     private int[] y_start_coords = y_coords;
     private int dragFromX = 0;
     private int dragFromY = 0;  
-    private int movingPiece;
+    private int movingPiece = 0;
     private int x_coordStartPos = -1;
     private int y_coordStartPos = -1;
     int x;
