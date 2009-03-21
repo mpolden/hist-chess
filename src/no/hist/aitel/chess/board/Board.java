@@ -50,39 +50,39 @@ public class Board {
 
     /**
      * Move a piece from an old position to a new position
-     * @param fromPos
-     * @param toPos
+     * @param from
+     * @param to
      */
-    public void movePiece(int fromPos, int toPos) {
+    public void movePiece(int from, int to) {
 
         // Check if any of the positions are outside the board
-        if ((fromPos < 0 || fromPos > 63) || (toPos < 0 || fromPos > 63)) {
+        if ((from < 0 || from > 63) || (to < 0 || from > 63)) {
             throw new IllegalPieceException("Can't move pieces outside of the board.\n"
-                    + "\nFrom: " + fromPos
-                    + "\nTo: " + toPos);
+                    + "\nFrom: " + from
+                    + "\nTo: " + to);
         }
 
         // Check if piece in 'from' position is empty
-        if (getPiece(fromPos).isEmpty()) {
+        if (getPiece(from).isEmpty()) {
             throw new IllegalPieceException("Can't move empty piece.\n" +
-                    "\nFrom: " + fromPos +
-                    "\nTo: " + toPos);
+                    "\nFrom: " + from +
+                    "\nTo: " + to);
         }
         
         // Check whos turn it is
-        if (!isValidTurn(getPiece(fromPos).getColor())) {
+        if (!isValidTurn(getPiece(from).getColor())) {
             throw new IllegalTurnException("It's not your turn!");
         }
 
-        p.setPositions(fromPos, toPos);
+        p.setPositions(from, to);
 
         if (p.isValidMove()) {
-            if (!getPiece(toPos).isEmpty()) {
-                addCaptured(getPiece(toPos));
+            if (!getPiece(to).isEmpty()) {
+                addCaptured(getPiece(to));
             }
 
-            board[toPos] = getPiece(fromPos);
-            board[fromPos] = new Piece();            
+            board[to] = getPiece(from);
+            board[from] = new Piece(); // Empty piece
             switchTurn();
         }
     }
@@ -103,6 +103,7 @@ public class Board {
         for (int i = 0; i < captured.length; i++) {
             if (captured[i] == null) {
                 captured[i] = piece;
+                break;
             }
         }
     }
@@ -119,7 +120,7 @@ public class Board {
     /**
      * Switches turn
      */
-    public void switchTurn() {
+    private void switchTurn() {
         turn ^= 1; // Bitwise flip between 0 and 1
     }
 

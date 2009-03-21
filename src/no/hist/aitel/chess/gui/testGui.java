@@ -64,7 +64,7 @@ class Mainwindow extends JFrame implements MouseListener, MouseMotionListener {
             x_coords[movingPiece] = x - dragFromX;
             y_coords[movingPiece] = y - dragFromY;
             this.repaint();
-            board.switchTurn();
+            //board.switchTurn(); // Ikke nødvendig, Board-klassen tar seg av dette
         }
         catch (ArrayIndexOutOfBoundsException e) {
         }        
