@@ -1,14 +1,15 @@
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+ * IllegalPositionException.java
+ *
  */
 
-package no.hist.aitel.chess.board;
+package no.hist.aitel.chess.position;
 
 /**
  *
- * @author Martin
+ * @author martin
  */
+
 public class IllegalPositionException extends IllegalArgumentException {
 
     /**

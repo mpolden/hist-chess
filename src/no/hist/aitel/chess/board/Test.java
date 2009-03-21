@@ -9,6 +9,7 @@ package no.hist.aitel.chess.board;
  *
  * @author martin
  */
+
 public class Test {
 
     /**
@@ -17,33 +18,21 @@ public class Test {
     public static void main(String[] args) {
         Board b  = new Board();
 
-        b.movePiece(0, 37);
-//        b.movePiece(49, 41);
-//        b.movePiece(9, 17);
-//        b.movePiece(48, 40);
-//        b.movePiece(17, 25);
-//        b.movePiece(40, 32);
-//        b.movePiece(25, 32);
-//        b.movePiece(41, 32);
-//        b.movePiece(2, 9);
-//        b.movePiece(56, 40);
-//        b.movePiece(9, 54);
-//        b.movePiece(55, 47);
-//        b.movePiece(0, 8);
-//        b.movePiece(57, 42);
-//        b.movePiece(8, 9);
-//        b.movePiece(42, 27);
-//        b.movePiece(9, 17);
-//        b.movePiece(52, 44);
-//        b.movePiece(17, 23);
-//        b.movePiece(51, 43);
-//        b.movePiece(23, 47);
-//
-//        b.movePiece(58, 49);
-//        b.movePiece(16, 24);
-//        b.movePiece(49, 41);
-//        b.movePiece(3, 19);
-      
+        b.movePiece(8, 16);
+        b.movePiece(49, 41);
+        b.movePiece(9, 17);
+        b.movePiece(48, 40);
+        b.movePiece(17, 25);
+        b.movePiece(40, 32);
+        b.movePiece(25, 32);
+        b.movePiece(41, 32);
+        b.movePiece(2, 9);
+        b.movePiece(56, 40);
+        b.movePiece(9, 54);
+        b.movePiece(55, 47);
+        b.movePiece(0, 8);
+        b.movePiece(57, 42);
+        b.movePiece(8, 9);
 
         System.out.println(b.toString());
 

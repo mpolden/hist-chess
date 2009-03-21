@@ -1,14 +1,15 @@
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+ * IllegalTurnException.java
+ *
  */
 
 package no.hist.aitel.chess.board;
 
 /**
  *
- * @author Martin
+ * @author martin
  */
+
 public class IllegalTurnException extends IllegalArgumentException {
 
     /**

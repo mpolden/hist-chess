@@ -5,10 +5,26 @@ package no.hist.aitel.chess.gui;
  * @author Vegard
  */
 
-import java.awt.*;
-import java.awt.event.*;
-import javax.swing.*;
-import no.hist.aitel.chess.board.*;
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLayeredPane;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import no.hist.aitel.chess.board.Board;
+import no.hist.aitel.chess.board.IllegalTurnException;
+import no.hist.aitel.chess.position.IllegalPositionException;
+//import java.awt.*;
+//import java.awt.event.*;
+//import javax.swing.*;
 
 
 class Mainwindow extends JFrame implements MouseListener, MouseMotionListener {

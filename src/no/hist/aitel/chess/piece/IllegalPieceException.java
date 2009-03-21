@@ -1,14 +1,15 @@
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+ * IllegalPieceException.java
+ *
  */
 
-package no.hist.aitel.chess.board;
+package no.hist.aitel.chess.piece;
 
 /**
  *
  * @author Martin
  */
+
 public class IllegalPieceException extends IllegalArgumentException {
 
     public IllegalPieceException(String s) {

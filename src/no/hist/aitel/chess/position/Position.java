@@ -1,17 +1,23 @@
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+ * Position.java
+ *
  */
 
-package no.hist.aitel.chess.board;
+package no.hist.aitel.chess.position;
+
+import no.hist.aitel.chess.board.Board;
+import no.hist.aitel.chess.piece.Piece;
 
 /**
  *
- * @author Martin
+ * @author martin
  */
+
 public class Position {
     private Board board;
-    private int fromPos, toPos;
+    private int fromPos;
+    private int toPos;
+    private int diffPos;
 
     /**
      * Creates a position object which is used to validate moves
@@ -21,37 +27,24 @@ public class Position {
     }
 
     /**
-     * Sets the destination piece
+     * Sets the from and to positions
+     * @param from
      * @param to
      */
-    public void setTo(int to) {
-        this.toPos = to;
-    }
-
-    /**
-     * Sets the piece that should be moved
-     * @param from
-     */
-    public void setFrom(int from) {
+    public void setPositions(int from, int to) {
         this.fromPos = from;
+        this.toPos = to;
+        this.diffPos = to - from;
     }
 
     /**
      * Checks if a move is valid
-     * @return True if the move is valid and false otherwise
+     * @return True if the move is valid otherwise an exception is thrown
      */
     public boolean isValidMove() {
-        // Pieces
-        Piece from = board.getPiece(this.fromPos);
-        Piece to = board.getPiece(this.toPos);
-
-        // Can't move empty piece
-        if (from.isEmpty()) {
-            throw new IllegalPositionException("Can't move empty piece.\n" +
-                    "Type: " + from.getType() +
-                    "\nFrom: " + fromPos +
-                    "\nTo: " + toPos);
-        }
+        // Get pieces
+        Piece from = board.getPiece(fromPos);
+        Piece to = board.getPiece(toPos);
 
         // Can't capture piece of same color
         if (from.getColor() == to.getColor()) {
@@ -60,17 +53,14 @@ public class Position {
                     "\nFrom: " + fromPos +
                     "\nTo: " + toPos);
         }
-        
-        // Difference between new position and old position
-        int diffPos = toPos - fromPos;
 
         // Piece type
         int type = from.getType();
 
         // Direction
-        int direction = getDirection(type, diffPos);
+        int direction = getDirection(type);
 
-        // Check if path is clear
+        // Check if path is clear, not checking for type == 2 (Knight) since it can jump over pieces
         if (type != 2 && !isClearPath(direction)) {
             throw new IllegalPositionException("A piece is blocking my path.\n" +
                     "Type: " + from.getType() +
@@ -114,12 +104,12 @@ public class Position {
                     }
                 } else {
                     if (from.getColor() == 0 && diffPos != 9 && diffPos != 7) {
-                        throw new IllegalPositionException("Pawn can't move forward because 'to' position isn't empty.\n" +
+                        throw new IllegalPositionException("Pawn can't move forward because field isn't empty.\n" +
                                 "Type: " + from.getType() +
                                 "\nFrom: " + fromPos +
                                 "\nTo: " + toPos);
                     } else if (from.getColor() == 1 && diffPos != -9 && diffPos != -7) {
-                        throw new IllegalPositionException("Pawn can't move forward because 'to' position isn't empty.\n" +
+                        throw new IllegalPositionException("Pawn can't move forward because field isn't empty.\n" +
                                 "Type: " + from.getType() +
                                 "\nFrom: " + fromPos +
                                 "\nTo: " + toPos);
@@ -211,18 +201,18 @@ public class Position {
                 }
             }
             default: {
-                throw new IllegalPositionException("Method was called with invalid positions (should never happen)");
+                throw new IllegalPositionException("Tried to move empty piece " +
+                        "(should never happen)");
             }
         }
     }
 
     /**
-     * Get the current direction
+     * Get the current direction for a type
      * @param type
-     * @param diffPos
-     * @return
+     * @return The direction or -1 if something bad happens
      */
-    private int getDirection(int type, int diffPos) {
+    private int getDirection(int type) {
 
         int[] directions = getDirections(type);
         switch (type) {
@@ -236,15 +226,19 @@ public class Position {
                         return direction;
                     }
                 }
-                return -1;
+                return -1; // Piece is moving one field to the left or right (1 % (n!=1) != 0)
             default: {
-                    return -1;
+
+                return -1;
             }
         }
     }
 
+
     /**
      * Get possible directions for a type
+     * @param type
+     * @return The possible directions for the type or -1 if something bad happens
      */
     private int[] getDirections(int type) {
         switch (type) {
@@ -258,11 +252,14 @@ public class Position {
                 return new int[] {6, 10, 15, 17};
             }
             case 3: {
-                return new int[] {8, 1};
+                return new int[] {8}; // Not including 1 as n % 1 == 0 and that causes an invalid
+                                      // warning to be displayed
             }
             case 4:
             case 5: {
-                return new int[] {7, 8, 9, 1};
+                return new int[] {7, 8, 9}; // Not including 1 as n % 1 == 0 and that causes an
+                                            // invalid warning to be displayed
+
             }
             default: {
                 return null;
@@ -276,7 +273,9 @@ public class Position {
      * @return True if the path is clear and false otherwise
      */
     private boolean isClearPath(int direction) {
-        if (direction == -1) {
+        if (direction == -1) { // Happens when a pieces moves one field to the left or right,
+                               // which is always valid since no piece can exist between only two
+                               // fields
             return true;
         }
         if (toPos < fromPos) { // Black moves in a negative direction

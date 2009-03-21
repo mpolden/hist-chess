@@ -2,12 +2,14 @@
  * Test2.java
  * 
  */
+
 package no.hist.aitel.chess.board;
 
 /**
  *
  * @author martin
  */
+
 public class Test2 {
 
     /**
