@@ -34,8 +34,7 @@ public class drawStartPos extends JPanel {
     private BufferedImage bishopw;
     static final int width = 80;
     static final int height = 80;
-    private static final int xIn = 13;
-    private static final int yIn = 108;
+    
 
 
     public drawStartPos() {
@@ -66,23 +65,23 @@ public class drawStartPos extends JPanel {
     int j=0;
     public void initStartCoords() {
         for (int i=8; i<16; i++) {
-            x_coords[i] = width*j +xIn;
-            y_coords[i] = height*7 +yIn;
+            x_coords[i] = width*j;
+            y_coords[i] = height*7;
             j++;
         }
         j=0;
         for (int i=48; i<56; i++) {
-            x_coords[i] = width*j +xIn;
-            y_coords[i] = height*2 +yIn;
+            x_coords[i] = width*j;
+            y_coords[i] = height*2;
             j++;
         }
-        x_coords[60] = width*4 +xIn;
-        y_coords[60] = height +yIn;
-        x_coords[4] = width*4 +xIn;
-        y_coords[4] = height*8 +yIn;
+        x_coords[60] = width*4;
+        y_coords[60] = height;
+        x_coords[4] = width*4;
+        y_coords[4] = height*8;
 
-        x_coords[59] = width*3 +xIn;
-        y_coords[59] = height +yIn;
+        x_coords[59] = width*3;
+        y_coords[59] = height;
         x_coords[3] = width*3;
         y_coords[3] = height*8;
 
