@@ -15,9 +15,7 @@ import no.hist.aitel.chess.piece.Piece;
 
 public class Position {
     private Board board;
-    private int fromPos;
-    private int toPos;
-    private int diffPos;
+    private int from, to, diff;
 
     /**
      * Creates a position object which is used to validate moves
@@ -32,104 +30,104 @@ public class Position {
      * @param to
      */
     public void setPositions(int from, int to) {
-        this.fromPos = from;
-        this.toPos = to;
-        this.diffPos = to - from;
+        this.from = from;
+        this.to = to;
+        this.diff = to - from;
     }
 
     /**
      * Checks if a move is valid
      * @return True if the move is valid otherwise an exception is thrown
      */
-    public boolean isValidMove() {
-        // Get pieces
-        Piece from = board.getPiece(fromPos);
-        Piece to = board.getPiece(toPos);
+    public boolean isValid() {
+        // Get destionation piece
+        Piece fromPiece = board.getPiece(from);
+        Piece toPiece = board.getPiece(to);
 
         // Can't capture piece of same color
-        if (from.getColor() == to.getColor()) {
+        if (fromPiece.getColor() == toPiece.getColor()) {
             throw new IllegalPositionException("Can't capture piece of same type.\n" +
-                    "Type: " + from.getType() +
-                    "\nFrom: " + fromPos +
-                    "\nTo: " + toPos);
+                    "Type: " + fromPiece.getType() +
+                    "\nFrom: " + from +
+                    "\nTo: " + to);
         }
 
         // Piece type
-        int type = from.getType();
+        int type = fromPiece.getType();
 
         // Direction
         int direction = getDirection(type);
 
         // Check if path is clear, not checking for type == 2 (Knight) since it can jump over pieces
-        if (type != 2 && !isClearPath(direction)) {
+        if (type != 2 && !isPathClear(direction)) {
             throw new IllegalPositionException("A piece is blocking my path.\n" +
-                    "Type: " + from.getType() +
-                    "\nFrom: " + fromPos +
-                    "\nTo: " + toPos);
+                    "Type: " + fromPiece.getType() +
+                    "\nFrom: " + from +
+                    "\nTo: " + to);
         }
 
         // Type specific rules
         switch (type) {
             // Pawn .. garbage follows :|
             case 0: {
-                if (to.isEmpty()) { // New position is empty, pawn can then only move forward
-                    if (from.getColor() == 0) { // White piece
-                        if ((fromPos >= 8 && fromPos <= 15)) { // If the pawn is in its original position, it can move 1 or 2 fields forward
-                            if (diffPos != 8 && diffPos != 16) {
+                if (toPiece.isEmpty()) { // New position is empty, pawn can then only move forward
+                    if (fromPiece.getColor() == 0) { // White piece
+                        if (from >= 8 && from <= 15) { // If the pawn is in its original position, it can move 1 or 2 fields forward
+                            if (diff != 8 && diff != 16) {
                                 throw new IllegalPositionException("Pawn can only move one or two fields forward when in initial position.\n" +
-                                        "Type: " + from.getType() +
-                                        "\nFrom: " + fromPos +
-                                        "\nTo: " + toPos);
+                                        "Type: " + fromPiece.getType() +
+                                        "\nFrom: " + from +
+                                        "\nTo: " + to);
                             }
-                        } else if (diffPos != 8) { // Pawn can always move 1 field forward
+                        } else if (diff != 8) { // Pawn can always move 1 field forward
                             throw new IllegalPositionException("Pawn can only move one field forward when not in initial position.\n" +
-                                    "Type: " + from.getType() +
-                                    "\nFrom: " + fromPos +
-                                    "\nTo: " + toPos);
+                                    "Type: " + fromPiece.getType() +
+                                    "\nFrom: " + from +
+                                    "\nTo: " + to);
                         }
-                    } else if (from.getColor() == 1) { // Black piece
-                        if (fromPos >= 48 && fromPos <= 55) { // Same as above
-                            if (diffPos != -8 && diffPos != -16) {
+                    } else if (fromPiece.getColor() == 1) { // Black piece
+                        if (from >= 48 && from <= 55) { // Same as above
+                            if (diff != -8 && diff != -16) {
                                 throw new IllegalPositionException("Pawn can only move one or two fields forward when in initial position.\n" +
-                                        "Type: " + from.getType() +
-                                        "\nFrom: " + fromPos +
-                                        "\nTo: " + toPos);
+                                        "Type: " + fromPiece.getType() +
+                                        "\nFrom: " + from +
+                                        "\nTo: " + to);
                             }
-                        } else if (diffPos != -8) {
+                        } else if (diff != -8) {
                             throw new IllegalPositionException("Pawn can only move one field forward when not in initial position.\n" +
-                                    "Type: " + from.getType() +
-                                    "\nFrom: " + fromPos +
-                                    "\nTo: " + toPos);
+                                    "Type: " + fromPiece.getType() +
+                                    "\nFrom: " + from +
+                                    "\nTo: " + to);
                         }
                     }
                 } else {
-                    if (from.getColor() == 0 && diffPos != 9 && diffPos != 7) {
+                    if (fromPiece.getColor() == 0 && diff != 9 && diff != 7) {
                         throw new IllegalPositionException("Pawn can't move forward because field isn't empty.\n" +
-                                "Type: " + from.getType() +
-                                "\nFrom: " + fromPos +
-                                "\nTo: " + toPos);
-                    } else if (from.getColor() == 1 && diffPos != -9 && diffPos != -7) {
+                                "Type: " + fromPiece.getType() +
+                                "\nFrom: " + from +
+                                "\nTo: " + to);
+                    } else if (fromPiece.getColor() == 1 && diff != -9 && diff != -7) {
                         throw new IllegalPositionException("Pawn can't move forward because field isn't empty.\n" +
-                                "Type: " + from.getType() +
-                                "\nFrom: " + fromPos +
-                                "\nTo: " + toPos);
+                                "Type: " + fromPiece.getType() +
+                                "\nFrom: " + from +
+                                "\nTo: " + to);
                     }
                 }
                 return true;
             }
             // Bishop
             case 1: {
-                if (diffPos % 7 != 0 && diffPos % 9 != 0) {
+                if (diff % 7 != 0 && diff % 9 != 0) {
                     throw new IllegalPositionException("Bishop can only move diagonally.\n" +
-                            "Type: " + from.getType() +
-                            "\nFrom: " + fromPos +
-                            "\nTo: " + toPos);
+                            "Type: " + fromPiece.getType() +
+                            "\nFrom: " + from +
+                            "\nTo: " + to);
                 }
                 return true;
             }
             // Knight
             case 2: {
-                switch (diffPos) {
+                switch (diff) {
                     case -10:
                     case -17:
                     case -15:
@@ -142,25 +140,25 @@ public class Position {
                     }
                     default: {
                         throw new IllegalPositionException("Knight can only move one field diagonally + one forward.\n" +
-                                "Type: " + from.getType() +
-                                "\nFrom: " + fromPos +
-                                "\nTo: " + toPos);
+                                "Type: " + fromPiece.getType() +
+                                "\nFrom: " + from +
+                                "\nTo: " + to);
                     }
                 }
             }
             // Rook
             case 3: {
-                if (diffPos % 7 == 0 || diffPos % 9 == 0) {
+                if (diff % 7 == 0 || diff % 9 == 0) {
                     throw new IllegalPositionException("Rook can't move diagonally.\n" +
-                            "Type: " + from.getType() +
-                            "\nFrom: " + fromPos +
-                            "\nTo: " + toPos);
+                            "Type: " + fromPiece.getType() +
+                            "\nFrom: " + from +
+                            "\nTo: " + to);
                 }
                 return true;
             }
             // Queen
             case 4: {
-                switch (diffPos) {
+                switch (diff) {
                     case -10:
                     case -17:
                     case -15:
@@ -170,9 +168,9 @@ public class Position {
                     case 15:
                     case 6: {
                         throw new IllegalPositionException("Queen can't move one field diagonally + one forward.\n" +
-                                "Type: " + from.getType() +
-                                "\nFrom: " + fromPos +
-                                "\nTo: " + toPos);
+                                "Type: " + fromPiece.getType() +
+                                "\nFrom: " + from +
+                                "\nTo: " + to);
                     }
                     default: {
                         return true;
@@ -181,7 +179,7 @@ public class Position {
             }
             // King
             case 5: {
-                switch (diffPos) {
+                switch (diff) {
                     case -1:
                     case -7:
                     case -8:
@@ -194,9 +192,9 @@ public class Position {
                     }
                     default: {
                         throw new IllegalPositionException("King can only move one field in any direction.\n" +
-                                "Type: " + from.getType() +
-                                "\nFrom: " + fromPos +
-                                "\nTo: " + toPos);
+                                "Type: " + fromPiece.getType() +
+                                "\nFrom: " + from +
+                                "\nTo: " + to);
                     }
                 }
             }
@@ -222,7 +220,7 @@ public class Position {
             case 4: // Queen
             case 5: // King
                 for (int direction : directions) {
-                    if (diffPos % direction == 0) {
+                    if (diff % direction == 0) {
                         return direction;
                     }
                 }
@@ -272,21 +270,21 @@ public class Position {
      * @param direction
      * @return True if the path is clear and false otherwise
      */
-    private boolean isClearPath(int direction) {
+    private boolean isPathClear(int direction) {
         if (direction == -1) { // Happens when a pieces moves one field to the left or right,
                                // which is always valid since no piece can exist between only two
                                // fields
             return true;
         }
-        if (toPos < fromPos) { // Black moves in a negative direction
-            for (int i = fromPos - direction; i > toPos; i -= direction) {
-                if (!board.getPiece(i).isEmpty()) {
+        if (to < from) { // Black moves in a negative direction
+            for (int position = from - direction; position > to; position -= direction) {
+                if (!board.getPiece(position).isEmpty()) {
                     return false;
                 }
             }
         } else { // White moves in a positive direction
-            for (int i = fromPos + direction; i < toPos; i += direction) {
-                if (!board.getPiece(i).isEmpty()) {
+            for (int position = from + direction; position < to; position += direction) {
+                if (!board.getPiece(position).isEmpty()) {
                     return false;
                 }
             }

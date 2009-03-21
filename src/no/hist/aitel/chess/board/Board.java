@@ -26,16 +26,14 @@ public class Board {
      * Creates the board and makes it ready for a new game
      */
     public Board() {
-        // Using the BoardInit class to get an initial board
-        BoardInit boardInit = new BoardInit();
-        board = boardInit.getInitBoard();
+        board = new BoardInit().getInitBoard();
     }
 
     /**
      * Get board
      * @return The current board
      */
-    public Piece[] getBoard() {
+    public Piece[] getBoard() { // Not needed?
         return board;
     }
 
@@ -70,13 +68,15 @@ public class Board {
         }
         
         // Check whos turn it is
-        if (!isValidTurn(getPiece(from).getColor())) {
-            throw new IllegalTurnException("It's not your turn!");
+        int color = getPiece(from).getColor();
+        if (!isValidTurn(color)) {
+            throw new IllegalTurnException("Color " + color + " is not allowed to move now.");
         }
 
         p.setPositions(from, to);
 
-        if (p.isValidMove()) {
+        if (p.isValid()) {
+
             if (!getPiece(to).isEmpty()) {
                 addCaptured(getPiece(to));
             }

@@ -14,7 +14,8 @@ import no.hist.aitel.chess.piece.Piece;
 public class BoardInit {
 
     final private int size = 64;
-    private Piece[] board = new Piece[size];
+    final private Piece[] board = new Piece[size];
+    private int position;
 
     /**
      * Creates an initial board
@@ -36,16 +37,16 @@ public class BoardInit {
      */
     private void fillInitBoard() {
         for (int i = 0; i < board.length; i++) {
-            board[i] = new Piece(getInitColor(i), getInitType(i));
+            position = i;
+            board[position] = new Piece(getInitColor(), getInitType());
         }
     }
 
     /**
      * Get the color for an initial position
-     * @param position
      * @return The color
      */
-    private int getInitColor(int position) {
+    private int getInitColor() {
         if (position <= 15) {
             return 0; // White
         } else if (position >= 48) {
@@ -56,10 +57,9 @@ public class BoardInit {
 
     /**
      * Get the type for an initial position
-     * @param position
      * @return The type
      */
-    private int getInitType(int position) {
+    private int getInitType() {
         switch (position) {
             // 0   1   2   3   4   5   6   7
             // 56  57  58  59  60  61  62  63
