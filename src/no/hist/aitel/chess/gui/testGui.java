@@ -22,6 +22,7 @@ import javax.swing.JPanel;
 import no.hist.aitel.chess.board.Board;
 import no.hist.aitel.chess.board.IllegalTurnException;
 import no.hist.aitel.chess.position.IllegalPositionException;
+import no.hist.aitel.chess.piece.IllegalPieceException;
 //import java.awt.*;
 //import java.awt.event.*;
 //import javax.swing.*;
@@ -41,6 +42,8 @@ class Mainwindow extends JFrame implements MouseListener, MouseMotionListener {
     private int movingPiece = -1;
     private int x_coordStartPos = -1;
     private int y_coordStartPos = -1;
+    private static final int xIn = 13;
+    private static final int yIn = 108;
     int x;
     int y;
     
@@ -85,9 +88,11 @@ class Mainwindow extends JFrame implements MouseListener, MouseMotionListener {
     public void mousePressed(MouseEvent e) {        
         x = e.getX();
         y = e.getY();
+
         try {
             for(int i=0; i<64; i++){
-            if(x>=x_coords[i] && x<=x_coords[i]+80 && y>= y_coords[i] && y<=y_coords[i]+80){
+            if(x>getRect.getRectCoordX(i) && x<x_coords[i]+(80) && y> y_coords[i] && y<y_coords[i]+(80)){
+                System.out.println("x: "+x+" y: "+y+"\nx_coords[i]: "+getRect.getRectCoordX(i)+"\ny_coords[i]: "+y_coords[i]+"\nx_coords[59]: "+x_coords[59]+"\ny_coords[59]: "+y_coords[59]);
                 movingPiece = i;
                 canDrag=true;
                 dragFromX = x - x_coords[i];
@@ -101,8 +106,8 @@ class Mainwindow extends JFrame implements MouseListener, MouseMotionListener {
         }
             x_coordStartPos = x;
             y_coordStartPos = y;
-        }catch(ArrayIndexOutOfBoundsException test) {
-            System.out.println("test");
+        }catch(ArrayIndexOutOfBoundsException outOfBoundsException) {
+            System.out.println(outOfBoundsException);
         }        
     }
           
@@ -153,6 +158,14 @@ class Mainwindow extends JFrame implements MouseListener, MouseMotionListener {
             x_coords[movingPiece] = getRect.getRectCoordX(fromPos);
             y_coords[movingPiece] = getRect.getRectCoordY(fromPos);
             System.out.println(outOfBoundsException);
+        } catch(IllegalPieceException turnException) {
+            System.out.println(turnException);
+            try{
+                x_coords[movingPiece] = getRect.getRectCoordX(fromPos);
+                y_coords[movingPiece] = getRect.getRectCoordY(fromPos);
+            } catch(ArrayIndexOutOfBoundsException outOfBoundsException) {
+                System.out.println(outOfBoundsException);
+            }
         }
         this.repaint();
         movingPiece = -1;
