@@ -42,8 +42,8 @@ class Mainwindow extends JFrame implements MouseListener, MouseMotionListener {
     private int y_coordStartPos = -1;
     private static final int xIn = 13;
     private static final int yIn = 108;
-    int x;
-    int y;
+    private int x;
+    private int y;
     
     public Mainwindow(String title) {        
         this.addMouseListener(this);
@@ -70,14 +70,10 @@ class Mainwindow extends JFrame implements MouseListener, MouseMotionListener {
         catch (ArrayIndexOutOfBoundsException e) {
         }        
     }
-
-    public void setXcoords(int[] newCoords) {
-            x_coords = newCoords;
-    }
-    public void setYcoords(int[] newCoords) {
-            y_coords = newCoords;
-    }
+    
     public void newgame() {
+            x_coords = boardGui.getStartXcoords();
+            y_coords = boardGui.getStartYcoords();
             
             this.repaint();
     }
@@ -208,6 +204,8 @@ class Mainwindow extends JFrame implements MouseListener, MouseMotionListener {
         private drawStartPos startPos = new drawStartPos();
         private int[] x_coords = startPos.getXcoords();
         private int[] y_coords = startPos.getYcoords();
+        private int[] start_x_coords;
+        private int[] start_y_coords;
 
         public Chessboard() {
             Dimension boardSize = new Dimension(1024, 768);
@@ -218,6 +216,8 @@ class Mainwindow extends JFrame implements MouseListener, MouseMotionListener {
             chessBoard.setLayout(new GridLayout(8, 8));
             chessBoard.setPreferredSize(boardSize);
             startPos.initStartCoords();
+            start_x_coords = x_coords;
+            start_y_coords = y_coords;
             startPos.setBounds(5, 0, boardSize.width, boardSize.height);
             chessBoard.setBounds(5, 0, boardSize.width, boardSize.height);
             chessBoard.setOpaque(true);
@@ -226,7 +226,14 @@ class Mainwindow extends JFrame implements MouseListener, MouseMotionListener {
             layeredPane.add(startPos, JLayeredPane.PALETTE_LAYER);
             add(layeredPane);    
                     
-        }        
+        }
+        public int[] getStartXcoords() {
+            return start_x_coords;
+        }
+
+        public int[] getStartYcoords() {
+            return start_y_coords;
+        }
         
         public int[] getXcoords() {
             return x_coords;
