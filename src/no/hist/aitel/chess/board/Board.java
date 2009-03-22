@@ -21,6 +21,7 @@ public class Board {
     private Piece[] captured = new Piece[size];
     private int turn = 0;
     private Position p = new Position(this);
+    private int capturedPos = 0;
     
     /**
      * Creates the board and makes it ready for a new game
@@ -44,6 +45,15 @@ public class Board {
      */
     public Piece getPiece(int position) {
         return board[position];
+    }
+
+    /**
+     * Get capturedPos
+     * @param position
+     * @return The position of the captured piece
+     */
+    public int getCapturedPos() {
+        return capturedPos;
     }
 
     /**
@@ -78,6 +88,7 @@ public class Board {
 
         if (!getPiece(to).isEmpty()) {
             addCaptured(getPiece(to));
+            capturedPos=to;
         }
 
         board[to] = getPiece(from);
