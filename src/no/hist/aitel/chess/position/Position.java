@@ -6,6 +6,7 @@
 package no.hist.aitel.chess.position;
 
 import no.hist.aitel.chess.board.Board;
+import no.hist.aitel.chess.piece.IllegalTypeException;
 import no.hist.aitel.chess.piece.Piece;
 
 /**
@@ -148,12 +149,24 @@ public class Position {
             }
             // Rook
             case 3: {
-                if (diff % 7 == 0 || diff % 9 == 0) {
-                    throw new IllegalPositionException("Rook can't move diagonally.\n" +
+                int myFrom = from;
+                int myTo = to;
+                while (myFrom % 8 != 0) {
+                    myFrom--;
+                }
+                int myDiff = myTo - myFrom;
+                if ((myDiff > 7 || myDiff <- 7) && myDiff % 8 != 0) {
+                    throw new IllegalPositionException("Rook can only move forward, backward, left or right.\n" +
                             "Type: " + fromPiece.getType() +
                             "\nFrom: " + from +
                             "\nTo: " + to);
                 }
+//                if (diff % 8 != 0) {
+//                    throw new IllegalPositionException("craaaap.\n" +
+//                            "Type: " + fromPiece.getType() +
+//                            "\nFrom: " + from +
+//                            "\nTo: " + to);
+//                }
                 break;
             }
             // Queen
@@ -199,8 +212,7 @@ public class Position {
                 }
             }
             default: {
-                throw new IllegalPositionException("Tried to move empty piece " +
-                        "(should never happen)");
+                throw new IllegalTypeException("Method was called with type " + type);
             }
         }
     }
@@ -216,6 +228,9 @@ public class Position {
             case 0: // Pawn
             case 1: // Bishop
             case 3: // Rook
+//                if (diff % 8 == 0 && diff <= 7) {
+//                    return 1;
+//                }
             case 4: // Queen
             case 5: // King
                 for (int direction : directions) {
@@ -225,7 +240,7 @@ public class Position {
                 }
                 return -1; // Piece is moving one field to the left or right (1 % (n!=1) != 0)
             default: {
-                return -1;
+                throw new IllegalTypeException("Method was called with type " + type);
             }
         }
     }
@@ -258,7 +273,7 @@ public class Position {
 
             }
             default: {
-                return null;
+                throw new IllegalTypeException("Method was called with type " + type);
             }
         }
     }
