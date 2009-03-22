@@ -159,11 +159,18 @@ class Mainwindow extends JFrame implements MouseListener, MouseMotionListener {
                 System.out.println(outOfBoundsException);
             }
         }
+        if(board.getCapturedPos() != -1) {
+            System.out.println("test2");
+            int capturedPos = board.getCapturedPos();
+            x_coords[capturedPos] = 0;
+            y_coords[capturedPos] = 0;
+            System.out.println(toPos+" "+capturedPos);       
+            
+        }
         this.repaint();
         //movingPiece = -1;
         System.out.println(board.toString());  
-        }
-             
+        }             
     }
     public void mouseEntered(MouseEvent e) {        
     }
