@@ -74,17 +74,15 @@ public class Board {
         }
 
         p.setPositions(from, to);
+        p.verifyPositions();
 
-        if (p.isValid()) {
-
-            if (!getPiece(to).isEmpty()) {
-                addCaptured(getPiece(to));
-            }
-
-            board[to] = getPiece(from);
-            board[from] = new Piece(); // Empty piece
-            switchTurn();
+        if (!getPiece(to).isEmpty()) {
+            addCaptured(getPiece(to));
         }
+
+        board[to] = getPiece(from);
+        board[from] = new Piece(); // Empty piece
+        switchTurn();
     }
 
     /**

@@ -25,7 +25,7 @@ public class BoardInit {
     }
 
     /**
-     * Gets a "fresh" board with pieces in their initial positions
+     * Get a "fresh" board with pieces in their initial positions
      * @return The board
      */
     public Piece[] getInitBoard() {
@@ -36,8 +36,7 @@ public class BoardInit {
      * Fills the initial board with pieces
      */
     private void fillInitBoard() {
-        for (int i = 0; i < board.length; i++) {
-            position = i;
+        for (position = 0; position < board.length; position++) {
             board[position] = new Piece(getInitColor(), getInitType());
         }
     }

@@ -36,10 +36,10 @@ public class Position {
     }
 
     /**
-     * Checks if a move is valid
-     * @return True if the move is valid otherwise an exception is thrown
+     * Verifies positions
+     * @return Throws an exception if positions are invalid
      */
-    public boolean isValid() {
+    public void verifyPositions() throws IllegalPositionException {
         // Get destionation piece
         Piece fromPiece = board.getPiece(from);
         Piece toPiece = board.getPiece(to);
@@ -59,7 +59,7 @@ public class Position {
         int direction = getDirection(type);
 
         // Check if path is clear, not checking for type == 2 (Knight) since it can jump over pieces
-        if (type != 2 && !isPathClear(direction)) {
+        if (type != 2 && !isValidPath(direction)) {
             throw new IllegalPositionException("A piece is blocking my path.\n" +
                     "Type: " + fromPiece.getType() +
                     "\nFrom: " + from +
@@ -113,7 +113,7 @@ public class Position {
                                 "\nTo: " + to);
                     }
                 }
-                return true;
+                break;
             }
             // Bishop
             case 1: {
@@ -123,7 +123,7 @@ public class Position {
                             "\nFrom: " + from +
                             "\nTo: " + to);
                 }
-                return true;
+                break;
             }
             // Knight
             case 2: {
@@ -136,7 +136,7 @@ public class Position {
                     case 17:
                     case 15:
                     case 6: {
-                        return true;
+                        break;
                     }
                     default: {
                         throw new IllegalPositionException("Knight can only move one field diagonally + one forward.\n" +
@@ -154,7 +154,7 @@ public class Position {
                             "\nFrom: " + from +
                             "\nTo: " + to);
                 }
-                return true;
+                break;
             }
             // Queen
             case 4: {
@@ -173,7 +173,7 @@ public class Position {
                                 "\nTo: " + to);
                     }
                     default: {
-                        return true;
+                        break;
                     }
                 }
             }
@@ -188,7 +188,7 @@ public class Position {
                     case 7:
                     case 8:
                     case 9: {
-                        return true;
+                        break;
                     }
                     default: {
                         throw new IllegalPositionException("King can only move one field in any direction.\n" +
@@ -211,7 +211,6 @@ public class Position {
      * @return The direction or -1 if something bad happens
      */
     private int getDirection(int type) {
-
         int[] directions = getDirections(type);
         switch (type) {
             case 0: // Pawn
@@ -226,7 +225,6 @@ public class Position {
                 }
                 return -1; // Piece is moving one field to the left or right (1 % (n!=1) != 0)
             default: {
-
                 return -1;
             }
         }
@@ -236,7 +234,7 @@ public class Position {
     /**
      * Get possible directions for a type
      * @param type
-     * @return The possible directions for the type or -1 if something bad happens
+     * @return The possible directions for the type or null if something bad happens
      */
     private int[] getDirections(int type) {
         switch (type) {
@@ -270,7 +268,7 @@ public class Position {
      * @param direction
      * @return True if the path is clear and false otherwise
      */
-    private boolean isPathClear(int direction) {
+    private boolean isValidPath(int direction) {
         if (direction == -1) { // Happens when a pieces moves one field to the left or right,
                                // which is always valid since no piece can exist between only two
                                // fields
