@@ -248,7 +248,7 @@ class Mainwindow extends JFrame implements MouseListener, MouseMotionListener {
                 try{
                     undoMove();
                 } catch(ArrayIndexOutOfBoundsException outOfBoundsException) {
-                    System.out.println("zomg");
+                    System.out.println("test");
                 }                
                 //JOptionPane.showMessageDialog(null, "Du angret et trekk");
             } else if (commando.equals("Highscore")) {
