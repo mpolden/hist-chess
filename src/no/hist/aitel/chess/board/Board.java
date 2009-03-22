@@ -21,7 +21,7 @@ public class Board {
     private Piece[] captured = new Piece[size];
     private int turn = 0;
     private Position p = new Position(this);
-    private int capturedPos = 0;
+    private int capturedPos = -1;
     
     /**
      * Creates the board and makes it ready for a new game
@@ -54,6 +54,10 @@ public class Board {
      */
     public int getCapturedPos() {
         return capturedPos;
+    }
+
+    public void setCapturedPos(int capturedPos) {
+        this.capturedPos = capturedPos;
     }
 
     /**
