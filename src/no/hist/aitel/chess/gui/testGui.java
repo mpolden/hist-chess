@@ -44,6 +44,8 @@ class Mainwindow extends JFrame implements MouseListener, MouseMotionListener {
     private static final int yIn = 108;
     private int x;
     private int y;
+    private int fromPos;
+    private int toPos;
     
     public Mainwindow(String title) {        
         this.addMouseListener(this);
@@ -61,21 +63,20 @@ class Mainwindow extends JFrame implements MouseListener, MouseMotionListener {
     }
 
     public void undoMove() {
-        try {
+        try {            
             x_coords[movingPiece] = x - dragFromX;
-            y_coords[movingPiece] = y - dragFromY;
+            y_coords[movingPiece] = y - dragFromY;            
             this.repaint();
             //board.switchTurn(); // Ikke nødvendig, Board-klassen tar seg av dette
         }
         catch (ArrayIndexOutOfBoundsException e) {
+            System.out.println("test");
         }        
     }
     
-    public void newgame() {
-            x_coords = boardGui.getStartXcoords();
-            y_coords = boardGui.getStartYcoords();
-            
-            this.repaint();
+    public void newgame() {        
+        //
+        this.repaint();
     }
     
     public void mousePressed(MouseEvent e) {        
@@ -122,8 +123,8 @@ class Mainwindow extends JFrame implements MouseListener, MouseMotionListener {
         if(canDrag) {
         int x_on_release = e.getX();
         int y_on_release = e.getY();        
-        int fromPos = getRect.getRectNumber(x_coordStartPos, y_coordStartPos);
-        int toPos = getRect.getRectNumber(x_on_release, y_on_release);
+        fromPos = getRect.getRectNumber(x_coordStartPos, y_coordStartPos);
+        toPos = getRect.getRectNumber(x_on_release, y_on_release);
         
         try {
             board.movePiece(fromPos, toPos);
@@ -159,7 +160,7 @@ class Mainwindow extends JFrame implements MouseListener, MouseMotionListener {
             }
         }
         this.repaint();
-        movingPiece = -1;
+        //movingPiece = -1;
         System.out.println(board.toString());  
         }
              
@@ -204,8 +205,7 @@ class Mainwindow extends JFrame implements MouseListener, MouseMotionListener {
         private drawStartPos startPos = new drawStartPos();
         private int[] x_coords = startPos.getXcoords();
         private int[] y_coords = startPos.getYcoords();
-        private int[] start_x_coords;
-        private int[] start_y_coords;
+        
 
         public Chessboard() {
             Dimension boardSize = new Dimension(1024, 768);
@@ -215,9 +215,7 @@ class Mainwindow extends JFrame implements MouseListener, MouseMotionListener {
             chessBoard = new drawBoard();            
             chessBoard.setLayout(new GridLayout(8, 8));
             chessBoard.setPreferredSize(boardSize);
-            startPos.initStartCoords();
-            start_x_coords = x_coords;
-            start_y_coords = y_coords;
+            startPos.initStartCoords();            
             startPos.setBounds(5, 0, boardSize.width, boardSize.height);
             chessBoard.setBounds(5, 0, boardSize.width, boardSize.height);
             chessBoard.setOpaque(true);
@@ -226,14 +224,7 @@ class Mainwindow extends JFrame implements MouseListener, MouseMotionListener {
             layeredPane.add(startPos, JLayeredPane.PALETTE_LAYER);
             add(layeredPane);    
                     
-        }
-        public int[] getStartXcoords() {
-            return start_x_coords;
-        }
-
-        public int[] getStartYcoords() {
-            return start_y_coords;
-        }
+        }       
         
         public int[] getXcoords() {
             return x_coords;
@@ -256,7 +247,8 @@ class Mainwindow extends JFrame implements MouseListener, MouseMotionListener {
             } else if (commando.equals("Undo move")) {
                 try{
                     undoMove();
-                } catch(ArrayIndexOutOfBoundsException outOfBoundsException) {                
+                } catch(ArrayIndexOutOfBoundsException outOfBoundsException) {
+                    System.out.println("zomg");
                 }                
                 //JOptionPane.showMessageDialog(null, "Du angret et trekk");
             } else if (commando.equals("Highscore")) {

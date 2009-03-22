@@ -19,7 +19,7 @@ import javax.swing.JPanel;
 public class drawStartPos extends JPanel {
     private int boardSize = 64;
     private int[] x_coords;
-    private int[] y_coords;    
+    private int[] y_coords;
     private BufferedImage pawnb;
     private BufferedImage pawnw;
     private BufferedImage kingb;
@@ -56,12 +56,7 @@ public class drawStartPos extends JPanel {
     public int[] getYcoords() {
         return y_coords;
     }
-    public void setXcoord(int i, int new_x) {
-        x_coords[i] = new_x;
-    }
-    public void setYcoords(int i, int new_y) {
-        y_coords[i] = new_y;
-    }
+        
     int j=0;
     public void initStartCoords() {
         for (int i=8; i<16; i++) {
@@ -128,7 +123,7 @@ public class drawStartPos extends JPanel {
         j=5;
         x_coords[61] = width*j;
         y_coords[61] = height*8;        
-    
+
     }
     
     @Override
