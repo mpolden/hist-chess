@@ -38,6 +38,7 @@ class Mainwindow extends JFrame implements MouseListener, MouseMotionListener {
     private int dragFromX = 0;
     private int dragFromY = 0;  
     private int movingPiece = -1;
+    private int capturedPiece = -1;
     private int x_coordStartPos = -1;
     private int y_coordStartPos = -1;
     private static final int xIn = 13;
@@ -161,10 +162,11 @@ class Mainwindow extends JFrame implements MouseListener, MouseMotionListener {
         }
         if(board.getCapturedPos() != -1) {
             System.out.println("test2");
-            int capturedPos = board.getCapturedPos();
-            x_coords[capturedPos] = 0;
-            y_coords[capturedPos] = 0;
-            System.out.println(toPos+" "+capturedPos);       
+            capturedPiece = board.getCapturedPos();
+            x_coords[toPos] = 0;
+            y_coords[toPos] = 0;
+            
+            System.out.println(toPos+" "+capturedPiece);
             
         }
         this.repaint();

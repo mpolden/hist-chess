@@ -56,6 +56,13 @@ public class drawStartPos extends JPanel {
     public int[] getYcoords() {
         return y_coords;
     }
+
+    /*public int getCapturedPiece(int i) {
+
+        for(int j=0; j<64; j++) {
+
+        }
+    }*/
         
     int j=0;
     public void initStartCoords() {

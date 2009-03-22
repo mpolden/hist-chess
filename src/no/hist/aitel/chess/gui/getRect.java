@@ -15,6 +15,10 @@ public class getRect {
     private int rectCoordX;
     private int rectCoordY;
 
+    /*public int getCapturedPiece(int rectNumber) {
+
+    }*/
+
     public int getRectNumber(int x, int y) { 
         int xNumber;
         int yNumber;
