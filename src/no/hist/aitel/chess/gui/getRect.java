@@ -52,28 +52,28 @@ public class getRect {
 
     public int getRectCoordX(int rectNumber) {
         if(rectNumber == 0 || rectNumber == 8 || rectNumber == 16 || rectNumber == 24 || rectNumber == 32 || rectNumber == 40 || rectNumber == 48 || rectNumber == 56) {
-            rectCoordX = (width*0) + xIn;
+            rectCoordX = (width*0);
         }
         else if(rectNumber == 1 || rectNumber == 9 || rectNumber == 17 || rectNumber == 25 || rectNumber == 33 || rectNumber == 41 || rectNumber == 49 || rectNumber == 57) {
-            rectCoordX = (width*1) + xIn;
+            rectCoordX = (width*1);
         }
         else if(rectNumber == 2 || rectNumber == 10 || rectNumber == 18 || rectNumber == 26 || rectNumber == 34 || rectNumber == 42 || rectNumber == 50 || rectNumber == 58) {
-            rectCoordX = (width*2) + xIn;
+            rectCoordX = (width*2);
         }
         else if(rectNumber == 3 || rectNumber == 11 || rectNumber == 19 || rectNumber == 27 || rectNumber == 35 || rectNumber == 43 || rectNumber == 51 || rectNumber == 59) {
-            rectCoordX = (width*3) + xIn;
+            rectCoordX = (width*3);
         }
         else if(rectNumber == 4 || rectNumber == 12 || rectNumber == 20 || rectNumber == 28 || rectNumber == 36 || rectNumber == 44 || rectNumber == 52 || rectNumber == 60) {
-            rectCoordX = (width*4) + xIn;
+            rectCoordX = (width*4);
         }
         else if(rectNumber == 5 || rectNumber == 13 || rectNumber == 21 || rectNumber == 29 || rectNumber == 37 || rectNumber == 45 || rectNumber == 53 || rectNumber == 61) {
-            rectCoordX = (width*5) + xIn;
+            rectCoordX = (width*5);
         }
         else if(rectNumber == 6 || rectNumber == 14 || rectNumber == 22 || rectNumber == 30 || rectNumber == 38 || rectNumber == 46 || rectNumber == 54 || rectNumber == 62) {
-            rectCoordX = (width*6) + xIn;
+            rectCoordX = (width*6);
         }
         else if(rectNumber == 7 || rectNumber == 15 || rectNumber == 23 || rectNumber == 31 || rectNumber == 39 || rectNumber == 47 || rectNumber == 55 || rectNumber == 63) {
-            rectCoordX = (width*7) + xIn;
+            rectCoordX = (width*7);
         }
         return rectCoordX;
     }

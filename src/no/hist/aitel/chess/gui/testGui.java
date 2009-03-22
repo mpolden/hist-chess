@@ -34,9 +34,7 @@ class Mainwindow extends JFrame implements MouseListener, MouseMotionListener {
     private Board board = new Board();
     private getRect getRect = new getRect();
     private int[] x_coords = boardGui.getXcoords();
-    private int[] y_coords = boardGui.getYcoords();
-    private int[] x_start_coords = x_coords;
-    private int[] y_start_coords = y_coords;
+    private int[] y_coords = boardGui.getYcoords();    
     private int dragFromX = 0;
     private int dragFromY = 0;  
     private int movingPiece = -1;
@@ -53,15 +51,15 @@ class Mainwindow extends JFrame implements MouseListener, MouseMotionListener {
         setTitle(title);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
-
         add(new Buttons(), BorderLayout.SOUTH);
-        add(boardGui, BorderLayout.CENTER);
-        
+        add(boardGui, BorderLayout.CENTER);        
         pack();
     }
+
     public Chessboard getBoard() {
         return boardGui;
     }
+
     public void undoMove() {
         try {
             x_coords[movingPiece] = x - dragFromX;
@@ -80,8 +78,7 @@ class Mainwindow extends JFrame implements MouseListener, MouseMotionListener {
             y_coords = newCoords;
     }
     public void newgame() {
-            setXcoords(x_start_coords);
-            setYcoords(y_start_coords);
+            
             this.repaint();
     }
     
@@ -91,15 +88,14 @@ class Mainwindow extends JFrame implements MouseListener, MouseMotionListener {
 
         try {
             for(int i=0; i<64; i++){
-            if(x>getRect.getRectCoordX(i) && x<x_coords[i]+(80) && y> y_coords[i] && y<y_coords[i]+(80)){
-                System.out.println("x: "+x+" y: "+y+"\nx_coords[i]: "+getRect.getRectCoordX(i)+"\ny_coords[i]: "+y_coords[i]+"\nx_coords[59]: "+x_coords[59]+"\ny_coords[59]: "+y_coords[59]);
+            if(x-xIn>x_coords[i] && x-xIn<x_coords[i]+(80) && y-27> y_coords[i] && y-27<y_coords[i]+(80)) {
                 movingPiece = i;
                 canDrag=true;
                 dragFromX = x - x_coords[i];
                 dragFromY = y - y_coords[i];
                 break;
             }
-            else{
+            else {
                 movingPiece = -1;
                 canDrag=false;
             }
@@ -129,8 +125,7 @@ class Mainwindow extends JFrame implements MouseListener, MouseMotionListener {
     public void mouseReleased(MouseEvent e) {
         if(canDrag) {
         int x_on_release = e.getX();
-        int y_on_release = e.getY();
-        System.out.println(x_on_release + " " + y_on_release);
+        int y_on_release = e.getY();        
         int fromPos = getRect.getRectNumber(x_coordStartPos, y_coordStartPos);
         int toPos = getRect.getRectNumber(x_on_release, y_on_release);
         
@@ -229,9 +224,9 @@ class Mainwindow extends JFrame implements MouseListener, MouseMotionListener {
             layeredPane.add(chessBoard, JLayeredPane.DEFAULT_LAYER);
             startPos.setOpaque(false);    
             layeredPane.add(startPos, JLayeredPane.PALETTE_LAYER);
-            add(layeredPane);       
+            add(layeredPane);    
                     
-        }
+        }        
         
         public int[] getXcoords() {
             return x_coords;
@@ -255,8 +250,7 @@ class Mainwindow extends JFrame implements MouseListener, MouseMotionListener {
                 try{
                     undoMove();
                 } catch(ArrayIndexOutOfBoundsException outOfBoundsException) {                
-                }
-                
+                }                
                 //JOptionPane.showMessageDialog(null, "Du angret et trekk");
             } else if (commando.equals("Highscore")) {
                 JOptionPane.showMessageDialog(null, "Highscore:");
@@ -266,10 +260,10 @@ class Mainwindow extends JFrame implements MouseListener, MouseMotionListener {
         }        
     }
 }
+
 class testGui {
 
     public static void main(String[] args) {
-
         JFrame frame = new Mainwindow("Chess");
         frame.setVisible(true);
         frame.setResizable(false);
