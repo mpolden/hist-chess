@@ -22,7 +22,7 @@ import javax.swing.JPanel;
 import no.hist.aitel.chess.board.Board;
 import no.hist.aitel.chess.board.IllegalTurnException;
 import no.hist.aitel.chess.position.IllegalPositionException;
-import no.hist.aitel.chess.piece.IllegalPieceException;
+import no.hist.aitel.chess.piece.*;
 //import java.awt.*;
 //import java.awt.event.*;
 //import javax.swing.*;
@@ -41,8 +41,12 @@ class Mainwindow extends JFrame implements MouseListener, MouseMotionListener {
     private int capturedPiece = -1;
     private int x_coordStartPos = -1;
     private int y_coordStartPos = -1;
-    private static final int xIn = 13;
-    private static final int yIn = 108;
+    private int capturedWhitePieces = 0;
+    private int capturedBlackPieces = 0;
+    private final int xIn = 13;
+    private final int yIn = 108;
+    private final int width = 80;
+    private final int height = 80;
     private int x;
     private int y;
     private int fromPos;
@@ -98,8 +102,8 @@ class Mainwindow extends JFrame implements MouseListener, MouseMotionListener {
                 canDrag=false;
             }
         }
-            x_coordStartPos = x;
-            y_coordStartPos = y;
+        x_coordStartPos = x;
+        y_coordStartPos = y;
         }catch(ArrayIndexOutOfBoundsException outOfBoundsException) {
             System.out.println(outOfBoundsException);
         }        
@@ -126,6 +130,8 @@ class Mainwindow extends JFrame implements MouseListener, MouseMotionListener {
         int y_on_release = e.getY();        
         fromPos = getRect.getRectNumber(x_coordStartPos, y_coordStartPos);
         toPos = getRect.getRectNumber(x_on_release, y_on_release);
+        capturedPiece = board.getPiece(toPos).getId();
+        System.out.println(capturedPiece);
         
         try {
             board.movePiece(fromPos, toPos);
@@ -152,7 +158,15 @@ class Mainwindow extends JFrame implements MouseListener, MouseMotionListener {
             y_coords[movingPiece] = getRect.getRectCoordY(fromPos);
             System.out.println(outOfBoundsException);
         } catch(IllegalPieceException turnException) {
-            System.out.println(turnException);
+            System.out.println(turnException);            
+            try{
+                x_coords[movingPiece] = getRect.getRectCoordX(fromPos);
+                y_coords[movingPiece] = getRect.getRectCoordY(fromPos);
+            } catch(ArrayIndexOutOfBoundsException outOfBoundsException) {
+                System.out.println(outOfBoundsException);
+            } 
+        } catch(IllegalTypeException typeException) {
+            System.out.println(typeException);
             try{
                 x_coords[movingPiece] = getRect.getRectCoordX(fromPos);
                 y_coords[movingPiece] = getRect.getRectCoordY(fromPos);
@@ -161,14 +175,32 @@ class Mainwindow extends JFrame implements MouseListener, MouseMotionListener {
             }
         }
         if(board.getCapturedPos() != -1) {
-            System.out.println("test2");
-            capturedPiece = board.getCapturedPos();
-            x_coords[toPos] = 0;
-            y_coords[toPos] = 0;
+            System.out.println(capturedPiece);
+                        
+            if(capturedPiece >= 48) {
+                try{
+                    x_coords[capturedPiece] = capturedBlackPieces*width;
+                    y_coords[capturedPiece] = height*9;
+                    capturedBlackPieces++;
+                } catch(ArrayIndexOutOfBoundsException excep) {}
+                
+            }
+
+            else if(capturedPiece <= 15) {
+                try{
+                    x_coords[capturedPiece] = capturedWhitePieces*width;
+                    y_coords[capturedPiece] = 0;
+                    capturedWhitePieces++;
+                } catch(ArrayIndexOutOfBoundsException excep) {}
+                
+            }
+
             
-            System.out.println(toPos+" "+capturedPiece);
+            
+            //System.out.println(test);
             
         }
+        board.setCapturedPos(-1);
         this.repaint();
         //movingPiece = -1;
         System.out.println(board.toString());  
