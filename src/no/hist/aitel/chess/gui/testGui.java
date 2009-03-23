@@ -16,6 +16,7 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -51,6 +52,8 @@ class Mainwindow extends JFrame implements MouseListener, MouseMotionListener {
     private int y;
     private int fromPos;
     private int toPos;
+    private String player1 = null;
+    private String player2 = null;
     
     public Mainwindow(String title) {        
         this.addMouseListener(this);
@@ -58,13 +61,30 @@ class Mainwindow extends JFrame implements MouseListener, MouseMotionListener {
         setTitle(title);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
+        players();
+
+        JPanel southPanel = new JPanel(new BorderLayout());
+        JLabel player1Label = new JLabel(player1);
+        JLabel player2Label = new JLabel(player2);
+
+        southPanel.add(boardGui, BorderLayout.CENTER);
+        southPanel.add(player1Label, BorderLayout.SOUTH);
+        southPanel.add(player2Label, BorderLayout.NORTH);
+
+        add(southPanel, BorderLayout.CENTER);
         add(new Buttons(), BorderLayout.SOUTH);
-        add(boardGui, BorderLayout.CENTER);        
+
+        //add(boardGui, BorderLayout.CENTER);
         pack();
     }
 
     public Chessboard getBoard() {
         return boardGui;
+    }
+
+    private void players() {
+     player1 = JOptionPane.showInputDialog("Navn på spiller 1:");
+     player2 = JOptionPane.showInputDialog("Navn på spiller 2:");
     }
 
     public void undoMove() {
