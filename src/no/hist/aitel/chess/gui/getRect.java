@@ -10,7 +10,7 @@ public class getRect {
     private static final int width = 80;
     private static final int height = 80;
     private static final int xIn = 13;
-    private static final int yIn = 108;
+    private static final int yIn = 141;
     private int rectNumber;
     private int rectCoordX;
     private int rectCoordY;

@@ -112,7 +112,7 @@ class Mainwindow extends JFrame implements MouseListener, MouseMotionListener {
 
         try {
             for(int i=0; i<64; i++){
-            if(x-xIn>x_coords[i] && x-xIn<x_coords[i]+(80) && y-27> y_coords[i] && y-27<y_coords[i]+(80)) {
+            if(x-xIn>x_coords[i] && x-xIn<x_coords[i]+(80) && y-60> y_coords[i] && y-60<y_coords[i]+(80)) {
                 movingPiece = i;
                 canDrag=true;
                 dragFromX = x - x_coords[i];
@@ -355,7 +355,7 @@ class testGui {
 
     public static void main(String[] args) {
         frame = new Mainwindow("Chess");
-        //addJMenu();
+        addJMenu();
         frame.setVisible(true);
         frame.setResizable(false);
         frame.setLocationRelativeTo(null);
