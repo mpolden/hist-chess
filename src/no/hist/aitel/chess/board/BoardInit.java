@@ -16,6 +16,7 @@ public class BoardInit {
     final private int size = 64;
     final private Piece[] board = new Piece[size];
     private int position;
+    private int id = -1;
 
     /**
      * Creates an initial board
@@ -37,10 +38,14 @@ public class BoardInit {
      */
     private void fillInitBoard() {
         for (position = 0; position < board.length; position++) {
-            board[position] = new Piece(getInitColor(), getInitType());
+            board[position] = new Piece(getInitColor(), getInitType(), getInitId());
         }
     }
 
+    private int getInitId() {
+        id++;
+        return id;
+    }
     /**
      * Get the color for an initial position
      * @return The color
