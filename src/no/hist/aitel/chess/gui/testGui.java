@@ -80,7 +80,15 @@ class Mainwindow extends JFrame implements MouseListener, MouseMotionListener {
 
         //add(boardGui, BorderLayout.CENTER);
         pack();
-    }    
+    }
+
+    public void setP1name(String newName) {
+        player1 = newName;
+    }
+
+    public void setP2name(String newName) {
+        player2 = newName;
+    }
 
     public Chessboard getBoard() {
         return boardGui;
@@ -318,10 +326,20 @@ class Mainwindow extends JFrame implements MouseListener, MouseMotionListener {
 }
 
 class testGui implements ActionListener, ItemListener {
-    private static JFrame frame; 
-    
 
-    private static void addJMenu() {
+    
+    private static void createAndShowGui() {
+        JFrame frame = new Mainwindow("Chess");
+        testGui testGui = new testGui();
+        frame.setJMenuBar(testGui.addJMenu());
+        frame.setVisible(true);
+        frame.setResizable(false);
+        frame.setLocationRelativeTo(null);
+        frame.pack();
+    }
+
+
+    private JMenuBar addJMenu() {
         JMenuBar menuBar = new JMenuBar();
         JMenu menu = new JMenu("File"), submenu = new JMenu("Set player names");
         menu.setMnemonic(KeyEvent.VK_A);
@@ -329,7 +347,7 @@ class testGui implements ActionListener, ItemListener {
         menuBar.add(menu);
 
         JMenuItem menuItem = new JMenuItem("Save game", KeyEvent.VK_T);
-        //menuItem.addActionListener(this);
+        menuItem.addActionListener(this);
         menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F2, ActionEvent.ALT_MASK));
         menuItem.getAccessibleContext().setAccessibleDescription("This doesn't really do anything");
         menu.add(menuItem);
@@ -337,23 +355,40 @@ class testGui implements ActionListener, ItemListener {
         menu.addSeparator();
         submenu.setMnemonic(KeyEvent.VK_S);
         menuItem = new JMenuItem("Player 1");
-        //menuItem.addActionListener(this);
+        menuItem.addActionListener(this);
         menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_1, ActionEvent.ALT_MASK));
         submenu.add(menuItem);
 
         menuItem = new JMenuItem("Player 2");        
         menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_2, ActionEvent.ALT_MASK));
-        //menuItem.addActionListener(this);
+        menuItem.addActionListener(this);
         submenu.add(menuItem);
 
         menu.add(submenu);
         
-        frame.setJMenuBar(menuBar);
+        return menuBar;
 
     }
 
+    protected String getClassName(Object o) {
+        String classString = o.getClass().getName();
+        int dotIndex = classString.lastIndexOf(".");
+        return classString.substring(dotIndex+1);
+    }
+
     public void actionPerformed(ActionEvent e) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        JMenuItem source = (JMenuItem)(e.getSource());
+        String s = "Action event detected."
+                + "\n"
+                + "    Event source: " + source.getText()
+                + " (an instance of " + getClassName(source) + ")";
+        System.out.println(s);
+        if(e.getActionCommand().equals("Player 1")) {
+            String newP1name = JOptionPane.showInputDialog(null, "Player 1 name:");
+            if(newP1name != "") {
+                //player1 = newP1name;
+            }
+        }
     }
 
     public void itemStateChanged(ItemEvent e) {
@@ -361,11 +396,11 @@ class testGui implements ActionListener, ItemListener {
     }
 
     public static void main(String[] args) {
-        frame = new Mainwindow("Chess");
-        addJMenu();
-        frame.setVisible(true);
-        frame.setResizable(false);
-        frame.setLocationRelativeTo(null);
-        frame.pack();
-    }    
+        javax.swing.SwingUtilities.invokeLater(new Runnable() {
+            public void run() {
+                createAndShowGui();
+            }
+        });
+    }
 }
+     
