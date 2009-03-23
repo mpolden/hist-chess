@@ -11,6 +11,8 @@ import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -323,7 +325,7 @@ class Mainwindow extends JFrame implements MouseListener, MouseMotionListener {
     }
 }
 
-class testGui {
+class testGui implements ActionListener, ItemListener {
     private static JFrame frame;
 
     private static void addJMenu() {
@@ -333,21 +335,25 @@ class testGui {
         menu.getAccessibleContext().setAccessibleDescription("Test");
         menuBar.add(menu);
 
-        JMenuItem menuItem = new JMenuItem("test test", KeyEvent.VK_T);
-        menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_1, ActionEvent.ALT_MASK));
+        JMenuItem menuItem = new JMenuItem("Save game", KeyEvent.VK_T);
+        //menuItem.addActionListener(this);
+        menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F2, ActionEvent.ALT_MASK));
         menuItem.getAccessibleContext().setAccessibleDescription("This doesn't really do anything");
         menu.add(menuItem);
 
         menu.addSeparator();
         submenu.setMnemonic(KeyEvent.VK_S);
         menuItem = new JMenuItem("Player 1");
-        menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_2, ActionEvent.ALT_MASK));
+        //menuItem.addActionListener(this);
+        menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_1, ActionEvent.ALT_MASK));
         submenu.add(menuItem);
 
         menuItem = new JMenuItem("Player 2");
+        //menuItem.addActionListener(this);
+        menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_2, ActionEvent.ALT_MASK));
         submenu.add(menuItem);
         menu.add(submenu);
-
+        
         frame.setJMenuBar(menuBar);
 
 
@@ -360,5 +366,13 @@ class testGui {
         frame.setResizable(false);
         frame.setLocationRelativeTo(null);
         frame.pack();
+    }
+
+    public void actionPerformed(ActionEvent e) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    public void itemStateChanged(ItemEvent e) {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 }
