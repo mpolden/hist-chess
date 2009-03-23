@@ -217,23 +217,20 @@ class Mainwindow extends JFrame implements MouseListener, MouseMotionListener {
                     y_coords[capturedPiece] = 0;
                     capturedWhitePieces++;
                     board.setCapturedPos(-1);
-                } catch(ArrayIndexOutOfBoundsException excep) {}
-                
+                } catch(ArrayIndexOutOfBoundsException excep) {}                
             }            
         }        
         this.repaint();        
         System.out.println(board.toString());  
         }             
     }
-    public void mouseEntered(MouseEvent e) {        
-    }
+    
     public void mouseExited(MouseEvent e) {        
         canDrag = false;        
     }
-    public void mouseClicked(MouseEvent e) {        
-    }
-    public void mouseMoved(MouseEvent e) {        
-    }
+    public void mouseClicked(MouseEvent e) {}
+    public void mouseMoved(MouseEvent e) {}
+    public void mouseEntered(MouseEvent e) {}
 
     public class Buttons extends JPanel {
 
@@ -321,8 +318,7 @@ class Mainwindow extends JFrame implements MouseListener, MouseMotionListener {
 }
 
 class testGui implements ActionListener, ItemListener {
-    private static JFrame frame;
-
+    private static JFrame frame; 
     
 
     private static void addJMenu() {
@@ -353,7 +349,6 @@ class testGui implements ActionListener, ItemListener {
         menu.add(submenu);
         
         frame.setJMenuBar(menuBar);
-
 
     }
 
