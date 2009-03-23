@@ -328,7 +328,7 @@ class testGui {
 
     private static void addJMenu() {
         JMenuBar menuBar = new JMenuBar();
-        JMenu menu = new JMenu("File"), submenu = new JMenu("A submenu");
+        JMenu menu = new JMenu("File"), submenu = new JMenu("Set player names");
         menu.setMnemonic(KeyEvent.VK_A);
         menu.getAccessibleContext().setAccessibleDescription("Test");
         menuBar.add(menu);
@@ -340,11 +340,11 @@ class testGui {
 
         menu.addSeparator();
         submenu.setMnemonic(KeyEvent.VK_S);
-        menuItem = new JMenuItem("An item in the submenu");
+        menuItem = new JMenuItem("Player 1");
         menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_2, ActionEvent.ALT_MASK));
         submenu.add(menuItem);
 
-        menuItem = new JMenuItem("Another item");
+        menuItem = new JMenuItem("Player 2");
         submenu.add(menuItem);
         menu.add(submenu);
 
