@@ -14,15 +14,17 @@ public class Piece {
 
     final private int color;
     final private int type;
+    final private int id;
 
     /**
      * Creates a new piece of the given color and type
      * @param color
      * @param type
      */
-    public Piece(int color, int type) {
+    public Piece(int color, int type, int id) {
         this.color = color;
         this.type = type;
+        this.id = id;
     }
 
     /**
@@ -31,6 +33,7 @@ public class Piece {
     public Piece() {
         this.color = -1;
         this.type = -1;
+        this.id = -1;
     }
 
     /**
@@ -47,6 +50,14 @@ public class Piece {
      */
     public int getType() {
         return type;
+    }
+
+    /**
+     * Get piece id
+     * @return The piece id
+     */
+    public int getId() {
+        return id;
     }
 
     /**
