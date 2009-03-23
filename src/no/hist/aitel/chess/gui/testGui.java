@@ -11,6 +11,7 @@ import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
@@ -18,16 +19,17 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.KeyStroke;
 import no.hist.aitel.chess.board.Board;
 import no.hist.aitel.chess.board.IllegalTurnException;
 import no.hist.aitel.chess.position.IllegalPositionException;
 import no.hist.aitel.chess.piece.*;
 import static no.hist.aitel.chess.gui.guiConstants.*;
-//import java.awt.*;
-//import java.awt.event.*;
-//import javax.swing.*;
 
 
 class Mainwindow extends JFrame implements MouseListener, MouseMotionListener {
@@ -51,6 +53,7 @@ class Mainwindow extends JFrame implements MouseListener, MouseMotionListener {
     private int toPos;
     private String player1 = null;
     private String player2 = null;
+
     
     public Mainwindow(String title) {        
         this.addMouseListener(this);
@@ -59,6 +62,8 @@ class Mainwindow extends JFrame implements MouseListener, MouseMotionListener {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
         players();
+
+        
 
         JPanel southPanel = new JPanel(new BorderLayout());
         JLabel player1Label = new JLabel(player1);
@@ -73,7 +78,7 @@ class Mainwindow extends JFrame implements MouseListener, MouseMotionListener {
 
         //add(boardGui, BorderLayout.CENTER);
         pack();
-    }
+    }    
 
     public Chessboard getBoard() {
         return boardGui;
@@ -319,9 +324,38 @@ class Mainwindow extends JFrame implements MouseListener, MouseMotionListener {
 }
 
 class testGui {
+    private static JFrame frame;
+
+    private static void addJMenu() {
+        JMenuBar menuBar = new JMenuBar();
+        JMenu menu = new JMenu("File"), submenu = new JMenu("A submenu");
+        menu.setMnemonic(KeyEvent.VK_A);
+        menu.getAccessibleContext().setAccessibleDescription("Test");
+        menuBar.add(menu);
+
+        JMenuItem menuItem = new JMenuItem("test test", KeyEvent.VK_T);
+        menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_1, ActionEvent.ALT_MASK));
+        menuItem.getAccessibleContext().setAccessibleDescription("This doesn't really do anything");
+        menu.add(menuItem);
+
+        menu.addSeparator();
+        submenu.setMnemonic(KeyEvent.VK_S);
+        menuItem = new JMenuItem("An item in the submenu");
+        menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_2, ActionEvent.ALT_MASK));
+        submenu.add(menuItem);
+
+        menuItem = new JMenuItem("Another item");
+        submenu.add(menuItem);
+        menu.add(submenu);
+
+        frame.setJMenuBar(menuBar);
+
+
+    }
 
     public static void main(String[] args) {
-        JFrame frame = new Mainwindow("Chess");
+        frame = new Mainwindow("Chess");
+        //addJMenu();
         frame.setVisible(true);
         frame.setResizable(false);
         frame.setLocationRelativeTo(null);
