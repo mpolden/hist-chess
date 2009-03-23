@@ -55,6 +55,8 @@ class Mainwindow extends JFrame implements MouseListener, MouseMotionListener {
     private int toPos;
     private String player1 = null;
     private String player2 = null;
+    private JLabel player1Label;
+    private JLabel player2Label;
 
     
     public Mainwindow(String title) {        
@@ -68,9 +70,8 @@ class Mainwindow extends JFrame implements MouseListener, MouseMotionListener {
         
 
         JPanel southPanel = new JPanel(new BorderLayout());
-        JLabel player1Label = new JLabel(player1);
-        JLabel player2Label = new JLabel(player2);
-
+        player1Label = new JLabel(player1);
+        player2Label = new JLabel(player2);
         southPanel.add(boardGui, BorderLayout.CENTER);
         southPanel.add(player1Label, BorderLayout.SOUTH);
         southPanel.add(player2Label, BorderLayout.NORTH);
@@ -83,11 +84,11 @@ class Mainwindow extends JFrame implements MouseListener, MouseMotionListener {
     }
 
     public void setP1name(String newName) {
-        player1 = newName;
+        player1Label.setText(newName);
     }
 
     public void setP2name(String newName) {
-        player2 = newName;
+        player2Label.setText(newName);
     }
 
     public Chessboard getBoard() {
@@ -329,7 +330,7 @@ class testGui implements ActionListener, ItemListener {
 
     
     private static void createAndShowGui() {
-        JFrame frame = new Mainwindow("Chess");
+        JFrame frame = new Mainwindow("Chess");        
         testGui testGui = new testGui();
         frame.setJMenuBar(testGui.addJMenu());
         frame.setVisible(true);
@@ -386,7 +387,7 @@ class testGui implements ActionListener, ItemListener {
         if(e.getActionCommand().equals("Player 1")) {
             String newP1name = JOptionPane.showInputDialog(null, "Player 1 name:");
             if(newP1name != "") {
-                //player1 = newP1name;
+                
             }
         }
     }
