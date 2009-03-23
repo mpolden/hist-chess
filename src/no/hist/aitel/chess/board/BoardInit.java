@@ -6,6 +6,7 @@
 package no.hist.aitel.chess.board;
 
 import no.hist.aitel.chess.piece.Piece;
+import static no.hist.aitel.chess.piece.PieceConstants.*;
 
 /**
  *
@@ -52,11 +53,11 @@ public class BoardInit {
      */
     private int getInitColor() {
         if (position <= 15) {
-            return 0; // White
+            return WHITE;
         } else if (position >= 48) {
-            return 1; // Black
+            return BLACK;
         }
-        return -1; // Empty piece
+        return UNDEFINED;
     }
 
     /**
@@ -67,42 +68,42 @@ public class BoardInit {
         switch (position) {
             // 0   1   2   3   4   5   6   7
             // 56  57  58  59  60  61  62  63
-            // = Rook (3) Knight (2) Bishop(1) Queen (4) King (5) Bishop(1) Knight(2) Rook(3)
+            // = Rook Knight Bishop Queen King Bishop Knight Rook
             case 0:
             case 56: {
-                return 3;
+                return ROOK;
             }
             case 1:
             case 57: {
-                return 2;
+                return KNIGHT;
             }
             case 2:
             case 58: {
-                return 1;
+                return BISHOP;
             }
             case 3:
             case 59: {
-                return 4;
+                return QUEEN;
             }
             case 4:
             case 60: {
-                return 5;
+                return KING;
             }
             case 5:
             case 61: {
-                return 1;
+                return BISHOP;
             }
             case 6:
             case 62: {
-                return 2;
+                return KNIGHT;
             }
             case 7:
             case 63: {
-                return 3;
+                return ROOK;
             }
             // 8   9   10  11  12  13  14  15
             // 48  49  50  51  52  53  54  55
-            // = Pawn (0)
+            // = Pawn
             case 8:
             case 9:
             case 10:
@@ -119,10 +120,10 @@ public class BoardInit {
             case 53:
             case 54:
             case 55: {
-                return 0;
+                return PAWN;
             }
             default: {
-                return -1; // Empty piece
+                return UNDEFINED;
             }
         }
     }

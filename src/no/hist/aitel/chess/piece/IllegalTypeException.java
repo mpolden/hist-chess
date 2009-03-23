@@ -7,8 +7,8 @@
 package no.hist.aitel.chess.piece;
 
 /**
- *
- * @author Martin
+ * This exception is thrown when certain methods are called with an invalid piece type
+ * @author martin
  */
 
 public class IllegalTypeException extends IllegalArgumentException {

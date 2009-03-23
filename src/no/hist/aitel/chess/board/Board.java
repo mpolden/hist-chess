@@ -8,6 +8,7 @@ package no.hist.aitel.chess.board;
 import no.hist.aitel.chess.position.Position;
 import no.hist.aitel.chess.piece.Piece;
 import no.hist.aitel.chess.piece.IllegalPieceException;
+import static no.hist.aitel.chess.piece.PieceConstants.*;
 
 /**
  *
@@ -19,9 +20,8 @@ public class Board {
     final private int size = 64;
     private Piece[] board = new Piece[size];
     private Piece[] captured = new Piece[size];
-    private int turn = 0;
+    private int turn = WHITE;
     private Position p = new Position(this);
-    private int capturedPos = -1;
     
     /**
      * Creates the board and makes it ready for a new game
@@ -45,19 +45,6 @@ public class Board {
      */
     public Piece getPiece(int position) {
         return board[position];
-    }
-
-    /**
-     * Get capturedPos
-     * @param position
-     * @return The position of the captured piece
-     */
-    public int getCapturedPos() {
-        return capturedPos;
-    }
-
-    public void setCapturedPos(int capturedPos) {
-        this.capturedPos = capturedPos;
     }
 
     /**
@@ -92,7 +79,6 @@ public class Board {
 
         if (!getPiece(to).isEmpty()) {
             addCaptured(getPiece(to));
-            capturedPos=to;
         }
 
         board[to] = getPiece(from);
@@ -138,6 +124,13 @@ public class Board {
     }
 
     /**
+     * Get current turn
+     */
+    public int getTurn() {
+        return turn;
+    }
+
+    /**
      * Produces a string representation of the chess board
      * @return Fancy ascii drawing of the board, colors and types
      */
@@ -150,14 +143,14 @@ public class Board {
             }
             int type = board[i].getType();
             int color = board[i].getColor();
-            if (color == 0) {
+            if (color == WHITE) {
                 out += "W";
-            } else if (color == 1) {
+            } else if (color == BLACK) {
                 out += "B";
             } else {
                 out += "x";
             }
-            if (type == -1) {
+            if (type == UNDEFINED) {
                 out += "x ";
             } else {
                 out += type + " ";

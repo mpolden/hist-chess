@@ -25,7 +25,11 @@ public class Test {
         b.movePiece(49, 41);
         b.movePiece(16, 23);
         b.movePiece(50, 42);
-        b.movePiece(23, 38);
+        b.movePiece(23, 31);
+        b.movePiece(56, 48);
+        b.movePiece(31, 55);
+//        b.movePiece(48, 33);
+
         System.out.println(b.toString());
 
 

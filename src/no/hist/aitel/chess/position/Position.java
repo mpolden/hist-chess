@@ -8,6 +8,7 @@ package no.hist.aitel.chess.position;
 import no.hist.aitel.chess.board.Board;
 import no.hist.aitel.chess.piece.IllegalTypeException;
 import no.hist.aitel.chess.piece.Piece;
+import static no.hist.aitel.chess.piece.PieceConstants.*;
 
 /**
  *
@@ -41,7 +42,7 @@ public class Position {
      * @return Throws an exception if positions are invalid
      */
     public void verifyPositions() throws IllegalPositionException {
-        // Get destionation piece
+        // Get destionation pieces
         Piece fromPiece = board.getPiece(from);
         Piece toPiece = board.getPiece(to);
 
@@ -60,7 +61,7 @@ public class Position {
         int direction = getDirection(type);
 
         // Check if path is clear, not checking for type == 2 (Knight) since it can jump over pieces
-        if (type != 2 && !isValidPath(direction)) {
+        if (type != KNIGHT && !isValidPath(direction)) {
             throw new IllegalPositionException("A piece is blocking my path.\n" +
                     "Type: " + fromPiece.getType() +
                     "\nFrom: " + from +
@@ -69,8 +70,7 @@ public class Position {
 
         // Type specific rules
         switch (type) {
-            // Pawn .. garbage follows :|
-            case 0: {
+            case PAWN: {
                 if (toPiece.isEmpty()) { // New position is empty, pawn can then only move forward
                     if (fromPiece.getColor() == 0) { // White piece
                         if (from >= 8 && from <= 15) { // If the pawn is in its original position, it can move 1 or 2 fields forward
@@ -116,19 +116,28 @@ public class Position {
                 }
                 break;
             }
-            // Bishop
-            case 1: {
-                if (diff % 7 != 0 && diff % 9 != 0) {
+            case BISHOP: {
+                if (diff % 7 == 0 || diff % 9 == 0) {
+                    break;
+                } else {
                     throw new IllegalPositionException("Bishop can only move diagonally.\n" +
                             "Type: " + fromPiece.getType() +
                             "\nFrom: " + from +
                             "\nTo: " + to);
                 }
-                break;
             }
-            // Knight
-            case 2: {
+            case KNIGHT: {
+                    
                 switch (diff) {
+                    // Castling
+//                    case -2:
+//                        Piece rook = board.getPiece(0);
+//                    case 2: {
+//                        Piece rook = board.getPiece(7);
+//                        if (from == 4 && to == 6) {
+//
+//                        }
+//                    }
                     case -10:
                     case -17:
                     case -15:
@@ -147,30 +156,38 @@ public class Position {
                     }
                 }
             }
-            // Rook
-            case 3: {
-                int myFrom = from;
-                int myTo = to;
-                while (myFrom % 8 != 0) {
-                    myFrom--;
+            case ROOK: {
+                if (diff % 8 == 0) {
+                    break;
+                } else {                    
+                    // No idea why, but this seems to be working
+                    int position = from;
+                    while (position % 8 != 0) { // Find closest previous field that is dividable by 8
+                        position--;
+                    }
+                    diff = to - position;
+                    if ((diff == 8 || diff == -8) || ((diff > 7 || diff < -7) && diff % 8 != 0)) {
+                        throw new IllegalPositionException("Rook can only move forward, backward, left or right.\n" +
+                                "Type: " + fromPiece.getType() +
+                                "\nFrom: " + from +
+                                "\nTo: " + to);
+                    } else {
+                        break;
+                    }
+
+                    // The following also works (for white anyway :-P)
+//                    for (int position = from; position < to; position++) {
+//                        if (position != from && position % 8 == 0) { // Moved past end of this line
+//                            throw new IllegalPositionException("Rook can only move forward, backward, left or right.\n" +
+//                                    "Type: " + fromPiece.getType() +
+//                                    "\nFrom: " + from +
+//                                    "\nTo: " + to);
+//                        }
+//                    }
+//                    break;
                 }
-                int myDiff = myTo - myFrom;
-                if ((myDiff > 7 || myDiff <- 7) && myDiff % 8 != 0) {
-                    throw new IllegalPositionException("Rook can only move forward, backward, left or right.\n" +
-                            "Type: " + fromPiece.getType() +
-                            "\nFrom: " + from +
-                            "\nTo: " + to);
-                }
-//                if (diff % 8 != 0) {
-//                    throw new IllegalPositionException("craaaap.\n" +
-//                            "Type: " + fromPiece.getType() +
-//                            "\nFrom: " + from +
-//                            "\nTo: " + to);
-//                }
-                break;
             }
-            // Queen
-            case 4: {
+            case QUEEN: {
                 switch (diff) {
                     case -10:
                     case -17:
@@ -190,8 +207,7 @@ public class Position {
                     }
                 }
             }
-            // King
-            case 5: {
+            case KING: {
                 switch (diff) {
                     case -1:
                     case -7:
@@ -212,27 +228,24 @@ public class Position {
                 }
             }
             default: {
-                throw new IllegalTypeException("Method was called with type " + type);
+                throw new IllegalTypeException("Invalid type: " + type);
             }
         }
     }
 
     /**
-     * Get the current direction for a type
+     * Get the current direction for a type (not for Knight)
      * @param type
      * @return The direction or -1 if something bad happens
      */
     private int getDirection(int type) {
         int[] directions = getDirections(type);
         switch (type) {
-            case 0: // Pawn
-            case 1: // Bishop
-            case 3: // Rook
-//                if (diff % 8 == 0 && diff <= 7) {
-//                    return 1;
-//                }
-            case 4: // Queen
-            case 5: // King
+            case PAWN:
+            case BISHOP:
+            case ROOK:
+            case QUEEN:
+            case KING:
                 for (int direction : directions) {
                     if (diff % direction == 0) {
                         return direction;
@@ -240,7 +253,7 @@ public class Position {
                 }
                 return -1; // Piece is moving one field to the left or right (1 % (n!=1) != 0)
             default: {
-                throw new IllegalTypeException("Method was called with type " + type);
+                throw new IllegalTypeException("Invalid type: " + type);
             }
         }
     }
@@ -253,27 +266,27 @@ public class Position {
      */
     private int[] getDirections(int type) {
         switch (type) {
-            case 0: {
+            case PAWN: {
                 return new int[] {7, 8, 9, 16};
             }
-            case 1: {
+            case BISHOP: {
                 return new int[] {7, 9};
             }
-            case 2: {
+            case KNIGHT: {
                 return new int[] {6, 10, 15, 17};
             }
-            case 3: {
+            case ROOK: {
                 return new int[] {8}; // Not including 1 as n % 1 == 0 and that causes an invalid
                                       // warning to be displayed
             }
-            case 4:
-            case 5: {
+            case QUEEN:
+            case KING: {
                 return new int[] {7, 8, 9}; // Not including 1 as n % 1 == 0 and that causes an
                                             // invalid warning to be displayed
 
             }
             default: {
-                throw new IllegalTypeException("Method was called with type " + type);
+                throw new IllegalTypeException("Invalid type: " + type);
             }
         }
     }

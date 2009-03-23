@@ -6,7 +6,7 @@
 package no.hist.aitel.chess.board;
 
 /**
- *
+ * This exception is thrown when a player attempts to move without having the current turn
  * @author martin
  */
 

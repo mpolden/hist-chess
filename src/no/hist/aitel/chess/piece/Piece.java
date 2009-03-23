@@ -5,6 +5,8 @@
 
 package no.hist.aitel.chess.piece;
 
+import static no.hist.aitel.chess.piece.PieceConstants.*;
+
 /**
  *
  * @author martin
@@ -31,14 +33,14 @@ public class Piece {
      * Creates an empty piece
      */
     public Piece() {
-        this.color = -1;
-        this.type = -1;
+        this.color = UNDEFINED;
+        this.type = UNDEFINED;
         this.id = -1;
     }
 
     /**
      * Get piece color
-     * @return The piece color which can be:<br />-1 (Empty)<br />&nbsp;0 (White)<br />&nbsp;1 (Black)
+     * @return The piece color
      */
     public int getColor() {
         return color;
@@ -46,7 +48,7 @@ public class Piece {
 
     /**
      * Get piece type
-     * @return The piece type which can be:<br />-1 (Empty)<br />&nbsp;0 (Pawn)<br />&nbsp;1 (Bishop)<br />&nbsp;2 (Knight)<br />&nbsp;3 (Rook)<br />&nbsp;4 (Queen)<br />&nbsp;5 (King)
+     * @return The piece type
      */
     public int getType() {
         return type;
@@ -65,7 +67,7 @@ public class Piece {
      * @return True if piece is empty and false otherwise
      */
     public boolean isEmpty() {
-        if (type == -1 && color == -1) {
+        if (type == UNDEFINED && color == UNDEFINED) {
             return true;
         }
         return false;
@@ -88,13 +90,13 @@ public class Piece {
      */
     private String getColorStr() {
         switch (color) {
-            case -1: {
-                return "Empty";
+            case UNDEFINED: {
+                return "Undefined";
             }
-            case 0: {
+            case WHITE: {
                 return "White";
             }
-            case 1: {
+            case BLACK: {
                 return "Black";
             }
             default: {
@@ -109,25 +111,25 @@ public class Piece {
      */
     private String getTypeStr() {
         switch (type) {
-            case -1: {
-                return "Empty";
+            case UNDEFINED: {
+                return "Undefined";
             }
-            case 0: {
+            case PAWN: {
                 return "Pawn";
             }
-            case 1: {
+            case BISHOP: {
                 return "Bishop";
             }
-            case 2: {
+            case KNIGHT: {
                 return "Knight";
             }
-            case 3: {
+            case ROOK: {
                 return "Rook";
             }
-            case 4: {
+            case QUEEN: {
                 return "Queen";
             }
-            case 5: {
+            case KING: {
                 return "King";
             }
             default: {
