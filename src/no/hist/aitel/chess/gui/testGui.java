@@ -114,7 +114,7 @@ class Mainwindow extends JFrame implements MouseListener, MouseMotionListener {
 
         try {
             for(int i=0; i<64; i++){
-            if(x-xIn>x_coords[i] && x-xIn<x_coords[i]+(80) && y-60> y_coords[i] && y-60<y_coords[i]+(80)) {
+            if(x-xIn>x_coords[i] && x-xIn<x_coords[i]+(width) && y-60> y_coords[i] && y-60<y_coords[i]+(height)) {
                 movingPiece = i;
                 canDrag=true;
                 dragFromX = x - x_coords[i];
@@ -219,14 +219,9 @@ class Mainwindow extends JFrame implements MouseListener, MouseMotionListener {
                     board.setCapturedPos(-1);
                 } catch(ArrayIndexOutOfBoundsException excep) {}
                 
-            }           
-            
-            //System.out.println(test);
-            
-        }
-        
-        this.repaint();
-        //movingPiece = -1;
+            }            
+        }        
+        this.repaint();        
         System.out.println(board.toString());  
         }             
     }
@@ -328,6 +323,8 @@ class Mainwindow extends JFrame implements MouseListener, MouseMotionListener {
 class testGui implements ActionListener, ItemListener {
     private static JFrame frame;
 
+    
+
     private static void addJMenu() {
         JMenuBar menuBar = new JMenuBar();
         JMenu menu = new JMenu("File"), submenu = new JMenu("Set player names");
@@ -348,24 +345,16 @@ class testGui implements ActionListener, ItemListener {
         menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_1, ActionEvent.ALT_MASK));
         submenu.add(menuItem);
 
-        menuItem = new JMenuItem("Player 2");
-        //menuItem.addActionListener(this);
+        menuItem = new JMenuItem("Player 2");        
         menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_2, ActionEvent.ALT_MASK));
+        //menuItem.addActionListener(this);
         submenu.add(menuItem);
+
         menu.add(submenu);
         
         frame.setJMenuBar(menuBar);
 
 
-    }
-
-    public static void main(String[] args) {
-        frame = new Mainwindow("Chess");
-        addJMenu();
-        frame.setVisible(true);
-        frame.setResizable(false);
-        frame.setLocationRelativeTo(null);
-        frame.pack();
     }
 
     public void actionPerformed(ActionEvent e) {
@@ -375,4 +364,13 @@ class testGui implements ActionListener, ItemListener {
     public void itemStateChanged(ItemEvent e) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
+
+    public static void main(String[] args) {
+        frame = new Mainwindow("Chess");
+        addJMenu();
+        frame.setVisible(true);
+        frame.setResizable(false);
+        frame.setLocationRelativeTo(null);
+        frame.pack();
+    }    
 }
