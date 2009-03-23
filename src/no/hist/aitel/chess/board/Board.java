@@ -95,7 +95,7 @@ public class Board {
         p.verifyPositions();
 
         if (!getPiece(to).isEmpty()) {
-
+            capturedPos = to;
             addCaptured(getPiece(to));
         }
 
