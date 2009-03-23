@@ -16,7 +16,7 @@ public final class guiConstants {
     public static final int width = 80;
     public static final int height = 80;
     public static final int xIn = 13;
-    public static final int yIn = 108;
+    public static final int yIn = 141;
     public static final int boardSize = 64;
 
     public static final Color dunkel = new Color (0x999999);
