@@ -202,6 +202,7 @@ class Mainwindow extends JFrame implements MouseListener, MouseMotionListener {
                     x_coords[capturedPiece] = capturedBlackPieces*width;
                     y_coords[capturedPiece] = height*9;
                     capturedBlackPieces++;
+                    board.setCapturedPos(-1);
                 } catch(ArrayIndexOutOfBoundsException excep) {}
                 
             }
@@ -211,16 +212,15 @@ class Mainwindow extends JFrame implements MouseListener, MouseMotionListener {
                     x_coords[capturedPiece] = capturedWhitePieces*width;
                     y_coords[capturedPiece] = 0;
                     capturedWhitePieces++;
+                    board.setCapturedPos(-1);
                 } catch(ArrayIndexOutOfBoundsException excep) {}
                 
-            }
-
-            
+            }           
             
             //System.out.println(test);
             
         }
-        board.setCapturedPos(-1);
+        
         this.repaint();
         //movingPiece = -1;
         System.out.println(board.toString());  
