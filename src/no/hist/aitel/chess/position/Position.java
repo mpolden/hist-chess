@@ -127,25 +127,15 @@ public class Position {
                 }
             }
             case KNIGHT: {
-                    
                 switch (diff) {
-                    // Castling
-//                    case -2:
-//                        Piece rook = board.getPiece(0);
-//                    case 2: {
-//                        Piece rook = board.getPiece(7);
-//                        if (from == 4 && to == 6) {
-//
-//                        }
-//                    }
                     case -10:
                     case -17:
                     case -15:
                     case -6:
+                    case 6:
                     case 10:
-                    case 17:
                     case 15:
-                    case 6: {
+                    case 17: {
                         break;
                     }
                     default: {
@@ -155,6 +145,7 @@ public class Position {
                                 "\nTo: " + to);
                     }
                 }
+                break;
             }
             case ROOK: {
                 if (diff % 8 == 0) {
@@ -165,8 +156,8 @@ public class Position {
                     while (position % 8 != 0) { // Find closest previous field that is dividable by 8
                         position--;
                     }
-                    diff = to - position;
-                    if ((diff == 8 || diff == -8) || ((diff > 7 || diff < -7) && diff % 8 != 0)) {
+                    int myDiff = to - position;
+                    if ((myDiff == 8 || myDiff == -8) || ((myDiff > 7 || myDiff < -7) && myDiff % 8 != 0)) {
                         throw new IllegalPositionException("Rook can only move forward, backward, left or right.\n" +
                                 "Type: " + fromPiece.getType() +
                                 "\nFrom: " + from +
@@ -206,6 +197,7 @@ public class Position {
                         break;
                     }
                 }
+                break;
             }
             case KING: {
                 switch (diff) {
@@ -226,6 +218,7 @@ public class Position {
                                 "\nTo: " + to);
                     }
                 }
+                break;
             }
             default: {
                 throw new IllegalTypeException("Invalid type: " + type);
@@ -243,6 +236,7 @@ public class Position {
         switch (type) {
             case PAWN:
             case BISHOP:
+            case KNIGHT:
             case ROOK:
             case QUEEN:
             case KING:
@@ -253,7 +247,8 @@ public class Position {
                 }
                 return -1; // Piece is moving one field to the left or right (1 % (n!=1) != 0)
             default: {
-                throw new IllegalTypeException("Invalid type: " + type);
+//                throw new IllegalTypeException("getDirection() was called with invalid type: " + type);
+                return -1;
             }
         }
     }
@@ -286,7 +281,8 @@ public class Position {
 
             }
             default: {
-                throw new IllegalTypeException("Invalid type: " + type);
+//                throw new IllegalTypeException("getDirections() was called with invalid type: " + type);
+                return null;
             }
         }
     }

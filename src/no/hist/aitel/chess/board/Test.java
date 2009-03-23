@@ -19,15 +19,10 @@ public class Test {
         Board b  = new Board();
 
 //        b.movePiece(0, 25);
-        b.movePiece(8, 24);
-        b.movePiece(48, 32);
-        b.movePiece(0, 16);
-        b.movePiece(49, 41);
-        b.movePiece(16, 23);
-        b.movePiece(50, 42);
-        b.movePiece(23, 31);
-        b.movePiece(56, 48);
-        b.movePiece(31, 55);
+        b.movePiece(14, 30);
+        b.movePiece(54, 46);
+        b.movePiece(6, 27);
+
 //        b.movePiece(48, 33);
 
         System.out.println(b.toString());
