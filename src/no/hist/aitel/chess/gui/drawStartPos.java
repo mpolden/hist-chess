@@ -10,14 +10,14 @@ import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
+import static no.hist.aitel.chess.gui.guiConstants.*;
 
 
 /**
  *
  * @author Vegard
  */
-public class drawStartPos extends JPanel {
-    private int boardSize = 64;
+public class drawStartPos extends JPanel {    
     private int[] x_coords;
     private int[] y_coords;
     private BufferedImage pawnb;
@@ -32,8 +32,6 @@ public class drawStartPos extends JPanel {
     private BufferedImage rookw;
     private BufferedImage bishopb;
     private BufferedImage bishopw;
-    static final int width = 80;
-    static final int height = 80;
     
 
 

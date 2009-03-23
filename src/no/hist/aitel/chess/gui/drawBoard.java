@@ -1,19 +1,15 @@
 package no.hist.aitel.chess.gui;
-import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import javax.swing.JPanel;
+import static no.hist.aitel.chess.gui.guiConstants.*;
+
 /**
  *
  * @author Vegard
  */
-public class drawBoard extends JPanel {   
-    private static final int width = 80;
-    private static final int height = 80;
-    static final Color dunkel = new Color (0x999999);
-    static final Color hell = new Color (0xFFFFCC);
-    static final Color black = new Color (0x000000);
-    static final Color pink = new Color (0xFFC0CB);
+public class drawBoard extends JPanel { 
+    
     private Font arial = new Font("Arial", Font.PLAIN, 16);
     
     
