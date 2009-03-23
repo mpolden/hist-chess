@@ -96,8 +96,8 @@ class Mainwindow extends JFrame implements MouseListener, MouseMotionListener {
     }
 
     private void players() {
-     player1 = JOptionPane.showInputDialog("Navn på spiller 1:");
-     player2 = JOptionPane.showInputDialog("Navn på spiller 2:");
+     player1 = "Player 1";
+     player2 = "Player 2";
     }
 
     public void undoMove() {
@@ -253,14 +253,12 @@ class Mainwindow extends JFrame implements MouseListener, MouseMotionListener {
             JButton buttonTwo = new JButton("Undo move");
             add(buttonTwo);
             JButton buttonThree = new JButton("Highscore");
-            add(buttonThree);
-            JButton buttonFour = new JButton("Save game");
-            add(buttonFour);
+            add(buttonThree);          
 
             buttonOne.addActionListener(listener);
             buttonTwo.addActionListener(listener);
             buttonThree.addActionListener(listener);
-            buttonFour.addActionListener(listener);
+            
         }
     }
 
@@ -319,18 +317,16 @@ class Mainwindow extends JFrame implements MouseListener, MouseMotionListener {
                 //JOptionPane.showMessageDialog(null, "Du angret et trekk");
             } else if (commando.equals("Highscore")) {
                 JOptionPane.showMessageDialog(null, "Highscore:");
-            } else if (commando.equals("Save game")) {
-                JOptionPane.showMessageDialog(null, "Game saved");
-            }
+            } 
         }        
     }
 }
 
 class testGui implements ActionListener, ItemListener {
-
+        private static Mainwindow test = new Mainwindow("chess");
     
     private static void createAndShowGui() {
-        JFrame frame = new Mainwindow("Chess");        
+        JFrame frame = test;
         testGui testGui = new testGui();
         frame.setJMenuBar(testGui.addJMenu());
         frame.setVisible(true);
@@ -387,7 +383,13 @@ class testGui implements ActionListener, ItemListener {
         if(e.getActionCommand().equals("Player 1")) {
             String newP1name = JOptionPane.showInputDialog(null, "Player 1 name:");
             if(newP1name != "") {
-                
+                test.setP1name(newP1name);                
+            }
+        }
+        else if(e.getActionCommand().equals("Player 2")) {
+            String newP2name = JOptionPane.showInputDialog(null, "Player 2 name:");
+            if(newP2name != "") {
+                test.setP2name(newP2name);
             }
         }
     }
