@@ -94,15 +94,7 @@ public class Mainwindow extends JFrame implements MouseListener, MouseMotionList
     }
 
     public void undoMove() {
-        try {            
-            x_coords[movingPiece] = x_coordStartPos - dragFromX;
-            y_coords[movingPiece] = y_coordStartPos - dragFromY;
-            this.repaint();
-            //board.switchTurn(); // Ikke nødvendig, Board-klassen tar seg av dette
-        }
-        catch (ArrayIndexOutOfBoundsException e) {
-            System.out.println("test");
-        }        
+        //
     }
     
     public void newgame() {        
@@ -239,7 +231,7 @@ public class Mainwindow extends JFrame implements MouseListener, MouseMotionList
                 capturedPiece = 58;
                 try{
                     x_coords[capturedPiece] = capturedWhitePieces*width;
-                    y_coords[capturedPiece] = 0;
+                    y_coords[capturedPiece] = zero;
                     capturedWhitePieces++;
                     board.setCapturedPos(-1);
                 } catch(ArrayIndexOutOfBoundsException excep) {}
