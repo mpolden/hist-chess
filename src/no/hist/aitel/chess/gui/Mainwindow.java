@@ -50,8 +50,15 @@ public class Mainwindow extends JFrame implements MouseListener, MouseMotionList
     private String player2 = null;
     private JLabel player1Label;
     private JLabel player2Label;
-    
-    
+    private int capturedPos = -1;
+
+    private int getCapturedPos() {
+        return capturedPos;
+    }
+
+    private void setCapturedPos(int capturedPos) {
+        this.capturedPos = capturedPos;
+    }
 
     
     public Mainwindow(String title) {        
@@ -157,46 +164,49 @@ public class Mainwindow extends JFrame implements MouseListener, MouseMotionList
 
         try {
             board.movePiece(fromPos, toPos);
+            setCapturedPos(board.getPiece(toPos).getId());
             x_coords[movingPiece] = getRect.getRectCoordX(toPos);
             y_coords[movingPiece] = getRect.getRectCoordY(toPos);
-        } catch(IllegalPositionException posE) {
-            System.out.println(posE.getMessage());
-            try{
+        } catch(IllegalArgumentException exception) {
+            System.out.println(exception.getMessage());
+//            try{
                 x_coords[movingPiece] = getRect.getRectCoordX(fromPos);
                 y_coords[movingPiece] = getRect.getRectCoordY(fromPos);
-            } catch(ArrayIndexOutOfBoundsException outOfBoundsException) {
-                System.out.println(outOfBoundsException);
-            }
-        } catch(IllegalTurnException turnE) {
-            System.out.println(turnE.getMessage());
-            try{
-                x_coords[movingPiece] = getRect.getRectCoordX(fromPos);
-                y_coords[movingPiece] = getRect.getRectCoordY(fromPos);
-            } catch(ArrayIndexOutOfBoundsException outOfBoundsException) {
-                System.out.println(outOfBoundsException.getMessage());
-            }
-        } catch(ArrayIndexOutOfBoundsException outOfBoundsException) {
-            x_coords[movingPiece] = getRect.getRectCoordX(fromPos);
-            y_coords[movingPiece] = getRect.getRectCoordY(fromPos);
-            System.out.println(outOfBoundsException);
-        } catch(IllegalPieceException turnException) {
-            System.out.println(turnException);            
-            try{
-                x_coords[movingPiece] = getRect.getRectCoordX(fromPos);
-                y_coords[movingPiece] = getRect.getRectCoordY(fromPos);
-            } catch(ArrayIndexOutOfBoundsException outOfBoundsException) {
-                System.out.println(outOfBoundsException);
-            } 
-        } catch(IllegalTypeException typeException) {
-            System.out.println(typeException);
-            try{
-                x_coords[movingPiece] = getRect.getRectCoordX(fromPos);
-                y_coords[movingPiece] = getRect.getRectCoordY(fromPos);
-            } catch(ArrayIndexOutOfBoundsException outOfBoundsException) {
-                System.out.println(outOfBoundsException);
-            }
+//            } catch(ArrayIndexOutOfBoundsException outOfBoundsException) {
+//                System.out.println(outOfBoundsException);
+//            }
+//        } catch(IllegalTurnException turnE) {
+//            System.out.println(turnE.getMessage());
+//            try{
+//                x_coords[movingPiece] = getRect.getRectCoordX(fromPos);
+//                y_coords[movingPiece] = getRect.getRectCoordY(fromPos);
+//            } catch(ArrayIndexOutOfBoundsException outOfBoundsException) {
+//                System.out.println(outOfBoundsException.getMessage());
+//            }
+//        } catch(ArrayIndexOutOfBoundsException outOfBoundsException) {
+//            x_coords[movingPiece] = getRect.getRectCoordX(fromPos);
+//            y_coords[movingPiece] = getRect.getRectCoordY(fromPos);
+//            System.out.println(outOfBoundsException);
+//        } catch(IllegalPieceException turnException) {
+//            System.out.println(turnException);
+//            try{
+//                x_coords[movingPiece] = getRect.getRectCoordX(fromPos);
+//                y_coords[movingPiece] = getRect.getRectCoordY(fromPos);
+//            } catch(ArrayIndexOutOfBoundsException outOfBoundsException) {
+//                System.out.println(outOfBoundsException);
+//            }
+//        } catch(IllegalTypeException typeException) {
+//            System.out.println(typeException);
+//            try{
+//                x_coords[movingPiece] = getRect.getRectCoordX(fromPos);
+//                y_coords[movingPiece] = getRect.getRectCoordY(fromPos);
+//            } catch(ArrayIndexOutOfBoundsException outOfBoundsException) {
+//                System.out.println(outOfBoundsException);
+//            }
         }
-        if(board.getCapturedPos() != -1) {
+
+        if(getCapturedPos() > -1) {
+//        if (board.get)
             System.out.println(capturedPiece);
             if(capturedPiece == 61) {
                 capturedPiece = 5;
@@ -204,7 +214,7 @@ public class Mainwindow extends JFrame implements MouseListener, MouseMotionList
                     x_coords[capturedPiece] = capturedBlackPieces*width;
                     y_coords[capturedPiece] = height*9;
                     capturedBlackPieces++;
-                    board.setCapturedPos(-1);
+                    setCapturedPos(-1);
                 } catch(ArrayIndexOutOfBoundsException excep) {}
             }
             else if(capturedPiece == 5) {
@@ -213,7 +223,7 @@ public class Mainwindow extends JFrame implements MouseListener, MouseMotionList
                     x_coords[capturedPiece] = capturedWhitePieces*width;
                     y_coords[capturedPiece] = zero;
                     capturedWhitePieces++;
-                    board.setCapturedPos(-1);
+                    setCapturedPos(-1);
                 } catch(ArrayIndexOutOfBoundsException excep) {}
             }
             else if(capturedPiece == 58) {
@@ -222,7 +232,7 @@ public class Mainwindow extends JFrame implements MouseListener, MouseMotionList
                     x_coords[capturedPiece] = capturedBlackPieces*width;
                     y_coords[capturedPiece] = height*9;
                     capturedBlackPieces++;
-                    board.setCapturedPos(-1);
+                    setCapturedPos(-1);
                 } catch(ArrayIndexOutOfBoundsException excep) {}
             }
             else if(capturedPiece == 2) {
@@ -231,7 +241,7 @@ public class Mainwindow extends JFrame implements MouseListener, MouseMotionList
                     x_coords[capturedPiece] = capturedWhitePieces*width;
                     y_coords[capturedPiece] = zero;
                     capturedWhitePieces++;
-                    board.setCapturedPos(-1);
+                    setCapturedPos(-1);
                 } catch(ArrayIndexOutOfBoundsException excep) {}
             }
                         
@@ -240,7 +250,7 @@ public class Mainwindow extends JFrame implements MouseListener, MouseMotionList
                     x_coords[capturedPiece] = capturedBlackPieces*width;
                     y_coords[capturedPiece] = height*9;
                     capturedBlackPieces++;
-                    board.setCapturedPos(-1);
+                    setCapturedPos(-1);
                 } catch(ArrayIndexOutOfBoundsException excep) {}
                 
             }
@@ -250,7 +260,7 @@ public class Mainwindow extends JFrame implements MouseListener, MouseMotionList
                     x_coords[capturedPiece] = capturedWhitePieces*width;
                     y_coords[capturedPiece] = zero;
                     capturedWhitePieces++;
-                    board.setCapturedPos(-1);
+                    setCapturedPos(-1);
                 } catch(ArrayIndexOutOfBoundsException excep) {}                
             }            
         }        

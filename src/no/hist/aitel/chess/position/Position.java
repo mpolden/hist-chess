@@ -248,8 +248,9 @@ public class Position {
                 return -1; // Piece is moving one field to the left or right (1 % (n!=1) != 0)
             }
             default: {
-                throw new IllegalTypeException("getDirection() was called with invalid type: "
-                        + type);
+//                throw new IllegalTypeException("getDirection() was called with invalid type: "
+//                        + type);
+                return -1;
             }
         }
     }
@@ -282,8 +283,9 @@ public class Position {
 
             }
             default: {
-                throw new IllegalTypeException("getDirections() was called with invalid type: "
-                        + type);
+//                throw new IllegalTypeException("getDirections() was called with invalid type: "
+//                        + type);
+                return null;
             }
         }
     }

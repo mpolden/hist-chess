@@ -21,7 +21,6 @@ public class Board {
     private Piece[] board = new Piece[size];
     private Piece[] captured = new Piece[size];
     private int turn = WHITE;
-    private int capturedPos = -1;
     private Position p = new Position(this);
     
     /**
@@ -46,22 +45,6 @@ public class Board {
      */
     public Piece getPiece(int position) {
         return board[position];
-    }
-
-    /**
-     * Get captured position
-     * @return The position of the captured piece
-     */
-    public int getCapturedPos() {
-        return capturedPos;
-    }
-
-    /**
-     * Set captured position
-     * @param captured position
-     */
-    public void setCapturedPos(int capturedPos) {
-        this.capturedPos = capturedPos;
     }
 
     /**
@@ -91,16 +74,22 @@ public class Board {
             throw new IllegalTurnException("Color " + color + " is not allowed to move now.");
         }
 
-        p.setPositions(from, to);
-        p.verifyPositions();
+//        System.out.println(isCastling(from, to));
+        if (isCastling(from, to)) {
+            doCastling(from, to);
+        } else {
+            p.setPositions(from, to);
+            p.verifyPositions();
 
-        if (!getPiece(to).isEmpty()) {
-            capturedPos = to;
-            addCaptured(getPiece(to));
+            if (!getPiece(to).isEmpty()) {
+                addCaptured(getPiece(to));
+            }
+
+            board[to] = getPiece(from);
+            getPiece(to).setInitPosition(false);
+            board[from] = new Piece(); // Empty piece
         }
 
-        board[to] = getPiece(from);
-        board[from] = new Piece(); // Empty piece
         switchTurn();
     }
 
@@ -146,6 +135,88 @@ public class Board {
      */
     public int getTurn() {
         return turn;
+    }
+
+    private void doCastling(int from, int to) {
+        if (from != 4 && from != 60) {
+            throw new IllegalSpecialMoveException("Castling can only be performed from position 4 or 60");
+        }
+        int rookTo = -1, rookFrom = -1;
+        if (from == 4 || from == 60) {
+            if (to == (from + 2)) {
+                rookTo = from + 1;
+                rookFrom = from + 3;
+            } else if (to == (from - 2)) {
+                rookTo = from - 2;
+                rookFrom = from - 4;
+            }
+            board[to] = getPiece(from);
+            board[from] = new Piece();
+            board[rookTo] = getPiece(rookFrom);
+            board[rookFrom] = new Piece();
+        }
+    }
+
+    private boolean isCastling(int from, int to) {
+        Piece fromPiece = getPiece(from);
+        
+        if (fromPiece.getType() == KING && fromPiece.isInitPosition()) {
+            if (fromPiece.getColor() == WHITE) {
+                int rookPos;
+                if (to == 6 && getPiece(5).isEmpty() && getPiece(6).isEmpty()) {
+                    rookPos = 7;
+                } else if (to == 2 && getPiece(1).isEmpty() && getPiece(2).isEmpty() && getPiece(3).isEmpty()) {
+                    rookPos = 0;
+                } else {
+                    rookPos = -1;
+                }
+                Piece rook;
+                if (rookPos > -1) {
+                    rook = getPiece(rookPos);
+                } else {
+                    return false;
+                }
+                if (rook.getColor() == WHITE && rook.getType() == ROOK && rook.isInitPosition()) {
+                    return true;
+                }
+            } else if (fromPiece.getColor() == BLACK) {
+                int rookPos;
+                if (to == 62 && getPiece(61).isEmpty() && getPiece(62).isEmpty()) {
+                    rookPos = 63;
+                } else if (to == 58 && getPiece(57).isEmpty() && getPiece(58).isEmpty() && getPiece(59).isEmpty()) {
+                    rookPos = 56;
+                } else {
+                    rookPos = -1;
+                }
+                Piece rook;
+                if (rookPos > -1) {
+                    rook = getPiece(rookPos);
+                } else {
+                    return false;
+                }
+                if (rook.getColor() == BLACK && rook.getType() == ROOK && rook.isInitPosition()) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    public boolean isEmptyRange(int from, int to) {
+        if (to < from) {
+            for (int i = from; i >= to; i--) {
+                if (!getPiece(i).isEmpty()) {
+                    return false;
+                }
+            }
+        } else {
+            for (int i = from; i <= to; i++) {
+                if (!getPiece(i).isEmpty()) {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 
     /**

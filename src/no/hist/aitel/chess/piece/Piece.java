@@ -17,6 +17,15 @@ public class Piece {
     final private int color;
     final private int type;
     final private int id;
+    private boolean initPosition = true;
+
+    public boolean isInitPosition() {
+        return initPosition;
+    }
+
+    public void setInitPosition(boolean initPosition) {
+        this.initPosition = initPosition;
+    }
 
     /**
      * Creates a new piece of the given color and type
@@ -35,7 +44,7 @@ public class Piece {
     public Piece() {
         this.color = UNDEFINED;
         this.type = UNDEFINED;
-        this.id = -1;
+        this.id = UNDEFINED;
     }
 
     /**
