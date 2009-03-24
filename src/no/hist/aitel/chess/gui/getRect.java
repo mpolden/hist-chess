@@ -77,6 +77,8 @@ public class getRect {
         }
         else if(rectNumber == 7 || rectNumber == 15 || rectNumber == 23 || rectNumber == 31 || rectNumber == 39 || rectNumber == 47 || rectNumber == 55 || rectNumber == 63) {
             rectCoordX = (width*7);
+        }else {
+            rectCoordX = -1;
         }
         return rectCoordX;
     }
