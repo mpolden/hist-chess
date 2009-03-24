@@ -158,10 +158,12 @@ public class Mainwindow extends JFrame implements MouseListener, MouseMotionList
         int y_on_release = e.getY();        
         fromPos = getRect.getRectNumber(x_coordStartPos, y_coordStartPos);
         toPos = getRect.getRectNumber(x_on_release, y_on_release);
-        capturedPiece = board.getPiece(toPos).getId();
-        System.out.println(capturedPiece);
         
-        if (capturedPiece > -1 && capturedPiece <= 63) {
+        
+        
+        if (toPos > -1 && toPos <= 63) {
+            capturedPiece = board.getPiece(toPos).getId();
+            System.out.println(capturedPiece);
             try {
                 board.movePiece(fromPos, toPos);
                 setCapturedPos(board.getPiece(toPos).getId());
@@ -169,7 +171,7 @@ public class Mainwindow extends JFrame implements MouseListener, MouseMotionList
                 y_coords[movingPiece] = getRect.getRectCoordY(toPos);
             } catch(IllegalArgumentException exception) {
                 System.out.println(exception.getMessage());
-    //            try{
+                
                     x_coords[movingPiece] = getRect.getRectCoordX(fromPos);
                     y_coords[movingPiece] = getRect.getRectCoordY(fromPos);
     //            } catch(ArrayIndexOutOfBoundsException outOfBoundsException) {
@@ -204,6 +206,9 @@ public class Mainwindow extends JFrame implements MouseListener, MouseMotionList
     //                System.out.println(outOfBoundsException);
     //            }
             }
+        } else {
+             x_coords[movingPiece] = getRect.getRectCoordX(fromPos);
+             y_coords[movingPiece] = getRect.getRectCoordY(fromPos);
         }
 
         if(getCapturedPos() > -1) {
