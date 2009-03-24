@@ -18,22 +18,26 @@ public class Test {
     public static void main(String[] args) {
         Board b  = new Board();
 
-        b.movePiece(13, 21);
-        b.movePiece(53, 45);
-        b.movePiece(14, 30);
-        b.movePiece(48, 40);
-        b.movePiece(12, 20);
-        b.movePiece(49, 41);
-        b.movePiece(6, 12);
-        b.movePiece(51, 43);
-        b.movePiece(5, 23);
-        b.movePiece(52, 44);
-        b.movePiece(3, 34);
+//        b.movePiece(13, 21);
+//        b.movePiece(53, 45);
+//        b.movePiece(14, 30);
+//        b.movePiece(48, 40);
+//        b.movePiece(12, 20);
+//        b.movePiece(49, 41);
+//        b.movePiece(6, 12);
+//        b.movePiece(51, 43);
+//        b.movePiece(5, 23);
+//        b.movePiece(52, 44);
+//        b.movePiece(3, 34);
 //        b.movePiece(4, 6);
 //        b.movePiece(59, 16);
 //        b.movePiece(58, 25);
 
-        System.out.println(b.toString());
+//        System.out.println(b.toString());
+        for (int i = 0; i < b.getBoard().length; i++) {
+            System.out.println(b.getPiece(i).toString());
+            System.out.println("");
+        }
 
         // 56  57  58  59  60  61  62  63
         // 48  49  50  51  52  53  54  55

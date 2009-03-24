@@ -93,7 +93,8 @@ public class SpecialPosition extends Position {
      */
     public void doCastling() {
         if (from != 4 && from != 60) {
-            throw new IllegalPositionException("Castling can only be performed from position 4 or 60");
+            throw new IllegalPositionException("Castling can only be performed from position 4 " +
+                    "(white) or 60 (black)");
         }
         int rookTo = -1, rookFrom = -1;
         if (from == 4 || from == 60) {

@@ -85,7 +85,7 @@ public class Piece {
      * @return True if piece is empty and false otherwise
      */
     public boolean isEmpty() {
-        if (type == UNDEFINED || color == UNDEFINED || id == UNDEFINED) {
+        if (type == UNDEFINED && color == UNDEFINED && id == UNDEFINED) {
             return true;
         }
         return false;
@@ -98,7 +98,7 @@ public class Piece {
     @Override
     public String toString() {
         String out = "Color: " + getColor() + " (" + getColorStr() +
-                ")\nType: " + getType() + " (" + getTypeStr() + ")";
+                ")\nType: " + getType() + " (" + getTypeStr() + ")\nID: " + getId();
         return out;
     }
 

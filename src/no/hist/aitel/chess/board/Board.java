@@ -78,28 +78,42 @@ public class Board {
         }
         
         // Check whos turn it is
-        int color = getPiece(from).getColor();
-        if (!isValidTurn(color)) {
-            throw new IllegalTurnException("Color " + color + " is not allowed to move now.");
+        if (!isValidTurn(getPiece(from).getColor())) {
+            throw new IllegalTurnException("Not allowed to move now.");
         }
 
+        // Check if we're in check
+//        if (p.inCheck() && getPiece(from).getType() != KING) { need to move king; }
+
+        // Set our positions
         p.setPositions(from, to);
 
-        if(p.isCastling()) {
+        // Check if we're doing a special move
+        if (p.isCastling()) {
             p.doCastling();
+//        } else if (p.isPromotion()) {
+//        } else if (p.isEnPassant())
         } else {
-            
+
+            // Verify regular move
             p.verifyPositions();
 
+            // If a piece is captured, save it to our table
             if (!getPiece(to).isEmpty()) {
                 addCaptured(getPiece(to));
             }
 
+            // Move the piece in our table
             setPiece(to, getPiece(from));
+
+            // Set that the piece has moved from its original position
             getPiece(to).setMoved(true);
+
+            // Put an empty piece in the old position
             setPiece(from, new Piece()); // Empty piece
         }
 
+        // Switch turn
         switchTurn();
     }
 

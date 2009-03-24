@@ -38,8 +38,19 @@ public class BoardInit {
      */
     private void fillInitBoard() {
         for (position = 0; position < board.length; position++) {
-            board[position] = new Piece(getInitColor(), getInitType(), position);
+            board[position] = new Piece(getInitColor(), getInitType(), getInitId());
         }
+    }
+
+    /**
+     * Get the id for an initial position
+     * @return The id
+     */
+    private int getInitId() {
+        if (position <= 15 || position >= 48) {
+            return position;
+        }
+        return UNDEFINED;
     }
 
     /**
