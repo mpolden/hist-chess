@@ -57,7 +57,7 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
         this.capturedPos = capturedPos;
     }
 
-    
+       
     public guiEngine(String title) {
         this.addMouseListener(this);
         this.addMouseMotionListener(this);
@@ -80,6 +80,10 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
 
         //add(boardGui, BorderLayout.CENTER);
         pack();
+    }
+    
+    public Chessboard getChessboard() {
+        return boardGui;
     }
 
     public void setP1name(String newName) {
@@ -181,9 +185,11 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
         } catch(IllegalArgumentException exception) { // IllegalArgumentException = alle våre exceptions
             System.out.println(exception.getMessage());
             resetPosition();
+            setCapturedPos(-1);
         } catch (ArrayIndexOutOfBoundsException exception) {
             System.out.println(exception.getMessage());
             resetPosition();
+            setCapturedPos(-1);
         }
 
         // Fin shø, andre betingelsen hindrer at brikken "capture"-er seg selv
@@ -288,7 +294,7 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
         private int[] x_coords = startPos.getXcoords();
         private int[] y_coords = startPos.getYcoords();
         private int xSize = 1024;
-        private int ySize= 768;
+        private int ySize = 768;
         
 
         public Chessboard() {
@@ -309,13 +315,18 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
             add(layeredPane);    
                     
         }
+        public drawBoard getDrawBoard() {
+            return chessBoard;
+        }
 
         public void setXsize(int size) {
-            xSize = size;
+            xSize = size;            
+            
         }
 
         public void setYsize(int size) {
-            ySize = size;
+            ySize = size;  
+            
         }
         
         public int[] getXcoords() {

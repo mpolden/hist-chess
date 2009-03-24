@@ -3,6 +3,7 @@
 package no.hist.aitel.chess.gui;
 
 import java.awt.Cursor;
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
@@ -21,17 +22,20 @@ import javax.swing.KeyStroke;
  */
 public class Main implements ActionListener, ItemListener {
     private static guiEngine mainWindow = new guiEngine("chess");
+    private static JFrame frame = mainWindow;
     
 
     private static void createAndShowGui() {
-        JFrame frame = mainWindow;
+        
         Main gui = new Main();
         frame.setJMenuBar(gui.addJMenu());
         frame.setVisible(true);
         frame.setResizable(false);
         frame.setLocationRelativeTo(null);
         frame.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-        frame.pack();
+        
+        //frame.pack();
+        
     }
 
     private JMenuBar addJMenu() {
@@ -116,6 +120,15 @@ public class Main implements ActionListener, ItemListener {
             if(!newP2name.equals("")) {
                 mainWindow.setP2name(newP2name);
             }
+        }
+        else if(e.getActionCommand().equals("1024 x 768")) {
+            mainWindow.getChessboard().setXsize(1024);
+            mainWindow.getChessboard().setYsize(768);
+            System.out.println(frame.getSize());
+            frame.setSize(1050, 882);
+            mainWindow.getChessboard().getDrawBoard().setPreferredSize(new Dimension(200, 100));
+            
+
         }
     }
 
