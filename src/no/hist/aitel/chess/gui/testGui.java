@@ -209,8 +209,44 @@ class Mainwindow extends JFrame implements MouseListener, MouseMotionListener {
         }
         if(board.getCapturedPos() != -1) {
             System.out.println(capturedPiece);
+            if(capturedPiece == 61) {
+                capturedPiece = 5;
+                try{
+                    x_coords[capturedPiece] = capturedBlackPieces*width;
+                    y_coords[capturedPiece] = height*9;
+                    capturedBlackPieces++;
+                    board.setCapturedPos(-1);
+                } catch(ArrayIndexOutOfBoundsException excep) {}
+            }
+            else if(capturedPiece == 5) {
+                capturedPiece = 61;
+                try{
+                    x_coords[capturedPiece] = capturedWhitePieces*width;
+                    y_coords[capturedPiece] = 0;
+                    capturedWhitePieces++;
+                    board.setCapturedPos(-1);
+                } catch(ArrayIndexOutOfBoundsException excep) {}
+            }
+            else if(capturedPiece == 58) {
+                capturedPiece = 2;
+                try{
+                    x_coords[capturedPiece] = capturedBlackPieces*width;
+                    y_coords[capturedPiece] = height*9;
+                    capturedBlackPieces++;
+                    board.setCapturedPos(-1);
+                } catch(ArrayIndexOutOfBoundsException excep) {}
+            }
+            else if(capturedPiece == 2) {
+                capturedPiece = 58;
+                try{
+                    x_coords[capturedPiece] = capturedWhitePieces*width;
+                    y_coords[capturedPiece] = 0;
+                    capturedWhitePieces++;
+                    board.setCapturedPos(-1);
+                } catch(ArrayIndexOutOfBoundsException excep) {}
+            }
                         
-            if(capturedPiece >= 48) {
+            else if(capturedPiece >= 48) {
                 try{
                     x_coords[capturedPiece] = capturedBlackPieces*width;
                     y_coords[capturedPiece] = height*9;
@@ -230,7 +266,7 @@ class Mainwindow extends JFrame implements MouseListener, MouseMotionListener {
             }            
         }        
         this.repaint();        
-        System.out.println(board.toString());  
+        System.out.println(board.toString());
         }             
     }
     
@@ -323,10 +359,10 @@ class Mainwindow extends JFrame implements MouseListener, MouseMotionListener {
 }
 
 class testGui implements ActionListener, ItemListener {
-        private static Mainwindow test = new Mainwindow("chess");
+        private static Mainwindow mainWindow = new Mainwindow("chess");
     
     private static void createAndShowGui() {
-        JFrame frame = test;
+        JFrame frame = mainWindow;
         testGui testGui = new testGui();
         frame.setJMenuBar(testGui.addJMenu());
         frame.setVisible(true);
@@ -383,13 +419,13 @@ class testGui implements ActionListener, ItemListener {
         if(e.getActionCommand().equals("Player 1")) {
             String newP1name = JOptionPane.showInputDialog(null, "Player 1 name:");
             if(newP1name != "") {
-                test.setP1name(newP1name);                
+                mainWindow.setP1name(newP1name);
             }
         }
         else if(e.getActionCommand().equals("Player 2")) {
             String newP2name = JOptionPane.showInputDialog(null, "Player 2 name:");
             if(newP2name != "") {
-                test.setP2name(newP2name);
+                mainWindow.setP2name(newP2name);
             }
         }
     }
