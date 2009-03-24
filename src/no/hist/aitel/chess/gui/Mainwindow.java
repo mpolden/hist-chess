@@ -50,6 +50,8 @@ public class Mainwindow extends JFrame implements MouseListener, MouseMotionList
     private String player2 = null;
     private JLabel player1Label;
     private JLabel player2Label;
+    
+    
 
     
     public Mainwindow(String title) {        
@@ -82,11 +84,7 @@ public class Mainwindow extends JFrame implements MouseListener, MouseMotionList
 
     public void setP2name(String newName) {
         player2Label.setText(newName);
-    }
-
-    public Board getBoard() {
-        return board;
-    }
+    }    
 
     private void players() {
      player1 = "Player 1";
@@ -295,10 +293,12 @@ public class Mainwindow extends JFrame implements MouseListener, MouseMotionList
         private drawPos startPos = new drawPos();
         private int[] x_coords = startPos.getXcoords();
         private int[] y_coords = startPos.getYcoords();
+        private int xSize = 1024;
+        private int ySize= 768;
         
 
         public Chessboard() {
-            Dimension boardSize = new Dimension(1024, 768);
+            Dimension boardSize = new Dimension(xSize, ySize);
             layeredPane = new JLayeredPane();
             getContentPane().add(layeredPane);
             layeredPane.setPreferredSize(boardSize);
@@ -314,7 +314,15 @@ public class Mainwindow extends JFrame implements MouseListener, MouseMotionList
             layeredPane.add(startPos, JLayeredPane.PALETTE_LAYER);
             add(layeredPane);    
                     
-        }       
+        }
+
+        public void setXsize(int size) {
+            xSize = size;
+        }
+
+        public void setYsize(int size) {
+            ySize = size;
+        }
         
         public int[] getXcoords() {
             return x_coords;

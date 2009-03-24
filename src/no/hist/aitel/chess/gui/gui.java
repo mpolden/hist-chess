@@ -21,6 +21,7 @@ import javax.swing.KeyStroke;
  */
 public class gui implements ActionListener, ItemListener {
     private static Mainwindow mainWindow = new Mainwindow("chess");
+    
 
     private static void createAndShowGui() {
         JFrame frame = mainWindow;
@@ -33,7 +34,6 @@ public class gui implements ActionListener, ItemListener {
         frame.pack();
     }
 
-
     private JMenuBar addJMenu() {
         JMenuBar menuBar = new JMenuBar();
         JMenu menu = new JMenu("File"), submenu = new JMenu("Set player names");
@@ -42,11 +42,25 @@ public class gui implements ActionListener, ItemListener {
         
         menuBar.add(menu);
 
-        JMenuItem menuItem = new JMenuItem("Save game", KeyEvent.VK_T);
+        JMenuItem menuItem = new JMenuItem("New game", KeyEvent.VK_T);
+        menuItem.addActionListener(this);
+        menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F1, ActionEvent.ALT_MASK));
+        menuItem.getAccessibleContext().setAccessibleDescription("Test");
+        menu.add(menuItem);
+
+        menuItem = new JMenuItem("Save game");
         menuItem.addActionListener(this);
         menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F2, ActionEvent.ALT_MASK));
         menuItem.getAccessibleContext().setAccessibleDescription("Test");
         menu.add(menuItem);
+
+        menuItem = new JMenuItem("Load game");
+        menuItem.addActionListener(this);
+        menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F3, ActionEvent.ALT_MASK));
+        menuItem.getAccessibleContext().setAccessibleDescription("Test");
+        menu.add(menuItem);
+
+
 
         menu.addSeparator();
         submenu.setMnemonic(KeyEvent.VK_S);
@@ -81,13 +95,13 @@ public class gui implements ActionListener, ItemListener {
         System.out.println(s);
         if(e.getActionCommand().equals("Player 1")) {
             String newP1name = JOptionPane.showInputDialog(null, "Player 1 name:");
-            if(newP1name != "") {
+            if(!newP1name.equals("")) {
                 mainWindow.setP1name(newP1name);
             }
         }
         else if(e.getActionCommand().equals("Player 2")) {
             String newP2name = JOptionPane.showInputDialog(null, "Player 2 name:");
-            if(newP2name != "") {
+            if(!newP2name.equals("")) {
                 mainWindow.setP2name(newP2name);
             }
         }
