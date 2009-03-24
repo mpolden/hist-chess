@@ -239,16 +239,17 @@ public class Position {
             case KNIGHT:
             case ROOK:
             case QUEEN:
-            case KING:
+            case KING: {
                 for (int direction : directions) {
                     if (diff % direction == 0) {
                         return direction;
                     }
                 }
                 return -1; // Piece is moving one field to the left or right (1 % (n!=1) != 0)
+            }
             default: {
-//                throw new IllegalTypeException("getDirection() was called with invalid type: " + type);
-                return -1;
+                throw new IllegalTypeException("getDirection() was called with invalid type: "
+                        + type);
             }
         }
     }
@@ -281,8 +282,8 @@ public class Position {
 
             }
             default: {
-//                throw new IllegalTypeException("getDirections() was called with invalid type: " + type);
-                return null;
+                throw new IllegalTypeException("getDirections() was called with invalid type: "
+                        + type);
             }
         }
     }
