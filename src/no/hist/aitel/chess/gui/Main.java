@@ -32,9 +32,7 @@ public class Main implements ActionListener, ItemListener {
         frame.setVisible(true);
         frame.setResizable(false);
         frame.setLocationRelativeTo(null);
-        frame.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-        
-        //frame.pack();
+        frame.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));      
         
     }
 
@@ -48,19 +46,19 @@ public class Main implements ActionListener, ItemListener {
 
         JMenuItem menuItem = new JMenuItem("New game", KeyEvent.VK_T);
         menuItem.addActionListener(this);
-        menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F1, ActionEvent.ALT_MASK));
+        menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N, ActionEvent.CTRL_MASK));
         menuItem.getAccessibleContext().setAccessibleDescription("Test");
         menu.add(menuItem);
 
         menuItem = new JMenuItem("Save game");
         menuItem.addActionListener(this);
-        menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F2, ActionEvent.ALT_MASK));
+        menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, ActionEvent.CTRL_MASK));
         menuItem.getAccessibleContext().setAccessibleDescription("Test");
         menu.add(menuItem);
 
         menuItem = new JMenuItem("Load game");
         menuItem.addActionListener(this);
-        menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F3, ActionEvent.ALT_MASK));
+        menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_L, ActionEvent.CTRL_MASK));
         menuItem.getAccessibleContext().setAccessibleDescription("Test");
         menu.add(menuItem);
 
@@ -128,8 +126,10 @@ public class Main implements ActionListener, ItemListener {
         else if(e.getActionCommand().equals("800 x 600")) {
             System.out.println(frame.getSize());
             frame.setSize(800, 600);
-            
-
+        }
+        else if(e.getActionCommand().equals("New game")) {
+            if (JOptionPane.YES_OPTION == JOptionPane.showConfirmDialog(null, "Are you sure you want to create a new game?\nUnsaved progress will be lost.")) {                
+            }
         }
     }
 
