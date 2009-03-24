@@ -17,7 +17,7 @@ import static no.hist.aitel.chess.gui.guiConstants.*;
  *
  * @author Vegard
  */
-public class drawStartPos extends JPanel {    
+public class drawPos extends JPanel {
     private int[] x_coords;
     private int[] y_coords;
     private BufferedImage pawnb;
@@ -35,7 +35,7 @@ public class drawStartPos extends JPanel {
     
 
 
-    public drawStartPos() {
+    public drawPos() {
         x_coords = new int[boardSize];
         y_coords = new int[boardSize];
         // 56  57  58  59  60  61  62  63
@@ -204,7 +204,7 @@ public class drawStartPos extends JPanel {
         g.drawImage(bishopw, x_coords[61], y_coords[61], width, height, this);        
     }
     public static void main(String[] args ){
-        drawStartPos test = new drawStartPos();
+        drawPos test = new drawPos();
         test.initStartCoords();
         System.out.println(test.getXcoords()[8]);
         System.out.println(test.getYcoords()[8]);

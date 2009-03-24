@@ -92,8 +92,8 @@ class Mainwindow extends JFrame implements MouseListener, MouseMotionListener {
         player2Label.setText(newName);
     }
 
-    public Chessboard getBoard() {
-        return boardGui;
+    public Board getBoard() {
+        return board;
     }
 
     private void players() {
@@ -303,7 +303,7 @@ class Mainwindow extends JFrame implements MouseListener, MouseMotionListener {
 
         private JLayeredPane layeredPane;
         private drawBoard chessBoard;
-        private drawStartPos startPos = new drawStartPos();
+        private drawPos startPos = new drawPos();
         private int[] x_coords = startPos.getXcoords();
         private int[] y_coords = startPos.getYcoords();
         
