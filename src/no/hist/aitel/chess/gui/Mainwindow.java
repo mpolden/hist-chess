@@ -21,9 +21,6 @@ import javax.swing.JLayeredPane;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import no.hist.aitel.chess.board.Board;
-import no.hist.aitel.chess.board.IllegalTurnException;
-import no.hist.aitel.chess.position.IllegalPositionException;
-import no.hist.aitel.chess.piece.*;
 import static no.hist.aitel.chess.gui.guiConstants.*;
 
 
