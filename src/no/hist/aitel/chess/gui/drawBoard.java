@@ -36,7 +36,7 @@ public class drawBoard extends JPanel {
             if (evenNum) {
                 g.setColor(hell);
             } else {
-                g.setColor(pink);
+                g.setColor(dunkel);
             }            
             g.fillRect(x*width, y*height, width, height);
             if (i % 8 == 0) { // Står nå på den siste ruten i linja
