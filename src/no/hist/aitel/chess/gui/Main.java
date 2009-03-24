@@ -121,12 +121,13 @@ public class Main implements ActionListener, ItemListener {
                 mainWindow.setP2name(newP2name);
             }
         }
-        else if(e.getActionCommand().equals("1024 x 768")) {
-            mainWindow.getChessboard().setXsize(1024);
-            mainWindow.getChessboard().setYsize(768);
+        else if(e.getActionCommand().equals("1024 x 768")) {            
             System.out.println(frame.getSize());
-            frame.setSize(1050, 882);
-            mainWindow.getChessboard().getDrawBoard().setPreferredSize(new Dimension(200, 100));
+            frame.setSize(1024, 768);
+        }
+        else if(e.getActionCommand().equals("800 x 600")) {
+            System.out.println(frame.getSize());
+            frame.setSize(800, 600);
             
 
         }
