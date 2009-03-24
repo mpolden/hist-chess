@@ -170,7 +170,7 @@ public class Mainwindow extends JFrame implements MouseListener, MouseMotionList
             x_coords[movingPiece] = getRect.getRectCoordX(toPos);
             y_coords[movingPiece] = getRect.getRectCoordY(toPos);
         } catch(IllegalPositionException posE) {
-            System.out.println(posE);
+            System.out.println(posE.getMessage());
             try{
                 x_coords[movingPiece] = getRect.getRectCoordX(fromPos);
                 y_coords[movingPiece] = getRect.getRectCoordY(fromPos);
@@ -178,12 +178,12 @@ public class Mainwindow extends JFrame implements MouseListener, MouseMotionList
                 System.out.println(outOfBoundsException);
             }
         } catch(IllegalTurnException turnE) {
-            System.out.println(turnE);
+            System.out.println(turnE.getMessage());
             try{
                 x_coords[movingPiece] = getRect.getRectCoordX(fromPos);
                 y_coords[movingPiece] = getRect.getRectCoordY(fromPos);
             } catch(ArrayIndexOutOfBoundsException outOfBoundsException) {
-                System.out.println(outOfBoundsException);
+                System.out.println(outOfBoundsException.getMessage());
             }
         } catch(ArrayIndexOutOfBoundsException outOfBoundsException) {
             x_coords[movingPiece] = getRect.getRectCoordX(fromPos);
@@ -275,7 +275,6 @@ public class Mainwindow extends JFrame implements MouseListener, MouseMotionList
     public void mouseClicked(MouseEvent e) {}
     public void mouseMoved(MouseEvent e) {}
     public void mouseEntered(MouseEvent e) {}
-
     public class Buttons extends JPanel {
 
         public Buttons() {
