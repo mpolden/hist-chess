@@ -18,6 +18,8 @@ public final class guiConstants {
     public static final int xIn = 13;
     public static final int yIn = 141;
     public static final int boardSize = 64;
+    public static final int zero = 0;
+    
 
     public static final Color dunkel = new Color (0x999999);
     public static final Color hell = new Color (0xFFFFCC);
