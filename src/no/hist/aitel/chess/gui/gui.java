@@ -36,7 +36,7 @@ public class gui implements ActionListener, ItemListener {
 
     private JMenuBar addJMenu() {
         JMenuBar menuBar = new JMenuBar();
-        JMenu menu = new JMenu("File"), submenu = new JMenu("Set player names");
+        JMenu menu = new JMenu("File"), submenu = new JMenu("Set player names"), submenu2 = new JMenu("Set resolution");
         menu.setMnemonic(KeyEvent.VK_A);
         menu.getAccessibleContext().setAccessibleDescription("Test");
         
@@ -60,7 +60,19 @@ public class gui implements ActionListener, ItemListener {
         menuItem.getAccessibleContext().setAccessibleDescription("Test");
         menu.add(menuItem);
 
+        menu.addSeparator();
+        submenu2.setMnemonic(KeyEvent.VK_S);
+        menuItem = new JMenuItem("1024 x 768");
+        menuItem.addActionListener(this);
+        menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_3, ActionEvent.ALT_MASK));
+        submenu2.add(menuItem);
 
+        menuItem = new JMenuItem("800 x 600");
+        menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_4, ActionEvent.ALT_MASK));
+        menuItem.addActionListener(this);
+        submenu2.add(menuItem);
+
+        menu.add(submenu2);
 
         menu.addSeparator();
         submenu.setMnemonic(KeyEvent.VK_S);
