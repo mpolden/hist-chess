@@ -6,6 +6,7 @@ package no.hist.aitel.chess.gui;
  */
 
 import java.awt.BorderLayout;
+import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
@@ -368,6 +369,7 @@ class testGui implements ActionListener, ItemListener {
         frame.setVisible(true);
         frame.setResizable(false);
         frame.setLocationRelativeTo(null);
+        frame.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         frame.pack();
     }
 
