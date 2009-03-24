@@ -41,14 +41,14 @@ class Mainwindow extends JFrame implements MouseListener, MouseMotionListener {
     private getRect getRect = new getRect();
     private int[] x_coords = boardGui.getXcoords();
     private int[] y_coords = boardGui.getYcoords();    
-    private int dragFromX = 0;
-    private int dragFromY = 0;  
+    private int dragFromX = zero;
+    private int dragFromY = zero;
     private int movingPiece = -1;
     private int capturedPiece = -1;
     private int x_coordStartPos = -1;
     private int y_coordStartPos = -1;
-    private int capturedWhitePieces = 0;
-    private int capturedBlackPieces = 0;    
+    private int capturedWhitePieces = zero;
+    private int capturedBlackPieces = zero;
     private int x;
     private int y;
     private int fromPos;
@@ -222,7 +222,7 @@ class Mainwindow extends JFrame implements MouseListener, MouseMotionListener {
                 capturedPiece = 61;
                 try{
                     x_coords[capturedPiece] = capturedWhitePieces*width;
-                    y_coords[capturedPiece] = 0;
+                    y_coords[capturedPiece] = zero;
                     capturedWhitePieces++;
                     board.setCapturedPos(-1);
                 } catch(ArrayIndexOutOfBoundsException excep) {}
@@ -259,7 +259,7 @@ class Mainwindow extends JFrame implements MouseListener, MouseMotionListener {
             else if(capturedPiece <= 15) {
                 try{
                     x_coords[capturedPiece] = capturedWhitePieces*width;
-                    y_coords[capturedPiece] = 0;
+                    y_coords[capturedPiece] = zero;
                     capturedWhitePieces++;
                     board.setCapturedPos(-1);
                 } catch(ArrayIndexOutOfBoundsException excep) {}                
