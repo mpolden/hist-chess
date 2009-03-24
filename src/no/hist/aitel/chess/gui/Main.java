@@ -19,13 +19,13 @@ import javax.swing.KeyStroke;
  *
  * @author Vegard
  */
-public class gui implements ActionListener, ItemListener {
-    private static Mainwindow mainWindow = new Mainwindow("chess");
+public class Main implements ActionListener, ItemListener {
+    private static guiEngine mainWindow = new guiEngine("chess");
     
 
     private static void createAndShowGui() {
         JFrame frame = mainWindow;
-        gui gui = new gui();
+        Main gui = new Main();
         frame.setJMenuBar(gui.addJMenu());
         frame.setVisible(true);
         frame.setResizable(false);

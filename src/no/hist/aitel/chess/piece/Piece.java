@@ -17,20 +17,29 @@ public class Piece {
     final private int color;
     final private int type;
     final private int id;
-    private boolean initPosition = true;
+    private boolean moved = false;
 
-    public boolean isInitPosition() {
-        return initPosition;
-    }
-
-    public void setInitPosition(boolean initPosition) {
-        this.initPosition = initPosition;
+    /**
+     * Check if piece has been moved
+     * @return True if piece has been moved from its original position and false otherwise
+     */
+    public boolean isMoved() {
+        return moved;
     }
 
     /**
-     * Creates a new piece of the given color and type
+     * Set if piece has been moved
+     * @param moved
+     */
+    public void setMoved(boolean moved) {
+        this.moved = moved;
+    }
+
+    /**
+     * Creates a new piece of the given color, type and id
      * @param color
      * @param type
+     * @param id
      */
     public Piece(int color, int type, int id) {
         this.color = color;
@@ -76,7 +85,7 @@ public class Piece {
      * @return True if piece is empty and false otherwise
      */
     public boolean isEmpty() {
-        if (type == UNDEFINED && color == UNDEFINED) {
+        if (type == UNDEFINED || color == UNDEFINED || id == UNDEFINED) {
             return true;
         }
         return false;

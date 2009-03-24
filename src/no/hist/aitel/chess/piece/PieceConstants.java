@@ -17,17 +17,48 @@ public final class PieceConstants {
     private PieceConstants() {
     }
 
-    // Constants
+    /**
+     * Used when an attribute is undefined (color, type etc)
+     */
     public static final int UNDEFINED = -1;
-    
+
+    /**
+     * The number which white is represented by
+     */
     public static final int WHITE = 0;
+    /**
+     * The number which black is represented by
+     */
     public static final int BLACK = 1;
 
+    /**
+     * The number a pawn is represented by
+     */
     public static final int PAWN = 0;
+
+    /**
+     * The number a bishop is represented by
+     */
     public static final int BISHOP = 1;
+
+    /**
+     * The number a knight is represented by
+     */
     public static final int KNIGHT = 2;
+
+    /**
+     * The number a rook is represented by
+     */
     public static final int ROOK = 3;
+
+    /**
+     * The number a queen is represented by
+     */
     public static final int QUEEN = 4;
+
+    /**
+     * The number a king is represented by
+     */
     public static final int KING = 5;
 
 }

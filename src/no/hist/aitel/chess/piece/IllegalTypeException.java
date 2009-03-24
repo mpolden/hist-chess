@@ -7,12 +7,16 @@
 package no.hist.aitel.chess.piece;
 
 /**
- * This exception is thrown when certain methods are called with an invalid piece type
+ *
  * @author martin
  */
 
 public class IllegalTypeException extends IllegalArgumentException {
 
+    /**
+     * This exception is thrown when certain methods are called with an invalid piece type
+     * @param s
+     */
     public IllegalTypeException(String s) {
         super(s);
     }

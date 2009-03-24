@@ -6,7 +6,7 @@
 package no.hist.aitel.chess.position;
 
 /**
- * This exception is thrown when a piece attempts a move that isn't allowed
+ *
  * @author martin
  */
 

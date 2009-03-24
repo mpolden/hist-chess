@@ -21,13 +21,10 @@ import javax.swing.JLayeredPane;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import no.hist.aitel.chess.board.Board;
-import no.hist.aitel.chess.board.IllegalTurnException;
-import no.hist.aitel.chess.position.IllegalPositionException;
-import no.hist.aitel.chess.piece.*;
 import static no.hist.aitel.chess.gui.guiConstants.*;
 
 
-public class Mainwindow extends JFrame implements MouseListener, MouseMotionListener {
+public class guiEngine extends JFrame implements MouseListener, MouseMotionListener {
     private boolean canDrag = true;
     private Chessboard boardGui = new Chessboard();
     private Board board = new Board();
@@ -61,7 +58,7 @@ public class Mainwindow extends JFrame implements MouseListener, MouseMotionList
     }
 
     
-    public Mainwindow(String title) {        
+    public guiEngine(String title) {
         this.addMouseListener(this);
         this.addMouseMotionListener(this);
         setTitle(title);
@@ -152,67 +149,48 @@ public class Mainwindow extends JFrame implements MouseListener, MouseMotionList
         this.repaint();
     }
 
+    /**
+     * Resets the piece position if the move is invalid
+     */
+    private void resetPosition() {
+        x_coords[movingPiece] = getRect.getRectCoordX(fromPos);
+        y_coords[movingPiece] = getRect.getRectCoordY(fromPos);
+    }
+
+    /**
+     * Changes the piece position
+     */
+    private void changePosition() {
+        x_coords[movingPiece] = getRect.getRectCoordX(toPos);
+        y_coords[movingPiece] = getRect.getRectCoordY(toPos);
+    }
+
     public void mouseReleased(MouseEvent e) {
         if(canDrag) {
         int x_on_release = e.getX();
         int y_on_release = e.getY();        
         fromPos = getRect.getRectNumber(x_coordStartPos, y_coordStartPos);
         toPos = getRect.getRectNumber(x_on_release, y_on_release);
-        
-        
-        
-        if (toPos > -1 && toPos <= 63) {
+
+        try {
             capturedPiece = board.getPiece(toPos).getId();
             System.out.println(capturedPiece);
-            try {
-                board.movePiece(fromPos, toPos);
-                setCapturedPos(board.getPiece(toPos).getId());
-                x_coords[movingPiece] = getRect.getRectCoordX(toPos);
-                y_coords[movingPiece] = getRect.getRectCoordY(toPos);
-            } catch(IllegalArgumentException exception) {
-                System.out.println(exception.getMessage());
-                
-                    x_coords[movingPiece] = getRect.getRectCoordX(fromPos);
-                    y_coords[movingPiece] = getRect.getRectCoordY(fromPos);
-    //            } catch(ArrayIndexOutOfBoundsException outOfBoundsException) {
-    //                System.out.println(outOfBoundsException);
-    //            }
-    //        } catch(IllegalTurnException turnE) {
-    //            System.out.println(turnE.getMessage());
-    //            try{
-    //                x_coords[movingPiece] = getRect.getRectCoordX(fromPos);
-    //                y_coords[movingPiece] = getRect.getRectCoordY(fromPos);
-    //            } catch(ArrayIndexOutOfBoundsException outOfBoundsException) {
-    //                System.out.println(outOfBoundsException.getMessage());
-    //            }
-    //        } catch(ArrayIndexOutOfBoundsException outOfBoundsException) {
-    //            x_coords[movingPiece] = getRect.getRectCoordX(fromPos);
-    //            y_coords[movingPiece] = getRect.getRectCoordY(fromPos);
-    //            System.out.println(outOfBoundsException);
-    //        } catch(IllegalPieceException turnException) {
-    //            System.out.println(turnException);
-    //            try{
-    //                x_coords[movingPiece] = getRect.getRectCoordX(fromPos);
-    //                y_coords[movingPiece] = getRect.getRectCoordY(fromPos);
-    //            } catch(ArrayIndexOutOfBoundsException outOfBoundsException) {
-    //                System.out.println(outOfBoundsException);
-    //            }
-    //        } catch(IllegalTypeException typeException) {
-    //            System.out.println(typeException);
-    //            try{
-    //                x_coords[movingPiece] = getRect.getRectCoordX(fromPos);
-    //                y_coords[movingPiece] = getRect.getRectCoordY(fromPos);
-    //            } catch(ArrayIndexOutOfBoundsException outOfBoundsException) {
-    //                System.out.println(outOfBoundsException);
-    //            }
-            }
-        } else {
-             x_coords[movingPiece] = getRect.getRectCoordX(fromPos);
-             y_coords[movingPiece] = getRect.getRectCoordY(fromPos);
+            board.movePiece(fromPos, toPos);
+            setCapturedPos(board.getPiece(toPos).getId());
+            changePosition();
+        } catch(IllegalArgumentException exception) { // IllegalArgumentException = alle våre exceptions
+            System.out.println(exception.getMessage());
+            resetPosition();
+        } catch (ArrayIndexOutOfBoundsException exception) {
+            System.out.println(exception.getMessage());
+            resetPosition();
         }
 
-        if(getCapturedPos() > -1) {
-//        if (board.get)
+        // Fin shø, andre betingelsen hindrer at brikken "capture"-er seg selv
+        if(getCapturedPos() > -1 && board.getPiece(fromPos).getId() != getCapturedPos()) {
+//            System.out.println("Captured pos: " + getCapturedPos());
+//            System.out.println("toPos ID: " + board.getPiece(toPos).getId());
+//            System.out.println("fromPos ID: " + board.getPiece(fromPos).getId());
             System.out.println(capturedPiece);
             if(capturedPiece == 61) {
                 capturedPiece = 5;

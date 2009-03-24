@@ -15,12 +15,19 @@ import static no.hist.aitel.chess.piece.PieceConstants.*;
  * @author martin
  */
 
-public class Position {
-    private Board board;
-    private int from, to, diff;
+abstract public class Position {
+    /**
+     * Board object to validate positions on
+     */
+    protected Board board;
+    /**
+     * From and to positions, and the difference between them
+     */
+    protected int from, to, diff;
 
     /**
-     * Creates a position object which is used to validate moves
+     * Creates a position object for a board which is used to validate moves
+     * @param board
      */
     public Position(Board board) {
         this.board = board;
@@ -39,7 +46,7 @@ public class Position {
 
     /**
      * Verifies positions
-     * @return Throws an exception if positions are invalid
+     * @throws IllegalPositionException
      */
     public void verifyPositions() throws IllegalPositionException {
         // Get destionation pieces
@@ -165,17 +172,6 @@ public class Position {
                     } else {
                         break;
                     }
-
-                    // The following also works (for white anyway :-P)
-//                    for (int position = from; position < to; position++) {
-//                        if (position != from && position % 8 == 0) { // Moved past end of this line
-//                            throw new IllegalPositionException("Rook can only move forward, backward, left or right.\n" +
-//                                    "Type: " + fromPiece.getType() +
-//                                    "\nFrom: " + from +
-//                                    "\nTo: " + to);
-//                        }
-//                    }
-//                    break;
                 }
             }
             case QUEEN: {
@@ -245,12 +241,15 @@ public class Position {
                         return direction;
                     }
                 }
-                return -1; // Piece is moving one field to the left or right (1 % (n!=1) != 0)
+                if (diff == 1 || diff == -1) {
+                    return -1; // Piece is moving one field to the left or right (1 % (n!=1) != 0)
+                } else {
+                    return -2; // Invalid direction
+                }
             }
             default: {
-//                throw new IllegalTypeException("getDirection() was called with invalid type: "
-//                        + type);
-                return -1;
+                throw new IllegalTypeException("getDirection() was called with an invalid type: "
+                        + type);
             }
         }
     }
@@ -280,12 +279,10 @@ public class Position {
             case KING: {
                 return new int[] {7, 8, 9}; // Not including 1 as n % 1 == 0 and that causes an
                                             // invalid warning to be displayed
-
             }
             default: {
-//                throw new IllegalTypeException("getDirections() was called with invalid type: "
-//                        + type);
-                return null;
+                throw new IllegalTypeException("getDirections() was called with an invalid type: "
+                        + type);
             }
         }
     }
@@ -300,6 +297,9 @@ public class Position {
                                // which is always valid since no piece can exist between only two
                                // fields
             return true;
+        }
+        if (direction == -2) {
+            return false; // Invalid direction (means that getDirection() couldn't find a direction)
         }
         if (to < from) { // Black moves in a negative direction
             for (int position = from - direction; position > to; position -= direction) {
