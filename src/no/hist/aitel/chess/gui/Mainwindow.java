@@ -135,19 +135,24 @@ public class Mainwindow extends JFrame implements MouseListener, MouseMotionList
         }        
     }
           
-    public void mouseDragged(MouseEvent e) {        
+    public void mouseDragged(MouseEvent e) {
+        x = e.getX();
+        y = e.getY();
         if(canDrag) {            
-            x_coords[movingPiece] = e.getX() - dragFromX;
-            y_coords[movingPiece] = e.getY() - dragFromY;
+            x_coords[movingPiece] = x - dragFromX;
+            y_coords[movingPiece] = y - dragFromY;
 
-            x_coords[movingPiece] = Math.max(x_coords[movingPiece], 0);
+            x_coords[movingPiece] = Math.max(x_coords[movingPiece], zero);
             x_coords[movingPiece] = Math.min(x_coords[movingPiece], getWidth() - 450);
 
             y_coords[movingPiece] = Math.max(y_coords[movingPiece], 50);
             y_coords[movingPiece] = Math.min(y_coords[movingPiece], getWidth() - 400);            
-
-            this.repaint();            
-        }        
+            
+            
+        }
+        
+        System.out.println(x+" "+y);
+        this.repaint();
     }
 
     public void mouseReleased(MouseEvent e) {
@@ -159,6 +164,7 @@ public class Mainwindow extends JFrame implements MouseListener, MouseMotionList
         capturedPiece = board.getPiece(toPos).getId();
         System.out.println(capturedPiece);
         
+
         try {
             board.movePiece(fromPos, toPos);
             x_coords[movingPiece] = getRect.getRectCoordX(toPos);
@@ -351,3 +357,5 @@ public class Mainwindow extends JFrame implements MouseListener, MouseMotionList
     }
 }
 
+
+     

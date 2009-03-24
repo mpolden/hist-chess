@@ -39,12 +39,13 @@ public class gui implements ActionListener, ItemListener {
         JMenu menu = new JMenu("File"), submenu = new JMenu("Set player names");
         menu.setMnemonic(KeyEvent.VK_A);
         menu.getAccessibleContext().setAccessibleDescription("Test");
+        
         menuBar.add(menu);
 
         JMenuItem menuItem = new JMenuItem("Save game", KeyEvent.VK_T);
         menuItem.addActionListener(this);
         menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F2, ActionEvent.ALT_MASK));
-        menuItem.getAccessibleContext().setAccessibleDescription("This doesn't really do anything");
+        menuItem.getAccessibleContext().setAccessibleDescription("Test");
         menu.add(menuItem);
 
         menu.addSeparator();
