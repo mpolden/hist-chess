@@ -95,8 +95,8 @@ public class Mainwindow extends JFrame implements MouseListener, MouseMotionList
 
     public void undoMove() {
         try {            
-            x_coords[movingPiece] = x - dragFromX;
-            y_coords[movingPiece] = y - dragFromY;            
+            x_coords[movingPiece] = x_coordStartPos - dragFromX;
+            y_coords[movingPiece] = y_coordStartPos - dragFromY;
             this.repaint();
             //board.switchTurn(); // Ikke nødvendig, Board-klassen tar seg av dette
         }
