@@ -59,8 +59,10 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
     private int capturedPos = -1;
     private JLabel stopWatchP1 = new JLabel("", JLabel.LEFT);
     private JLabel stopWatchP2 = new JLabel("", JLabel.LEFT);
-    private Runnable runThis;
-    private Runnable runThis1;
+    private Runnable player1timer;
+    private Runnable player2timer;
+    private int timeUsedP1 = zero;
+    private int timeUsedP2 = zero;
     private Font player = new Font("VERDANA", Font.BOLD, 20);
     private Font timer = new Font("VERDANA", Font.ITALIC, 14);
 
@@ -114,28 +116,28 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
         add(southPanel, BorderLayout.SOUTH);
         add(northPanel, BorderLayout.NORTH);
 
-        runThis = new Runnable () {
-            public void run () {
-                int i = 0;
+        player1timer = new Runnable () {
+            public void run () {                
                 while(timerCheck) {
                     try {
                         Thread.currentThread().sleep(1000);
-                        stopWatchP1.setText("   " + i++ + " sek");
+                        stopWatchP1.setText("   " + timeUsedP1 + " sek");
+                        timeUsedP1++;
                     } catch (InterruptedException ex) {
                         Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
             }
         };
-        new Thread(runThis).start();
+        new Thread(player1timer).start();
 
-        runThis1 = new Runnable () {
-            public void run () {
-                int i = 0;
-                while(timerCheck) {
+        player2timer = new Runnable () {
+            public void run () {                
+                while(!timerCheck) {
                     try {
                         Thread.currentThread().sleep(1000);
-                        stopWatchP2.setText("   " + i++ + " sek");
+                        stopWatchP2.setText("   " + timeUsedP2 + " sek");
+                        timeUsedP2++;
                     } catch (InterruptedException ex) {
                         Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
                     }
@@ -143,7 +145,7 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
             }
         };
 
-        new Thread(runThis1).start();
+        new Thread(player2timer).start();
 
 
 
@@ -240,10 +242,12 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
         y_coords[movingPiece] = getRect.getRectCoordY(toPos);
         if(timerCheck) {
             timerCheck = false;
+            new Thread(player2timer).start();
             
         }
         else {
             timerCheck = true;
+            new Thread(player1timer).start();
             
         }
     }
