@@ -18,11 +18,11 @@ public class Test {
     public static void main(String[] args) {
         Board b  = new Board();
 
-        b.movePiece(8, 24);
-        b.movePiece(55, 47);
-        b.movePiece(24, 32);
-        b.movePiece(49, 33);
-        b.movePiece(32, 41);
+//        b.movePiece(8, 24);
+//        b.movePiece(55, 47);
+//        b.movePiece(24, 32);
+//        b.movePiece(49, 33);
+//        b.movePiece(32, 41);
 //        b.movePiece(49, 41);
 //        b.movePiece(6, 12);
 //        b.movePiece(51, 43);
@@ -32,6 +32,15 @@ public class Test {
 //        b.movePiece(4, 6);
 //        b.movePiece(59, 16);
 //        b.movePiece(58, 25);
+        b.movePiece(8, 16);
+        b.movePiece(52, 44);
+        b.movePiece(9, 17);
+        b.movePiece(61, 52);
+        b.movePiece(10, 18);
+        b.movePiece(62, 47);
+        b.movePiece(11, 19);
+        b.movePiece(60, 62);
+
 
         System.out.println(b.toString());
 

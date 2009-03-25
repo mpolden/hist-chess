@@ -415,7 +415,7 @@ public class Position {
                 } else {
                     return false;
                 }
-                if (rook.getColor() == BLACK && rook.getType() == ROOK && rook.isMoved()) {
+                if (rook.getColor() == BLACK && rook.getType() == ROOK && !rook.isMoved()) {
                     return true;
                 }
             }

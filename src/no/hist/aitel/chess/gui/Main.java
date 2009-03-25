@@ -20,7 +20,7 @@ import javax.swing.KeyStroke;
  * @author Vegard
  */
 public class Main implements ActionListener, ItemListener {
-    private static guiEngine mainWindow = new guiEngine("chess");
+    private static guiEngine mainWindow = new guiEngine("Chess");
     private static JFrame frame = mainWindow; 
     
 

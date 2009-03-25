@@ -18,7 +18,7 @@ public final class PieceConstants {
     }
 
     /**
-     * Used when an attribute is undefined (color, type etc)
+     * The number which undefined attributes are represented by
      */
     public static final int UNDEFINED = -1;
 
