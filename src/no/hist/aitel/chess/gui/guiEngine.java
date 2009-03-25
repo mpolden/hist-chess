@@ -353,7 +353,7 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
             this.repaint();
             System.out.println(board.toString());
             if(turnCounter%2 != 0) {
-                new Thread(runThis1).wait();
+                //new Thread(runThis1).wait();
 
             }
         }
