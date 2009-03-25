@@ -238,7 +238,7 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
     }
 
     private void checkCastling() {
-        if(fromPos == 4 && board.getPiece(toPos).getId() == 4) {
+        if(!(board.getPiece(toPos).isMoved()) && fromPos == 4 && board.getPiece(toPos).getId() == 4) {
             if(toPos == 2) {
                 x_coords[0] = getRect.getRectCoordX(3);
                 y_coords[0] = getRect.getRectCoordY(3);
@@ -247,6 +247,17 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
                 x_coords[7] = getRect.getRectCoordX(5);
                 y_coords[7] = getRect.getRectCoordY(5);
             }
+        }
+        else if(!(board.getPiece(toPos).isMoved()) && fromPos == 60 && board.getPiece(toPos).getId() == 60) {
+            if(toPos == 62) {
+                x_coords[63] = getRect.getRectCoordX(61);
+                y_coords[63] = getRect.getRectCoordY(61);
+            }
+            else if(toPos == 58) {
+                x_coords[56] = getRect.getRectCoordX(59);
+                y_coords[56] = getRect.getRectCoordY(59);
+            }
+
         }
 
     }
