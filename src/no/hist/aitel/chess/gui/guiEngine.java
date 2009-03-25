@@ -79,10 +79,10 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
         JLabel player2Label = new JLabel(player2, JLabel.LEFT);
 
         player1Label.setFont(player);
-        player1Label.setBorder(BorderFactory.createTitledBorder("Player White"));
+        //player1Label.setBorder(BorderFactory.createTitledBorder("Player White"));
 
         player2Label.setFont(player);
-        player2Label.setBorder(BorderFactory.createTitledBorder("Player Black"));
+        //player2Label.setBorder(BorderFactory.createTitledBorder("Player Black"));
 
         stopWatchP1.setFont(timer);
         stopWatchP1.setBorder(BorderFactory.createEmptyBorder());
@@ -91,10 +91,10 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
         stopWatchP2.setBorder(BorderFactory.createEmptyBorder());
 
         southPanel.add(boardGui, BorderLayout.CENTER);
-        //southPanel.add(player1Label, BorderLayout.SOUTH);
+        southPanel.add(player1Label, BorderLayout.SOUTH);
         southPanel.add(stopWatchP1, BorderLayout.SOUTH);
 
-        //northPanel.add(player2Label, BorderLayout.NORTH);
+        northPanel.add(player2Label, BorderLayout.NORTH);
         northPanel.add(stopWatchP2, BorderLayout.SOUTH);
 
         add(southPanel, BorderLayout.CENTER);
