@@ -179,11 +179,12 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
     public void mousePressed(MouseEvent e) {
         x = e.getX();
         y = e.getY();
-        System.out.println(northPanel.getHeight());
+        //System.out.println(northPanel.getHeight());
         try {
             for (int i = 0; i < 64; i++) {
-                if (x - xIn > x_coords[i] && x - xIn < x_coords[i] + (width) && y - yIn + 24 > y_coords[i] && y - yIn + 24 < y_coords[i] + (height)) {
+                if (x - xIn > x_coords[i] && x - xIn < x_coords[i] + (width) && y - yIn + 61 > y_coords[i] && y - yIn + 61 < y_coords[i] + (height)) {
                     movingPiece = i;
+                    System.out.println(movingPiece);
                     canDrag = true;
                     dragFromX = x - x_coords[i];
                     dragFromY = y - y_coords[i];
