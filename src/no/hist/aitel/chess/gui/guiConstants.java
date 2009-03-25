@@ -13,10 +13,10 @@ public final class guiConstants {
     private guiConstants() {
     }
 
-    public static final int width = 80;
-    public static final int height = 80;
+    public static final int width = 60;
+    public static final int height = 60;
     public static final int xIn = 13;
-    public static final int yIn = 141;
+    public static final int yIn = 120;
     public static final int boardSize = 64;
     public static final int zero = 0;
 

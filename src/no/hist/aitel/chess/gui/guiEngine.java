@@ -141,10 +141,10 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
             y_coords[movingPiece] = y - dragFromY;
 
             x_coords[movingPiece] = Math.max(x_coords[movingPiece], zero);
-            x_coords[movingPiece] = Math.min(x_coords[movingPiece], getWidth() - 450);
+            x_coords[movingPiece] = Math.min(x_coords[movingPiece], getWidth() - 400);
 
             y_coords[movingPiece] = Math.max(y_coords[movingPiece], 50);
-            y_coords[movingPiece] = Math.min(y_coords[movingPiece], getWidth() - 400);            
+            y_coords[movingPiece] = Math.min(y_coords[movingPiece], getWidth() - 340);
             
             
         }
@@ -293,8 +293,8 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
         private drawPos startPos = new drawPos();
         private int[] x_coords = startPos.getXcoords();
         private int[] y_coords = startPos.getYcoords();
-        private int xSize = 1024;
-        private int ySize = 768;
+        private int xSize = 800;
+        private int ySize = 600;
         
 
         public Chessboard() {
