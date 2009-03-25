@@ -108,7 +108,7 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
                         Thread.currentThread().sleep(1000);
                         stopWatchP1.setText("   " + i++ + " sek");
                     } catch (InterruptedException ex) {
-                        Logger.getLogger(Mainwindow.class.getName()).log(Level.SEVERE, null, ex);
+                        Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
             }
@@ -123,7 +123,7 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
                         Thread.currentThread().sleep(1000);
                         stopWatchP2.setText("   " + i++ + " sek");
                     } catch (InterruptedException ex) {
-                        Logger.getLogger(Mainwindow.class.getName()).log(Level.SEVERE, null, ex);
+                        Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
             }
