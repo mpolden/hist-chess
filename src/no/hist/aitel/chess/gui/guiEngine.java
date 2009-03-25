@@ -47,7 +47,7 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
     private int y;
     private int fromPos;
     private int toPos;
-    private int turnCounter;
+    private boolean timerCheck = true;
     //private int yIn;
     private String player1 = null;
     private String player2 = null;
@@ -117,7 +117,7 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
         runThis = new Runnable () {
             public void run () {
                 int i = 0;
-                while(true) {
+                while(timerCheck) {
                     try {
                         Thread.currentThread().sleep(1000);
                         stopWatchP1.setText("   " + i++ + " sek");
@@ -132,7 +132,7 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
         runThis1 = new Runnable () {
             public void run () {
                 int i = 0;
-                while(true) {
+                while(timerCheck) {
                     try {
                         Thread.currentThread().sleep(1000);
                         stopWatchP2.setText("   " + i++ + " sek");
@@ -238,7 +238,14 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
     private void changePosition() {
         x_coords[movingPiece] = getRect.getRectCoordX(toPos);
         y_coords[movingPiece] = getRect.getRectCoordY(toPos);
-        turnCounter++;
+        if(timerCheck) {
+            timerCheck = false;
+            
+        }
+        else {
+            timerCheck = true;
+            
+        }
     }
 
     private void checkCastling() {
@@ -352,10 +359,7 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
             }
             this.repaint();
             System.out.println(board.toString());
-            if(turnCounter%2 != 0) {
-                //new Thread(runThis1).wait();
-
-            }
+            
         }
     }
 
