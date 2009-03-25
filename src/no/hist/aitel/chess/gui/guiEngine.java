@@ -121,7 +121,7 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
                 while(timerCheck) {
                     try {
                         Thread.currentThread().sleep(1000);
-                        stopWatchP1.setText("   " + timeUsedP1 + " sek");
+                        stopWatchP1.setText("   " + timeUsedP1 + " sec");
                         timeUsedP1++;
                     } catch (InterruptedException ex) {
                         Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
@@ -136,7 +136,7 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
                 while(!timerCheck) {
                     try {
                         Thread.currentThread().sleep(1000);
-                        stopWatchP2.setText("   " + timeUsedP2 + " sek");
+                        stopWatchP2.setText("   " + timeUsedP2 + " sec");
                         timeUsedP2++;
                     } catch (InterruptedException ex) {
                         Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
