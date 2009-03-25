@@ -61,19 +61,19 @@ public class Main implements ActionListener, ItemListener {
         menuItem.getAccessibleContext().setAccessibleDescription("Test");
         menu.add(menuItem);
 
-        menu.addSeparator();
+        //menu.addSeparator();
         submenu2.setMnemonic(KeyEvent.VK_S);
         menuItem = new JMenuItem("1024 x 768");
         menuItem.addActionListener(this);
         menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_3, ActionEvent.ALT_MASK));
-        submenu2.add(menuItem);
+        //submenu2.add(menuItem);
 
         menuItem = new JMenuItem("800 x 600");
         menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_4, ActionEvent.ALT_MASK));
         menuItem.addActionListener(this);
-        submenu2.add(menuItem);
+        //submenu2.add(menuItem);
 
-        menu.add(submenu2);
+        //menu.add(submenu2);
 
         menu.addSeparator();
         submenu.setMnemonic(KeyEvent.VK_S);

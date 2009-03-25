@@ -129,7 +129,7 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
                 }
             }
         };
-        new Thread(player1timer).start();
+        //new Thread(player1timer).start();
 
         player2timer = new Runnable () {
             public void run () {                
@@ -145,7 +145,7 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
             }
         };
 
-        new Thread(player2timer).start();
+        //new Thread(player2timer).start();
 
 
 
