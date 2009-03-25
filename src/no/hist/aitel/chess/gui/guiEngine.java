@@ -5,6 +5,7 @@ package no.hist.aitel.chess.gui;
  * @author Vegard
  */
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
@@ -57,8 +58,8 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
     private int capturedPos = -1;
     private JLabel stopWatchP1 = new JLabel("", JLabel.LEFT);
     private JLabel stopWatchP2 = new JLabel("", JLabel.LEFT);
-    Font player = new Font("VERDANA", Font.BOLD, 15);
-    Font timer = new Font("VERDANA", Font.ITALIC, 10);
+    Font player = new Font("VERDANA", Font.BOLD, 20);
+    Font timer = new Font("VERDANA", Font.ITALIC, 14);
 
     private int getCapturedPos() {
         return capturedPos;
@@ -97,11 +98,15 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
         stopWatchP2.setBorder(BorderFactory.createEmptyBorder());
 
         centerPanel.add(boardGui, BorderLayout.CENTER);
+        //centerPanel.setBackground(new Color(0x97694F));
+        
         southPanel.add(player1Label, BorderLayout.SOUTH);
         southPanel.add(stopWatchP1, BorderLayout.NORTH);
+        southPanel.setBackground(new Color(0xC0D9D9));
 
         northPanel.add(player2Label, BorderLayout.NORTH);
         northPanel.add(stopWatchP2, BorderLayout.SOUTH);
+        northPanel.setBackground(new Color(0xFF2400));
         add(centerPanel, BorderLayout.CENTER);
         add(southPanel, BorderLayout.SOUTH);
         add(northPanel, BorderLayout.NORTH);

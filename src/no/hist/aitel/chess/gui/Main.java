@@ -2,6 +2,7 @@
 
 package no.hist.aitel.chess.gui;
 
+import java.awt.Component;
 import java.awt.Cursor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -21,17 +22,17 @@ import javax.swing.KeyStroke;
  */
 public class Main implements ActionListener, ItemListener {
     private static guiEngine mainWindow = new guiEngine("chess");
-    private static JFrame frame = mainWindow;
+    private static JFrame frame = mainWindow; 
     
 
     private static void createAndShowGui() {
         
         Main gui = new Main();
-        frame.setJMenuBar(gui.addJMenu());
+        frame.setJMenuBar(gui.addJMenu());        
         frame.setVisible(true);
         frame.setResizable(false);
         frame.setLocationRelativeTo(null);
-        frame.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));      
+        frame.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         
     }
 
