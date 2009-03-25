@@ -133,7 +133,7 @@ public class Board {
                 rookTo = from + 1;
                 rookFrom = from + 3;
             } else if (to == (from - 2)) {
-                rookTo = from - 2;
+                rookTo = from - 1;
                 rookFrom = from - 4;
             } else {
                 throw new IllegalSpecialPositionException("Castling is allowed, but method was " +

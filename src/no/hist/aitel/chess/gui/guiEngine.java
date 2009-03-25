@@ -237,17 +237,31 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
         y_coords[movingPiece] = getRect.getRectCoordY(toPos);
     }
 
+    private void checkCastling() {
+        if(fromPos == 4 && board.getPiece(toPos).getId() == 4) {
+            if(toPos == 2) {
+                x_coords[0] = getRect.getRectCoordX(3);
+                y_coords[0] = getRect.getRectCoordY(3);
+            }
+            else if(toPos == 6) {
+                x_coords[7] = getRect.getRectCoordX(5);
+                y_coords[7] = getRect.getRectCoordY(5);
+            }
+        }
+
+    }
+
     public void mouseReleased(MouseEvent e) {
         if (canDrag) {
             int x_on_release = e.getX();
             int y_on_release = e.getY();
             fromPos = getRect.getRectNumber(x_coordStartPos, y_coordStartPos);
             toPos = getRect.getRectNumber(x_on_release, y_on_release);
-
             try {
                 capturedPiece = board.getPiece(toPos).getId();
                 System.out.println(capturedPiece);
-                board.movePiece(fromPos, toPos);
+                board.movePiece(fromPos, toPos);                
+                checkCastling();
                 setCapturedPos(board.getPiece(toPos).getId());
                 changePosition();
             } catch (IllegalArgumentException exception) { // IllegalArgumentException = alle våre exceptions
