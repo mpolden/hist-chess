@@ -75,8 +75,8 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
         JPanel southPanel = new JPanel(new BorderLayout());
         JPanel northPanel = new JPanel(new BorderLayout());
 
-        JLabel player1Label = new JLabel(player1, JLabel.LEFT);
-        JLabel player2Label = new JLabel(player2, JLabel.LEFT);
+        player1Label = new JLabel(player1, JLabel.LEFT);
+        player2Label = new JLabel(player2, JLabel.LEFT);
 
         player1Label.setFont(player);
         //player1Label.setBorder(BorderFactory.createTitledBorder("Player White"));
