@@ -50,6 +50,8 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
     private String player2 = null;
     private JLabel player1Label;
     private JLabel player2Label;
+    private JPanel southPanel;
+    private JPanel northPanel;
     private int capturedPos = -1;
     private JLabel stopWatchP1 = new JLabel("", JLabel.LEFT);
     private JLabel stopWatchP2 = new JLabel("", JLabel.LEFT);
@@ -72,8 +74,8 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
         setLayout(new BorderLayout());
         players();
 
-        JPanel southPanel = new JPanel(new BorderLayout());
-        JPanel northPanel = new JPanel(new BorderLayout());
+        southPanel = new JPanel(new BorderLayout());
+        northPanel = new JPanel(new BorderLayout());
 
         player1Label = new JLabel(player1, JLabel.LEFT);
         player2Label = new JLabel(player2, JLabel.LEFT);
@@ -168,10 +170,10 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
     public void mousePressed(MouseEvent e) {
         x = e.getX();
         y = e.getY();
-
+        System.out.println(northPanel.getHeight());
         try {
             for (int i = 0; i < 64; i++) {
-                if (x - xIn > x_coords[i] && x - xIn < x_coords[i] + (width) && y - 60 > y_coords[i] && y - 60 < y_coords[i] + (height)) {
+                if (x - xIn > x_coords[i] && x - xIn < x_coords[i] + (width) && y - yIn + 24 > y_coords[i] && y - yIn + 24 < y_coords[i] + (height)) {
                     movingPiece = i;
                     canDrag = true;
                     dragFromX = x - x_coords[i];
