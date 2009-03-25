@@ -26,4 +26,5 @@ public final class guiConstants {
     public static final Color hell = new Color (0xFFFFCC);
     public static final Color black = new Color (0x000000);
     public static final Color pink = new Color (0xFFC0CB);
+    public static final Color white = new Color (0xFFFFFF);
 }
