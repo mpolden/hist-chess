@@ -47,6 +47,7 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
     private int y;
     private int fromPos;
     private int toPos;
+    private int turnCounter;
     //private int yIn;
     private String player1 = null;
     private String player2 = null;
@@ -58,8 +59,10 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
     private int capturedPos = -1;
     private JLabel stopWatchP1 = new JLabel("", JLabel.LEFT);
     private JLabel stopWatchP2 = new JLabel("", JLabel.LEFT);
-    Font player = new Font("VERDANA", Font.BOLD, 20);
-    Font timer = new Font("VERDANA", Font.ITALIC, 14);
+    private Runnable runThis;
+    private Runnable runThis1;
+    private Font player = new Font("VERDANA", Font.BOLD, 20);
+    private Font timer = new Font("VERDANA", Font.ITALIC, 14);
 
     private int getCapturedPos() {
         return capturedPos;
@@ -111,7 +114,7 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
         add(southPanel, BorderLayout.SOUTH);
         add(northPanel, BorderLayout.NORTH);
 
-        Runnable runThis = new Runnable () {
+        runThis = new Runnable () {
             public void run () {
                 int i = 0;
                 while(true) {
@@ -126,7 +129,7 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
         };
         new Thread(runThis).start();
 
-        Runnable runThis1 = new Runnable () {
+        runThis1 = new Runnable () {
             public void run () {
                 int i = 0;
                 while(true) {
@@ -235,6 +238,7 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
     private void changePosition() {
         x_coords[movingPiece] = getRect.getRectCoordX(toPos);
         y_coords[movingPiece] = getRect.getRectCoordY(toPos);
+        turnCounter++;
     }
 
     private void checkCastling() {
@@ -348,6 +352,10 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
             }
             this.repaint();
             System.out.println(board.toString());
+            if(turnCounter%2 != 0) {
+                new Thread(runThis1).wait();
+
+            }
         }
     }
 
