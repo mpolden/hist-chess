@@ -91,10 +91,10 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
         stopWatchP2.setBorder(BorderFactory.createEmptyBorder());
 
         southPanel.add(boardGui, BorderLayout.CENTER);
-        southPanel.add(player1Label, BorderLayout.SOUTH);
+        //southPanel.add(player1Label, BorderLayout.SOUTH);
         southPanel.add(stopWatchP1, BorderLayout.SOUTH);
 
-        northPanel.add(player2Label, BorderLayout.NORTH);
+        //northPanel.add(player2Label, BorderLayout.NORTH);
         northPanel.add(stopWatchP2, BorderLayout.SOUTH);
 
         add(southPanel, BorderLayout.CENTER);
