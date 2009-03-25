@@ -46,12 +46,14 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
     private int y;
     private int fromPos;
     private int toPos;
+    //private int yIn;
     private String player1 = null;
     private String player2 = null;
     private JLabel player1Label;
     private JLabel player2Label;
     private JPanel southPanel;
     private JPanel northPanel;
+    private JPanel centerPanel;
     private int capturedPos = -1;
     private JLabel stopWatchP1 = new JLabel("", JLabel.LEFT);
     private JLabel stopWatchP2 = new JLabel("", JLabel.LEFT);
@@ -76,6 +78,8 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
 
         southPanel = new JPanel(new BorderLayout());
         northPanel = new JPanel(new BorderLayout());
+        centerPanel = new JPanel(new BorderLayout());
+
 
         player1Label = new JLabel(player1, JLabel.LEFT);
         player2Label = new JLabel(player2, JLabel.LEFT);
@@ -92,14 +96,14 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
         stopWatchP2.setFont(timer);
         stopWatchP2.setBorder(BorderFactory.createEmptyBorder());
 
-        southPanel.add(boardGui, BorderLayout.CENTER);
+        centerPanel.add(boardGui, BorderLayout.CENTER);
         southPanel.add(player1Label, BorderLayout.SOUTH);
-        southPanel.add(stopWatchP1, BorderLayout.SOUTH);
+        southPanel.add(stopWatchP1, BorderLayout.NORTH);
 
         northPanel.add(player2Label, BorderLayout.NORTH);
         northPanel.add(stopWatchP2, BorderLayout.SOUTH);
-
-        add(southPanel, BorderLayout.CENTER);
+        add(centerPanel, BorderLayout.CENTER);
+        add(southPanel, BorderLayout.SOUTH);
         add(northPanel, BorderLayout.NORTH);
 
         Runnable runThis = new Runnable () {
@@ -358,7 +362,7 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
         private int[] x_coords = startPos.getXcoords();
         private int[] y_coords = startPos.getYcoords();
         private int xSize = 800;
-        private int ySize = 600;
+        private int ySize = 680;
 
         public Chessboard() {
             Dimension boardSize = new Dimension(xSize, ySize);
