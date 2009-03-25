@@ -7,7 +7,8 @@ package no.hist.aitel.chess.board;
 
 import no.hist.aitel.chess.piece.Piece;
 import no.hist.aitel.chess.piece.IllegalPieceException;
-import no.hist.aitel.chess.position.SpecialPosition;
+import no.hist.aitel.chess.position.IllegalSpecialPositionException;
+import no.hist.aitel.chess.position.Position;
 import static no.hist.aitel.chess.piece.PieceConstants.*;
 
 /**
@@ -20,7 +21,7 @@ public class Board {
     final private int size = 64;
     private Piece[] board = new Piece[size];
     private Piece[] captured = new Piece[size];
-    private SpecialPosition p = new SpecialPosition(this);
+    private Position p = new Position(this);
     private int turn = WHITE;
     
     /**
@@ -52,7 +53,7 @@ public class Board {
      * @param position
      * @param piece
      */
-    public void setPiece(int position, Piece piece) {
+    private void setPiece(int position, Piece piece) {
         board[position] = piece;
     }
 
@@ -61,7 +62,7 @@ public class Board {
      * @param from
      * @param to
      */
-    public void movePiece(int from, int to) {
+    public void movePiece(int from, int to) throws IllegalArgumentException {
 
         // Check if any of the positions are outside the board
         if ((from < 0 || from > 63) || (to < 0 || from > 63)) {
@@ -90,31 +91,78 @@ public class Board {
 
         // Check if we're doing a special move
         if (p.isCastling()) {
-            p.doCastling();
+            doCastling(from, to);
+        } else if (p.isEnPassant()) {
+            doEnPassant(from, to);
 //        } else if (p.isPromotion()) {
-//        } else if (p.isEnPassant())
         } else {
 
-            // Verify regular move
+            // Regular move
             p.verifyPositions();
+            doRegularMove(from, to);
 
-            // If a piece is captured, save it to our table
-            if (!getPiece(to).isEmpty()) {
-                addCaptured(getPiece(to));
-            }
-
-            // Move the piece in our table
-            setPiece(to, getPiece(from));
-
-            // Set that the piece has moved from its original position
-            getPiece(to).setMoved(true);
-
-            // Put an empty piece in the old position
-            setPiece(from, new Piece()); // Empty piece
         }
 
         // Switch turn
         switchTurn();
+    }
+
+    /**
+     * Perform a regular move
+     * @param from
+     * @param to
+     */
+    private void doRegularMove(int from, int to) {
+        if (!getPiece(to).isEmpty()) {
+            addCaptured(getPiece(to));
+        }
+        setPiece(to, getPiece(from));
+        getPiece(to).setMoved(true);
+        setPiece(from, new Piece()); // Empty piece
+    }
+
+    /**
+     * Perform castling move
+     * @param from
+     * @param to
+     */
+    private void doCastling(int from, int to) throws IllegalSpecialPositionException {
+        int rookTo = -1, rookFrom = -1;
+        if (from == 4 || from == 60) {
+            if (to == (from + 2)) {
+                rookTo = from + 1;
+                rookFrom = from + 3;
+            } else if (to == (from - 2)) {
+                rookTo = from - 2;
+                rookFrom = from - 4;
+            } else {
+                throw new IllegalSpecialPositionException("Castling is allowed, but method was " +
+                        "called with invalid positions.\nFrom: " + from + "\nTo: " + to);
+            }
+            setPiece(to, getPiece(from));
+            setPiece(from, new Piece());
+            setPiece(rookTo, getPiece(rookFrom));
+            setPiece(rookFrom, new Piece());
+        }
+    }
+    /**
+     * Perform en passant move
+     * @param from
+     * @param to
+     */
+    private void doEnPassant(int from, int to) throws IllegalSpecialPositionException {
+        int pawn = -1;
+        if (to == from + 9 || to == from + 7) {
+            pawn = to - 8;
+        } else if (to == from - 9 || to == from - 7) {
+            pawn = to + 8;
+        } else {
+            throw new IllegalSpecialPositionException("En passant is allowed, but method was " +
+                    "called with invalid positions.\nFrom: " + from + "\nTo: " + to);
+        }
+        setPiece(to, getPiece(from));
+        setPiece(from, new Piece());
+        setPiece(to - 8, new Piece());
     }
 
     /**

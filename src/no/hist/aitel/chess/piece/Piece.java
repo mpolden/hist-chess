@@ -85,10 +85,7 @@ public class Piece {
      * @return True if piece is empty and false otherwise
      */
     public boolean isEmpty() {
-        if (type == UNDEFINED && color == UNDEFINED && id == UNDEFINED) {
-            return true;
-        }
-        return false;
+        return (type == UNDEFINED && color == UNDEFINED && id == UNDEFINED);
     }
 
     /**

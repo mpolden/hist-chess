@@ -43,7 +43,7 @@ public class BoardInit {
     }
 
     /**
-     * Get the id for an initial position
+     * Get the id for a piece
      * @return The id
      */
     private int getInitId() {
