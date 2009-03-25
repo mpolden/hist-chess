@@ -53,8 +53,9 @@ public class SpecialPosition extends Position {
                 } else if (to == 2 && isEmptyRange(1, 3)) {
                     rookFrom = 0;
                 } else {
-                    throw new IllegalPositionException("Can't perform castling because fields" +
-                            " between king and rook aren't empty");
+//                    throw new IllegalPositionException("Can't perform castling because fields" +
+//                            " between king and rook aren't empty");
+                    return false;
                 }
                 Piece rook;
                 if (rookFrom == 0 || rookFrom == 7) {
@@ -71,8 +72,9 @@ public class SpecialPosition extends Position {
                 } else if (to == 58 && isEmptyRange(57, 59)) {
                     rookFrom = 56;
                 } else {
-                    throw new IllegalPositionException("Can't perform castling because fields" +
-                            " between king and rook aren't empty");
+//                    throw new IllegalPositionException("Can't perform castling because fields" +
+//                            " between king and rook aren't empty");
+                    return false;
                 }
                 Piece rook;
                 if (rookFrom == 56 || rookFrom == 63) {
