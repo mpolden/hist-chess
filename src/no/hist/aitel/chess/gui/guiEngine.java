@@ -26,6 +26,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import no.hist.aitel.chess.board.Board;
 import static no.hist.aitel.chess.gui.guiConstants.*;
+import static no.hist.aitel.chess.piece.PieceConstants.*;
 
 public class guiEngine extends JFrame implements MouseListener, MouseMotionListener {
 
@@ -306,8 +307,11 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
             try {
                 capturedPiece = board.getPiece(toPos).getId();
                 System.out.println(capturedPiece);
-                board.movePiece(fromPos, toPos);                
-                checkCastling();
+                System.out.println(board.getPiece(fromPos).getType());                
+                board.movePiece(fromPos, toPos);
+                if(board.getPiece(toPos).getType() == KING) {
+                    checkCastling();
+                }
                 setCapturedPos(board.getPiece(toPos).getId());
                 changePosition();
             } catch (IllegalArgumentException exception) { // IllegalArgumentException = alle våre exceptions

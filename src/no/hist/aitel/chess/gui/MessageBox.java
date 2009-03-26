@@ -35,7 +35,7 @@ public class MessageBox {
 	 + "\n> Spillernavn1(Hvit) Spillenavn2(Svart)"
 	 + "\n> MESSAGE"
 	 + "\n> HVIT VANT"
-	 + "\n> TEST"
+	 + "\n> TEST2"
 	 + "\n> TEST"
 	 + "\n> TEST"
 	 + "\n> TEST"
