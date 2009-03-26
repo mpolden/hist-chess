@@ -63,6 +63,7 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
     private JPanel westPanel;
     private JPanel eastPanel;
     private JTextArea textArea;
+    private JTextArea miniMap;
     private int capturedPos = -1;
     private JLabel stopWatchP1 = new JLabel("", JLabel.LEFT);
     private JLabel stopWatchP2 = new JLabel("", JLabel.LEFT);
@@ -71,8 +72,7 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
     private int timeUsedP1 = zero;
     private int timeUsedP2 = zero;
     private Font player = new Font("VERDANA", Font.BOLD, 20);
-    private Font timer = new Font("VERDANA", Font.ITALIC, 14);
-    private TekstVindu etVindu = new TekstVindu("test");
+    private Font timer = new Font("VERDANA", Font.ITALIC, 14);  
 
     private int getCapturedPos() {
         return capturedPos;
@@ -116,17 +116,19 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
         player1Label.setFont(player);
         player2Label.setFont(player);
 
-        textArea = new JTextArea(20, 20);
-        JScrollPane scrollPane = new JScrollPane(textArea);
+        textArea = new JTextArea(10, 20);
+        miniMap = new JTextArea(10, 20);
         textArea.setEditable(false);
+        miniMap.setEditable(false);
+        textArea.setBorder(BorderFactory.createLineBorder( Color.black));
+        miniMap.setBorder(BorderFactory.createLineBorder( Color.black));
+        new JScrollPane(textArea);
 
         stopWatchP1.setFont(timer);
         stopWatchP1.setBorder(BorderFactory.createEmptyBorder());
 
         stopWatchP2.setFont(timer);
-        stopWatchP2.setBorder(BorderFactory.createEmptyBorder());
-
-        westPanel.add(boardGui, BorderLayout.CENTER);
+        stopWatchP2.setBorder(BorderFactory.createEmptyBorder());        
         //westPanel.setBackground(new Color(0x97694F));
         
         southPanel.add(player1Label, BorderLayout.SOUTH);
@@ -137,8 +139,12 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
         northPanel.add(stopWatchP2, BorderLayout.SOUTH);
         northPanel.setBackground(new Color(0xFF2400));
 
-        eastPanel.setBackground(new Color(0x97694F));
-        eastPanel.add(scrollPane, BorderLayout.CENTER);
+        westPanel.add(boardGui, BorderLayout.WEST);
+
+        //eastPanel.setBackground(new Color(0x97694F));
+        eastPanel.add(textArea, BorderLayout.WEST);
+        eastPanel.add(miniMap, BorderLayout.SOUTH);
+
         add(eastPanel, BorderLayout.EAST);
         add(westPanel, BorderLayout.WEST);
         add(southPanel, BorderLayout.SOUTH);
@@ -157,6 +163,7 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
                 }
             }
         };
+        stopWatchP1.setText("   " + timeUsedP1 + " sec");
         
 
         player2timer = new Runnable () {
@@ -172,9 +179,10 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
                 }
             }
         };
-       
+        stopWatchP2.setText("   " + timeUsedP2 + " sec");
         pack();
     }
+
     
     public void setBoardObj(Board board) {
         this.board = board;
@@ -401,7 +409,7 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
             }
             this.repaint();
             System.out.println(board.toString());
-            
+            miniMap.setText(board.toString());
         }
     }
 
@@ -446,7 +454,7 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
         private drawPos startPos = new drawPos();
         private int[] x_coords = startPos.getXcoords();
         private int[] y_coords = startPos.getYcoords();
-        private int xSize = 800;
+        private int xSize = 600;
         private int ySize = 680;
 
         public Chessboard() {
