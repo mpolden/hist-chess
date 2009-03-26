@@ -53,15 +53,15 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
     private int y;
     private int fromPos;
     private int toPos;
-    private boolean timerCheck = true;
-    //private int yIn;
+    private boolean timerCheck = true;    
     private String player1 = null;
     private String player2 = null;
     private JLabel player1Label;
     private JLabel player2Label;
     private JPanel southPanel;
     private JPanel northPanel;
-    private JPanel centerPanel;
+    private JPanel westPanel;
+    private JPanel eastPanel;
     private int capturedPos = -1;
     private JLabel stopWatchP1 = new JLabel("", JLabel.LEFT);
     private JLabel stopWatchP2 = new JLabel("", JLabel.LEFT);
@@ -71,6 +71,7 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
     private int timeUsedP2 = zero;
     private Font player = new Font("VERDANA", Font.BOLD, 20);
     private Font timer = new Font("VERDANA", Font.ITALIC, 14);
+    private TekstVindu etVindu = new TekstVindu("test");
 
     private int getCapturedPos() {
         return capturedPos;
@@ -104,7 +105,8 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
 
         southPanel = new JPanel(new BorderLayout());
         northPanel = new JPanel(new BorderLayout());
-        centerPanel = new JPanel(new BorderLayout());
+        westPanel = new JPanel(new BorderLayout());
+        eastPanel = new JPanel(new BorderLayout());
 
 
         player1Label = new JLabel(player1, JLabel.LEFT);
@@ -122,8 +124,8 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
         stopWatchP2.setFont(timer);
         stopWatchP2.setBorder(BorderFactory.createEmptyBorder());
 
-        centerPanel.add(boardGui, BorderLayout.CENTER);
-        //centerPanel.setBackground(new Color(0x97694F));
+        westPanel.add(boardGui, BorderLayout.CENTER);
+        //westPanel.setBackground(new Color(0x97694F));
         
         southPanel.add(player1Label, BorderLayout.SOUTH);
         southPanel.add(stopWatchP1, BorderLayout.NORTH);
@@ -132,7 +134,10 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
         northPanel.add(player2Label, BorderLayout.NORTH);
         northPanel.add(stopWatchP2, BorderLayout.SOUTH);
         northPanel.setBackground(new Color(0xFF2400));
-        add(centerPanel, BorderLayout.CENTER);
+
+        eastPanel.setBackground(new Color(0x97694F));
+        add(eastPanel, BorderLayout.EAST);
+        add(westPanel, BorderLayout.WEST);
         add(southPanel, BorderLayout.SOUTH);
         add(northPanel, BorderLayout.NORTH);
 

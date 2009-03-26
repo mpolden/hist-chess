@@ -21,15 +21,9 @@ import javax.swing.JTextArea;
  *
  * @author Neerow
  */
-public class MessageBox {
-	 public static void main(String[]args){
-		 TekstVindu etVindu = new TekstVindu("Chess Team 9");
-		 etVindu.setVisible(true);
-	 }
 
-}
 
- class TekstVindu extends JFrame{
+ public class TekstVindu extends JFrame{
 	 private static final String standardtekst =
 	 "> Velkommen til Chess av Team 9"
 	 + "\n> Spillernavn1(Hvit) Spillenavn2(Svart)"
