@@ -29,6 +29,8 @@ import static no.hist.aitel.chess.gui.guiConstants.*;
 
 public class guiEngine extends JFrame implements MouseListener, MouseMotionListener {
 
+    private String hei;
+
     private boolean canDrag = true;
     private Chessboard boardGui = new Chessboard();
     private Board board = new Board();
