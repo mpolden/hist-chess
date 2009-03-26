@@ -5,6 +5,7 @@
 
 package no.hist.aitel.chess.position;
 
+import java.io.Serializable;
 import no.hist.aitel.chess.board.Board;
 import no.hist.aitel.chess.piece.IllegalTypeException;
 import no.hist.aitel.chess.piece.Piece;
@@ -15,7 +16,7 @@ import static no.hist.aitel.chess.piece.PieceConstants.*;
  * @author martin
  */
 
-public class Position {
+public class Position implements Serializable {
     /**
      * Board object to validate positions on
      */
