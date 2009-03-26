@@ -93,8 +93,17 @@ public class Main implements ActionListener, ItemListener {
 
         menu.add(submenu);
 
-        return menuBar;
+        menu.addSeparator();
+        menuItem = new JMenuItem("Exit");
+        menuItem.addActionListener(this);
+        menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Q, ActionEvent.CTRL_MASK));
+        menuItem.getAccessibleContext().setAccessibleDescription("Test");
+        menu.add(menuItem);
 
+        menu.add(menuItem);
+        
+        return menuBar;
+        
     }    
 
     protected String getClassName(Object o) {
@@ -112,9 +121,11 @@ public class Main implements ActionListener, ItemListener {
                 + " (an instance of " + getClassName(source) + ")";
         System.out.println(s);
         if(e.getActionCommand().equals("Save game")) {
-            saveAndLoad.saveIntArray("./src/no/hist/aitel/chess/resources/x_coords.txt", mainWindow.getChessboard().getXcoords());
-            saveAndLoad.saveIntArray("./src/no/hist/aitel/chess/resources/y_coords.txt", mainWindow.getChessboard().getYcoords());
-            saveAndLoad.saveBoard("./src/no/hist/aitel/chess/resources/internal.txt", mainWindow.getBoardObj());
+             if (JOptionPane.YES_OPTION == JOptionPane.showConfirmDialog(null, "Are you sure you want to save the game?\nPrevious saved game will be lost.")) {
+                 saveAndLoad.saveIntArray("./src/no/hist/aitel/chess/resources/x_coords.txt", mainWindow.getChessboard().getXcoords());
+                 saveAndLoad.saveIntArray("./src/no/hist/aitel/chess/resources/y_coords.txt", mainWindow.getChessboard().getYcoords());
+                 saveAndLoad.saveBoard("./src/no/hist/aitel/chess/resources/internal.txt", mainWindow.getBoardObj());
+             }
         }
         else if(e.getActionCommand().equals("Load game")) {
             if (JOptionPane.YES_OPTION == JOptionPane.showConfirmDialog(null, "Are you sure you want to load game?\nUnsaved progress will be lost.")) {
@@ -154,6 +165,11 @@ public class Main implements ActionListener, ItemListener {
                 } catch (ClassNotFoundException ex) {
                     Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
                 }
+            }
+        }
+        else if(e.getActionCommand().equals("Exit")) {
+            if (JOptionPane.YES_OPTION == JOptionPane.showConfirmDialog(null, "Are you sure you want to exit the game?\nUnsaved progress will be lost.")) {
+               System.exit(0);
             }
         }
     }
