@@ -168,7 +168,7 @@ public class drawPos extends JPanel {
             File file_princes_leia = new File("./src/no/hist/aitel/chess/resources/princes_leia.gif");
             File file_rebel_guard = new File("./src/no/hist/aitel/chess/resources/rebel_guard.gif");
             File file_royal_guard = new File("./src/no/hist/aitel/chess/resources/royal_guard.gif");
-            File file_storm_trooper = new File("./src/no/hist/aitel/chess/resources/storm_tropper.gif");
+            File file_storm_trooper = new File("./src/no/hist/aitel/chess/resources/storm_trooper.gif");
             File file_yoda = new File("./src/no/hist/aitel/chess/resources/yoda.gif");
 
             pawnb = ImageIO.read(file_pawnb);
@@ -195,7 +195,7 @@ public class drawPos extends JPanel {
             sw_rookb = ImageIO.read(file_royal_guard);
             sw_rookw = ImageIO.read(file_chewbaca);
             sw_bishopb = ImageIO.read(file_darth_maul);
-            sw_bishopw = ImageIO.read(file_darth_maul);
+            sw_bishopw = ImageIO.read(file_obi_wan_kenobi);
 
 
 
