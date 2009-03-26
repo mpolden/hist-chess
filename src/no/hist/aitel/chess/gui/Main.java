@@ -114,7 +114,7 @@ public class Main implements ActionListener, ItemListener {
         if(e.getActionCommand().equals("Save game")) {
             saveAndLoad.saveIntArray("./src/no/hist/aitel/chess/resources/x_coords.txt", mainWindow.getChessboard().getXcoords());
             saveAndLoad.saveIntArray("./src/no/hist/aitel/chess/resources/y_coords.txt", mainWindow.getChessboard().getYcoords());
-            saveAndLoad.saveBoard("./src/no/hist/aitel/chess/resources/game_internal.txt", mainWindow.getBoardObj());
+            saveAndLoad.saveBoard("./src/no/hist/aitel/chess/resources/internal.txt", mainWindow.getBoardObj());
         }
         else if(e.getActionCommand().equals("Load game")) {
             if (JOptionPane.YES_OPTION == JOptionPane.showConfirmDialog(null, "Are you sure you want to load game?\nUnsaved progress will be lost.")) {
