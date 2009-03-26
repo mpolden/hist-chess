@@ -195,7 +195,7 @@ public class drawPos extends JPanel {
             sw_rookb = ImageIO.read(file_royal_guard);
             sw_rookw = ImageIO.read(file_chewbaca);
             sw_bishopb = ImageIO.read(file_darth_maul);
-            sw_bishopw = ImageIO.read(file_obi_wan_kenobi);
+            sw_bishopw = ImageIO.read(file_darth_maul);
 
 
 
