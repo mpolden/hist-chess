@@ -148,6 +148,7 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
         northPanel.setBackground(new Color(0xFF2400));
 
         boardGui.setBackground(new Color(0xD8D8BF));
+        boardGui.setBorder(BorderFactory.createLineBorder( Color.black));
         westPanel.add(boardGui, BorderLayout.WEST);
         
 
@@ -264,10 +265,10 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
             y_coords[movingPiece] = y - dragFromY;
 
             x_coords[movingPiece] = Math.max(x_coords[movingPiece], zero);
-            x_coords[movingPiece] = Math.min(x_coords[movingPiece], getWidth() - 400);
+            x_coords[movingPiece] = Math.min(x_coords[movingPiece], getWidth() - 360);
 
             y_coords[movingPiece] = Math.max(y_coords[movingPiece], 50);
-            y_coords[movingPiece] = Math.min(y_coords[movingPiece], getWidth() - 340);
+            y_coords[movingPiece] = Math.min(y_coords[movingPiece], getWidth() - 310);
 
 
         }
@@ -367,7 +368,7 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
                 if (capturedPiece == 61) {
                     capturedPiece = 5;
                     try {
-                        x_coords[capturedPiece] = capturedBlackPieces * width;
+                        x_coords[capturedPiece] = capturedBlackPieces * width/2;
                         y_coords[capturedPiece] = height * 9;
                         capturedBlackPieces++;
                         setCapturedPos(-1);
@@ -376,7 +377,7 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
                 } else if (capturedPiece == 5) {
                     capturedPiece = 61;
                     try {
-                        x_coords[capturedPiece] = capturedWhitePieces * width;
+                        x_coords[capturedPiece] = capturedWhitePieces * width/2;
                         y_coords[capturedPiece] = zero;
                         capturedWhitePieces++;
                         setCapturedPos(-1);
@@ -385,7 +386,7 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
                 } else if (capturedPiece == 58) {
                     capturedPiece = 2;
                     try {
-                        x_coords[capturedPiece] = capturedBlackPieces * width;
+                        x_coords[capturedPiece] = capturedBlackPieces * width/2;
                         y_coords[capturedPiece] = height * 9;
                         capturedBlackPieces++;
                         setCapturedPos(-1);
@@ -394,7 +395,7 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
                 } else if (capturedPiece == 2) {
                     capturedPiece = 58;
                     try {
-                        x_coords[capturedPiece] = capturedWhitePieces * width;
+                        x_coords[capturedPiece] = capturedWhitePieces * width/2;
                         y_coords[capturedPiece] = zero;
                         capturedWhitePieces++;
                         setCapturedPos(-1);
@@ -402,7 +403,7 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
                     }
                 } else if (capturedPiece >= 48) {
                     try {
-                        x_coords[capturedPiece] = capturedBlackPieces * width;
+                        x_coords[capturedPiece] = capturedBlackPieces * width/2;
                         y_coords[capturedPiece] = height * 9;
                         capturedBlackPieces++;
                         setCapturedPos(-1);
@@ -411,7 +412,7 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
 
                 } else if (capturedPiece <= 15) {
                     try {
-                        x_coords[capturedPiece] = capturedWhitePieces * width;
+                        x_coords[capturedPiece] = capturedWhitePieces * width/2;
                         y_coords[capturedPiece] = zero;
                         capturedWhitePieces++;
                         setCapturedPos(-1);
@@ -466,7 +467,7 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
         private drawPos startPos = new drawPos();
         private int[] x_coords = startPos.getXcoords();
         private int[] y_coords = startPos.getYcoords();
-        private int xSize = 480;
+        private int xSize = 480+5;
         private int ySize = 480+yIn;
 
         public Chessboard() {
