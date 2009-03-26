@@ -247,7 +247,11 @@ public class Position {
                         return direction;
                     }
                 }
-                return -1; // Piece is moving one field to the left or right (1 % (n!=1) != 0)
+                if (diff == -1 || diff == 1) {
+                    return -1; // Piece is moving one field to the left or right (1 % (n!=1) != 0)
+                } else {
+                    return -2;
+                }
             }
             default: {
                 throw new IllegalTypeException("getDirection() was called with an invalid type: "
@@ -289,12 +293,12 @@ public class Position {
                 return new int[] {6, 10, 15, 17};
             }
             case ROOK: {
-                return new int[] {8}; // Not including 1 as n % 1 == 0 and that causes an invalid
+                return new int[] {8, 1}; // Not including 1 as n % 1 == 0 and that causes an invalid
                                       // warning to be displayed
             }
             case QUEEN:
             case KING: {
-                return new int[] {7, 8, 9}; // Not including 1 as n % 1 == 0 and that causes an
+                return new int[] {7, 8, 9, 1}; // Not including 1 as n % 1 == 0 and that causes an
                                             // invalid warning to be displayed
             }
             default: {
@@ -309,9 +313,9 @@ public class Position {
      * @param direction
      * @return True if the path is clear and false otherwise
      */
-    private boolean isValidPath(int direction) {
-        if (direction == -1 && !isEmptyRange(from, to)) { // Happens when a pieces moves to the left or right,
-            return false;
+    private boolean isValidPath(int direction) {       
+        if (direction == -1) { // Happens when a pieces moves to the left or right,
+            return true;
         }
         if (to < from) { // Black moves in a negative direction
             for (int position = from - direction; position > to; position -= direction) {
