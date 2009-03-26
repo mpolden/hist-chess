@@ -32,6 +32,19 @@ public class drawPos extends JPanel {
     private BufferedImage rookw;
     private BufferedImage bishopb;
     private BufferedImage bishopw;
+
+    private BufferedImage sw_pawnb;
+    private BufferedImage sw_pawnw;
+    private BufferedImage sw_kingb;
+    private BufferedImage sw_kingw;
+    private BufferedImage sw_queenb;
+    private BufferedImage sw_queenw;
+    private BufferedImage sw_knightb;
+    private BufferedImage sw_knightw;
+    private BufferedImage sw_rookb;
+    private BufferedImage sw_rookw;
+    private BufferedImage sw_bishopb;
+    private BufferedImage sw_bishopw;
     
 
 
@@ -53,6 +66,11 @@ public class drawPos extends JPanel {
     }
     public int[] getYcoords() {
         return y_coords;
+    }
+
+    public void setSW() {
+        kingb = sw_kingb;
+        this.repaint();
     }
         
     int j=0;
@@ -140,6 +158,7 @@ public class drawPos extends JPanel {
             File file_rookw = new File("./src/no/hist/aitel/chess/resources/rookw.gif");
             File file_bishopb = new File("./src/no/hist/aitel/chess/resources/bishopb.gif");
             File file_bishopw = new File("./src/no/hist/aitel/chess/resources/bishopw.gif");
+            File file_darth_vader = new File("./src/no/hist/aitel/chess/resources/darth_vader.gif");
             pawnb = ImageIO.read(file_pawnb);
             pawnw = ImageIO.read(file_pawnw);
             kingb = ImageIO.read(file_kingb);
@@ -151,7 +170,9 @@ public class drawPos extends JPanel {
             rookb = ImageIO.read(file_rookb);
             rookw = ImageIO.read(file_rookw);
             bishopb = ImageIO.read(file_bishopb);
-            bishopw = ImageIO.read(file_bishopw);           
+            bishopw = ImageIO.read(file_bishopw);
+            sw_kingb = ImageIO.read(file_darth_vader);
+
         }
 
         catch (IOException e) {

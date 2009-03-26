@@ -61,19 +61,19 @@ public class Main implements ActionListener, ItemListener {
         menuItem.getAccessibleContext().setAccessibleDescription("Test");
         menu.add(menuItem);
 
-        //menu.addSeparator();
+        menu.addSeparator();
         submenu2.setMnemonic(KeyEvent.VK_S);
-        menuItem = new JMenuItem("1024 x 768");
+        menuItem = new JMenuItem("Classic Chess");
         menuItem.addActionListener(this);
         menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_3, ActionEvent.ALT_MASK));
-        //submenu2.add(menuItem);
+        submenu2.add(menuItem);
 
-        menuItem = new JMenuItem("800 x 600");
+        menuItem = new JMenuItem("Star Wars Chess");
         menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_4, ActionEvent.ALT_MASK));
         menuItem.addActionListener(this);
-        //submenu2.add(menuItem);
+        submenu2.add(menuItem);
 
-        //menu.add(submenu2);
+        menu.add(submenu2);
 
         menu.addSeparator();
         submenu.setMnemonic(KeyEvent.VK_S);
@@ -118,13 +118,11 @@ public class Main implements ActionListener, ItemListener {
                 mainWindow.setP2name(newP2name);
             }
         }
-        else if(e.getActionCommand().equals("1024 x 768")) {            
-            System.out.println(frame.getSize());
-            frame.setSize(1024, 768);
+        else if(e.getActionCommand().equals("Classic Chess")) {
+            
         }
-        else if(e.getActionCommand().equals("800 x 600")) {
-            System.out.println(frame.getSize());
-            frame.setSize(800, 600);
+        else if(e.getActionCommand().equals("Star Wars Chess")) {
+            
         }
         else if(e.getActionCommand().equals("New game")) {
             if (JOptionPane.YES_OPTION == JOptionPane.showConfirmDialog(null, "Are you sure you want to create a new game?\nUnsaved progress will be lost.")) {

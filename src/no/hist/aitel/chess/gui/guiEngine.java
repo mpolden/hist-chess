@@ -417,7 +417,7 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
             chessBoard = new drawBoard();
             chessBoard.setLayout(new GridLayout(8, 8));
             chessBoard.setPreferredSize(boardSize);
-            startPos.initStartCoords();
+            startPos.initStartCoords();            
             startPos.setBounds(5, 0, boardSize.width, boardSize.height);
             chessBoard.setBounds(5, 0, boardSize.width, boardSize.height);
             chessBoard.setOpaque(true);
