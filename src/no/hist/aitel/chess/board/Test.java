@@ -26,15 +26,14 @@ public class Test {
 //        b.movePiece(55, 47);
 //        b.movePiece(19, 46);
 //        b.movePiece(53, 45);
+
         b.movePiece(8, 24);
         b.movePiece(48, 40);
         b.movePiece(1, 16);
         b.movePiece(49, 41);
-        b.movePiece(0, 1);
-
+        b.movePiece(0, 35);
 
         System.out.println(b.toString());
-//        System.out.println(getRank(63));
 
         // 56  57  58  59  60  61  62  63
         // 48  49  50  51  52  53  54  55

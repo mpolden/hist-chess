@@ -93,7 +93,9 @@ public class Board implements Serializable {
         }
 
         // Check if we're in check
-//        if (p.inCheck() && getPiece(from).getType() != KING) { need to move king; }
+        if (inCheck(turn) && getPiece(from).getType() != KING) {
+            throw new BoardException("You're in check, you need to move your king.");
+        }
 
         // Set our positions
         p.setPositions(from, to);
@@ -113,7 +115,6 @@ public class Board implements Serializable {
 
         // Check if any color is in check
         setInCheck();
-        System.out.println("blackInCheck: " + blackInCheck + "\nwhiteInCheck: " + whiteInCheck);
 
         // Switch turn
         switchTurn();
@@ -186,30 +187,7 @@ public class Board implements Serializable {
     /**
      * Check if a color is in check
      */
-    public void verifyInCheck(int from) {
-        for (int position = 0; position < board.length; position++) {
-            if (turn == WHITE) {
-//                for (int i = 0; i < board.length; i++)
-                try {
-                    p.setPositions(from, getKing(BLACK));
-                    p.verifyPositions();
-                    blackInCheck = true;
-                } catch (IllegalPositionException e) {
-                    blackInCheck = false;
-                }
-            } else if (turn == BLACK) {
-                try {
-                    p.setPositions(from, getKing(WHITE));
-                    p.verifyPositions();
-                    whiteInCheck = true;
-                } catch (IllegalPositionException e) {
-                    whiteInCheck = false;
-                }
-            }
-        }
-    }
-
-    public void setInCheck() {
+    private void setInCheck() {
         for (int position = 0; position < board.length; position++) {
             if (getPiece(position).getColor() == WHITE) {
                 try {
@@ -231,6 +209,24 @@ public class Board implements Serializable {
         }
     }
 
+    /**
+     * Check if a color is in check
+     * @param color
+     */
+    private boolean inCheck(int color) {
+        if (color == WHITE) {
+            return whiteInCheck;
+        } else if (color == BLACK) {
+            return blackInCheck;
+        }
+        return false;
+    }
+
+    /**
+     * Get the position of a king
+     * @param color
+     * @return The position
+     */
     private int getKing(int color) {
         for (int position = 0; position < board.length; position++) {
             if (getPiece(position).getColor() == color && getPiece(position).getType() == KING) {

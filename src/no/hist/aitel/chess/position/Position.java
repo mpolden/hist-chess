@@ -300,7 +300,6 @@ public class Position implements Serializable {
      * @return True if the path is clear and false otherwise
      */
     private boolean isValidPath(int direction) {
-        System.out.println(direction);
         // Could not find a vertical or horizontal direction, but rank is still different
         if (direction == -1 && getRank(from) != getRank(to)) {
             return true;
@@ -313,7 +312,6 @@ public class Position implements Serializable {
             }
         } else { // White moves in a positive direction
             for (int position = from + direction; position < to; position += direction) {
-                System.out.println(position);
                 if (!board.getPiece(position).isEmpty()) {
                     return false;
                 }
