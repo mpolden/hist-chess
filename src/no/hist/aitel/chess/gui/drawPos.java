@@ -69,8 +69,7 @@ public class drawPos extends JPanel {
     }
 
     public void setSW() {
-        kingb = sw_kingb;
-        this.repaint();
+        kingb = sw_kingb;        
     }
         
     int j=0;
