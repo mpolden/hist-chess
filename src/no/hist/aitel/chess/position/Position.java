@@ -237,7 +237,9 @@ public class Position implements Serializable {
     private int getDirection(int type) {
         int[] directions = getDirections(type);
         for (int direction : directions) {
-            if (diff % direction == 0) {
+            if (direction == 1) {
+                return 1;
+            } else if (diff % direction == 0) {
                 return direction;
             }
         }
@@ -277,12 +279,12 @@ public class Position implements Serializable {
                 return new int[] {6, 10, 15, 17};
             }
             case ROOK: {
-                return new int[] {8}; // Not including 1 as n % 1 == 0 and that causes an invalid
+                return new int[] {8, 1}; // Not including 1 as n % 1 == 0 and that causes an invalid
                                       // warning to be displayed
             }
             case QUEEN:
             case KING: {
-                return new int[] {7, 8, 9}; // Not including 1 as n % 1 == 0 and that causes an
+                return new int[] {7, 8, 9, 1}; // Not including 1 as n % 1 == 0 and that causes an
                                             // invalid warning to be displayed
             }
             default: {
@@ -298,6 +300,7 @@ public class Position implements Serializable {
      * @return True if the path is clear and false otherwise
      */
     private boolean isValidPath(int direction) {
+        System.out.println(direction);
         // Could not find a vertical or horizontal direction, but rank is still different
         if (direction == -1 && getRank(from) != getRank(to)) {
             return true;
@@ -310,6 +313,7 @@ public class Position implements Serializable {
             }
         } else { // White moves in a positive direction
             for (int position = from + direction; position < to; position += direction) {
+                System.out.println(position);
                 if (!board.getPiece(position).isEmpty()) {
                     return false;
                 }

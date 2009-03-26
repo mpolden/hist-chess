@@ -18,16 +18,19 @@ public class Test {
     public static void main(String[] args) {
         Board b  = new Board();
 
-        b.movePiece(11, 27);
+//        b.movePiece(11, 27);
+//        b.movePiece(48, 40);
+//        b.movePiece(3, 19);
+//        b.movePiece(49, 41);
+//        b.movePiece(14, 22);
+//        b.movePiece(55, 47);
+//        b.movePiece(19, 46);
+//        b.movePiece(53, 45);
+        b.movePiece(8, 24);
         b.movePiece(48, 40);
-        b.movePiece(3, 19);
+        b.movePiece(1, 16);
         b.movePiece(49, 41);
-//        b.movePiece(19, 35);
-        b.movePiece(14, 22);
-        b.movePiece(55, 47);
-        b.movePiece(19, 46);
-        b.movePiece(53, 45);
-//        b.movePiece(37, 46);
+        b.movePiece(0, 1);
 
 
         System.out.println(b.toString());
