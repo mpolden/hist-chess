@@ -24,6 +24,8 @@ import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 import no.hist.aitel.chess.board.Board;
 import no.hist.aitel.chess.board.BoardException;
 import no.hist.aitel.chess.position.IllegalPositionException;
@@ -31,8 +33,6 @@ import static no.hist.aitel.chess.gui.guiConstants.*;
 import static no.hist.aitel.chess.piece.PieceConstants.*;
 
 public class guiEngine extends JFrame implements MouseListener, MouseMotionListener {
-
-    private String hei;
 
     private boolean canDrag = true;
     private Chessboard boardGui = new Chessboard();
@@ -62,6 +62,7 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
     private JPanel northPanel;
     private JPanel westPanel;
     private JPanel eastPanel;
+    private JTextArea textArea;
     private int capturedPos = -1;
     private JLabel stopWatchP1 = new JLabel("", JLabel.LEFT);
     private JLabel stopWatchP2 = new JLabel("", JLabel.LEFT);
@@ -113,10 +114,11 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
         player2Label = new JLabel(player2, JLabel.LEFT);
 
         player1Label.setFont(player);
-        //player1Label.setBorder(BorderFactory.createTitledBorder("Player White"));
-
         player2Label.setFont(player);
-        //player2Label.setBorder(BorderFactory.createTitledBorder("Player Black"));
+
+        textArea = new JTextArea(20, 20);
+        JScrollPane scrollPane = new JScrollPane(textArea);
+        textArea.setEditable(false);
 
         stopWatchP1.setFont(timer);
         stopWatchP1.setBorder(BorderFactory.createEmptyBorder());
@@ -136,11 +138,12 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
         northPanel.setBackground(new Color(0xFF2400));
 
         eastPanel.setBackground(new Color(0x97694F));
+        eastPanel.add(scrollPane, BorderLayout.CENTER);
         add(eastPanel, BorderLayout.EAST);
         add(westPanel, BorderLayout.WEST);
         add(southPanel, BorderLayout.SOUTH);
         add(northPanel, BorderLayout.NORTH);
-
+        
         player1timer = new Runnable () {
             public void run () {                
                 while(timerCheck) {
