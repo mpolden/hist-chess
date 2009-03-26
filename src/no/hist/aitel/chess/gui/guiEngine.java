@@ -149,10 +149,8 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
 
         boardGui.setBackground(new Color(0xD8D8BF));
         boardGui.setBorder(BorderFactory.createLineBorder( Color.black));
-        westPanel.add(boardGui, BorderLayout.WEST);
         
-
-        
+        westPanel.add(boardGui, BorderLayout.WEST);       
         eastPanel.add(p1textArea, BorderLayout.NORTH);
         eastPanel.add(centerTextArea, BorderLayout.CENTER);
         eastPanel.add(p2textArea, BorderLayout.SOUTH);
