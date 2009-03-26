@@ -84,28 +84,28 @@ public class getRect {
     }
 
     public int getRectCoordY(int rectNumber) {
-        if(rectNumber == 0 || rectNumber == 1 || rectNumber == 2 || rectNumber == 3 || rectNumber == 4 || rectNumber == 5 || rectNumber == 6 || rectNumber == 7) {
+        if(rectNumber >= 0 && rectNumber <= 7) {
             rectCoordY = (height*8);
         }
-        else if(rectNumber == 8 || rectNumber == 9 || rectNumber == 10 || rectNumber == 11 || rectNumber == 12 || rectNumber == 13 || rectNumber == 14 || rectNumber == 15) {
+        else if(rectNumber >= 8 && rectNumber <= 15) {
             rectCoordY = (height*7);
         }
-        else if(rectNumber == 16 || rectNumber == 17 || rectNumber == 18 || rectNumber == 19 || rectNumber == 20 || rectNumber == 21 || rectNumber == 22 || rectNumber == 23) {
+        else if(rectNumber >= 16 && rectNumber <= 23) {
             rectCoordY = (height*6);
         }
-        else if(rectNumber == 24 || rectNumber == 25 || rectNumber == 26 || rectNumber == 27 || rectNumber == 28 || rectNumber == 29 || rectNumber == 30 || rectNumber == 31) {
+        else if(rectNumber >= 24 && rectNumber <= 31) {
             rectCoordY = (height*5);
         }
-        else if(rectNumber == 32 || rectNumber == 33 || rectNumber == 34 || rectNumber == 35 || rectNumber == 36 || rectNumber == 37 || rectNumber == 38 || rectNumber == 39) {
+        else if(rectNumber >= 32 && rectNumber <= 39) {
             rectCoordY = (height*4);
         }
-        else if(rectNumber == 40 || rectNumber == 41 || rectNumber == 42 || rectNumber == 43 || rectNumber == 44 || rectNumber == 45 || rectNumber == 46 || rectNumber == 47) {
+        else if(rectNumber >= 40 && rectNumber <= 47) {
             rectCoordY = (height*3);
         }
-        else if(rectNumber == 48 || rectNumber == 49 || rectNumber == 50 || rectNumber == 51 || rectNumber == 52 || rectNumber == 53 || rectNumber == 54 || rectNumber == 55) {
+        else if(rectNumber >= 48 && rectNumber <= 55) {
             rectCoordY = (height*2);
         }
-        else if(rectNumber == 56 || rectNumber == 57 || rectNumber == 58 || rectNumber == 59 || rectNumber == 60 || rectNumber == 61 || rectNumber == 62 || rectNumber == 63) {
+        else if(rectNumber >= 56 && rectNumber <= 63) {
             rectCoordY = (height*1);
         }
         return rectCoordY;
