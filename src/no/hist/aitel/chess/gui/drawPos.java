@@ -163,13 +163,13 @@ public class drawPos extends JPanel {
             File file_emperor = new File("./src/no/hist/aitel/chess/resources/emperor.gif");
             File file_c3po = new File("./src/no/hist/aitel/chess/resources/c3po.gif");
             File file_boba_fett = new File("./src/no/hist/aitel/chess/resources/boba_fett.gif");
-            File file_lando_calrissian = new File("./src/no/hist/aitel/chess/resources/lando_calrissian.gif");
+            //File file_lando_calrissian = new File("./src/no/hist/aitel/chess/resources/lando_calrissian.gif");
             File file_obi_wan_kenobi = new File("./src/no/hist/aitel/chess/resources/obi_wan_kenobi.gif");
             File file_princes_leia = new File("./src/no/hist/aitel/chess/resources/princes_leia.gif");
             File file_rebel_guard = new File("./src/no/hist/aitel/chess/resources/rebel_guard.gif");
             File file_royal_guard = new File("./src/no/hist/aitel/chess/resources/royal_guard.gif");
             File file_storm_trooper = new File("./src/no/hist/aitel/chess/resources/storm_trooper.gif");
-            File file_yoda = new File("./src/no/hist/aitel/chess/resources/yoda.gif");
+            File file_yoda = new File("./src/no/hist/aitel/chess/resources/yoda_star_wars.gif");
 
             pawnb = ImageIO.read(file_pawnb);
             pawnw = ImageIO.read(file_pawnw);
