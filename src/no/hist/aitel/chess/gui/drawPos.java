@@ -158,6 +158,19 @@ public class drawPos extends JPanel {
             File file_bishopb = new File("./src/no/hist/aitel/chess/resources/bishopb.gif");
             File file_bishopw = new File("./src/no/hist/aitel/chess/resources/bishopw.gif");
             File file_darth_vader = new File("./src/no/hist/aitel/chess/resources/darth_vader.gif");
+            File file_chewbaca = new File("./src/no/hist/aitel/chess/resources/chewbaca.gif");
+            File file_darth_maul = new File("./src/no/hist/aitel/chess/resources/darth_maul.gif");
+            File file_emperor = new File("./src/no/hist/aitel/chess/resources/emperor.gif");
+            File file_c3po = new File("./src/no/hist/aitel/chess/resources/c3po.gif");
+            File file_boba_fett = new File("./src/no/hist/aitel/chess/resources/boba_fett.gif");
+            File file_lando_calrissian = new File("./src/no/hist/aitel/chess/resources/lando_calrissian.gif");
+            File file_obi_wan_kenobi = new File("./src/no/hist/aitel/chess/resources/obi_wan_kenobi.gif");
+            File file_princes_leia = new File("./src/no/hist/aitel/chess/resources/princes_leia.gif");
+            File file_rebel_guard = new File("./src/no/hist/aitel/chess/resources/rebel_guard.gif");
+            File file_royal_guard = new File("./src/no/hist/aitel/chess/resources/royal_guard.gif");
+            File file_storm_trooper = new File("./src/no/hist/aitel/chess/resources/storm_tropper.gif");
+            File file_yoda = new File("./src/no/hist/aitel/chess/resources/yoda.gif");
+
             pawnb = ImageIO.read(file_pawnb);
             pawnw = ImageIO.read(file_pawnw);
             kingb = ImageIO.read(file_kingb);
@@ -170,7 +183,21 @@ public class drawPos extends JPanel {
             rookw = ImageIO.read(file_rookw);
             bishopb = ImageIO.read(file_bishopb);
             bishopw = ImageIO.read(file_bishopw);
-            sw_kingb = ImageIO.read(file_darth_vader);
+
+            sw_pawnb = ImageIO.read(file_storm_trooper);
+            sw_pawnw = ImageIO.read(file_rebel_guard);
+            sw_kingb = ImageIO.read(file_emperor);
+            sw_kingw = ImageIO.read(file_yoda);
+            sw_queenb = ImageIO.read(file_darth_vader);
+            sw_queenw = ImageIO.read(file_princes_leia);
+            sw_knightb = ImageIO.read(file_boba_fett);
+            sw_knightw = ImageIO.read(file_c3po);
+            sw_rookb = ImageIO.read(file_royal_guard);
+            sw_rookw = ImageIO.read(file_chewbaca);
+            sw_bishopb = ImageIO.read(file_darth_maul);
+            sw_bishopw = ImageIO.read(file_obi_wan_kenobi);
+
+
 
         }
 
@@ -180,41 +207,41 @@ public class drawPos extends JPanel {
 
         //draw pawns        
         for(int i=8; i<16; i++) {
-            g.drawImage(pawnw, x_coords[i], y_coords[i], width, height, this);        
+            g.drawImage(sw_pawnw, x_coords[i], y_coords[i], width, height, this);
         }        
         for(int i=48; i<56; i++) {
-            g.drawImage(pawnb, x_coords[i], y_coords[i], width, height, this);
+            g.drawImage(sw_pawnb, x_coords[i], y_coords[i], width, height, this);
         }
         //draw kings
-        g.drawImage(kingb, x_coords[60], y_coords[60], width, height, this);
-        g.drawImage(kingw, x_coords[4], y_coords[4], width, height, this);        
+        g.drawImage(sw_kingb, x_coords[60], y_coords[60], width, height, this);
+        g.drawImage(sw_kingw, x_coords[4], y_coords[4], width, height, this);
         //draw queens
-        g.drawImage(queenb, x_coords[59], y_coords[59], width, height, this);        
-        g.drawImage(queenw, x_coords[3], y_coords[3], width, height, this);        
+        g.drawImage(sw_queenb, x_coords[59], y_coords[59], width, height, this);
+        g.drawImage(sw_queenw, x_coords[3], y_coords[3], width, height, this);
         //draw knights
         j=1;
         for(int i=0; i<2; i++) {            
-            g.drawImage(knightw, x_coords[j], y_coords[j], width, height, this);
+            g.drawImage(sw_knightw, x_coords[j], y_coords[j], width, height, this);
             j=6;
         }                
-        g.drawImage(knightb, x_coords[57], y_coords[57], width, height, this);        
-        g.drawImage(knightb, x_coords[62], y_coords[62], width, height, this);        
+        g.drawImage(sw_knightb, x_coords[57], y_coords[57], width, height, this);
+        g.drawImage(sw_knightb, x_coords[62], y_coords[62], width, height, this);
         //draw rooks
         j=0;
         for(int i=0; i<2; i++) {
-            g.drawImage(rookw, x_coords[j], y_coords[j], width, height, this);
+            g.drawImage(sw_rookw, x_coords[j], y_coords[j], width, height, this);
             j=7;
         }        
-        g.drawImage(rookb, x_coords[56], y_coords[56], width, height, this);
-        g.drawImage(rookb, x_coords[63], y_coords[63], width, height, this);
+        g.drawImage(sw_rookb, x_coords[56], y_coords[56], width, height, this);
+        g.drawImage(sw_rookb, x_coords[63], y_coords[63], width, height, this);
         //draw bishops
         j=2;
         for(int i=0; i<2; i++) {
-            g.drawImage(bishopb, x_coords[j], y_coords[j], width, height, this);           
+            g.drawImage(sw_bishopb, x_coords[j], y_coords[j], width, height, this);
             j=5;
         }        
-        g.drawImage(bishopw, x_coords[58], y_coords[58], width, height, this);       
-        g.drawImage(bishopw, x_coords[61], y_coords[61], width, height, this);        
+        g.drawImage(sw_bishopw, x_coords[58], y_coords[58], width, height, this);
+        g.drawImage(sw_bishopw, x_coords[61], y_coords[61], width, height, this);
     }
     public static void main(String[] args ){
         drawPos test = new drawPos();
