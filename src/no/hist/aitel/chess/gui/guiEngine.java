@@ -78,8 +78,15 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
     }
 
     public void setXcoords(int[] newCoords) {
-        x_coords = newCoords;
-        this.repaint();
+        for(int i=0; i<64; i++) {
+           x_coords[i] = newCoords[i];
+        }        
+    }
+
+    public void setYcoords(int[] newCoords) {
+        for(int i=0; i<64; i++) {
+           y_coords[i] = newCoords[i];
+        }
     }
 
     public guiEngine(String title) {
@@ -154,6 +161,10 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
         };
        
         pack();
+    }
+    
+    public Board getBoard() {
+        return board;
     }
 
     public Chessboard getChessboard() {

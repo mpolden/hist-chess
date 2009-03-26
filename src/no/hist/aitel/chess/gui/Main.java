@@ -30,7 +30,8 @@ import javax.swing.KeyStroke;
  */
 public class Main implements ActionListener, ItemListener {
     private static guiEngine mainWindow = new guiEngine("Chess");
-    private static JFrame frame = mainWindow; 
+    private static JFrame frame = mainWindow;
+    private saveAndLoad saveAndLoad = new saveAndLoad();
     
 
     private static void createAndShowGui() {
@@ -106,36 +107,7 @@ public class Main implements ActionListener, ItemListener {
         String classString = o.getClass().getName();
         int dotIndex = classString.lastIndexOf(".");
         return classString.substring(dotIndex+1);
-    }
-
-    private void saveArray(String filename, int[] output_veld) {
-        try {
-            FileOutputStream fos = new FileOutputStream(filename);
-            GZIPOutputStream gzos = new GZIPOutputStream(fos);
-            ObjectOutputStream out = new ObjectOutputStream(gzos);
-            out.writeObject(output_veld);
-            out.flush();
-            out.close();
-        }
-        catch (IOException e) {
-            System.out.println(e);
-        }
-    }
-    
-    private int[] loadArray(String filename) throws ClassNotFoundException {
-        try {
-            FileInputStream fis = new FileInputStream(filename);
-            GZIPInputStream gzis = new GZIPInputStream(fis);
-            ObjectInputStream in = new ObjectInputStream(gzis);
-            int[] gelezen_veld = (int[])in.readObject();
-            in.close();
-            return gelezen_veld;
-        }
-        catch (IOException e) {
-            System.out.println(e);
-        }
-        return null;
-    }
+    }   
 
 
     public void actionPerformed(ActionEvent e) {
@@ -146,11 +118,15 @@ public class Main implements ActionListener, ItemListener {
                 + " (an instance of " + getClassName(source) + ")";
         System.out.println(s);
         if(e.getActionCommand().equals("Save game")) {
-            saveArray("./src/no/hist/aitel/chess/resources/io.txt", mainWindow.getChessboard().getXcoords());
+            saveAndLoad.saveIntArray("./src/no/hist/aitel/chess/resources/x_coords.txt", mainWindow.getChessboard().getXcoords());
+            saveAndLoad.saveIntArray("./src/no/hist/aitel/chess/resources/y_coords.txt", mainWindow.getChessboard().getYcoords());
+            saveAndLoad.savePieceArray("./src/no/hist/aitel/chess/resources/internal.txt", mainWindow.getBoard().getBoard());
         }
         else if(e.getActionCommand().equals("Load game")) {
             try {
-                mainWindow.setXcoords(loadArray("./src/no/hist/aitel/chess/resources/io.txt"));
+                mainWindow.setXcoords(saveAndLoad.loadIntArray("./src/no/hist/aitel/chess/resources/x_coords.txt"));
+                mainWindow.setYcoords(saveAndLoad.loadIntArray("./src/no/hist/aitel/chess/resources/y_coords.txt"));
+                mainWindow.getBoard().setBoard(saveAndLoad.loadPieceArray("./src/no/hist/aitel/chess/resources/internal.txt"));
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
             }
