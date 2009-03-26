@@ -236,29 +236,12 @@ public class Position implements Serializable {
      */
     private int getDirection(int type) {
         int[] directions = getDirections(type);
-        switch (type) {
-            case PAWN:
-            case BISHOP:
-            case KNIGHT:
-            case ROOK:
-            case QUEEN:
-            case KING: {
-                for (int direction : directions) {
-                    if (diff % direction == 0) {
-                        return direction;
-                    }
-                }
-                if (diff == -1 || diff == 1) {
-                    return -1; // Piece is moving one field to the left or right (1 % (n!=1) != 0)
-                } else {
-                    return -2;
-                }
-            }
-            default: {
-                throw new IllegalTypeException("getDirection() was called with an invalid type: "
-                        + type);
+        for (int direction : directions) {
+            if (diff % direction == 0) {
+                return direction;
             }
         }
+        return -1;
     }
 
     /**
@@ -294,16 +277,16 @@ public class Position implements Serializable {
                 return new int[] {6, 10, 15, 17};
             }
             case ROOK: {
-                return new int[] {8, 1}; // Not including 1 as n % 1 == 0 and that causes an invalid
+                return new int[] {8}; // Not including 1 as n % 1 == 0 and that causes an invalid
                                       // warning to be displayed
             }
             case QUEEN:
             case KING: {
-                return new int[] {7, 8, 9, 1}; // Not including 1 as n % 1 == 0 and that causes an
+                return new int[] {7, 8, 9}; // Not including 1 as n % 1 == 0 and that causes an
                                             // invalid warning to be displayed
             }
             default: {
-                throw new IllegalTypeException("getDirections() was called with an invalid type: "
+                throw new IllegalTypeException("Invalid type: "
                         + type);
             }
         }
@@ -314,8 +297,9 @@ public class Position implements Serializable {
      * @param direction
      * @return True if the path is clear and false otherwise
      */
-    private boolean isValidPath(int direction) {       
-        if (direction == -1) { // Happens when a pieces moves to the left or right,
+    private boolean isValidPath(int direction) {
+        // Could not find a vertical or horizontal direction, but rank is still different
+        if (direction == -1 && getRank(from) != getRank(to)) {
             return true;
         }
         if (to < from) { // Black moves in a negative direction
@@ -393,8 +377,6 @@ public class Position implements Serializable {
                 } else if (to == 2 && isEmptyRange(1, 3)) {
                     rookFrom = 0;
                 } else {
-//                    throw new IllegalPositionException("Can't perform castling because fields" +
-//                            " between king and rook aren't empty");
                     return false;
                 }
                 Piece rook;
@@ -412,8 +394,6 @@ public class Position implements Serializable {
                 } else if (to == 58 && isEmptyRange(57, 59)) {
                     rookFrom = 56;
                 } else {
-//                    throw new IllegalPositionException("Can't perform castling because fields" +
-//                            " between king and rook aren't empty");
                     return false;
                 }
                 Piece rook;

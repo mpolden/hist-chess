@@ -32,24 +32,6 @@ public class Board implements Serializable {
     }
 
     /**
-     * Get board
-     * @return The current board
-     */
-    @Deprecated
-    public Piece[] getBoard() { // Not needed?
-        return board;
-    }
-
-    /**
-     * Set the board
-     * @param board
-     */
-    @Deprecated
-    public void setBoard(Piece[] board) {
-        this.board = board;
-    }
-
-    /**
      * Get piece
      * @param position
      * @return The piece in the given position
@@ -87,25 +69,25 @@ public class Board implements Serializable {
      * @param from
      * @param to
      */
-    public void movePiece(int from, int to) throws IllegalArgumentException {
+    public void movePiece(int from, int to) throws BoardException {
 
         // Check if any of the positions are outside the board
         if ((from < 0 || from > 63) || (to < 0 || from > 63)) {
-            throw new IllegalPieceException("Can't move pieces outside of the board.\n"
+            throw new BoardException("Can't move pieces outside of the board.\n"
                     + "\nFrom: " + from
                     + "\nTo: " + to);
         }
 
         // Check if piece in 'from' position is empty
         if (getPiece(from).isEmpty()) {
-            throw new IllegalPieceException("Can't move empty piece.\n" +
+            throw new BoardException("Can't move empty piece.\n" +
                     "\nFrom: " + from +
                     "\nTo: " + to);
         }
         
         // Check whos turn it is
         if (!isValidTurn(getPiece(from).getColor())) {
-            throw new IllegalTurnException("Not allowed to move now.");
+            throw new BoardException("Not allowed to move now.");
         }
 
         // Check if we're in check
