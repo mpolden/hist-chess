@@ -21,7 +21,7 @@ public final class guiConstants {
     public static final int zero = 0;
 
     
-
+    public static final Color kewl = new Color (0xD8D8BF);
     public static final Color dunkel = new Color (0x999999);
     public static final Color hell = new Color (0xFFFFCC);
     public static final Color black = new Color (0x000000);

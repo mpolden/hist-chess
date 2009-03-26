@@ -24,6 +24,16 @@ public class drawBoard extends JPanel {
 
         boolean inverse = false;
         boolean evenNum;
+        g.setColor(kewl);
+        for(int i=0; i<8; i++) {            
+            g.fillRect(i*width, 0, width, height);
+        }
+        for(int i=0; i<8; i++) {
+            g.fillRect(i*width, 9*height, width, height);
+        }
+        for(int i=0; i<8; i++) {
+            g.fillRect(i*width, 10*height, width, height);
+        }        
         
         for (int i = 1; i<=64; i++) {
             int x = i%8;
