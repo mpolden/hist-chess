@@ -166,45 +166,40 @@ public class Position {
                 break;
             }
             case ROOK: {
-                if (diff % 8 == 0) {
+                if (diff % 8 == 0 || getRank(from) == getRank(to)) {
                     break;
-                } else {                    
+                } else {
                     // No idea why, but this seems to be working
-                    int position = from;
-                    while (position % 8 != 0) { // Find closest previous field that is dividable by 8
-                        position--;
-                    }
-                    int myDiff = to - position;
-                    if ((myDiff == 8 || myDiff == -8) || ((myDiff > 7 || myDiff < -7) && myDiff % 8 != 0)) {
-                        throw new IllegalPositionException("Rook can only move forward, backward, left or right.\n" +
-                                "Type: " + fromPiece.getType() +
-                                "\nFrom: " + from +
-                                "\nTo: " + to);
-                    } else {
-                        break;
-                    }
+//                    int position = from;
+//                    while (position % 8 != 0) { // Find closest previous field that is dividable by 8
+//                        position--;
+//                    }
+//                    int myDiff = to - position;
+//                    if ((myDiff == 8 || myDiff == -8) || ((myDiff > 7 || myDiff < -7) && myDiff % 8 != 0)) {
+//                        throw new IllegalPositionException("Rook can only move forward, backward, left or right.\n" +
+//                                "Type: " + fromPiece.getType() +
+//                                "\nFrom: " + from +
+//                                "\nTo: " + to);
+//                    } else {
+//                        break;
+//                    }
+                    throw new IllegalPositionException("Rook can only move forward, backward, left or right.\n" +
+                            "Type: " + fromPiece.getType() +
+                            "\nFrom: " + from +
+                            "\nTo: " + to);
                 }
             }
             case QUEEN: {
-                switch (diff) {
-                    case -10:
-                    case -17:
-                    case -15:
-                    case -6:
-                    case 10:
-                    case 17:
-                    case 15:
-                    case 6: {
-                        throw new IllegalPositionException("Queen can't move one field diagonally + one forward.\n" +
-                                "Type: " + fromPiece.getType() +
-                                "\nFrom: " + from +
-                                "\nTo: " + to);
-                    }
-                    default: {
-                        break;
-                    }
+                if (diff % 7 == 0 || diff % 8 == 0 || diff % 9 == 0) {
+                    break;
+                } else if (getRank(from) == getRank(to)) {
+                    break;
+                } else {
+                    throw new IllegalPositionException("Queen can't move one field diagonally + one forward.\n" +
+                            "Type: " + fromPiece.getType() +
+                            "\nFrom: " + from +
+                            "\nTo: " + to);
                 }
-                break;
             }
             case KING: {
                 switch (diff) {
@@ -236,7 +231,7 @@ public class Position {
     /**
      * Get the current direction for a type (not for Knight)
      * @param type
-     * @return The direction or -1 if something bad happens
+     * @return The direction or -2 if something bad happens
      */
     private int getDirection(int type) {
         int[] directions = getDirections(type);
@@ -252,17 +247,28 @@ public class Position {
                         return direction;
                     }
                 }
-                if (diff == 1 || diff == -1) {
-                    return -1; // Piece is moving one field to the left or right (1 % (n!=1) != 0)
-                } else {
-                    return -2; // Invalid direction
-                }
+                return -1; // Piece is moving one field to the left or right (1 % (n!=1) != 0)
             }
             default: {
                 throw new IllegalTypeException("getDirection() was called with an invalid type: "
                         + type);
             }
         }
+    }
+
+    /**
+     * Get rank from position
+     * @param position
+     * @return The rank
+     */
+    private int getRank(int position) {
+        int j = 0;
+        for (int i = 0; i <= position; i++) {
+            if (i % 8 == 0) {
+                j++;
+            }
+        }
+        return j;
     }
 
 
@@ -304,13 +310,8 @@ public class Position {
      * @return True if the path is clear and false otherwise
      */
     private boolean isValidPath(int direction) {
-        if (direction == -1) { // Happens when a pieces moves one field to the left or right,
-                               // which is always valid since no fromPiece can exist between only two
-                               // fields
-            return true;
-        }
-        if (direction == -2) {
-            return false; // Invalid direction (means that getDirection() couldn't find a direction)
+        if (direction == -1 && !isEmptyRange(from, to)) { // Happens when a pieces moves to the left or right,
+            return false;
         }
         if (to < from) { // Black moves in a negative direction
             for (int position = from - direction; position > to; position -= direction) {
@@ -333,6 +334,7 @@ public class Position {
      * Check if pawn can be promoted
      * @return True if pawn can be promoted
      */
+    @Deprecated
     public boolean isPromotion() {
         Piece piece = board.getPiece(from);
         if (piece.getType() == PAWN) {

@@ -35,6 +35,7 @@ public class Board {
      * Get board
      * @return The current board
      */
+    @Deprecated
     public Piece[] getBoard() { // Not needed?
         return board;
     }
@@ -56,6 +57,21 @@ public class Board {
     private void setPiece(int position, Piece piece) {
         board[position] = piece;
     }
+
+    /**
+     * Checks if in check
+     * @return True if in check and false otherwise
+     */
+//    public boolean inCheck() {
+//        for (int position = 0; position < board.length; position++) {
+//            if (boardgetColor() == WHITE) {
+//                try {
+//
+//                }
+//            }
+//        }
+//        return false;
+//    }
 
     /**
      * Move a piece from an old position to a new position
@@ -94,7 +110,6 @@ public class Board {
             doCastling(from, to);
         } else if (p.isEnPassant()) {
             doEnPassant(from, to);
-//        } else if (p.isPromotion()) {
         } else {
 
             // Regular move
@@ -169,6 +184,7 @@ public class Board {
      * Get the captured pieces
      * @return The captured pieces
      */
+    @Deprecated
     public Piece[] getCaptured() {
         return captured;
     }
@@ -177,6 +193,7 @@ public class Board {
      * Adds a piece to the captured array
      * @param piece
      */
+    @Deprecated
     private void addCaptured(Piece piece) {
         for (int i = 0; i < captured.length; i++) {
             if (captured[i] == null) {

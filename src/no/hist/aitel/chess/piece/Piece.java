@@ -15,8 +15,8 @@ import static no.hist.aitel.chess.piece.PieceConstants.*;
 public class Piece {
 
     final private int color;
-    final private int type;
     final private int id;
+    private int type;
     private boolean moved = false;
 
     /**
@@ -78,6 +78,14 @@ public class Piece {
      */
     public int getId() {
         return id;
+    }
+
+    /**
+     * Set piece type
+     * @param type
+     */
+    public void setType(int type) {
+        this.type = type;
     }
 
     /**
