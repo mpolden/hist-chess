@@ -24,7 +24,7 @@ public class drawBoard extends JPanel {
 
         boolean inverse = false;
         boolean evenNum;
-                
+        
         for (int i = 1; i<=64; i++) {
             int x = i%8;
 
