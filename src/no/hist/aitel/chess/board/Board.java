@@ -5,6 +5,7 @@
 
 package no.hist.aitel.chess.board;
 
+import java.io.Serializable;
 import no.hist.aitel.chess.piece.Piece;
 import no.hist.aitel.chess.piece.IllegalPieceException;
 import no.hist.aitel.chess.position.IllegalSpecialPositionException;
@@ -16,11 +17,10 @@ import static no.hist.aitel.chess.piece.PieceConstants.*;
  * @author martin
  */
 
-public class Board {
+public class Board implements Serializable {
 
     final private int size = 64;
     private Piece[] board = new Piece[size];
-    private Piece[] captured = new Piece[size];
     private Position p = new Position(this);
     private int turn = WHITE;
     
@@ -35,6 +35,7 @@ public class Board {
      * Get board
      * @return The current board
      */
+    @Deprecated
     public Piece[] getBoard() { // Not needed?
         return board;
     }
@@ -43,6 +44,7 @@ public class Board {
      * Set the board
      * @param board
      */
+    @Deprecated
     public void setBoard(Piece[] board) {
         this.board = board;
     }
@@ -135,9 +137,6 @@ public class Board {
      * @param to
      */
     private void doRegularMove(int from, int to) {
-        if (!getPiece(to).isEmpty()) {
-            addCaptured(getPiece(to));
-        }
         setPiece(to, getPiece(from));
         getPiece(to).setMoved(true);
         setPiece(from, new Piece()); // Empty piece
@@ -185,29 +184,6 @@ public class Board {
         setPiece(to, getPiece(from));
         setPiece(from, new Piece());
         setPiece(to - 8, new Piece());
-    }
-
-    /**
-     * Get the captured pieces
-     * @return The captured pieces
-     */
-    @Deprecated
-    public Piece[] getCaptured() {
-        return captured;
-    }
-
-    /**
-     * Adds a piece to the captured array
-     * @param piece
-     */
-    @Deprecated
-    private void addCaptured(Piece piece) {
-        for (int i = 0; i < captured.length; i++) {
-            if (captured[i] == null) {
-                captured[i] = piece;
-                break;
-            }
-        }
     }
 
     /**

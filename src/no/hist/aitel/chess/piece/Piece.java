@@ -5,7 +5,6 @@
 
 package no.hist.aitel.chess.piece;
 
-import java.io.Serializable;
 import static no.hist.aitel.chess.piece.PieceConstants.*;
 
 /**
@@ -13,7 +12,7 @@ import static no.hist.aitel.chess.piece.PieceConstants.*;
  * @author martin
  */
 
-public class Piece implements Serializable {
+public class Piece {
 
     final private int color;
     final private int id;
