@@ -45,12 +45,12 @@ public class saveAndLoad {
         return null;
     }
 
-    public void saveBoard(String filename, Board output_veld) {
+    public void saveBoard(String filename, Board save) {
         try {
             FileOutputStream fos = new FileOutputStream(filename);
             //GZIPOutputStream gzos = new GZIPOutputStream(fos);
             ObjectOutputStream out = new ObjectOutputStream(fos);
-            out.writeObject(output_veld);
+            out.writeObject(save);
             out.flush();
             out.close();
         }
@@ -64,9 +64,9 @@ public class saveAndLoad {
             FileInputStream fis = new FileInputStream(filename);
             //GZIPInputStream gzis = new GZIPInputStream(fis);
             ObjectInputStream in = new ObjectInputStream(fis);
-            Board gelezen_veld = (Board)in.readObject();
+            Board load = (Board)in.readObject();
             in.close();
-            return gelezen_veld;
+            return load;
         }
         catch (IOException e) {
             System.out.println(e);
