@@ -218,7 +218,7 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
 
         }
 
-        System.out.println(x + " " + y);
+        //System.out.println(x + " " + y);
         this.repaint();
     }
 
@@ -279,6 +279,7 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
             int y_on_release = e.getY();
             fromPos = getRect.getRectNumber(x_coordStartPos, y_coordStartPos);
             toPos = getRect.getRectNumber(x_on_release, y_on_release);
+            System.out.println(fromPos+" "+toPos);
             try {
                 capturedPiece = board.getPiece(toPos).getId();
                 System.out.println(capturedPiece);
