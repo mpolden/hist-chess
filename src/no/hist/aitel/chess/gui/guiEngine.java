@@ -37,6 +37,7 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
     private getRect getRect = new getRect();
     private int[] x_coords = boardGui.getXcoords();
     private int[] y_coords = boardGui.getYcoords();
+    
     private int dragFromX = zero;
     private int dragFromY = zero;
     private int movingPiece = -1;

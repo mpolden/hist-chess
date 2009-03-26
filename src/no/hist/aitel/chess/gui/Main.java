@@ -127,7 +127,8 @@ public class Main implements ActionListener, ItemListener {
             frame.setSize(800, 600);
         }
         else if(e.getActionCommand().equals("New game")) {
-            if (JOptionPane.YES_OPTION == JOptionPane.showConfirmDialog(null, "Are you sure you want to create a new game?\nUnsaved progress will be lost.")) {                
+            if (JOptionPane.YES_OPTION == JOptionPane.showConfirmDialog(null, "Are you sure you want to create a new game?\nUnsaved progress will be lost.")) {
+                mainWindow.newgame();
             }
         }
     }
