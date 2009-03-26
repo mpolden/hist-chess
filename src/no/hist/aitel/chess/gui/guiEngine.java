@@ -25,6 +25,8 @@ import javax.swing.JLayeredPane;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import no.hist.aitel.chess.board.Board;
+import no.hist.aitel.chess.board.BoardException;
+import no.hist.aitel.chess.position.IllegalPositionException;
 import static no.hist.aitel.chess.gui.guiConstants.*;
 import static no.hist.aitel.chess.piece.PieceConstants.*;
 
@@ -314,7 +316,11 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
                 }
                 setCapturedPos(board.getPiece(toPos).getId());
                 changePosition();
-            } catch (BoardException exception) { // IllegalArgumentException = alle våre exceptions
+            } catch (BoardException exception) { 
+                System.out.println(exception.getMessage());
+                resetPosition();
+                setCapturedPos(-1);
+            } catch (IllegalPositionException exception) {
                 System.out.println(exception.getMessage());
                 resetPosition();
                 setCapturedPos(-1);
