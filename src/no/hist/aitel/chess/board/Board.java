@@ -35,9 +35,16 @@ public class Board {
      * Get board
      * @return The current board
      */
-    @Deprecated
     public Piece[] getBoard() { // Not needed?
         return board;
+    }
+
+    /**
+     * Set the board
+     * @param board
+     */
+    public void setBoard(Piece[] board) {
+        this.board = board;
     }
 
     /**
