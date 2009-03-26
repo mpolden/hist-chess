@@ -41,7 +41,7 @@ public class Main implements ActionListener, ItemListener {
 
     private JMenuBar addJMenu() {
         JMenuBar menuBar = new JMenuBar();
-        JMenu menu = new JMenu("File"), submenu = new JMenu("Set player names"), submenu2 = new JMenu("Set resolution");
+        JMenu menu = new JMenu("File"), submenu = new JMenu("Set player names"), submenu2 = new JMenu("Change pieces");
         menu.setMnemonic(KeyEvent.VK_A);
         menu.getAccessibleContext().setAccessibleDescription("Test");
         
@@ -139,7 +139,7 @@ public class Main implements ActionListener, ItemListener {
                 mainWindow.setP2name(newP2name);
             }
         }
-        else if(e.getActionCommand().equals("Classic Chess")) {
+        else if(e.getActionCommand().equals("Classic Chess")) {            
             
         }
         else if(e.getActionCommand().equals("Star Wars Chess")) {

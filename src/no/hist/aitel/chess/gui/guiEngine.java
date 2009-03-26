@@ -92,7 +92,7 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
            y_coords[i] = newCoords[i];
         }
         this.repaint();
-    }
+    }    
 
     public guiEngine(String title) {
         this.addMouseListener(this);

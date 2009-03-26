@@ -66,11 +66,7 @@ public class drawPos extends JPanel {
     }
     public int[] getYcoords() {
         return y_coords;
-    }
-
-    public void setSW() {
-        kingb = sw_kingb;        
-    }
+    }    
         
     int j=0;
     public void initStartCoords() {
@@ -204,7 +200,8 @@ public class drawPos extends JPanel {
             System.out.println("Image could not be read\n"+e);
         }
 
-        //draw pawns        
+        //draw pawns
+        
         for(int i=8; i<16; i++) {
             g.drawImage(sw_pawnw, x_coords[i], y_coords[i], width, height, this);
         }        
