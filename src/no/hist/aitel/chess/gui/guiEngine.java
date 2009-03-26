@@ -314,7 +314,7 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
                 }
                 setCapturedPos(board.getPiece(toPos).getId());
                 changePosition();
-            } catch (IllegalArgumentException exception) { // IllegalArgumentException = alle våre exceptions
+            } catch (BoardException exception) { // IllegalArgumentException = alle våre exceptions
                 System.out.println(exception.getMessage());
                 resetPosition();
                 setCapturedPos(-1);
