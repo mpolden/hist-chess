@@ -120,13 +120,13 @@ public class Main implements ActionListener, ItemListener {
         if(e.getActionCommand().equals("Save game")) {
             saveAndLoad.saveIntArray("./src/no/hist/aitel/chess/resources/x_coords.txt", mainWindow.getChessboard().getXcoords());
             saveAndLoad.saveIntArray("./src/no/hist/aitel/chess/resources/y_coords.txt", mainWindow.getChessboard().getYcoords());
-            saveAndLoad.savePieceArray("./src/no/hist/aitel/chess/resources/internal.txt", mainWindow.getBoardObj().getBoard());
+            saveAndLoad.saveBoard("./src/no/hist/aitel/chess/resources/internal.txt", mainWindow.getBoardObj());
         }
         else if(e.getActionCommand().equals("Load game")) {
             try {
                 mainWindow.setXcoords(saveAndLoad.loadIntArray("./src/no/hist/aitel/chess/resources/x_coords.txt"));
                 mainWindow.setYcoords(saveAndLoad.loadIntArray("./src/no/hist/aitel/chess/resources/y_coords.txt"));
-                mainWindow.getBoardObj().setBoard(saveAndLoad.loadPieceArray("./src/no/hist/aitel/chess/resources/internal.txt"));
+                mainWindow.setBoardObj(saveAndLoad.loadBoard("./src/no/hist/aitel/chess/resources/internal.txt"));
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
             }

@@ -163,6 +163,10 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
         pack();
     }
     
+    public void setBoardObj(Board board) {
+        this.board = board;
+    }
+
     public Board getBoardObj() {
         return board;
     }
