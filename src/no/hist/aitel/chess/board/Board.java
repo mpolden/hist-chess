@@ -7,7 +7,7 @@ package no.hist.aitel.chess.board;
 
 import java.io.Serializable;
 import no.hist.aitel.chess.piece.Piece;
-import no.hist.aitel.chess.piece.IllegalPieceException;
+import no.hist.aitel.chess.position.IllegalPositionException;
 import no.hist.aitel.chess.position.IllegalSpecialPositionException;
 import no.hist.aitel.chess.position.Position;
 import static no.hist.aitel.chess.piece.PieceConstants.*;
@@ -23,6 +23,8 @@ public class Board implements Serializable {
     private Piece[] board = new Piece[size];
     private Position p = new Position(this);
     private int turn = WHITE;
+    private boolean whiteInCheck = false;
+    private boolean blackInCheck = false;
     
     /**
      * Creates the board and makes it ready for a new game
@@ -109,6 +111,10 @@ public class Board implements Serializable {
 
         }
 
+        // Check if any color is in check
+        setInCheck();
+        System.out.println("blackInCheck: " + blackInCheck + "\nwhiteInCheck: " + whiteInCheck);
+
         // Switch turn
         switchTurn();
     }
@@ -175,6 +181,63 @@ public class Board implements Serializable {
      */
     private boolean isValidTurn(int color) {
         return (color == turn);
+    }
+
+    /**
+     * Check if a color is in check
+     */
+    public void verifyInCheck(int from) {
+        for (int position = 0; position < board.length; position++) {
+            if (turn == WHITE) {
+//                for (int i = 0; i < board.length; i++)
+                try {
+                    p.setPositions(from, getKing(BLACK));
+                    p.verifyPositions();
+                    blackInCheck = true;
+                } catch (IllegalPositionException e) {
+                    blackInCheck = false;
+                }
+            } else if (turn == BLACK) {
+                try {
+                    p.setPositions(from, getKing(WHITE));
+                    p.verifyPositions();
+                    whiteInCheck = true;
+                } catch (IllegalPositionException e) {
+                    whiteInCheck = false;
+                }
+            }
+        }
+    }
+
+    public void setInCheck() {
+        for (int position = 0; position < board.length; position++) {
+            if (getPiece(position).getColor() == WHITE) {
+                try {
+                    p.setPositions(position, getKing(BLACK));
+                    p.verifyPositions();
+                    blackInCheck = true;
+                } catch (IllegalPositionException e) {
+                    blackInCheck = false;
+                }
+            } else if (getPiece(position).getColor() == BLACK) {
+                try {
+                    p.setPositions(position, getKing(WHITE));
+                    p.verifyPositions();
+                    whiteInCheck = true;
+                } catch (IllegalPositionException e) {
+                    whiteInCheck = false;
+                }
+            }
+        }
+    }
+
+    private int getKing(int color) {
+        for (int position = 0; position < board.length; position++) {
+            if (getPiece(position).getColor() == color && getPiece(position).getType() == KING) {
+                return position;
+            }
+        }
+        return -1;
     }
 
     /**
