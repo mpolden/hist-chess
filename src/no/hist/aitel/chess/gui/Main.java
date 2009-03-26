@@ -8,15 +8,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.KeyEvent;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.util.zip.GZIPInputStream;
-import java.util.zip.GZIPOutputStream;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -33,10 +26,11 @@ public class Main implements ActionListener, ItemListener {
     private static JFrame frame = mainWindow;
     private saveAndLoad saveAndLoad = new saveAndLoad();
     
+    
 
     private static void createAndShowGui() {
         
-        Main gui = new Main();
+        Main gui = new Main();        
         frame.setJMenuBar(gui.addJMenu());        
         frame.setVisible(true);
         frame.setResizable(false);
@@ -101,7 +95,7 @@ public class Main implements ActionListener, ItemListener {
 
         return menuBar;
 
-    }
+    }    
 
     protected String getClassName(Object o) {
         String classString = o.getClass().getName();
@@ -123,12 +117,14 @@ public class Main implements ActionListener, ItemListener {
             saveAndLoad.saveBoard("./src/no/hist/aitel/chess/resources/internal.txt", mainWindow.getBoardObj());
         }
         else if(e.getActionCommand().equals("Load game")) {
-            try {
-                mainWindow.setXcoords(saveAndLoad.loadIntArray("./src/no/hist/aitel/chess/resources/x_coords.txt"));
-                mainWindow.setYcoords(saveAndLoad.loadIntArray("./src/no/hist/aitel/chess/resources/y_coords.txt"));
-                mainWindow.setBoardObj(saveAndLoad.loadBoard("./src/no/hist/aitel/chess/resources/internal.txt"));
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+            if (JOptionPane.YES_OPTION == JOptionPane.showConfirmDialog(null, "Are you sure you want to load game?\nUnsaved progress will be lost.")) {
+                try {
+                    mainWindow.setXcoords(saveAndLoad.loadIntArray("./src/no/hist/aitel/chess/resources/x_coords.txt"));
+                    mainWindow.setYcoords(saveAndLoad.loadIntArray("./src/no/hist/aitel/chess/resources/y_coords.txt"));
+                    mainWindow.setBoardObj(saveAndLoad.loadBoard("./src/no/hist/aitel/chess/resources/internal.txt"));
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         }
         else if(e.getActionCommand().equals("Player 1")) {
@@ -151,7 +147,13 @@ public class Main implements ActionListener, ItemListener {
         }
         else if(e.getActionCommand().equals("New game")) {
             if (JOptionPane.YES_OPTION == JOptionPane.showConfirmDialog(null, "Are you sure you want to create a new game?\nUnsaved progress will be lost.")) {
-                mainWindow.newgame();
+                try {
+                    mainWindow.setXcoords(saveAndLoad.loadIntArray("./src/no/hist/aitel/chess/resources/new_game_x_coords.txt"));
+                    mainWindow.setYcoords(saveAndLoad.loadIntArray("./src/no/hist/aitel/chess/resources/new_game_y_coords.txt"));
+                    mainWindow.setBoardObj(saveAndLoad.loadBoard("./src/no/hist/aitel/chess/resources/new_game_internal.txt"));
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         }
     }
