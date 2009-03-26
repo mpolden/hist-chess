@@ -108,7 +108,7 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
         northPanel = new JPanel(new BorderLayout());
         westPanel = new JPanel(new BorderLayout());
         eastPanel = new JPanel(new BorderLayout());
-
+        
 
         player1Label = new JLabel(player1, JLabel.LEFT);
         player2Label = new JLabel(player2, JLabel.LEFT);
@@ -122,6 +122,7 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
         miniMap.setEditable(false);
         textArea.setBorder(BorderFactory.createLineBorder( Color.black));
         miniMap.setBorder(BorderFactory.createLineBorder( Color.black));
+        miniMap.setFont(timer);
         new JScrollPane(textArea);
 
         stopWatchP1.setFont(timer);
