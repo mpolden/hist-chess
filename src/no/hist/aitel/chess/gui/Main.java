@@ -8,6 +8,15 @@ import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.KeyEvent;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.zip.GZIPInputStream;
+import java.util.zip.GZIPOutputStream;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -99,6 +108,36 @@ public class Main implements ActionListener, ItemListener {
         return classString.substring(dotIndex+1);
     }
 
+    private void saveArray(String filename, int[] output_veld) {
+        try {
+            FileOutputStream fos = new FileOutputStream(filename);
+            GZIPOutputStream gzos = new GZIPOutputStream(fos);
+            ObjectOutputStream out = new ObjectOutputStream(gzos);
+            out.writeObject(output_veld);
+            out.flush();
+            out.close();
+        }
+        catch (IOException e) {
+            System.out.println(e);
+        }
+    }
+    
+    private int[] loadArray(String filename) throws ClassNotFoundException {
+        try {
+            FileInputStream fis = new FileInputStream(filename);
+            GZIPInputStream gzis = new GZIPInputStream(fis);
+            ObjectInputStream in = new ObjectInputStream(gzis);
+            int[] gelezen_veld = (int[])in.readObject();
+            in.close();
+            return gelezen_veld;
+        }
+        catch (IOException e) {
+            System.out.println(e);
+        }
+        return null;
+    }
+
+
     public void actionPerformed(ActionEvent e) {
         JMenuItem source = (JMenuItem)(e.getSource());
         String s = "Action event detected."
@@ -106,7 +145,17 @@ public class Main implements ActionListener, ItemListener {
                 + "    Event source: " + source.getText()
                 + " (an instance of " + getClassName(source) + ")";
         System.out.println(s);
-        if(e.getActionCommand().equals("Player 1")) {
+        if(e.getActionCommand().equals("Save game")) {
+            saveArray("./src/no/hist/aitel/chess/resources/io.txt", mainWindow.getChessboard().getXcoords());
+        }
+        else if(e.getActionCommand().equals("Load game")) {
+            try {
+                mainWindow.setXcoords(loadArray("./src/no/hist/aitel/chess/resources/io.txt"));
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        else if(e.getActionCommand().equals("Player 1")) {
             String newP1name = JOptionPane.showInputDialog(null, "Player 1 name:");
             if(!newP1name.equals("")) {
                 mainWindow.setP1name(newP1name);

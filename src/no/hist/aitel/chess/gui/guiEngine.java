@@ -77,6 +77,11 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
         this.capturedPos = capturedPos;
     }
 
+    public void setXcoords(int[] newCoords) {
+        x_coords = newCoords;
+        this.repaint();
+    }
+
     public guiEngine(String title) {
         this.addMouseListener(this);
         this.addMouseMotionListener(this);
@@ -449,6 +454,8 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
         public int[] getYcoords() {
             return y_coords;
         }
+
+        
     }
 
     private class Buttonlistener implements ActionListener {
