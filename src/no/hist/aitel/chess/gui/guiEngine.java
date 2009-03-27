@@ -34,7 +34,7 @@ import static no.hist.aitel.chess.piece.PieceConstants.*;
 
 public class guiEngine extends JFrame implements MouseListener, MouseMotionListener {
 
-    private boolean canDrag = true;
+    private boolean canDrag = false;
     private Chessboard boardGui = new Chessboard();
     private Board board = new Board();
     private getRect getRect = new getRect();
@@ -231,24 +231,31 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
     public void mousePressed(MouseEvent e) {
         x = e.getX();
         y = e.getY();
+        System.out.println(x+" "+y);
         //System.out.println(northPanel.getHeight());
         try {
-            for (int i = 0; i < 64; i++) {
-                if (x - xIn > x_coords[i] && x - xIn < x_coords[i] + (width) && y - yIn + 61 > y_coords[i] && y - yIn + 61 < y_coords[i] + (height)) {
-                    movingPiece = i;
-                    System.out.println(i);
-                    System.out.println(movingPiece);
-                    canDrag = true;
-                    dragFromX = x - x_coords[i];
-                    dragFromY = y - y_coords[i];
-                    break;
-                } else {
-                    movingPiece = -1;
-                    canDrag = false;
+            if(y>=yIn && y <= (height*8)+yIn) {
+                for (int i = 0; i < 64; i++) {
+                    if (x - xIn > x_coords[i] && x - xIn < x_coords[i] + (width) && y - yIn + 61 > y_coords[i] && y - yIn + 61 < y_coords[i] + (height)) {
+                        movingPiece = i;
+                        System.out.println(i);
+                        System.out.println(movingPiece);
+                        canDrag = true;
+                        dragFromX = x - x_coords[i];
+                        dragFromY = y - y_coords[i];
+                        break;
+                    } else {
+                        movingPiece = -1;
+                        canDrag = false;
+                    }
                 }
+                x_coordStartPos = x;
+                y_coordStartPos = y;
+            } else {
+                movingPiece = -1;
+                canDrag = false;
             }
-            x_coordStartPos = x;
-            y_coordStartPos = y;
+            
         } catch (ArrayIndexOutOfBoundsException outOfBoundsException) {
             System.out.println(outOfBoundsException);
         }
@@ -266,8 +273,6 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
 
             y_coords[movingPiece] = Math.max(y_coords[movingPiece], 50);
             y_coords[movingPiece] = Math.min(y_coords[movingPiece], getWidth() - 310);
-
-
         }
 
         //System.out.println(x + " " + y);
