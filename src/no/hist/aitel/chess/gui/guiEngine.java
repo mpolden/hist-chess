@@ -193,6 +193,18 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
         pack();
     }
 
+    public int getTimeUsedP1() {
+        return timeUsedP1;
+    }
+    public int getTimeUsedP2() {
+        return timeUsedP2;
+    }
+    public void setTimeUsed(int timeP1, int timeP2) {
+        timeUsedP1 = timeP1;
+        stopWatchP1.setText("   " + timeUsedP1 + " sec");
+        timeUsedP2 = timeP2;
+        stopWatchP2.setText("   " + timeUsedP2 + " sec");        
+    }
     
     public void setBoardObj(Board board) {
         this.board = board;

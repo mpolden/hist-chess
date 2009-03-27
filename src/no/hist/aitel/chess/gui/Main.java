@@ -25,7 +25,8 @@ public class Main implements ActionListener, ItemListener {
     private static guiEngine mainWindow = new guiEngine("Chess");
     private static JFrame frame = mainWindow;
     private saveAndLoad saveAndLoad = new saveAndLoad();
-    
+    private int timeUsedP1 = 0;
+    private int timeUsedP2 = 0;
     
 
     private static void createAndShowGui() {
@@ -125,6 +126,8 @@ public class Main implements ActionListener, ItemListener {
                  saveAndLoad.saveIntArray("./src/no/hist/aitel/chess/resources/x_coords.txt", mainWindow.getChessboard().getXcoords());
                  saveAndLoad.saveIntArray("./src/no/hist/aitel/chess/resources/y_coords.txt", mainWindow.getChessboard().getYcoords());
                  saveAndLoad.saveBoard("./src/no/hist/aitel/chess/resources/internal.txt", mainWindow.getBoardObj());
+                 timeUsedP1 = mainWindow.getTimeUsedP1();
+                 timeUsedP2 = mainWindow.getTimeUsedP2();
              }
         }
         else if(e.getActionCommand().equals("Load game")) {
@@ -133,6 +136,7 @@ public class Main implements ActionListener, ItemListener {
                     mainWindow.setXcoords(saveAndLoad.loadIntArray("./src/no/hist/aitel/chess/resources/x_coords.txt"));
                     mainWindow.setYcoords(saveAndLoad.loadIntArray("./src/no/hist/aitel/chess/resources/y_coords.txt"));
                     mainWindow.setBoardObj(saveAndLoad.loadBoard("./src/no/hist/aitel/chess/resources/internal.txt"));
+                    mainWindow.setTimeUsed(timeUsedP1, timeUsedP2);
                 } catch (ClassNotFoundException ex) {
                     Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -162,6 +166,7 @@ public class Main implements ActionListener, ItemListener {
                     mainWindow.setXcoords(saveAndLoad.loadIntArray("./src/no/hist/aitel/chess/resources/new_game_x_coords.txt"));
                     mainWindow.setYcoords(saveAndLoad.loadIntArray("./src/no/hist/aitel/chess/resources/new_game_y_coords.txt"));
                     mainWindow.setBoardObj(saveAndLoad.loadBoard("./src/no/hist/aitel/chess/resources/new_game_internal.txt"));
+                    mainWindow.setTimeUsed(0, 0);
                 } catch (ClassNotFoundException ex) {
                     Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
                 }
