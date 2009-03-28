@@ -31,7 +31,7 @@ public class drawPos extends JPanel {
     private BufferedImage rookb;
     private BufferedImage rookw;
     private BufferedImage bishopb;
-    private BufferedImage bishopw;
+    private BufferedImage bishopw;   
 
     private BufferedImage sw_pawnb;
     private BufferedImage sw_pawnw;
@@ -138,7 +138,7 @@ public class drawPos extends JPanel {
     }
     
     @Override
-    public void paintComponent(Graphics g) {
+    public void paintComponent(Graphics g) {        
         super.paintComponent(g);        
         try {
             File file_pawnb = new File("./src/no/hist/aitel/chess/resources/pawnb.gif");
@@ -152,19 +152,24 @@ public class drawPos extends JPanel {
             File file_rookb = new File("./src/no/hist/aitel/chess/resources/rookb.gif");
             File file_rookw = new File("./src/no/hist/aitel/chess/resources/rookw.gif");
             File file_bishopb = new File("./src/no/hist/aitel/chess/resources/bishopb.gif");
-            File file_bishopw = new File("./src/no/hist/aitel/chess/resources/bishopw.gif");
-            File file_darth_vader = new File("./src/no/hist/aitel/chess/resources/darth_vader.gif");
-            File file_chewbaca = new File("./src/no/hist/aitel/chess/resources/chewbaca.gif");
-            File file_darth_maul = new File("./src/no/hist/aitel/chess/resources/darth_maul.gif");
-            File file_emperor = new File("./src/no/hist/aitel/chess/resources/emperor.gif");
-            File file_c3po = new File("./src/no/hist/aitel/chess/resources/c3po.gif");
-            File file_boba_fett = new File("./src/no/hist/aitel/chess/resources/boba_fett.gif");
-            File file_obi_wan_kenobi = new File("./src/no/hist/aitel/chess/resources/obi_wan_kenobi.gif");
-            File file_princes_leia = new File("./src/no/hist/aitel/chess/resources/princes_leia.gif");
-            File file_rebel_guard = new File("./src/no/hist/aitel/chess/resources/rebel_guard.gif");
-            File file_royal_guard = new File("./src/no/hist/aitel/chess/resources/royal_guard_.gif");
-            File file_storm_trooper = new File("./src/no/hist/aitel/chess/resources/storm_trooper.gif");
-            File file_yoda = new File("./src/no/hist/aitel/chess/resources/yoda_star_wars.gif");
+            File file_bishopw = new File("./src/no/hist/aitel/chess/resources/bishopw.gif");            
+
+            try  {
+            sw_pawnb = ImageIO.read(Thread.currentThread().getContextClassLoader().getResourceAsStream("./no/hist/aitel/chess/resources/storm_trooper.gif"));
+            sw_pawnw = ImageIO.read(Thread.currentThread().getContextClassLoader().getResourceAsStream("./no/hist/aitel/chess/resources/rebel_guard.gif"));
+            sw_kingb = ImageIO.read(Thread.currentThread().getContextClassLoader().getResourceAsStream("./no/hist/aitel/chess/resources/emperor.gif"));
+            sw_kingw = ImageIO.read(Thread.currentThread().getContextClassLoader().getResourceAsStream("./no/hist/aitel/chess/resources/yoda_star_wars.gif"));
+            sw_queenb = ImageIO.read(Thread.currentThread().getContextClassLoader().getResourceAsStream("./no/hist/aitel/chess/resources/darth_vader.gif"));
+            sw_queenw = ImageIO.read(Thread.currentThread().getContextClassLoader().getResourceAsStream("./no/hist/aitel/chess/resources/princes_leia.gif"));
+            sw_knightb = ImageIO.read(Thread.currentThread().getContextClassLoader().getResourceAsStream("./no/hist/aitel/chess/resources/boba_fett.gif"));
+            sw_knightw = ImageIO.read(Thread.currentThread().getContextClassLoader().getResourceAsStream("./no/hist/aitel/chess/resources/chewbaca.gif"));
+            sw_rookb = ImageIO.read(Thread.currentThread().getContextClassLoader().getResourceAsStream("./no/hist/aitel/chess/resources/royal_guard_.gif"));
+            sw_rookw = ImageIO.read(Thread.currentThread().getContextClassLoader().getResourceAsStream("./no/hist/aitel/chess/resources/c3po.gif"));
+            sw_bishopb = ImageIO.read(Thread.currentThread().getContextClassLoader().getResourceAsStream("./no/hist/aitel/chess/resources/darth_maul.gif"));
+            sw_bishopw = ImageIO.read(Thread.currentThread().getContextClassLoader().getResourceAsStream("./no/hist/aitel/chess/resources/obi_wan_kenobi.gif"));
+            } catch (IOException ioe) {
+            System.out.println("IOException: " + ioe.getMessage());
+            }
 
             pawnb = ImageIO.read(file_pawnb);
             pawnw = ImageIO.read(file_pawnw);
@@ -177,20 +182,7 @@ public class drawPos extends JPanel {
             rookb = ImageIO.read(file_rookb);
             rookw = ImageIO.read(file_rookw);
             bishopb = ImageIO.read(file_bishopb);
-            bishopw = ImageIO.read(file_bishopw);
-
-            sw_pawnb = ImageIO.read(file_storm_trooper);
-            sw_pawnw = ImageIO.read(file_rebel_guard);
-            sw_kingb = ImageIO.read(file_emperor);
-            sw_kingw = ImageIO.read(file_yoda);
-            sw_queenb = ImageIO.read(file_darth_vader);
-            sw_queenw = ImageIO.read(file_princes_leia);
-            sw_knightb = ImageIO.read(file_boba_fett);
-            sw_knightw = ImageIO.read(file_chewbaca);
-            sw_rookb = ImageIO.read(file_royal_guard);
-            sw_rookw = ImageIO.read(file_c3po);
-            sw_bishopb = ImageIO.read(file_darth_maul);
-            sw_bishopw = ImageIO.read(file_obi_wan_kenobi);
+            bishopw = ImageIO.read(file_bishopw);       
 
 
 
