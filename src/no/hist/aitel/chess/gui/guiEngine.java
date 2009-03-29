@@ -436,7 +436,7 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
             }
             this.repaint();
             System.out.println(board.toString());
-            p2textArea.setText(board.toString());
+            //p2textArea.setText(board.toString());
         }
     }
 
