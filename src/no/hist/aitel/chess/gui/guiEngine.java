@@ -243,8 +243,7 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
     public void mousePressed(MouseEvent e) {
         x = e.getX();
         y = e.getY();
-        System.out.println(x+" "+y);
-        //System.out.println(northPanel.getHeight());
+        System.out.println(x+" "+y);       
         try {
             if(y>=yIn && y <= (height*8)+yIn) {
                 for (int i = 0; i < 64; i++) {
