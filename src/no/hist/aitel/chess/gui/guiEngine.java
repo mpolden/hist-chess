@@ -10,6 +10,7 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -32,7 +33,7 @@ import no.hist.aitel.chess.position.IllegalPositionException;
 import static no.hist.aitel.chess.gui.guiConstants.*;
 import static no.hist.aitel.chess.piece.PieceConstants.*;
 
-public class guiEngine extends JFrame implements MouseListener, MouseMotionListener {
+public class guiEngine extends JFrame implements MouseListener, MouseMotionListener, ActionListener {
 
     private boolean canDrag = false;
     private Chessboard boardGui = new Chessboard();
@@ -341,7 +342,28 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
 
     }
 
+
+    protected void createFrame() {
+        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+        int w = getSize().width;
+        int h = getSize().height;
+        int x = (dim.width-w)/2;
+        int y = (dim.height-h)/2;
+        internalFrame frame = new internalFrame();
+        frame.setLocation(x, y);
+        frame.setVisible(true); //necessary as of 1.3
+        frame.setResizable(false); 
+       
+    }
+
+    private void checkPromotion() {
+        if(toPos >= 56 || toPos <= 7) {
+            createFrame();
+        }
+    }    
+
     public void mouseReleased(MouseEvent e) {
+        
         if (canDrag) {
             int x_on_release = e.getX();
             int y_on_release = e.getY();
@@ -353,6 +375,9 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
                 System.out.println(capturedPiece);
                 System.out.println(board.getPiece(fromPos).getType());                
                 board.movePiece(fromPos, toPos);
+                if(board.getPiece(toPos).getType() == PAWN) {
+                    checkPromotion();
+                }
                 if(board.getPiece(toPos).getType() == KING) {
                     checkCastling();
                 }
@@ -443,13 +468,14 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
         canDrag = false;
     }
 
-    public void mouseClicked(MouseEvent e) {
-    }
+    public void mouseClicked(MouseEvent e) {}
 
-    public void mouseMoved(MouseEvent e) {
-    }
+    public void mouseMoved(MouseEvent e) {}
 
-    public void mouseEntered(MouseEvent e) {
+    public void mouseEntered(MouseEvent e) {}
+
+    public void actionPerformed(ActionEvent e) {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     public class Buttons extends JPanel {
