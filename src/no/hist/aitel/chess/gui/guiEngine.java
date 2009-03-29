@@ -350,7 +350,7 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
         int x = (dim.width-w)/2;
         int y = (dim.height-h)/2;
         internalFrame frame = new internalFrame();
-        frame.setLocation(x, y);
+        frame.setLocationRelativeTo(null);        
         frame.setVisible(true); //necessary as of 1.3
         frame.setResizable(false); 
        
@@ -362,8 +362,7 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
         }
     }    
 
-    public void mouseReleased(MouseEvent e) {
-        
+    public void mouseReleased(MouseEvent e) {        
         if (canDrag) {
             int x_on_release = e.getX();
             int y_on_release = e.getY();

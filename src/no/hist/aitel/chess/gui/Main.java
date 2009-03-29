@@ -31,7 +31,8 @@ public class Main implements ActionListener, ItemListener {
 
     private static void createAndShowGui() {
         
-        Main gui = new Main();        
+        Main gui = new Main();
+
         frame.setJMenuBar(gui.addJMenu());        
         frame.setVisible(true);
         frame.setResizable(false);
