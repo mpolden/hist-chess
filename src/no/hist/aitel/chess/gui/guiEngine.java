@@ -342,23 +342,16 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
     }
 
 
-    protected void createInternalFrame(String color) {
-        internalFrame frame = new internalFrame(color);
-        frame.setTitle("Promotion");
-        frame.setLocationRelativeTo(null);        
-        frame.setVisible(true); //necessary as of 1.3
-        frame.setResizable(false);        
-        frame.pack();
-
-       
+    protected void createPromotionFrame(String color) {
+        new promotionFrame(color);           
     }
 
     private void checkPromotion() {
         if(toPos >= 56) {
-            createInternalFrame("white");
+            createPromotionFrame("white");
         }
         else if(toPos <=7) {
-            createInternalFrame("black");
+            createPromotionFrame("black");
         }
     }    
 
@@ -476,28 +469,7 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
     public void actionPerformed(ActionEvent e) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
-
-    public class Buttons extends JPanel {
-
-        public Buttons() {
-            Buttonlistener listener = new Buttonlistener();
-
-            setLayout(new FlowLayout());
-
-            JButton buttonOne = new JButton("New game");
-            add(buttonOne);
-            JButton buttonTwo = new JButton("Undo move");
-            add(buttonTwo);
-            JButton buttonThree = new JButton("Highscore");
-            add(buttonThree);
-
-            buttonOne.addActionListener(listener);
-            buttonTwo.addActionListener(listener);
-            buttonThree.addActionListener(listener);
-
-        }
-    }
-
+    
     public class Chessboard extends JPanel {
 
         private JLayeredPane layeredPane;
@@ -551,28 +523,6 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
 
         
     }
-
-    private class Buttonlistener implements ActionListener {
-
-        public void actionPerformed(ActionEvent event) {
-
-            String commando = event.getActionCommand();
-
-            if (commando.equals("New game")) {
-                if (JOptionPane.YES_OPTION == JOptionPane.showConfirmDialog(null, "Are you sure you want to create a new game?\nUnsaved progress will be lost.")) {
-                    newgame();
-                }
-            } else if (commando.equals("Undo move")) {
-                try {
-                    undoMove();
-                } catch (ArrayIndexOutOfBoundsException outOfBoundsException) {
-                    System.out.println("test");
-                }
-            //JOptionPane.showMessageDialog(null, "Du angret et trekk");
-            } else if (commando.equals("Highscore")) {
-                JOptionPane.showMessageDialog(null, "Highscore:");
-            }
-        }
-    }
+    
 }
 

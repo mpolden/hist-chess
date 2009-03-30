@@ -23,7 +23,7 @@ import javax.swing.JRadioButton;
  *
  * @author Vegard
  */
-public class internalFrame extends JFrame implements ActionListener {
+public class promotionFrame extends JFrame implements ActionListener {
     private JButton okButton;
     private JLayeredPane desktop;
     private JInternalFrame internalFrame;
@@ -38,8 +38,8 @@ public class internalFrame extends JFrame implements ActionListener {
     JLabel picture;
     
 
-    public internalFrame(String color) {
-        if(color == "white") {
+    public promotionFrame(String color) {
+        if(color.equals("white")) {
             blackOrWhite = "w";
         }
         else {
@@ -47,9 +47,10 @@ public class internalFrame extends JFrame implements ActionListener {
         }
         
         internalFrame = new JInternalFrame();       
-        
+        Buttonlistener listener = new Buttonlistener();
 
         okButton = new JButton("Ok");
+        okButton.addActionListener(listener);
         Panel button = new Panel();
         button.add(okButton);
         add(button, BorderLayout.SOUTH);
@@ -88,14 +89,19 @@ public class internalFrame extends JFrame implements ActionListener {
                                              + ".gif"));
         
         add(radioButtons, BorderLayout.LINE_START);
-        add(picture, BorderLayout.CENTER);
-
-        
+        add(picture, BorderLayout.CENTER);       
         
 
         desktop = new JDesktopPane();
         desktop.setOpaque(true);
         internalFrame.add(desktop, BorderLayout.CENTER);
+
+        setTitle("Promotion");
+        setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+        setLocationRelativeTo(null);
+        setResizable(false);
+        pack();
+        setVisible(true);
         
     }
 
@@ -114,6 +120,19 @@ public class internalFrame extends JFrame implements ActionListener {
         picture.setIcon(createImageIcon("./src/no/hist/aitel/chess/resources/"
                                         + e.getActionCommand() + blackOrWhite
                                         + ".gif"));
+        System.out.println(picked);
     }
 
+    private class Buttonlistener implements ActionListener {
+
+        public void actionPerformed(ActionEvent event) {
+            setVisible(false);
+            
+            System.out.println("test");
+        }
+    }
+
+    public static void main(String[] args) {
+        new promotionFrame("black");
+    }
 }
