@@ -241,7 +241,7 @@ public class drawPos extends JPanel {
         sw_pawnw = img;
         
         g.drawImage(img, x, y, width, height, this);
-        //g.fillRect(x, y, width, height);
+        g.fillRect(x, y, width, height);
     }
 
     public static void main(String[] args ){
