@@ -10,7 +10,6 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
-import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -343,22 +342,23 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
     }
 
 
-    protected void createFrame() {
-        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-        int w = getSize().width;
-        int h = getSize().height;
-        int x = (dim.width-w)/2;
-        int y = (dim.height-h)/2;
-        internalFrame frame = new internalFrame();
+    protected void createInternalFrame(String color) {
+        internalFrame frame = new internalFrame(color);
+        frame.setTitle("Promotion");
         frame.setLocationRelativeTo(null);        
         frame.setVisible(true); //necessary as of 1.3
-        frame.setResizable(false); 
+        frame.setResizable(false);        
+        frame.pack();
+
        
     }
 
     private void checkPromotion() {
-        if(toPos >= 56 || toPos <= 7) {
-            createFrame();
+        if(toPos >= 56) {
+            createInternalFrame("white");
+        }
+        else if(toPos <=7) {
+            createInternalFrame("black");
         }
     }    
 
