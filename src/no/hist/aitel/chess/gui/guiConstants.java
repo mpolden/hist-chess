@@ -3,6 +3,7 @@
 package no.hist.aitel.chess.gui;
 
 import java.awt.Color;
+import java.awt.image.BufferedImage;
 
 /**
  *
@@ -27,4 +28,18 @@ public final class guiConstants {
     public static final Color black = new Color (0x000000);
     public static final Color pink = new Color (0xFFC0CB);
     public static final Color white = new Color (0xFFFFFF);
+
+
+    public static BufferedImage sw_pawnb;
+    public static BufferedImage sw_pawnw;
+    public static BufferedImage sw_kingb;
+    public static BufferedImage sw_kingw;
+    public static BufferedImage sw_queenb;
+    public static BufferedImage sw_queenw;
+    public static BufferedImage sw_knightb;
+    public static BufferedImage sw_knightw;
+    public static BufferedImage sw_rookb;
+    public static BufferedImage sw_rookw;
+    public static BufferedImage sw_bishopb;
+    public static BufferedImage sw_bishopw;
 }

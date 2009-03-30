@@ -34,9 +34,16 @@ public class promotionFrame extends JFrame implements ActionListener {
     static String knightString = "knight";
     static String bishopString = "bishop";
     static String blackOrWhite;
-    static String picked;
+    static String picked = "queen";
     JLabel picture;
-    
+
+    public String getPicked() {
+        return picked;
+    }
+
+    public JButton getButton() {
+        return okButton;
+    }
 
     public promotionFrame(String color) {
         if(color.equals("white")) {
@@ -46,11 +53,9 @@ public class promotionFrame extends JFrame implements ActionListener {
             blackOrWhite = "b";
         }
         
-        internalFrame = new JInternalFrame();       
-        Buttonlistener listener = new Buttonlistener();
-
+        internalFrame = new JInternalFrame();
         okButton = new JButton("Ok");
-        okButton.addActionListener(listener);
+       
         Panel button = new Panel();
         button.add(okButton);
         add(button, BorderLayout.SOUTH);
@@ -119,18 +124,8 @@ public class promotionFrame extends JFrame implements ActionListener {
         picked = e.getActionCommand();
         picture.setIcon(createImageIcon("./src/no/hist/aitel/chess/resources/"
                                         + e.getActionCommand() + blackOrWhite
-                                        + ".gif"));
-        System.out.println(picked);
-    }
-
-    private class Buttonlistener implements ActionListener {
-
-        public void actionPerformed(ActionEvent event) {
-            setVisible(false);
-            
-            System.out.println("test");
-        }
-    }
+                                        + ".gif"));        
+    }    
 
     public static void main(String[] args) {
         new promotionFrame("black");

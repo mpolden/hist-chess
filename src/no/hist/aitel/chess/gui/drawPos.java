@@ -20,6 +20,7 @@ import static no.hist.aitel.chess.gui.guiConstants.*;
 public class drawPos extends JPanel {
     private int[] x_coords;
     private int[] y_coords;
+    private BufferedImage[] images;
     private BufferedImage pawnb;
     private BufferedImage pawnw;
     private BufferedImage kingb;
@@ -31,20 +32,21 @@ public class drawPos extends JPanel {
     private BufferedImage rookb;
     private BufferedImage rookw;
     private BufferedImage bishopb;
-    private BufferedImage bishopw;   
+    private BufferedImage bishopw;
+    private Graphics g = getGraphics();
 
-    private BufferedImage sw_pawnb;
-    private BufferedImage sw_pawnw;
-    private BufferedImage sw_kingb;
-    private BufferedImage sw_kingw;
-    private BufferedImage sw_queenb;
-    private BufferedImage sw_queenw;
-    private BufferedImage sw_knightb;
-    private BufferedImage sw_knightw;
-    private BufferedImage sw_rookb;
-    private BufferedImage sw_rookw;
-    private BufferedImage sw_bishopb;
-    private BufferedImage sw_bishopw;
+//    private BufferedImage sw_pawnb;
+//    private BufferedImage sw_pawnw;
+//    private BufferedImage sw_kingb;
+//    private BufferedImage sw_kingw;
+//    private BufferedImage sw_queenb;
+//    private BufferedImage sw_queenw;
+//    private BufferedImage sw_knightb;
+//    private BufferedImage sw_knightw;
+//    private BufferedImage sw_rookb;
+//    private BufferedImage sw_rookw;
+//    private BufferedImage sw_bishopb;
+//    private BufferedImage sw_bishopw;
     
 
 
@@ -138,7 +140,8 @@ public class drawPos extends JPanel {
     }
     
     @Override
-    public void paintComponent(Graphics g) {        
+    public void paintComponent(Graphics g) {
+        this.g = g;
         super.paintComponent(g);        
         try {
             File file_pawnb = new File("./src/no/hist/aitel/chess/resources/pawnb.gif");
@@ -231,6 +234,16 @@ public class drawPos extends JPanel {
         g.drawImage(sw_bishopw, x_coords[58], y_coords[58], width, height, this);
         g.drawImage(sw_bishopw, x_coords[61], y_coords[61], width, height, this);
     }
+    
+
+    public void drawPromotion(BufferedImage img, int x, int y) {
+        g = getGraphics();
+        sw_pawnw = img;
+        
+        g.drawImage(img, x, y, width, height, this);
+        //g.fillRect(x, y, width, height);
+    }
+
     public static void main(String[] args ){
         drawPos test = new drawPos();
         test.initStartCoords();

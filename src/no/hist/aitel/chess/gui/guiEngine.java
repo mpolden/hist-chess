@@ -7,22 +7,22 @@ package no.hist.aitel.chess.gui;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
-import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
@@ -73,7 +73,9 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
     private int timeUsedP1 = zero;
     private int timeUsedP2 = zero;
     private Font player = new Font("VERDANA", Font.BOLD, 20);
-    private Font timer = new Font("VERDANA", Font.ITALIC, 14);  
+    private Font timer = new Font("VERDANA", Font.ITALIC, 14);
+    private promotionFrame frame;
+    private String picked = "test";
 
     private int getCapturedPos() {
         return capturedPos;
@@ -341,19 +343,41 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
 
     }
 
-
-    protected void createPromotionFrame(String color) {
-        new promotionFrame(color);           
-    }
-
     private void checkPromotion() {
-        if(toPos >= 56) {
-            createPromotionFrame("white");
+        Buttonlistener listener = new Buttonlistener();
+       
+        if(toPos >= 56) {            
+            frame = new promotionFrame("white");
+            frame.getButton().addActionListener(listener);
+            
+            
         }
         else if(toPos <=7) {
-            createPromotionFrame("black");
+            frame = new promotionFrame("black");
+            frame.getButton().addActionListener(listener);
         }
-    }    
+    }
+
+    private class Buttonlistener implements ActionListener {
+        public void actionPerformed(ActionEvent event) {
+            frame.setVisible(false);
+            picked = frame.getPicked();
+            System.out.println(picked);
+            if(toPos >= 56) {
+                if(picked.equals("queen")) {
+                    try {
+                        sw_queenw = ImageIO.read(Thread.currentThread().getContextClassLoader().getResourceAsStream("./no/hist/aitel/chess/resources/princes_leia.gif"));
+                    } catch (IOException ex) {
+                        Logger.getLogger(guiEngine.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    Graphics g = getGraphics();
+                    //g.fillRect(getRect.getRectCoordX(toPos), getRect.getRectCoordY(toPos), width, height);
+                    
+                    boardGui.getStartPos().drawPromotion(sw_queenw, getRect.getRectCoordX(toPos), getRect.getRectCoordY(toPos));
+                } 
+            }
+        }
+    }
 
     public void mouseReleased(MouseEvent e) {        
         if (canDrag) {
@@ -469,6 +493,7 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
     public void actionPerformed(ActionEvent e) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
+
     
     public class Chessboard extends JPanel {
 
@@ -497,6 +522,9 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
             layeredPane.add(startPos, JLayeredPane.PALETTE_LAYER);
             add(layeredPane);
 
+        }
+        public drawPos getStartPos() {
+            return startPos;
         }
 
         public drawBoard getDrawBoard() {
