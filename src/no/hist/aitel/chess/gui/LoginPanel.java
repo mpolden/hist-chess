@@ -26,7 +26,7 @@ class MainWindow extends JFrame {
 
     public MainWindow(String tittel) {
 
-        Player();
+        //Player();
 
         setTitle(tittel);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
