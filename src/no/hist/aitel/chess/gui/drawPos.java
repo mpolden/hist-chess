@@ -35,8 +35,8 @@ public class drawPos extends JPanel {
     private BufferedImage rookw;
     private BufferedImage bishopb;
     private BufferedImage bishopw;
-    private Graphics g = getGraphics();
-    private Graphics gg = getGraphics();
+    
+    
    
 
 //    private BufferedImage sw_pawnb;
@@ -240,31 +240,28 @@ public class drawPos extends JPanel {
     }
 
     
-    public void update() {
-        paintComponent(gg);
+    @Override
+    public void update(Graphics g) {
+        paintComponent(g);
     }
 
-    public void changeImg() {
-        try {
-            sw_pawnw = ImageIO.read(Thread.currentThread().getContextClassLoader().getResourceAsStream("./no/hist/aitel/chess/resources/chewbaca.gif"));
-        } catch (IOException ex) {
-            System.out.println(ex);
-        }
-        this.repaint();
+    public void setImg(BufferedImage img) {
+        sw_pawnw = img;
+        repaint();
     }
 
     public void drawPromotion(BufferedImage img, int x, int y, int id) {
-        gg = getGraphics();
+        Graphics g = getGraphics();
         try {
             sw_pawnw = ImageIO.read(Thread.currentThread().getContextClassLoader().getResourceAsStream("./no/hist/aitel/chess/resources/chewbaca.gif"));
         } catch (IOException ex) {
             Logger.getLogger(drawPos.class.getName()).log(Level.SEVERE, null, ex);
         }
         //paintComponent(g);
-        gg.setColor(pink);
-        gg.fillRect(x_coords[id], y_coords[id], width, height);
+        g.setColor(pink);
+        g.fillRect(x_coords[id], y_coords[id], width, height);
 
-        gg.drawImage(img, x_coords[id], y_coords[id], width, height, this);
+        g.drawImage(img, x_coords[id], y_coords[id], width, height, this);
         //g.fillRect(x+80, y, width, height);
     }
 

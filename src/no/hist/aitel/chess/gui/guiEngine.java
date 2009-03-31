@@ -370,10 +370,12 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
                     } catch (IOException ex) {
                         Logger.getLogger(guiEngine.class.getName()).log(Level.SEVERE, null, ex);
                     }
-                    Graphics g = getGraphics();
+                    //boardGui.getStartPos().setImg(sw_queenw);
+                    //Graphics g = getGraphics();
                     //g.fillRect(getRect.getRectCoordX(toPos), getRect.getRectCoordY(toPos), width, height);
                     //boardGui.getStartPos().changeImg();
                     boardGui.getStartPos().drawPromotion(sw_queenw, getRect.getRectCoordX(toPos), getRect.getRectCoordY(toPos), board.getPiece(toPos).getId());
+
                 } 
             }
         }
