@@ -351,12 +351,15 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
         if(toPos >= 56 && toPos <=63) {
             frame = new promotionFrame("white");
             frame.getButton().addActionListener(listener);
+            //frame.setUndecorated(true);
+
             
             
         }
         else if(toPos <=7 && toPos >=0) {
             frame = new promotionFrame("black");
             frame.getButton().addActionListener(listener);
+            //frame.setUndecorated(true);
         }
     }
 
