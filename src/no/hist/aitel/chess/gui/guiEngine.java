@@ -346,13 +346,13 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
     private void checkPromotion() {
         Buttonlistener listener = new Buttonlistener();
        
-        if(toPos >= 56) {            
+        if(toPos >= 56 && toPos <=63) {
             frame = new promotionFrame("white");
             frame.getButton().addActionListener(listener);
             
             
         }
-        else if(toPos <=7) {
+        else if(toPos <=7 && toPos >=0) {
             frame = new promotionFrame("black");
             frame.getButton().addActionListener(listener);
         }
@@ -372,7 +372,7 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
                     }
                     Graphics g = getGraphics();
                     //g.fillRect(getRect.getRectCoordX(toPos), getRect.getRectCoordY(toPos), width, height);
-                    
+                    //boardGui.getStartPos().changeImg();
                     boardGui.getStartPos().drawPromotion(sw_queenw, getRect.getRectCoordX(toPos), getRect.getRectCoordY(toPos), board.getPiece(toPos).getId());
                 } 
             }

@@ -239,8 +239,18 @@ public class drawPos extends JPanel {
         
     }
 
-    public void update(Graphics gg) {
+    
+    public void update() {
         paintComponent(gg);
+    }
+
+    public void changeImg() {
+        try {
+            sw_pawnw = ImageIO.read(Thread.currentThread().getContextClassLoader().getResourceAsStream("./no/hist/aitel/chess/resources/chewbaca.gif"));
+        } catch (IOException ex) {
+            System.out.println(ex);
+        }
+        this.repaint();
     }
 
     public void drawPromotion(BufferedImage img, int x, int y, int id) {
@@ -251,8 +261,8 @@ public class drawPos extends JPanel {
             Logger.getLogger(drawPos.class.getName()).log(Level.SEVERE, null, ex);
         }
         //paintComponent(g);
-        
-        
+        gg.setColor(pink);
+        gg.fillRect(x_coords[id], y_coords[id], width, height);
 
         gg.drawImage(img, x_coords[id], y_coords[id], width, height, this);
         //g.fillRect(x+80, y, width, height);
