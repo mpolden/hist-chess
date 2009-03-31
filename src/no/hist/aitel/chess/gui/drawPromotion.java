@@ -20,16 +20,23 @@ public class drawPromotion extends JPanel {
     private int x;
     private int y;
 
-    public drawPromotion(int x, int y) {
-        Graphics g = getGraphics();
-        try {
-                        img = ImageIO.read(Thread.currentThread().getContextClassLoader().getResourceAsStream("./no/hist/aitel/chess/resources/princes_leia.gif"));
-                    } catch (IOException ex) {
-                        Logger.getLogger(guiEngine.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-        
+    public drawPromotion(BufferedImage img, int x, int y) {
+        this.img = img;
         this.x = x;
         this.y = y;
-        g.drawImage(img, x, y, width, height, this);
     }
+
+    @Override
+    public void paintComponent(Graphics g) {
+        g = getGraphics();
+        
+        //paintComponent(g);
+        g.setColor(pink);
+        g.fillRect(x, y, width, height);
+
+        g.drawImage(img, x, y, width, height, this);
+        //g.fillRect(x+80, y, width, height);
+    
+    }
+    
 }
