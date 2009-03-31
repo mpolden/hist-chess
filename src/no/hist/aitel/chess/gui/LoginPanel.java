@@ -1,6 +1,5 @@
 package no.hist.aitel.chess.gui;
 
-
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
@@ -155,7 +154,7 @@ class LoginPanel {
 
         JFrame frame = new MainWindow("Chess");
         frame.setVisible(true);
-        frame.setResizable(true);
+        frame.setResizable(false);
         frame.setLocationRelativeTo(null);
     }
 }
