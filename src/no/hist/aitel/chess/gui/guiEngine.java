@@ -374,8 +374,8 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
                     //Graphics g = getGraphics();
                     //g.fillRect(getRect.getRectCoordX(toPos), getRect.getRectCoordY(toPos), width, height);
                     //boardGui.getStartPos().changeImg();
-                    new drawPromotion(sw_queenw, getRect.getRectCoordX(toPos), getRect.getRectCoordY(toPos));
-                    //boardGui.getStartPos().drawPromotion(sw_queenw, getRect.getRectCoordX(toPos), getRect.getRectCoordY(toPos), board.getPiece(toPos).getId());
+                    //new drawPromotion(sw_queenw, getRect.getRectCoordX(toPos), getRect.getRectCoordY(toPos));
+                    boardGui.getStartPos().drawPromotion(sw_queenw, getRect.getRectCoordX(toPos), getRect.getRectCoordY(toPos), board.getPiece(toPos).getId());
 
                 } 
             }

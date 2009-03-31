@@ -144,8 +144,9 @@ public class drawPos extends JPanel {
     }
     
     @Override
-    public void paintComponent(Graphics g) {       
-        super.paintComponent(g);        
+    public void paintComponent(Graphics g) {     
+        super.paintComponent(g);
+
         try {
             File file_pawnb = new File("./src/no/hist/aitel/chess/resources/pawnb.gif");
             File file_pawnw = new File("./src/no/hist/aitel/chess/resources/pawnw.gif");
@@ -238,20 +239,17 @@ public class drawPos extends JPanel {
         g.drawImage(sw_bishopw, x_coords[61], y_coords[61], width, height, this);
         
     }
-
     
-    @Override
-    public void update(Graphics g) {
-        paintComponent(g);
-    }
-
+    
     public void setImg(BufferedImage img) {
         sw_pawnw = img;
         repaint();
     }
 
     public void drawPromotion(BufferedImage img, int x, int y, int id) {
+
         Graphics g = getGraphics();
+
         try {
             sw_pawnw = ImageIO.read(Thread.currentThread().getContextClassLoader().getResourceAsStream("./no/hist/aitel/chess/resources/chewbaca.gif"));
         } catch (IOException ex) {

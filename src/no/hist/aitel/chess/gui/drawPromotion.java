@@ -4,10 +4,6 @@ package no.hist.aitel.chess.gui;
 
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
-import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 import static no.hist.aitel.chess.gui.guiConstants.*;
 
@@ -33,7 +29,7 @@ public class drawPromotion extends JPanel {
         //paintComponent(g);
         g.setColor(pink);
         g.fillRect(x, y, width, height);
-
+            
         g.drawImage(img, x, y, width, height, this);
         //g.fillRect(x+80, y, width, height);
     

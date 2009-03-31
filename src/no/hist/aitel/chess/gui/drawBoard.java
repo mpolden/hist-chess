@@ -15,6 +15,10 @@ public class drawBoard extends JPanel {
     
     public drawBoard() {        
     }
+
+    @Override
+    public void repaint() {        
+    }
     
     @Override
     public void paintComponent(Graphics g) {
