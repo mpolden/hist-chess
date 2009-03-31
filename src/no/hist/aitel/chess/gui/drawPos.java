@@ -35,7 +35,7 @@ public class drawPos extends JPanel {
     private BufferedImage rookw;
     private BufferedImage bishopb;
     private BufferedImage bishopw;
-    
+    private boolean[] promoted = new boolean[15];
     
    
 
@@ -249,17 +249,13 @@ public class drawPos extends JPanel {
     public void drawPromotion(BufferedImage img, int x, int y, int id) {
 
         Graphics g = getGraphics();
-
-        try {
-            sw_pawnw = ImageIO.read(Thread.currentThread().getContextClassLoader().getResourceAsStream("./no/hist/aitel/chess/resources/chewbaca.gif"));
-        } catch (IOException ex) {
-            Logger.getLogger(drawPos.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        //paintComponent(g);
+        x_coords[id] = 0;
+        y_coords[id] = 0;
+        
         g.setColor(pink);
         g.fillRect(x_coords[id], y_coords[id], width, height);
 
-        g.drawImage(img, x_coords[id], y_coords[id], width, height, this);
+        g.drawImage(img, x, y, width, height, this);
         //g.fillRect(x+80, y, width, height);
     }
 
