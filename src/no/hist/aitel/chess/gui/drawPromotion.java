@@ -16,8 +16,10 @@ public class drawPromotion extends JPanel {
     private int x;
     private int y;
 
-    public drawPromotion(BufferedImage img, int x, int y) {
-        this.img = img;
+    public drawPromotion() {        
+    }
+
+    public void initPromotion(int x, int y){
         this.x = x;
         this.y = y;
     }
@@ -30,7 +32,7 @@ public class drawPromotion extends JPanel {
         g.setColor(pink);
         g.fillRect(x, y, width, height);
             
-        g.drawImage(img, x, y, width, height, this);
+        g.drawImage(sw_queenw, x, y, width, height, this);
         //g.fillRect(x+80, y, width, height);
     
     }

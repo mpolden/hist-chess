@@ -8,8 +8,6 @@ import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 import static no.hist.aitel.chess.gui.guiConstants.*;
@@ -35,7 +33,12 @@ public class drawPos extends JPanel {
     private BufferedImage rookw;
     private BufferedImage bishopb;
     private BufferedImage bishopw;
-    private boolean[] promoted = new boolean[15];
+    //private boolean[] promoted = new boolean[15];
+    private BufferedImage[] promoteImage = new BufferedImage[64];
+
+    public void setImage(BufferedImage img, int i) {
+        promoteImage[i] = img;
+    }
     
    
 
@@ -237,15 +240,16 @@ public class drawPos extends JPanel {
         }        
         g.drawImage(sw_bishopw, x_coords[58], y_coords[58], width, height, this);
         g.drawImage(sw_bishopw, x_coords[61], y_coords[61], width, height, this);
+
+        for(int i=0; i<64; i++) {
+            if(promoteImage[i] != null)
+                g.drawImage(promoteImage[i], x_coords[i], y_coords[i], width, height, this);
+        }
         
     }
     
     
-    public void setImg(BufferedImage img) {
-        sw_pawnw = img;
-        repaint();
-    }
-
+    
     public void drawPromotion(BufferedImage img, int x, int y, int id) {
 
         Graphics g = getGraphics();

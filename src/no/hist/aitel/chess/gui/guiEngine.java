@@ -32,6 +32,7 @@ import no.hist.aitel.chess.position.IllegalPositionException;
 import static no.hist.aitel.chess.gui.guiConstants.*;
 import static no.hist.aitel.chess.piece.PieceConstants.*;
 
+
 public class guiEngine extends JFrame implements MouseListener, MouseMotionListener, ActionListener {
 
     private boolean canDrag = false;
@@ -364,23 +365,38 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
             picked = frame.getPicked();
             System.out.println(picked);
             if(toPos >= 56) {
-                if(picked.equals("queen")) {
-                    try {
-                        sw_queenw = ImageIO.read(Thread.currentThread().getContextClassLoader().getResourceAsStream("./no/hist/aitel/chess/resources/princes_leia.gif"));
-                    } catch (IOException ex) {
-                        Logger.getLogger(guiEngine.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                    //boardGui.getStartPos().setImg(sw_queenw);
-                    //Graphics g = getGraphics();
-                    //g.fillRect(getRect.getRectCoordX(toPos), getRect.getRectCoordY(toPos), width, height);
-                    //boardGui.getStartPos().changeImg();
-                    new drawPromotion(sw_queenw, getRect.getRectCoordX(toPos), getRect.getRectCoordY(toPos));                   
-                   
-                    boardGui.getStartPos().drawPromotion(sw_queenw, getRect.getRectCoordX(toPos), getRect.getRectCoordY(toPos), board.getPiece(toPos).getId());
-
-                } 
+                if(picked.equals("queen")) {                    
+                    boardGui.getStartPos().setImage(sw_queenw, board.getPiece(toPos).getId());
+                    //board.setPiece(toPos, new Piece(WHITE, QUEEN, board.getPiece(toPos).getId()));
+                    
+                }
+                else if(picked.equals("rook")) {
+                    boardGui.getStartPos().setImage(sw_rookw, board.getPiece(toPos).getId());
+                }
+                else if(picked.equals("knight")) {
+                    boardGui.getStartPos().setImage(sw_knightw, board.getPiece(toPos).getId());
+                }
+                else if(picked.equals("bishop")) {
+                    boardGui.getStartPos().setImage(sw_bishopw, board.getPiece(toPos).getId());
+                }
             }
-        }
+            else if(toPos <= 7) {
+                if(picked.equals("queen")) {
+                    boardGui.getStartPos().setImage(sw_queenb, board.getPiece(toPos).getId());
+                    repaint();
+                }
+                else if(picked.equals("rook")) {
+                    boardGui.getStartPos().setImage(sw_rookb, board.getPiece(toPos).getId());
+                }
+                else if(picked.equals("knight")) {
+                    boardGui.getStartPos().setImage(sw_knightb, board.getPiece(toPos).getId());
+                }
+                else if(picked.equals("bishop")) {
+                    boardGui.getStartPos().setImage(sw_bishopb, board.getPiece(toPos).getId());
+                }
+            }
+            repaint();
+        }        
     }
 
     public void mouseReleased(MouseEvent e) {        

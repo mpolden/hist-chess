@@ -47,7 +47,7 @@ public class Board implements Serializable {
      * @param position
      * @param piece
      */
-    private void setPiece(int position, Piece piece) {
+    public void setPiece(int position, Piece piece) {
         board[position] = piece;
     }
 
