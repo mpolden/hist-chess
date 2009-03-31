@@ -205,11 +205,23 @@ public class drawPos extends JPanel {
         //draw pawns
         
         for(int i=8; i<16; i++) {
-            g.drawImage(sw_pawnw, x_coords[i], y_coords[i], width, height, this);
+            if(promoteImage[i] == null) {
+                g.drawImage(sw_pawnw, x_coords[i], y_coords[i], width, height, this);
+            }
+            else {
+                g.drawImage(promoteImage[i], x_coords[i], y_coords[i], width, height, this);
+            }
+            
         }        
         for(int i=48; i<56; i++) {
-            g.drawImage(sw_pawnb, x_coords[i], y_coords[i], width, height, this);
+            if(promoteImage[i] == null) {
+                g.drawImage(sw_pawnb, x_coords[i], y_coords[i], width, height, this);
+            }
+            else {
+                g.drawImage(promoteImage[i], x_coords[i], y_coords[i], width, height, this);
+            }            
         }
+        
         //draw kings
         g.drawImage(sw_kingb, x_coords[60], y_coords[60], width, height, this);
         g.drawImage(sw_kingw, x_coords[4], y_coords[4], width, height, this);
@@ -241,10 +253,10 @@ public class drawPos extends JPanel {
         g.drawImage(sw_bishopw, x_coords[58], y_coords[58], width, height, this);
         g.drawImage(sw_bishopw, x_coords[61], y_coords[61], width, height, this);
 
-        for(int i=0; i<64; i++) {
+        /*for(int i=0; i<64; i++) {
             if(promoteImage[i] != null)
                 g.drawImage(promoteImage[i], x_coords[i], y_coords[i], width, height, this);
-        }
+        }*/
         
     }
     

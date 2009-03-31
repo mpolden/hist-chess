@@ -28,6 +28,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import no.hist.aitel.chess.board.Board;
 import no.hist.aitel.chess.board.BoardException;
+import no.hist.aitel.chess.piece.Piece;
 import no.hist.aitel.chess.position.IllegalPositionException;
 import static no.hist.aitel.chess.gui.guiConstants.*;
 import static no.hist.aitel.chess.piece.PieceConstants.*;
@@ -367,32 +368,38 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
             if(toPos >= 56) {
                 if(picked.equals("queen")) {                    
                     boardGui.getStartPos().setImage(sw_queenw, board.getPiece(toPos).getId());
-                    //board.setPiece(toPos, new Piece(WHITE, QUEEN, board.getPiece(toPos).getId()));
+                    board.setPiece(toPos, new Piece(WHITE, QUEEN, board.getPiece(toPos).getId()));
                     
                 }
                 else if(picked.equals("rook")) {
                     boardGui.getStartPos().setImage(sw_rookw, board.getPiece(toPos).getId());
+                    board.setPiece(toPos, new Piece(WHITE, ROOK, board.getPiece(toPos).getId()));
                 }
                 else if(picked.equals("knight")) {
                     boardGui.getStartPos().setImage(sw_knightw, board.getPiece(toPos).getId());
+                    board.setPiece(toPos, new Piece(WHITE, KNIGHT, board.getPiece(toPos).getId()));
                 }
                 else if(picked.equals("bishop")) {
                     boardGui.getStartPos().setImage(sw_bishopw, board.getPiece(toPos).getId());
+                    board.setPiece(toPos, new Piece(WHITE, BISHOP, board.getPiece(toPos).getId()));
                 }
             }
             else if(toPos <= 7) {
                 if(picked.equals("queen")) {
                     boardGui.getStartPos().setImage(sw_queenb, board.getPiece(toPos).getId());
-                    repaint();
+                    board.setPiece(toPos, new Piece(BLACK, QUEEN, board.getPiece(toPos).getId()));
                 }
                 else if(picked.equals("rook")) {
                     boardGui.getStartPos().setImage(sw_rookb, board.getPiece(toPos).getId());
+                    board.setPiece(toPos, new Piece(BLACK, ROOK, board.getPiece(toPos).getId()));
                 }
                 else if(picked.equals("knight")) {
                     boardGui.getStartPos().setImage(sw_knightb, board.getPiece(toPos).getId());
+                    board.setPiece(toPos, new Piece(BLACK, KNIGHT, board.getPiece(toPos).getId()));
                 }
                 else if(picked.equals("bishop")) {
                     boardGui.getStartPos().setImage(sw_bishopb, board.getPiece(toPos).getId());
+                    board.setPiece(toPos, new Piece(BLACK, BISHOP, board.getPiece(toPos).getId()));
                 }
             }
             repaint();
@@ -404,12 +411,9 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
             int x_on_release = e.getX();
             int y_on_release = e.getY();
             fromPos = getRect.getRectNumber(x_coordStartPos, y_coordStartPos);
-            toPos = getRect.getRectNumber(x_on_release, y_on_release);
-            System.out.println(fromPos+" "+toPos);
+            toPos = getRect.getRectNumber(x_on_release, y_on_release);           
             try {
-                capturedPiece = board.getPiece(toPos).getId();
-                System.out.println(capturedPiece);
-                System.out.println(board.getPiece(fromPos).getType());                
+                capturedPiece = board.getPiece(toPos).getId();                              
                 board.movePiece(fromPos, toPos);
                 if(board.getPiece(toPos).getType() == PAWN) {
                     checkPromotion();
@@ -550,17 +554,7 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
 
         public drawBoard getDrawBoard() {
             return chessBoard;
-        }
-
-        public void setXsize(int size) {
-            xSize = size;
-
-        }
-
-        public void setYsize(int size) {
-            ySize = size;
-
-        }
+        }  
 
         public int[] getXcoords() {
             return x_coords;
