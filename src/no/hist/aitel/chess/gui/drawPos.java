@@ -8,6 +8,8 @@ import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 import static no.hist.aitel.chess.gui.guiConstants.*;
@@ -34,6 +36,8 @@ public class drawPos extends JPanel {
     private BufferedImage bishopb;
     private BufferedImage bishopw;
     private Graphics g = getGraphics();
+    private Graphics gg = getGraphics();
+   
 
 //    private BufferedImage sw_pawnb;
 //    private BufferedImage sw_pawnw;
@@ -140,8 +144,7 @@ public class drawPos extends JPanel {
     }
     
     @Override
-    public void paintComponent(Graphics g) {
-        this.g = g;
+    public void paintComponent(Graphics g) {       
         super.paintComponent(g);        
         try {
             File file_pawnb = new File("./src/no/hist/aitel/chess/resources/pawnb.gif");
@@ -233,15 +236,26 @@ public class drawPos extends JPanel {
         }        
         g.drawImage(sw_bishopw, x_coords[58], y_coords[58], width, height, this);
         g.drawImage(sw_bishopw, x_coords[61], y_coords[61], width, height, this);
-    }
-    
-
-    public void drawPromotion(BufferedImage img, int x, int y) {
-        g = getGraphics();
-        sw_pawnw = img;
         
-        g.drawImage(img, x, y, width, height, this);
-        g.fillRect(x, y, width, height);
+    }
+
+    public void update(Graphics gg) {
+        paintComponent(gg);
+    }
+
+    public void drawPromotion(BufferedImage img, int x, int y, int id) {
+        gg = getGraphics();
+        try {
+            sw_pawnw = ImageIO.read(Thread.currentThread().getContextClassLoader().getResourceAsStream("./no/hist/aitel/chess/resources/chewbaca.gif"));
+        } catch (IOException ex) {
+            Logger.getLogger(drawPos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        //paintComponent(g);
+        
+        
+
+        gg.drawImage(img, x_coords[id], y_coords[id], width, height, this);
+        //g.fillRect(x+80, y, width, height);
     }
 
     public static void main(String[] args ){

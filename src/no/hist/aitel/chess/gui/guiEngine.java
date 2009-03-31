@@ -373,7 +373,7 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
                     Graphics g = getGraphics();
                     //g.fillRect(getRect.getRectCoordX(toPos), getRect.getRectCoordY(toPos), width, height);
                     
-                    boardGui.getStartPos().drawPromotion(sw_queenw, getRect.getRectCoordX(toPos), getRect.getRectCoordY(toPos));
+                    boardGui.getStartPos().drawPromotion(sw_queenw, getRect.getRectCoordX(toPos), getRect.getRectCoordY(toPos), board.getPiece(toPos).getId());
                 } 
             }
         }
@@ -475,6 +475,7 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
                 }
             }
             this.repaint();
+            
             System.out.println(board.toString());
             //p2textArea.setText(board.toString());
         }
