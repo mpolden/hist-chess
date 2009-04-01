@@ -153,7 +153,7 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
         
         westPanel.add(boardGui, BorderLayout.WEST);       
         eastPanel.add(p1textArea, BorderLayout.NORTH);
-        centerTextArea.setText("\n\n  Er nå mulig å velge brikker fra menyen :)");
+        centerTextArea.setText("\n\n  1. April: Er nå mulig å velge brikker fra menyen :)");
         eastPanel.add(centerTextArea, BorderLayout.CENTER);
         eastPanel.add(p2textArea, BorderLayout.SOUTH);
 
