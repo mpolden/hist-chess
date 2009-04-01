@@ -24,9 +24,11 @@ public final class guiConstants {
     public static final Color kewl = new Color (0xD8D8BF);
     public static final Color dunkel = new Color (0x999999);
     public static final Color hell = new Color (0xFFFFCC);
-    public static final Color black = new Color (0x000000);
+    public static final Color black = new Color (0x211E1E);
     public static final Color pink = new Color (0xFFC0CB);
     public static final Color white = new Color (0xFFFFFF);
+    public static final Color dark_wood = new Color (0x855E42);
+    public static final Color light_wood = new Color (0xE9C2A6);
 
     public static BufferedImage pawnb;
     public static BufferedImage pawnw;
