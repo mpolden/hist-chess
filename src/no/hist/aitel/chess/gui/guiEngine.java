@@ -365,7 +365,7 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
     }
 
     private class Buttonlistener implements ActionListener {
-        public void actionPerformed(ActionEvent event) {
+        public void actionPerformed(ActionEvent event) {            
             frame.setVisible(false);
             picked = frame.getPicked();
             System.out.println(picked);
