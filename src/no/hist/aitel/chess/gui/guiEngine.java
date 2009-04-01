@@ -8,17 +8,15 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
-import java.io.IOException;
+import java.awt.image.BufferedImage;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -369,41 +367,41 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
             frame.setVisible(false);
             picked = frame.getPicked();
             System.out.println(picked);
+            BufferedImage[] images = boardGui.getStartPos().getImages();
             if(toPos >= 56) {
                 if(picked.equals("queen")) {                    
-                    boardGui.getStartPos().setPromotedImage(sw_queenw, board.getPiece(toPos).getId());
-                    board.setPiece(toPos, new Piece(WHITE, QUEEN, board.getPiece(toPos).getId()));
-                    
+                    boardGui.getStartPos().setPromotedImage(images[3], board.getPiece(toPos).getId());
+                    board.setPiece(toPos, new Piece(WHITE, QUEEN, board.getPiece(toPos).getId()));                    
                 }
                 else if(picked.equals("rook")) {
-                    boardGui.getStartPos().setPromotedImage(sw_rookw, board.getPiece(toPos).getId());
+                    boardGui.getStartPos().setPromotedImage(images[0], board.getPiece(toPos).getId());
                     board.setPiece(toPos, new Piece(WHITE, ROOK, board.getPiece(toPos).getId()));
                 }
                 else if(picked.equals("knight")) {
-                    boardGui.getStartPos().setPromotedImage(sw_knightw, board.getPiece(toPos).getId());
+                    boardGui.getStartPos().setPromotedImage(images[1], board.getPiece(toPos).getId());
                     board.setPiece(toPos, new Piece(WHITE, KNIGHT, board.getPiece(toPos).getId()));
                 }
                 else if(picked.equals("bishop")) {
-                    boardGui.getStartPos().setPromotedImage(sw_bishopw, board.getPiece(toPos).getId());
+                    boardGui.getStartPos().setPromotedImage(images[2], board.getPiece(toPos).getId());
                     board.setPiece(toPos, new Piece(WHITE, BISHOP, board.getPiece(toPos).getId()));
                 }
             }
             
             else if(toPos <= 7) {
                 if(picked.equals("queen")) {
-                    boardGui.getStartPos().setPromotedImage(sw_queenb, board.getPiece(toPos).getId());
+                    boardGui.getStartPos().setPromotedImage(images[59], board.getPiece(toPos).getId());
                     board.setPiece(toPos, new Piece(BLACK, QUEEN, board.getPiece(toPos).getId()));
                 }
                 else if(picked.equals("rook")) {
-                    boardGui.getStartPos().setPromotedImage(sw_rookb, board.getPiece(toPos).getId());
+                    boardGui.getStartPos().setPromotedImage(images[56], board.getPiece(toPos).getId());
                     board.setPiece(toPos, new Piece(BLACK, ROOK, board.getPiece(toPos).getId()));
                 }
                 else if(picked.equals("knight")) {
-                    boardGui.getStartPos().setPromotedImage(sw_knightb, board.getPiece(toPos).getId());
+                    boardGui.getStartPos().setPromotedImage(images[57], board.getPiece(toPos).getId());
                     board.setPiece(toPos, new Piece(BLACK, KNIGHT, board.getPiece(toPos).getId()));
                 }
                 else if(picked.equals("bishop")) {
-                    boardGui.getStartPos().setPromotedImage(sw_bishopb, board.getPiece(toPos).getId());
+                    boardGui.getStartPos().setPromotedImage(images[58], board.getPiece(toPos).getId());
                     board.setPiece(toPos, new Piece(BLACK, BISHOP, board.getPiece(toPos).getId()));
                 }
             }

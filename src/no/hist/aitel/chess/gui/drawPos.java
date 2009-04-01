@@ -25,6 +25,10 @@ public class drawPos extends JPanel {
     private BufferedImage[] promoteImage = new BufferedImage[64];
     private boolean classic = true;
 
+    public BufferedImage[] getImages() {
+        return images;
+    }
+
     public void setPromotedImage(BufferedImage img, int i) {
         promoteImage[i] = img;
     }   
