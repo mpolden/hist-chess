@@ -155,6 +155,7 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
         
         westPanel.add(boardGui, BorderLayout.WEST);       
         eastPanel.add(p1textArea, BorderLayout.NORTH);
+        centerTextArea.setText("\n\nEr nå mulig å velge brikker fra menyen :)");
         eastPanel.add(centerTextArea, BorderLayout.CENTER);
         eastPanel.add(p2textArea, BorderLayout.SOUTH);
 
@@ -447,43 +448,7 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
 //            System.out.println("toPos ID: " + board.getPiece(toPos).getId());
 //            System.out.println("fromPos ID: " + board.getPiece(fromPos).getId());
                 System.out.println(capturedPiece);
-                if (capturedPiece == 61) {
-                    capturedPiece = 5;
-                    try {
-                        x_coords[capturedPiece] = capturedBlackPieces * width/2;
-                        y_coords[capturedPiece] = height * 9;
-                        capturedBlackPieces++;
-                        setCapturedPos(-1);
-                    } catch (ArrayIndexOutOfBoundsException excep) {
-                    }
-                } else if (capturedPiece == 5) {
-                    capturedPiece = 61;
-                    try {
-                        x_coords[capturedPiece] = capturedWhitePieces * width/2;
-                        y_coords[capturedPiece] = zero;
-                        capturedWhitePieces++;
-                        setCapturedPos(-1);
-                    } catch (ArrayIndexOutOfBoundsException excep) {
-                    }
-                } else if (capturedPiece == 58) {
-                    capturedPiece = 2;
-                    try {
-                        x_coords[capturedPiece] = capturedBlackPieces * width/2;
-                        y_coords[capturedPiece] = height * 9;
-                        capturedBlackPieces++;
-                        setCapturedPos(-1);
-                    } catch (ArrayIndexOutOfBoundsException excep) {
-                    }
-                } else if (capturedPiece == 2) {
-                    capturedPiece = 58;
-                    try {
-                        x_coords[capturedPiece] = capturedWhitePieces * width/2;
-                        y_coords[capturedPiece] = zero;
-                        capturedWhitePieces++;
-                        setCapturedPos(-1);
-                    } catch (ArrayIndexOutOfBoundsException excep) {
-                    }
-                } else if (capturedPiece >= 48) {
+                if (capturedPiece >= 48) {
                     try {
                         x_coords[capturedPiece] = capturedBlackPieces * width/2;
                         y_coords[capturedPiece] = height * 9;

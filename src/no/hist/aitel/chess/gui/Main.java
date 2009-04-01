@@ -155,10 +155,10 @@ public class Main implements ActionListener, ItemListener {
             }
         }
         else if(e.getActionCommand().equals("Classic Chess")) {            
-            
+            mainWindow.getChessboard().getStartPos().setClassicImages();
         }
         else if(e.getActionCommand().equals("Star Wars Chess")) {
-            
+            mainWindow.getChessboard().getStartPos().setSwImages();
         }
         else if(e.getActionCommand().equals("New game")) {
             if (JOptionPane.YES_OPTION == JOptionPane.showConfirmDialog(null, "Are you sure you want to create a new game?\nUnsaved progress will be lost.")) {
