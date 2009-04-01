@@ -370,38 +370,39 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
             System.out.println(picked);
             if(toPos >= 56) {
                 if(picked.equals("queen")) {                    
-                    boardGui.getStartPos().setImage(sw_queenw, board.getPiece(toPos).getId());
+                    boardGui.getStartPos().setPromotedImage(sw_queenw, board.getPiece(toPos).getId());
                     board.setPiece(toPos, new Piece(WHITE, QUEEN, board.getPiece(toPos).getId()));
                     
                 }
                 else if(picked.equals("rook")) {
-                    boardGui.getStartPos().setImage(sw_rookw, board.getPiece(toPos).getId());
+                    boardGui.getStartPos().setPromotedImage(sw_rookw, board.getPiece(toPos).getId());
                     board.setPiece(toPos, new Piece(WHITE, ROOK, board.getPiece(toPos).getId()));
                 }
                 else if(picked.equals("knight")) {
-                    boardGui.getStartPos().setImage(sw_knightw, board.getPiece(toPos).getId());
+                    boardGui.getStartPos().setPromotedImage(sw_knightw, board.getPiece(toPos).getId());
                     board.setPiece(toPos, new Piece(WHITE, KNIGHT, board.getPiece(toPos).getId()));
                 }
                 else if(picked.equals("bishop")) {
-                    boardGui.getStartPos().setImage(sw_bishopw, board.getPiece(toPos).getId());
+                    boardGui.getStartPos().setPromotedImage(sw_bishopw, board.getPiece(toPos).getId());
                     board.setPiece(toPos, new Piece(WHITE, BISHOP, board.getPiece(toPos).getId()));
                 }
             }
+            
             else if(toPos <= 7) {
                 if(picked.equals("queen")) {
-                    boardGui.getStartPos().setImage(sw_queenb, board.getPiece(toPos).getId());
+                    boardGui.getStartPos().setPromotedImage(sw_queenb, board.getPiece(toPos).getId());
                     board.setPiece(toPos, new Piece(BLACK, QUEEN, board.getPiece(toPos).getId()));
                 }
                 else if(picked.equals("rook")) {
-                    boardGui.getStartPos().setImage(sw_rookb, board.getPiece(toPos).getId());
+                    boardGui.getStartPos().setPromotedImage(sw_rookb, board.getPiece(toPos).getId());
                     board.setPiece(toPos, new Piece(BLACK, ROOK, board.getPiece(toPos).getId()));
                 }
                 else if(picked.equals("knight")) {
-                    boardGui.getStartPos().setImage(sw_knightb, board.getPiece(toPos).getId());
+                    boardGui.getStartPos().setPromotedImage(sw_knightb, board.getPiece(toPos).getId());
                     board.setPiece(toPos, new Piece(BLACK, KNIGHT, board.getPiece(toPos).getId()));
                 }
                 else if(picked.equals("bishop")) {
-                    boardGui.getStartPos().setImage(sw_bishopb, board.getPiece(toPos).getId());
+                    boardGui.getStartPos().setPromotedImage(sw_bishopb, board.getPiece(toPos).getId());
                     board.setPiece(toPos, new Piece(BLACK, BISHOP, board.getPiece(toPos).getId()));
                 }
             }
@@ -541,7 +542,7 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
             chessBoard = new drawBoard();
             chessBoard.setLayout(new GridLayout(8, 8));
             chessBoard.setPreferredSize(boardSize);
-            startPos.initStartCoords();            
+            startPos.initDrawPos();
             startPos.setBounds(5, 0, boardSize.width, boardSize.height);
             chessBoard.setBounds(5, 0, boardSize.width, boardSize.height);
             chessBoard.setOpaque(true);

@@ -20,7 +20,6 @@ public final class guiConstants {
     public static final int yIn = 155;
     public static final int boardSize = 64;
     public static final int zero = 0;
-
     
     public static final Color kewl = new Color (0xD8D8BF);
     public static final Color dunkel = new Color (0x999999);
@@ -29,6 +28,18 @@ public final class guiConstants {
     public static final Color pink = new Color (0xFFC0CB);
     public static final Color white = new Color (0xFFFFFF);
 
+    public static BufferedImage pawnb;
+    public static BufferedImage pawnw;
+    public static BufferedImage kingb;
+    public static BufferedImage kingw;
+    public static BufferedImage queenb;
+    public static BufferedImage queenw;
+    public static BufferedImage knightb;
+    public static BufferedImage knightw;
+    public static BufferedImage rookb;
+    public static BufferedImage rookw;
+    public static BufferedImage bishopb;
+    public static BufferedImage bishopw;
 
     public static BufferedImage sw_pawnb;
     public static BufferedImage sw_pawnw;

@@ -6,7 +6,6 @@ package no.hist.aitel.chess.gui;
 
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
@@ -21,40 +20,12 @@ public class drawPos extends JPanel {
     private int[] x_coords;
     private int[] y_coords;
     private BufferedImage[] images;
-    private BufferedImage pawnb;
-    private BufferedImage pawnw;
-    private BufferedImage kingb;
-    private BufferedImage kingw;
-    private BufferedImage queenb;
-    private BufferedImage queenw;
-    private BufferedImage knightb;
-    private BufferedImage knightw;
-    private BufferedImage rookb;
-    private BufferedImage rookw;
-    private BufferedImage bishopb;
-    private BufferedImage bishopw;
-    //private boolean[] promoted = new boolean[15];
+    private String sw_ = "sw_";    
     private BufferedImage[] promoteImage = new BufferedImage[64];
 
-    public void setImage(BufferedImage img, int i) {
+    public void setPromotedImage(BufferedImage img, int i) {
         promoteImage[i] = img;
-    }
-    
-   
-
-//    private BufferedImage sw_pawnb;
-//    private BufferedImage sw_pawnw;
-//    private BufferedImage sw_kingb;
-//    private BufferedImage sw_kingw;
-//    private BufferedImage sw_queenb;
-//    private BufferedImage sw_queenw;
-//    private BufferedImage sw_knightb;
-//    private BufferedImage sw_knightw;
-//    private BufferedImage sw_rookb;
-//    private BufferedImage sw_rookw;
-//    private BufferedImage sw_bishopb;
-//    private BufferedImage sw_bishopw;
-    
+    }   
 
 
     public drawPos() {
@@ -78,7 +49,7 @@ public class drawPos extends JPanel {
     }    
         
     int j=0;
-    public void initStartCoords() {
+    public void initDrawPos() {
         for (int i=8; i<16; i++) {
             x_coords[i] = width*j;
             y_coords[i] = height*7;
@@ -142,29 +113,9 @@ public class drawPos extends JPanel {
 
         j=5;
         x_coords[61] = width*j;
-        y_coords[61] = height*8;        
-
-    }
-    
-    @Override
-    public void paintComponent(Graphics g) {     
-        super.paintComponent(g);
+        y_coords[61] = height*8;
 
         try {
-            File file_pawnb = new File("./src/no/hist/aitel/chess/resources/pawnb.gif");
-            File file_pawnw = new File("./src/no/hist/aitel/chess/resources/pawnw.gif");
-            File file_kingb = new File("./src/no/hist/aitel/chess/resources/kingb.gif");
-            File file_kingw = new File("./src/no/hist/aitel/chess/resources/kingw.gif");
-            File file_queenb = new File("./src/no/hist/aitel/chess/resources/queenb.gif");
-            File file_queenw = new File("./src/no/hist/aitel/chess/resources/queenw.gif");
-            File file_knightb = new File("./src/no/hist/aitel/chess/resources/knightb.gif");
-            File file_knightw = new File("./src/no/hist/aitel/chess/resources/knightw.gif");
-            File file_rookb = new File("./src/no/hist/aitel/chess/resources/rookb.gif");
-            File file_rookw = new File("./src/no/hist/aitel/chess/resources/rookw.gif");
-            File file_bishopb = new File("./src/no/hist/aitel/chess/resources/bishopb.gif");
-            File file_bishopw = new File("./src/no/hist/aitel/chess/resources/bishopw.gif");            
-
-            try  {
             sw_pawnb = ImageIO.read(Thread.currentThread().getContextClassLoader().getResourceAsStream("./no/hist/aitel/chess/resources/storm_trooper.gif"));
             sw_pawnw = ImageIO.read(Thread.currentThread().getContextClassLoader().getResourceAsStream("./no/hist/aitel/chess/resources/rebel_guard.gif"));
             sw_kingb = ImageIO.read(Thread.currentThread().getContextClassLoader().getResourceAsStream("./no/hist/aitel/chess/resources/emperor.gif"));
@@ -177,33 +128,31 @@ public class drawPos extends JPanel {
             sw_rookw = ImageIO.read(Thread.currentThread().getContextClassLoader().getResourceAsStream("./no/hist/aitel/chess/resources/c3po.gif"));
             sw_bishopb = ImageIO.read(Thread.currentThread().getContextClassLoader().getResourceAsStream("./no/hist/aitel/chess/resources/darth_maul.gif"));
             sw_bishopw = ImageIO.read(Thread.currentThread().getContextClassLoader().getResourceAsStream("./no/hist/aitel/chess/resources/obi_wan_kenobi.gif"));
-            } catch (IOException ioe) {
+        } catch (IOException ioe) {
             System.out.println("IOException: " + ioe.getMessage());
-            }
-
-            pawnb = ImageIO.read(file_pawnb);
-            pawnw = ImageIO.read(file_pawnw);
-            kingb = ImageIO.read(file_kingb);
-            kingw = ImageIO.read(file_kingw);
-            queenb = ImageIO.read(file_queenb);
-            queenw = ImageIO.read(file_queenw);
-            knightb = ImageIO.read(file_knightb);
-            knightw = ImageIO.read(file_knightw);
-            rookb = ImageIO.read(file_rookb);
-            rookw = ImageIO.read(file_rookw);
-            bishopb = ImageIO.read(file_bishopb);
-            bishopw = ImageIO.read(file_bishopw);       
-
-
-
         }
+        try {
+            pawnb = ImageIO.read(Thread.currentThread().getContextClassLoader().getResourceAsStream("./no/hist/aitel/chess/resources/pawnb.gif"));
+            pawnw = ImageIO.read(Thread.currentThread().getContextClassLoader().getResourceAsStream("./no/hist/aitel/chess/resources/pawnw.gif"));
+            kingb = ImageIO.read(Thread.currentThread().getContextClassLoader().getResourceAsStream("./no/hist/aitel/chess/resources/kingb.gif"));
+            kingw = ImageIO.read(Thread.currentThread().getContextClassLoader().getResourceAsStream("./no/hist/aitel/chess/resources/kingw.gif"));
+            queenb = ImageIO.read(Thread.currentThread().getContextClassLoader().getResourceAsStream("./no/hist/aitel/chess/resources/queenb.gif"));
+            queenw = ImageIO.read(Thread.currentThread().getContextClassLoader().getResourceAsStream("./no/hist/aitel/chess/resources/queenw.gif"));
+            knightb = ImageIO.read(Thread.currentThread().getContextClassLoader().getResourceAsStream("./no/hist/aitel/chess/resources/knightb.gif"));
+            knightw = ImageIO.read(Thread.currentThread().getContextClassLoader().getResourceAsStream("./no/hist/aitel/chess/resources/knightw.gif"));
+            rookb = ImageIO.read(Thread.currentThread().getContextClassLoader().getResourceAsStream("./no/hist/aitel/chess/resources/rookb.gif"));
+            rookw = ImageIO.read(Thread.currentThread().getContextClassLoader().getResourceAsStream("./no/hist/aitel/chess/resources/rookw.gif"));
+            bishopb = ImageIO.read(Thread.currentThread().getContextClassLoader().getResourceAsStream("./no/hist/aitel/chess/resources/bishopb.gif"));
+            bishopw = ImageIO.read(Thread.currentThread().getContextClassLoader().getResourceAsStream("./no/hist/aitel/chess/resources/bishopw.gif"));
+        } catch (IOException ioe) {
+            System.out.println("IOException: " + ioe.getMessage());
+        } 
 
-        catch (IOException e) {
-            System.out.println("Image could not be read\n"+e);
-        }
-
-        //draw pawns
-        
+    }
+    
+    @Override
+    public void paintComponent(Graphics g) {        
+        //draw pawns        
         for(int i=8; i<16; i++) {
             if(promoteImage[i] == null) {
                 g.drawImage(sw_pawnw, x_coords[i], y_coords[i], width, height, this);
@@ -251,33 +200,14 @@ public class drawPos extends JPanel {
             j=5;
         }        
         g.drawImage(sw_bishopw, x_coords[58], y_coords[58], width, height, this);
-        g.drawImage(sw_bishopw, x_coords[61], y_coords[61], width, height, this);
-
-        /*for(int i=0; i<64; i++) {
-            if(promoteImage[i] != null)
-                g.drawImage(promoteImage[i], x_coords[i], y_coords[i], width, height, this);
-        }*/
+        g.drawImage(sw_bishopw, x_coords[61], y_coords[61], width, height, this);       
         
-    }
+    }    
     
-    
-    
-    public void drawPromotion(BufferedImage img, int x, int y, int id) {
-
-        Graphics g = getGraphics();
-        x_coords[id] = 0;
-        y_coords[id] = 0;
-        
-        g.setColor(pink);
-        g.fillRect(x_coords[id], y_coords[id], width, height);
-
-        g.drawImage(img, x, y, width, height, this);
-        //g.fillRect(x+80, y, width, height);
-    }
 
     public static void main(String[] args ){
         drawPos test = new drawPos();
-        test.initStartCoords();
+        test.initDrawPos();
         System.out.println(test.getXcoords()[8]);
         System.out.println(test.getYcoords()[8]);
         
