@@ -48,26 +48,26 @@ public class Main implements ActionListener, ItemListener {
         
         menuBar.add(menu);
 
-        JMenuItem menuItem = new JMenuItem("New game", KeyEvent.VK_T);
+        JMenuItem menuItem = new JMenuItem("New game", KeyEvent.VK_N);
         menuItem.addActionListener(this);
         menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N, ActionEvent.CTRL_MASK));
         menuItem.getAccessibleContext().setAccessibleDescription("Test");
         menu.add(menuItem);
 
-        menuItem = new JMenuItem("Save game");
+        menuItem = new JMenuItem("Save game", KeyEvent.VK_S);
         menuItem.addActionListener(this);
         menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, ActionEvent.CTRL_MASK));
         menuItem.getAccessibleContext().setAccessibleDescription("Test");
         menu.add(menuItem);
 
-        menuItem = new JMenuItem("Load game");
+        menuItem = new JMenuItem("Load game", KeyEvent.VK_L);
         menuItem.addActionListener(this);
         menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_L, ActionEvent.CTRL_MASK));
         menuItem.getAccessibleContext().setAccessibleDescription("Test");
         menu.add(menuItem);
 
         menu.addSeparator();
-        submenu2.setMnemonic(KeyEvent.VK_S);
+        submenu2.setMnemonic(KeyEvent.VK_C);
         menuItem = new JMenuItem("Classic Chess");
         menuItem.addActionListener(this);
         menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_3, ActionEvent.ALT_MASK));
