@@ -238,11 +238,6 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
         //
     }
 
-    public void newgame() {
-        //
-        this.repaint();
-    }
-
     public void mousePressed(MouseEvent e) {
         x = e.getX();
         y = e.getY();
@@ -250,10 +245,8 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
         try {
             if(y>=yIn && y <= (height*8)+yIn) {
                 for (int i = 0; i < 64; i++) {
-                    if (x - xIn > x_coords[i] && x - xIn < x_coords[i] + (width) && y - yIn + 61 > y_coords[i] && y - yIn + 61 < y_coords[i] + (height)) {
-                        movingPiece = i;
-                        System.out.println(i);
-                        System.out.println(movingPiece);
+                    if (x - xIn > x_coords[i] && x - xIn < x_coords[i] + (width) && y - yIn + y_calibrate > y_coords[i] && y - yIn + y_calibrate < y_coords[i] + (height)) {
+                        movingPiece = i;                        
                         canDrag = true;
                         dragFromX = x - x_coords[i];
                         dragFromY = y - y_coords[i];
@@ -350,11 +343,9 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
         if(toPos >= 56 && toPos <=63) {
             frame = new promotionFrame("white");
             frame.getButton().addActionListener(listener);
-            //frame.setUndecorated(true);
-
-            
-            
+            //frame.setUndecorated(true);           
         }
+        
         else if(toPos <=7 && toPos >=0) {
             frame = new promotionFrame("black");
             frame.getButton().addActionListener(listener);

@@ -18,6 +18,7 @@ public final class guiConstants {
     public static final int height = 60;
     public static final int xIn = 17;
     public static final int yIn = 155;
+    public static final int y_calibrate = 61;
     public static final int boardSize = 64;
     public static final int zero = 0;
     
