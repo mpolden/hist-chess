@@ -23,8 +23,8 @@ public class Board implements Serializable {
     private Piece[] board = new Piece[size];
     private Position p = new Position(this);
     private int turn = WHITE;
-    private boolean whiteInCheck = false;
-    private boolean blackInCheck = false;
+    private boolean inCheck = false;
+    private boolean checkMate = false;
     
     /**
      * Creates the board and makes it ready for a new game
@@ -35,8 +35,8 @@ public class Board implements Serializable {
 
     /**
      * Get piece
-     * @param position
-     * @return The piece in the given position
+     * @param from
+     * @return The piece in the given from
      */
     public Piece getPiece(int position) {
         return board[position];
@@ -44,7 +44,7 @@ public class Board implements Serializable {
 
     /**
      * Set piece
-     * @param position
+     * @param from
      * @param piece
      */
     public void setPiece(int position, Piece piece) {
@@ -52,22 +52,7 @@ public class Board implements Serializable {
     }
 
     /**
-     * Checks if in check
-     * @return True if in check and false otherwise
-     */
-//    public boolean inCheck() {
-//        for (int position = 0; position < board.length; position++) {
-//            if (boardgetColor() == WHITE) {
-//                try {
-//
-//                }
-//            }
-//        }
-//        return false;
-//    }
-
-    /**
-     * Move a piece from an old position to a new position
+     * Move a piece from an old from to a new from
      * @param from
      * @param to
      */
@@ -80,7 +65,7 @@ public class Board implements Serializable {
                     + "\nTo: " + to);
         }
 
-        // Check if piece in 'from' position is empty
+        // Check if piece in 'from' from is empty
         if (getPiece(from).isEmpty()) {
             throw new BoardException("Can't move empty piece.\n" +
                     "\nFrom: " + from +
@@ -92,10 +77,9 @@ public class Board implements Serializable {
             throw new BoardException("Not allowed to move now.");
         }
 
-        // Check if we're in check
-        if (inCheck(turn) && getPiece(from).getType() != KING) {
-            throw new BoardException("You're in check, you need to move your king.");
-        }
+        // Save the pieces we're moving, in case we need to "revert" it
+        Piece fromPiece = getPiece(from);
+        Piece toPiece = getPiece(to);
 
         // Set our positions
         p.setPositions(from, to);
@@ -113,8 +97,26 @@ public class Board implements Serializable {
 
         }
 
-        // Check if any color is in check
-        setInCheck();
+        // Update check and check mate states
+        updateInCheck();
+        updateCheckMate();
+
+        if (!isInCheck() && isCheckMate()) {
+            throw new CheckMateException("Stalemate.");
+        }
+        
+        if (isCheckMate()) {
+            throw new CheckMateException("Game over dude!");
+        }
+
+        if (isInCheck()) {
+            // Undo move
+            setPiece(from, fromPiece);
+            setPiece(to, toPiece);
+            throw new CheckException("You can't put yourself in check.\n" +
+                    "\nFrom: " + from +
+                    "\nTo: " + to);
+        }
 
         // Switch turn
         switchTurn();
@@ -172,7 +174,7 @@ public class Board implements Serializable {
         }
         setPiece(to, getPiece(from));
         setPiece(from, new Piece());
-        setPiece(to - 8, new Piece());
+        setPiece(pawn, new Piece());
     }
 
     /**
@@ -185,47 +187,69 @@ public class Board implements Serializable {
     }
 
     /**
-     * Check if a color is in check
+     * Update check state
      */
-    private void setInCheck() {
+    private void updateInCheck() {
+        int opponent = turn ^ 1;
         for (int position = 0; position < board.length; position++) {
-            if (getPiece(position).getColor() == WHITE) {
+            if (getPiece(position).getColor() == opponent) {
                 try {
-                    p.setPositions(position, getKing(BLACK));
+                    p.setPositions(position, getKing(turn));
                     p.verifyPositions();
-                    blackInCheck = true;
+                    inCheck = true;
+                    break;
                 } catch (IllegalPositionException e) {
-                    blackInCheck = false;
-                }
-            } else if (getPiece(position).getColor() == BLACK) {
-                try {
-                    p.setPositions(position, getKing(WHITE));
-                    p.verifyPositions();
-                    whiteInCheck = true;
-                } catch (IllegalPositionException e) {
-                    whiteInCheck = false;
+                    inCheck = false;
                 }
             }
         }
     }
 
     /**
-     * Check if a color is in check
-     * @param color
+     * Update check mate state
      */
-    private boolean inCheck(int color) {
-        if (color == WHITE) {
-            return whiteInCheck;
-        } else if (color == BLACK) {
-            return blackInCheck;
+    private void updateCheckMate() {
+        boolean checkState = isInCheck();
+        for (int from = 0; from < board.length; from++) {
+            if (getPiece(from).getColor() == turn) {
+                for (int to = 0; to < board.length; to++) {
+                    try {
+                        p.setPositions(from, to);
+                        p.verifyPositions();
+                        updateInCheck();
+                        if (!isInCheck()) {
+                            checkMate = false;
+                            inCheck = checkState; // Restore check state, since we're doing simulated moves
+                            return;
+                        }
+                    } catch (IllegalPositionException e) {
+                        checkMate = true;
+                    }
+                }
+            }
         }
-        return false;
     }
 
     /**
-     * Get the position of a king
+     * Check if player is in check
+     * @return True if in check and false otherwise
+     */
+    private boolean isInCheck() {
+        return inCheck;
+    }
+
+    /**
+     * Check if player is check mate
+     * @return True if check mate and false otherwise
+     */
+    private boolean isCheckMate() {
+        return checkMate;
+    }
+
+    /**
+     * Get the from of a king
      * @param color
-     * @return The position
+     * @return The from
      */
     private int getKing(int color) {
         for (int position = 0; position < board.length; position++) {

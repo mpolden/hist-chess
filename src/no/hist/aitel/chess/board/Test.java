@@ -27,13 +27,16 @@ public class Test {
 //        b.movePiece(19, 46);
 //        b.movePiece(53, 45);
 
-        b.movePiece(8, 24);
-        b.movePiece(48, 40);
-        b.movePiece(1, 16);
-        b.movePiece(49, 41);
-        b.movePiece(0, 35);
+        // Check mate in 4 moves
+        b.movePiece(13, 21);
+        b.movePiece(52, 36);
+        b.movePiece(14, 30);
+        b.movePiece(59, 31);
+//        b.movePiece(8, 16); // Invalid move -> check mate
+
 
         System.out.println(b.toString());
+//        System.out.println(b.getPiece(45).toString());
 
         // 56  57  58  59  60  61  62  63
         // 48  49  50  51  52  53  54  55
