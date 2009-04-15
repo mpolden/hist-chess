@@ -25,6 +25,8 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import no.hist.aitel.chess.board.Board;
+import no.hist.aitel.chess.board.CheckException;
+import no.hist.aitel.chess.board.CheckMateException;
 import no.hist.aitel.chess.board.BoardException;
 import no.hist.aitel.chess.piece.Piece;
 import no.hist.aitel.chess.position.IllegalPositionException;
@@ -422,6 +424,14 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
                 resetPosition();
                 setCapturedPos(-1);
             } catch (IllegalPositionException exception) {
+                System.out.println(exception.getMessage());
+                resetPosition();
+                setCapturedPos(-1);
+            } catch (CheckException exception) {
+                System.out.println(exception.getMessage());
+                resetPosition();
+                setCapturedPos(-1);
+            } catch (CheckMateException exception) {
                 System.out.println(exception.getMessage());
                 resetPosition();
                 setCapturedPos(-1);
