@@ -133,7 +133,7 @@ public class Piece implements Serializable {
      * Get piece type
      * @return The piece type
      */
-    private String getTypeStr() {
+    public String getTypeStr() {
         switch (type) {
             case UNDEFINED: {
                 return "Undefined";
