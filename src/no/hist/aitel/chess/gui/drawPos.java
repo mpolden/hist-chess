@@ -29,6 +29,12 @@ public class drawPos extends JPanel {
         return images;
     }
 
+    public void resetPromoteImage() {
+        for (int i=0; i<64; i++) {
+            promoteImage[i] = null;
+        }
+    }
+
     public void setPromotedImage(BufferedImage img, int i) {
         promoteImage[i] = img;
     }   

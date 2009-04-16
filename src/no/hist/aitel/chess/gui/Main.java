@@ -125,7 +125,7 @@ public class Main implements ActionListener, ItemListener {
              if (JOptionPane.YES_OPTION == JOptionPane.showConfirmDialog(null, "Are you sure you want to save the game?\nPrevious saved game will be lost.")) {
                  saveAndLoad.saveIntArray("./src/no/hist/aitel/chess/resources/x_coords.txt", mainWindow.getChessboard().getXcoords());
                  saveAndLoad.saveIntArray("./src/no/hist/aitel/chess/resources/y_coords.txt", mainWindow.getChessboard().getYcoords());
-                 saveAndLoad.saveBoard("./src/no/hist/aitel/chess/resources/internal.txt", mainWindow.getBoardObj());
+                 saveAndLoad.saveBoard("./src/no/hist/aitel/chess/resources/internal.txt", mainWindow.getBoardObj());                 
                  timeUsedP1 = mainWindow.getTimeUsedP1();
                  timeUsedP2 = mainWindow.getTimeUsedP2();
              }
@@ -167,6 +167,7 @@ public class Main implements ActionListener, ItemListener {
                     mainWindow.setYcoords(saveAndLoad.loadIntArray("./src/no/hist/aitel/chess/resources/new_game_y_coords.txt"));
                     mainWindow.setBoardObj(saveAndLoad.loadBoard("./src/no/hist/aitel/chess/resources/new_game_internal.txt"));
                     mainWindow.setTimeUsed(0, 0);
+                    mainWindow.getChessboard().getStartPos().resetPromoteImage();
                 } catch (ClassNotFoundException ex) {
                     Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
                 }

@@ -334,9 +334,7 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
                 x_coords[56] = getRect.getRectCoordX(59);
                 y_coords[56] = getRect.getRectCoordY(59);
             }
-
         }
-
     }
 
     private void checkPromotion() {
@@ -352,6 +350,12 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
             frame = new promotionFrame("black");
             frame.getButton().addActionListener(listener);
             //frame.setUndecorated(true);
+        }
+    }
+
+    private void checkEnPassant() {
+        if (board.getPiece(toPos).getType() == PAWN) {
+            
         }
     }
 
