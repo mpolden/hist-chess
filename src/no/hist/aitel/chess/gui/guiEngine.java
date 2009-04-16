@@ -55,7 +55,8 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
     private int y;
     private int fromPos;
     private int toPos;
-    private boolean timerCheck = true;    
+    private boolean timerCheckP1 = true;
+    private boolean timerCheckP2 = false;
     private String player1 = null;
     private String player2 = null;
     private JLabel player1Label;
@@ -83,6 +84,11 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
 
     private int getCapturedPos() {
         return capturedPos;
+    }
+
+    private void stopTimers() {
+        timerCheckP1 = false;
+        timerCheckP2 = false;
     }
 
     private void setCapturedPos(int capturedPos) {
@@ -116,6 +122,7 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
         miniMapArea.setText(board.toString());
         getChessboard().getStartPos().resetPromoteImage();
         setCenterTextArea("");
+        stopTimers();
     }
 
     public guiEngine(String title) {
@@ -175,8 +182,7 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
         boardGui.setBorder(BorderFactory.createLineBorder( Color.black));
         
         westPanel.add(boardGui, BorderLayout.WEST);       
-        eastPanel.add(p1textArea, BorderLayout.NORTH);
-        centerText += "\n\n  1. April: Er nå mulig å velge brikker fra menyen :)";
+        eastPanel.add(p1textArea, BorderLayout.NORTH);        
         centerTextArea.setText(centerText);
         eastPanel.add(centerScrollPane, BorderLayout.CENTER);
         eastPanel.add(miniMapArea, BorderLayout.SOUTH);
@@ -191,7 +197,7 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
         
         player1timer = new Runnable () {
             public void run () {                
-                while(timerCheck) {
+                while(timerCheckP1) {
                     try {
                         Thread.currentThread().sleep(1000);
                         stopWatchP1.setText("   " + timeUsedP1 + " sec");
@@ -207,7 +213,7 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
 
         player2timer = new Runnable () {
             public void run () {                
-                while(!timerCheck) {
+                while(timerCheckP2) {
                     try {
                         Thread.currentThread().sleep(1000);
                         stopWatchP2.setText("   " + timeUsedP2 + " sec");
@@ -322,13 +328,19 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
     private void changePosition() {
         x_coords[movingPiece] = getRect.getRectCoordX(toPos);
         y_coords[movingPiece] = getRect.getRectCoordY(toPos);
-        if(timerCheck) {
-            timerCheck = false;
+        if(!timerCheckP1 && !timerCheckP2) {
+            timerCheckP2 = true;
+            new Thread(player2timer).start();
+        }
+        else if(timerCheckP1) {
+            timerCheckP2 = true;
+            timerCheckP1 = false;
             new Thread(player2timer).start();
             
         }
         else {
-            timerCheck = true;
+            timerCheckP1 = true;
+            timerCheckP2 = false;
             new Thread(player1timer).start();
             
         }
