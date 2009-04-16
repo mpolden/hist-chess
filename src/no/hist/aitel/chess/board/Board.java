@@ -99,15 +99,6 @@ public class Board implements Serializable {
 
         // Update check and check mate states
         updateInCheck();
-        updateCheckMate();
-
-        if (!isInCheck() && isCheckMate()) {
-            throw new CheckMateException("Stalemate.");
-        }
-        
-        if (isCheckMate()) {
-            throw new CheckMateException("Game over dude!");
-        }
 
         if (isInCheck()) {
             // Undo move
@@ -116,6 +107,16 @@ public class Board implements Serializable {
             throw new CheckException("You can't put yourself in check.\n" +
                     "\nFrom: " + from +
                     "\nTo: " + to);
+        }
+
+        updateCheckMate();
+
+        if (!isInCheck() && isCheckMate()) {
+            throw new CheckMateException("Stalemate.");
+        }
+        
+        if (isCheckMate()) {
+            throw new CheckMateException("Game over dude!");
         }
 
         // Switch turn
@@ -247,9 +248,9 @@ public class Board implements Serializable {
     }
 
     /**
-     * Get the from of a king
+     * Get the position of a king
      * @param color
-     * @return The from
+     * @return The position
      */
     private int getKing(int color) {
         for (int position = 0; position < board.length; position++) {
