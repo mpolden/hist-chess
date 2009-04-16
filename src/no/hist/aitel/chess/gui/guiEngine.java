@@ -65,7 +65,7 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
     private JPanel westPanel;
     private JPanel eastPanel;
     private JTextArea p1textArea;
-    private JTextArea p2textArea;
+    private JTextArea miniMapArea;
     private JTextArea centerTextArea;
     private int capturedPos = -1;
     private JLabel stopWatchP1 = new JLabel("", JLabel.LEFT);
@@ -76,8 +76,10 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
     private int timeUsedP2 = zero;
     private Font player = new Font("VERDANA", Font.BOLD, 20);
     private Font timer = new Font("VERDANA", Font.ITALIC, 14);
+    private Font miniMap = new Font("COURIER NEW", Font.PLAIN, 16);
     private promotionFrame frame;
     private String picked = "test";
+    private String centerText = "";
 
     private int getCapturedPos() {
         return capturedPos;
@@ -99,7 +101,22 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
            y_coords[i] = newCoords[i];
         }
         this.repaint();
-    }    
+    }
+    public String getCenterTextArea() {
+        return centerText;
+    }
+
+    public void setCenterTextArea(String newText) {
+        centerText = newText;
+        centerTextArea.setText(centerText);
+    }
+
+    public void cleanup() {
+        setTimeUsed(0, 0);
+        miniMapArea.setText(board.toString());
+        getChessboard().getStartPos().resetPromoteImage();
+        setCenterTextArea("");
+    }
 
     public guiEngine(String title) {
         this.addMouseListener(this);
@@ -119,21 +136,25 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
         player2Label = new JLabel(player2, JLabel.LEFT);
 
         player1Label.setFont(player);
-        player2Label.setFont(player);
+        player2Label.setFont(player);        
 
         centerTextArea = new JTextArea(10, 25);
+        JScrollPane centerScrollPane = new JScrollPane(centerTextArea);
+        centerScrollPane.createHorizontalScrollBar();
         p1textArea = new JTextArea(10, 25);
-        p2textArea = new JTextArea(10, 10);
+        miniMapArea = new JTextArea(10, 10);
         p1textArea.setEditable(false);
-        p2textArea.setEditable(false);
+        miniMapArea.setEditable(false);
         centerTextArea.setEditable(false);
         p1textArea.setBorder(BorderFactory.createLineBorder( Color.black));
-        p2textArea.setBorder(BorderFactory.createLineBorder( Color.black));
+        miniMapArea.setBorder(BorderFactory.createLineBorder( Color.black));
         centerTextArea.setBorder(BorderFactory.createLineBorder( Color.black));
-        p2textArea.setBackground(new Color(0xD8D8BF));
+        miniMapArea.setBackground(new Color(0xD8D8BF));
         p1textArea.setBackground(new Color(0xD8D8BF));
         centerTextArea.setBackground(new Color(0xD8D8BF));
-        p2textArea.setFont(timer);
+        centerTextArea.setAutoscrolls(true);
+        miniMapArea.setFont(timer);
+        miniMapArea.setText(board.toString());
         new JScrollPane(p1textArea);
 
         stopWatchP1.setFont(timer);
@@ -155,9 +176,12 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
         
         westPanel.add(boardGui, BorderLayout.WEST);       
         eastPanel.add(p1textArea, BorderLayout.NORTH);
-        centerTextArea.setText("\n\n  1. April: Er nå mulig å velge brikker fra menyen :)");
-        eastPanel.add(centerTextArea, BorderLayout.CENTER);
-        eastPanel.add(p2textArea, BorderLayout.SOUTH);
+        centerText += "\n\n  1. April: Er nå mulig å velge brikker fra menyen :)";
+        centerTextArea.setText(centerText);
+        eastPanel.add(centerScrollPane, BorderLayout.CENTER);
+        eastPanel.add(miniMapArea, BorderLayout.SOUTH);
+
+        miniMapArea.setFont(miniMap);
 
         add(eastPanel, BorderLayout.EAST);
         add(westPanel, BorderLayout.WEST);
@@ -234,10 +258,6 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
     private void players() {
         player1 = "Player 1";
         player2 = "Player 2";
-    }
-
-    public void undoMove() {
-        //
     }
 
     public void mousePressed(MouseEvent e) {
@@ -335,6 +355,7 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
                 y_coords[56] = getRect.getRectCoordY(59);
             }
         }
+        miniMapArea.setText(board.toString());
     }
 
     private void checkPromotion() {
@@ -403,6 +424,7 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
                 }
             }
             repaint();
+            miniMapArea.setText(board.toString());
         }        
     }
 
@@ -471,9 +493,10 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
                 }
             }
             this.repaint();
-            
-            System.out.println(board.toString());
-            //p2textArea.setText(board.toString());
+            centerText += "\n    test";
+            centerTextArea.setText(centerText);
+            System.out.println(board.toString());          
+            miniMapArea.setText(board.toString());
         }
     }
 
