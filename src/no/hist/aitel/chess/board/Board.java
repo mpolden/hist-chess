@@ -268,6 +268,130 @@ public class Board implements Serializable {
         turn ^= 1; // Bitwise flip between 0 and 1
     }
 
+    public String getNotation(int position) {
+        int rank = 0;
+        for (int i = 0; i <= position; i++) {
+            if (i % 8 == 0) {
+                rank++;
+            }
+        }
+
+        char file;
+
+        switch (position) {
+            case 0:
+            case 8:
+            case 16:
+            case 24:
+            case 32:
+            case 40:
+            case 48:
+            case 56: {
+                file = 'a';
+                break;
+            }
+            case 1:
+            case 9:
+            case 17:
+            case 25:
+            case 33:
+            case 41:
+            case 49:
+            case 57: {
+                file = 'b';
+                break;
+            }
+            case 2:
+            case 10:
+            case 18:
+            case 26:
+            case 34:
+            case 42:
+            case 50:
+            case 58: {
+                file = 'c';
+                break;
+            }
+            case 3:
+            case 11:
+            case 19:
+            case 27:
+            case 35:
+            case 43:
+            case 51:
+            case 59: {
+                file = 'd';
+                break;
+            }
+            case 4:
+            case 12:
+            case 20:
+            case 28:
+            case 36:
+            case 44:
+            case 52:
+            case 60: {
+                file = 'e';
+                break;
+            }
+            case 5:
+            case 13:
+            case 21:
+            case 29:
+            case 37:
+            case 45:
+            case 53:
+            case 61: {
+                file = 'f';
+                break;
+            }
+            case 6:
+            case 14:
+            case 22:
+            case 30:
+            case 38:
+            case 46:
+            case 54:
+            case 62: {
+                file = 'g';
+                break;
+            }
+            case 7:
+            case 15:
+            case 23:
+            case 31:
+            case 39:
+            case 47:
+            case 55:
+            case 63: {
+                file = 'h';
+                break;
+            }
+            default: {
+                file = 'x';
+            }
+        }
+
+        return file + "" + rank;
+    }
+    // 224
+    // 232
+    // 240
+    // 248
+    // 256
+    // 264
+    // 272
+    // 280
+
+        // 56  57  58  59  60  61  62  63
+        // 48  49  50  51  52  53  54  55
+        // 40  41  42  43  44  45  46  47
+        // 32  33  34  35  36  37  38  39
+        // 24  25  26  27  28  29  30  31
+        // 16  17  18  19  20  21  22  23
+        // 8   9   10  11  12  13  14  15
+        // 0   1   2   3   4   5   6   7
+
     /**
      * Produces a string representation of the chess board
      * @return Fancy ascii drawing of the board, colors and types

@@ -18,6 +18,7 @@ public class Test {
     public static void main(String[] args) {
         Board b  = new Board();
 
+        // Check
 //        b.movePiece(11, 27);
 //        b.movePiece(48, 40);
 //        b.movePiece(3, 19);
@@ -28,15 +29,20 @@ public class Test {
 //        b.movePiece(53, 45);
 
         // Check mate in 4 moves
-        b.movePiece(13, 21);
-        b.movePiece(52, 36);
-        b.movePiece(14, 30);
-        b.movePiece(59, 31);
+//        b.movePiece(13, 21);
+//        b.movePiece(52, 36);
+//        b.movePiece(14, 30);
+//        b.movePiece(59, 31);
 //        b.movePiece(8, 16); // Invalid move -> check mate
 
+        // En passant
+//        b.movePiece(10, 26);
+//        b.movePiece(48, 40);
+//        b.movePiece(26, 34);
+//        b.movePiece(51, 35);
+//        b.movePiece(34, 43);
 
-        System.out.println(b.toString());
-//        System.out.println(b.getPiece(45).toString());
+        System.out.println(b.getNotation(24));
 
         // 56  57  58  59  60  61  62  63
         // 48  49  50  51  52  53  54  55

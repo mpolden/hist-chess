@@ -17,18 +17,17 @@ import static no.hist.aitel.chess.piece.PieceConstants.*;
  */
 
 public class Position implements Serializable {
+
     /**
      * Board object to validate positions on
      */
     private Board board;
+
     /**
-     * From and to positions, and the difference between them
+     * From and to position, and the difference between them
      */
     private int from, to, diff;
-    /**
-     * True if en passant is possible in the next move
-     */
-    private boolean enPassant = false;
+
 
     /**
      * Creates a position object for a board which is used to validate moves
@@ -54,8 +53,6 @@ public class Position implements Serializable {
      * @throws IllegalPositionException
      */
     public void verifyPositions() throws IllegalPositionException {
-        // Make sure we're not allowing en passant before we start throwing exceptions
-        enPassant = false;
 
         // Get destionation pieces
         Piece fromPiece = board.getPiece(from);
@@ -95,8 +92,6 @@ public class Position implements Serializable {
                                         "\nFrom: " + from +
                                         "\nTo: " + to);
                             }
-                            // Moved two fields forward, en passant is now possible
-                            if (diff == 16) { enPassant = true; }
                         } else if (diff != 8) { // Pawn can always move 1 field forward
                             throw new IllegalPositionException("Pawn can only move one field forward when not in initial position.\n" +
                                     "Type: " + fromPiece.getType() +
@@ -111,8 +106,6 @@ public class Position implements Serializable {
                                         "\nFrom: " + from +
                                         "\nTo: " + to);
                             }
-                            // Moved two fields forward, en passant is now possible
-                            if (diff == -16) { enPassant = true; }
                         } else if (diff != -8) {
                             throw new IllegalPositionException("Pawn can only move one field forward when not in initial position.\n" +
                                     "Type: " + fromPiece.getType() +
@@ -349,14 +342,14 @@ public class Position implements Serializable {
             if (fromPiece.getColor() == WHITE) {
                 if (to == from + 9 || to == from + 7) {
                     Piece blackPawn = board.getPiece(to - 8);
-                    if (!blackPawn.isEmpty() && enPassant) {
+                    if (!blackPawn.isEmpty()) {
                         return true;
                     }
                 }
             } else if (fromPiece.getColor() == BLACK) {
                 if (to == from - 9 || to == from - 7) {
                     Piece whitePawn = board.getPiece(to + 8);
-                    if (!whitePawn.isEmpty() && enPassant) {
+                    if (!whitePawn.isEmpty()) {
                         return true;
                     }
                 }
@@ -441,8 +434,7 @@ public class Position implements Serializable {
      */
     @Override
     public String toString() {
-        String out = "From: " + from + "\nTo: " + to + "\nDiff: " + diff + "\nenPassant: " +
-                enPassant;
+        String out = "From: " + from + "\nTo: " + to + "\nDiff: " + diff;
         return out;
     }
 
