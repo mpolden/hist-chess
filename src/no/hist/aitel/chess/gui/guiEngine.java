@@ -445,6 +445,9 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
                 }
                 setCapturedPos(board.getPiece(toPos).getId());
                 changePosition();
+                String from = board.getNotation(fromPos);
+                String to = board.getNotation(toPos);
+                centerText += "\n  "+board.getPiece(toPos).getTypeStr()+" from "+from+" to "+to;
             } catch (BoardException exception) { 
                 System.out.println(exception.getMessage());
                 resetPosition();
@@ -493,7 +496,7 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
                 }
             }
             this.repaint();
-            centerText += "\n    test";
+            //centerText += "\n    test";
             centerTextArea.setText(centerText);
             System.out.println(board.toString());          
             miniMapArea.setText(board.toString());
