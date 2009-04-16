@@ -287,7 +287,7 @@ public class Board implements Serializable {
             case 40:
             case 48:
             case 56: {
-                file = 'a';
+                file = 'A';
                 break;
             }
             case 1:
@@ -298,7 +298,7 @@ public class Board implements Serializable {
             case 41:
             case 49:
             case 57: {
-                file = 'b';
+                file = 'B';
                 break;
             }
             case 2:
@@ -309,7 +309,7 @@ public class Board implements Serializable {
             case 42:
             case 50:
             case 58: {
-                file = 'c';
+                file = 'C';
                 break;
             }
             case 3:
@@ -320,7 +320,7 @@ public class Board implements Serializable {
             case 43:
             case 51:
             case 59: {
-                file = 'd';
+                file = 'D';
                 break;
             }
             case 4:
@@ -331,7 +331,7 @@ public class Board implements Serializable {
             case 44:
             case 52:
             case 60: {
-                file = 'e';
+                file = 'E';
                 break;
             }
             case 5:
@@ -342,7 +342,7 @@ public class Board implements Serializable {
             case 45:
             case 53:
             case 61: {
-                file = 'f';
+                file = 'F';
                 break;
             }
             case 6:
@@ -353,7 +353,7 @@ public class Board implements Serializable {
             case 46:
             case 54:
             case 62: {
-                file = 'g';
+                file = 'G';
                 break;
             }
             case 7:
@@ -364,7 +364,7 @@ public class Board implements Serializable {
             case 47:
             case 55:
             case 63: {
-                file = 'h';
+                file = 'H';
                 break;
             }
             default: {
