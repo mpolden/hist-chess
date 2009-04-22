@@ -28,6 +28,11 @@ public class Position implements Serializable {
      */
     private int from, to, diff;
 
+    /**
+     * Boolean which controls enPassant
+     */
+    private boolean enPassant;
+
 
     /**
      * Creates a position object for a board which is used to validate moves
@@ -52,7 +57,11 @@ public class Position implements Serializable {
      * Verifies positions
      * @throws IllegalPositionException
      */
-    public void verifyPositions() throws IllegalPositionException {
+    public void verifyPositions(boolean simulated) throws IllegalPositionException {
+        
+        if (!simulated) {
+            enPassant = false;
+        }
 
         // Get destionation pieces
         Piece fromPiece = board.getPiece(from);
@@ -92,6 +101,9 @@ public class Position implements Serializable {
                                         "\nFrom: " + from +
                                         "\nTo: " + to);
                             }
+                            if (!simulated && diff == 16) {
+                                enPassant = true;
+                            }
                         } else if (diff != 8) { // Pawn can always move 1 field forward
                             throw new IllegalPositionException("Pawn can only move one field forward when not in initial position.\n" +
                                     "Type: " + fromPiece.getType() +
@@ -105,6 +117,9 @@ public class Position implements Serializable {
                                         "Type: " + fromPiece.getType() +
                                         "\nFrom: " + from +
                                         "\nTo: " + to);
+                            }
+                            if (!simulated && diff == -16) {
+                                enPassant = true;
                             }
                         } else if (diff != -8) {
                             throw new IllegalPositionException("Pawn can only move one field forward when not in initial position.\n" +
@@ -342,14 +357,14 @@ public class Position implements Serializable {
             if (fromPiece.getColor() == WHITE) {
                 if (to == from + 9 || to == from + 7) {
                     Piece blackPawn = board.getPiece(to - 8);
-                    if (!blackPawn.isEmpty()) {
+                    if (enPassant && blackPawn.getColor() == BLACK) {
                         return true;
                     }
                 }
             } else if (fromPiece.getColor() == BLACK) {
                 if (to == from - 9 || to == from - 7) {
                     Piece whitePawn = board.getPiece(to + 8);
-                    if (!whitePawn.isEmpty()) {
+                    if (enPassant && whitePawn.getColor() == WHITE) {
                         return true;
                     }
                 }
@@ -434,7 +449,8 @@ public class Position implements Serializable {
      */
     @Override
     public String toString() {
-        String out = "From: " + from + "\nTo: " + to + "\nDiff: " + diff;
+        String out = "From: " + from + "\nTo: " + to + "\nDiff: " + diff +
+                "\nenPassant: " + enPassant;
         return out;
     }
 

@@ -112,7 +112,7 @@ public class Piece implements Serializable {
      * Get piece color
      * @return The piece color
      */
-    private String getColorStr() {
+    public String getColorStr() {
         switch (color) {
             case UNDEFINED: {
                 return "Undefined";

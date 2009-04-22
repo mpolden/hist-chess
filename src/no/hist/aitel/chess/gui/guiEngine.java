@@ -401,18 +401,28 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
             if(toPos >= 56) {
                 if(picked.equals("queen")) {                    
                     boardGui.getStartPos().setPromotedImage(images[3], board.getPiece(toPos).getId());
+                    // Trenger ikke å bruke setPiece her egentlig, kan sette type direkte på brikken i stedet
+                    // så slipper vi å opprette et nytt objekt av Piece.
+                    // For eksempel:
+                    // board.getPiece(toPos).setType(QUEEN)
                     board.setPiece(toPos, new Piece(WHITE, QUEEN, board.getPiece(toPos).getId()));                    
                 }
                 else if(picked.equals("rook")) {
                     boardGui.getStartPos().setPromotedImage(images[0], board.getPiece(toPos).getId());
+                    // For eksempel:
+                    // board.getPiece(toPos).setType(ROOK)
                     board.setPiece(toPos, new Piece(WHITE, ROOK, board.getPiece(toPos).getId()));
                 }
                 else if(picked.equals("knight")) {
                     boardGui.getStartPos().setPromotedImage(images[1], board.getPiece(toPos).getId());
+                    // For eksempel:
+                    // board.getPiece(toPos).setType(ROOK)
                     board.setPiece(toPos, new Piece(WHITE, KNIGHT, board.getPiece(toPos).getId()));
                 }
                 else if(picked.equals("bishop")) {
                     boardGui.getStartPos().setPromotedImage(images[2], board.getPiece(toPos).getId());
+                    // For eksempel:
+                    // board.getPiece(toPos).setType(ROOK)
                     board.setPiece(toPos, new Piece(WHITE, BISHOP, board.getPiece(toPos).getId()));
                 }
             }
@@ -459,7 +469,7 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
                 changePosition();
                 String from = board.getNotation(fromPos);
                 String to = board.getNotation(toPos);
-                centerText += "\n  "+board.getPiece(toPos).getTypeStr()+" from "+from+" to "+to;
+                centerText += "\n  "+board.getPiece(toPos).getColorStr() + " " + board.getPiece(toPos).getTypeStr()+" from "+from+" to "+to;
             } catch (BoardException exception) { 
                 System.out.println(exception.getMessage());
                 resetPosition();

@@ -17,20 +17,31 @@ import static no.hist.aitel.chess.piece.PieceConstants.*;
  * @author martin
  */
 
-public class Board implements Serializable {
+public class Board implements Serializable, Cloneable {
 
     final private int size = 64;
     private Piece[] board = new Piece[size];
-    private Position p = new Position(this);
     private int turn = WHITE;
     private boolean inCheck = false;
     private boolean checkMate = false;
+    private Position p = new Position(this);
     
     /**
      * Creates the board and makes it ready for a new game
      */
     public Board() {
         board = new BoardInit().getInitBoard();
+    }
+
+    /**
+     * Reset board
+     */
+    public void reset() {
+        board = new BoardInit().getInitBoard();
+        turn = WHITE;
+        inCheck = false;
+        checkMate = false;
+        p = new Position(this);
     }
 
     /**
@@ -52,7 +63,15 @@ public class Board implements Serializable {
     }
 
     /**
-     * Move a piece from an old from to a new from
+     * Set board
+     * @param board
+     */
+    public void setBoard(Piece[] board) {
+        this.board = board;
+    }
+
+    /**
+     * Move a piece
      * @param from
      * @param to
      */
@@ -92,15 +111,13 @@ public class Board implements Serializable {
         } else {
 
             // Regular move
-            p.verifyPositions();
+            p.verifyPositions(false);
             doRegularMove(from, to);
 
         }
 
-        // Update check and check mate states
-        updateInCheck();
-
-        if (isInCheck()) {
+        // Check if player is in check after move, but wasn't initially in check
+        if (!isInCheck() && inCheckAfterMove() && !isCheckMate()) {
             // Undo move
             setPiece(from, fromPiece);
             setPiece(to, toPiece);
@@ -109,15 +126,27 @@ public class Board implements Serializable {
                     "\nTo: " + to);
         }
 
-        updateCheckMate();
+        // Check if player is initially in check and is still in check after move
+        if (isInCheck() && inCheckAfterMove() && !isCheckMate()) {
+            // Undo move
+            setPiece(from, fromPiece);
+            setPiece(to, toPiece);
+            throw new CheckException("Still in check! Move another piece.\n" +
+                    "\nFrom: " + from +
+                    "\nTo: " + to);
+        }
 
-        if (!isInCheck() && isCheckMate()) {
-            throw new CheckMateException("Stalemate.");
-        }
-        
-        if (isCheckMate()) {
-            throw new CheckMateException("Game over dude!");
-        }
+//        if (!isInCheck() && isCheckMate()) {
+//            throw new CheckMateException("Stalemate! Not in check, but can't move anywhere.");
+//        }
+//
+//        if (isCheckMate()) {
+//            throw new CheckMateException("Game over dude!");
+//        }
+
+        // Update check and check mate state
+        updateInCheck();
+//        updateCheckMate();
 
         // Switch turn
         switchTurn();
@@ -188,15 +217,16 @@ public class Board implements Serializable {
     }
 
     /**
-     * Update check state
+     * Update current check state
      */
     private void updateInCheck() {
         int opponent = turn ^ 1;
+        // Check any of the current players pieces has put opponent in check
         for (int position = 0; position < board.length; position++) {
-            if (getPiece(position).getColor() == opponent) {
+            if (getPiece(position).getColor() == turn) {
                 try {
-                    p.setPositions(position, getKing(turn));
-                    p.verifyPositions();
+                    p.setPositions(position, getKing(opponent));
+                    p.verifyPositions(true);
                     inCheck = true;
                     break;
                 } catch (IllegalPositionException e) {
@@ -207,28 +237,52 @@ public class Board implements Serializable {
     }
 
     /**
+     * Check if player is in check after move
+     * @return True if player is in check after move and false otherwise
+     */
+    private boolean inCheckAfterMove() {
+        int opponent = turn ^ 1;
+        for (int position = 0; position < board.length; position++) {
+            if (getPiece(position).getColor() == opponent) {
+                try {
+                    // Check if any opponent piece can move to my king
+                    p.setPositions(position, getKing(turn));
+                    p.verifyPositions(true);
+                    return true;
+                } catch (IllegalPositionException e) {
+
+                }
+            }
+        }
+        return false;
+    }
+
+    /**
      * Update check mate state
      */
     private void updateCheckMate() {
         boolean checkState = isInCheck();
-        for (int from = 0; from < board.length; from++) {
-            if (getPiece(from).getColor() == turn) {
-                for (int to = 0; to < board.length; to++) {
-                    try {
-                        p.setPositions(from, to);
-                        p.verifyPositions();
-                        updateInCheck();
-                        if (!isInCheck()) {
-                            checkMate = false;
-                            inCheck = checkState; // Restore check state, since we're doing simulated moves
-                            return;
+        // Simulate moves on the fake board to see if we can get out of check
+        out: {
+            for (int from = 0; from < board.length; from++) {
+                if (getPiece(from).getColor() == turn) {
+                    for (int to = 0; to < board.length; to++) {
+                        try {
+                            p.setPositions(from, to);
+                            p.verifyPositions(true);
+                            updateInCheck();
+                            if (isInCheck()) {
+                                checkMate = false;
+                                break out;
+                            }
+                        } catch (IllegalPositionException e) {
+                            checkMate = true;
                         }
-                    } catch (IllegalPositionException e) {
-                        checkMate = true;
                     }
                 }
             }
         }
+        inCheck = checkState;
     }
 
     /**
@@ -368,29 +422,22 @@ public class Board implements Serializable {
                 break;
             }
             default: {
-                file = 'x';
+                file = '_';
             }
         }
 
         return file + "" + rank;
     }
-    // 224
-    // 232
-    // 240
-    // 248
-    // 256
-    // 264
-    // 272
-    // 280
 
-        // 56  57  58  59  60  61  62  63
-        // 48  49  50  51  52  53  54  55
-        // 40  41  42  43  44  45  46  47
-        // 32  33  34  35  36  37  38  39
-        // 24  25  26  27  28  29  30  31
-        // 16  17  18  19  20  21  22  23
-        // 8   9   10  11  12  13  14  15
-        // 0   1   2   3   4   5   6   7
+    /**
+     * Get a string format of the board state
+     * @return Values of turn, inCheck and checkMate
+     */
+    public String getStateStr() {
+        String out = "turn: " + turn + "\ninCheck: " + inCheck +
+                "\ncheckMate: " + checkMate;
+        return out;
+    }
 
     /**
      * Produces a string representation of the chess board
