@@ -25,8 +25,6 @@ class MainWindow extends JFrame {
 
     public MainWindow(String tittel) {
 
-        //Player();
-
         setTitle(tittel);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
@@ -70,7 +68,6 @@ class MainWindow extends JFrame {
         public OkButton() {
             ButtonListener listener = new ButtonListener();
 
-
             JButton OkButton = new JButton("Nytt Spill");
             add(OkButton);
 
@@ -95,7 +92,7 @@ class MainWindow extends JFrame {
         }
     }
 
-    public void Player() {
+    public void MidiPlayer() {
 
         File midiFile = new File("./src/no/hist/aitel/chess/resources/sw.mid");
 
@@ -131,20 +128,27 @@ class MainWindow extends JFrame {
         }
 
     }
-}
 
-class ButtonListener implements ActionListener {
+    class ButtonListener implements ActionListener {
 
-    public void actionPerformed(ActionEvent listener1) {
-        String kommando = listener1.getActionCommand();
+        public void actionPerformed(ActionEvent listener1) {
+            String kommando = listener1.getActionCommand();
 
-        if (kommando.equals("Nytt Spill")) {
+          //  Settings.swBoard = true;
 
-            System.out.println("tjoho");
-        } else {
+
+            if (kommando.equals("Nytt Spill")) {
+                javax.swing.SwingUtilities.invokeLater(new Runnable() {
+
+                    public void run() {
+                        Main.createAndShowGui();
+                    }
+                });
+            } else {
+            }
+
+
         }
-
-
     }
 }
 

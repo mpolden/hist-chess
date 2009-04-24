@@ -78,6 +78,10 @@ public class drawPos extends JPanel {
     int j=0;
     public void initDrawPos() {
 
+        //if(Settings.swBoard) {
+          //  setSwImages();
+        //}
+
         try {
             sw_pawnb = ImageIO.read(Thread.currentThread().getContextClassLoader().getResourceAsStream("./no/hist/aitel/chess/resources/storm_trooper.gif"));
             sw_pawnw = ImageIO.read(Thread.currentThread().getContextClassLoader().getResourceAsStream("./no/hist/aitel/chess/resources/rebel_guard.gif"));

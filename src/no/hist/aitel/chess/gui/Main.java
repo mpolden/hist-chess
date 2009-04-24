@@ -30,7 +30,7 @@ public class Main implements ActionListener, ItemListener {
     private String centerText = "";
     
 
-    private static void createAndShowGui() {
+    public static void createAndShowGui() {
         
         Main gui = new Main();
         frame.setJMenuBar(gui.addJMenu());
