@@ -309,8 +309,7 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
             y_coords[movingPiece] = Math.max(y_coords[movingPiece], 50);
             y_coords[movingPiece] = Math.min(y_coords[movingPiece], getWidth() - 310);
         }
-
-        //System.out.println(x + " " + y);
+       
         this.repaint();
     }
 

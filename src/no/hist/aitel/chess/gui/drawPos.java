@@ -77,40 +77,35 @@ public class drawPos extends JPanel {
         
     int j=0;
     public void initDrawPos() {
-
-        //if(Settings.swBoard) {
-          //  setSwImages();
-        //}
-
         try {
-            sw_pawnb = ImageIO.read(Thread.currentThread().getContextClassLoader().getResourceAsStream("./no/hist/aitel/chess/resources/storm_trooper.gif"));
-            sw_pawnw = ImageIO.read(Thread.currentThread().getContextClassLoader().getResourceAsStream("./no/hist/aitel/chess/resources/rebel_guard.gif"));
-            sw_kingb = ImageIO.read(Thread.currentThread().getContextClassLoader().getResourceAsStream("./no/hist/aitel/chess/resources/emperor.gif"));
-            sw_kingw = ImageIO.read(Thread.currentThread().getContextClassLoader().getResourceAsStream("./no/hist/aitel/chess/resources/yoda_star_wars.gif"));
-            sw_queenb = ImageIO.read(Thread.currentThread().getContextClassLoader().getResourceAsStream("./no/hist/aitel/chess/resources/darth_vader.gif"));
-            sw_queenw = ImageIO.read(Thread.currentThread().getContextClassLoader().getResourceAsStream("./no/hist/aitel/chess/resources/princes_leia.gif"));
-            sw_knightb = ImageIO.read(Thread.currentThread().getContextClassLoader().getResourceAsStream("./no/hist/aitel/chess/resources/boba_fett.gif"));
-            sw_knightw = ImageIO.read(Thread.currentThread().getContextClassLoader().getResourceAsStream("./no/hist/aitel/chess/resources/chewbaca.gif"));
-            sw_rookb = ImageIO.read(Thread.currentThread().getContextClassLoader().getResourceAsStream("./no/hist/aitel/chess/resources/royal_guard_.gif"));
-            sw_rookw = ImageIO.read(Thread.currentThread().getContextClassLoader().getResourceAsStream("./no/hist/aitel/chess/resources/c3po.gif"));
-            sw_bishopb = ImageIO.read(Thread.currentThread().getContextClassLoader().getResourceAsStream("./no/hist/aitel/chess/resources/darth_maul.gif"));
-            sw_bishopw = ImageIO.read(Thread.currentThread().getContextClassLoader().getResourceAsStream("./no/hist/aitel/chess/resources/obi_wan_kenobi.gif"));
+            sw_pawnb = ImageIO.read(getClass().getResource("/no/hist/aitel/chess/resources/storm_trooper.gif"));
+            sw_pawnw = ImageIO.read(getClass().getResource("/no/hist/aitel/chess/resources/rebel_guard.gif"));
+            sw_kingb = ImageIO.read(getClass().getResource("/no/hist/aitel/chess/resources/emperor.gif"));
+            sw_kingw = ImageIO.read(getClass().getResource("/no/hist/aitel/chess/resources/yoda_star_wars.gif"));
+            sw_queenb = ImageIO.read(getClass().getResource("/no/hist/aitel/chess/resources/darth_vader.gif"));
+            sw_queenw = ImageIO.read(getClass().getResource("/no/hist/aitel/chess/resources/princes_leia.gif"));
+            sw_knightb = ImageIO.read(getClass().getResource("/no/hist/aitel/chess/resources/boba_fett.gif"));
+            sw_knightw = ImageIO.read(getClass().getResource("/no/hist/aitel/chess/resources/chewbaca.gif"));
+            sw_rookb = ImageIO.read(getClass().getResource("/no/hist/aitel/chess/resources/royal_guard_.gif"));
+            sw_rookw = ImageIO.read(getClass().getResource("/no/hist/aitel/chess/resources/c3po.gif"));
+            sw_bishopb = ImageIO.read(getClass().getResource("/no/hist/aitel/chess/resources/darth_maul.gif"));
+            sw_bishopw = ImageIO.read(getClass().getResource("/no/hist/aitel/chess/resources/obi_wan_kenobi.gif"));
         } catch (IOException ioe) {
             System.out.println("IOException: " + ioe.getMessage());
         }
         try {
-            pawnb = ImageIO.read(Thread.currentThread().getContextClassLoader().getResourceAsStream("./no/hist/aitel/chess/resources/pawnb.gif"));
-            pawnw = ImageIO.read(Thread.currentThread().getContextClassLoader().getResourceAsStream("./no/hist/aitel/chess/resources/pawnw.gif"));
-            kingb = ImageIO.read(Thread.currentThread().getContextClassLoader().getResourceAsStream("./no/hist/aitel/chess/resources/kingb.gif"));
-            kingw = ImageIO.read(Thread.currentThread().getContextClassLoader().getResourceAsStream("./no/hist/aitel/chess/resources/kingw.gif"));
-            queenb = ImageIO.read(Thread.currentThread().getContextClassLoader().getResourceAsStream("./no/hist/aitel/chess/resources/queenb.gif"));
-            queenw = ImageIO.read(Thread.currentThread().getContextClassLoader().getResourceAsStream("./no/hist/aitel/chess/resources/queenw.gif"));
-            knightb = ImageIO.read(Thread.currentThread().getContextClassLoader().getResourceAsStream("./no/hist/aitel/chess/resources/knightb.gif"));
-            knightw = ImageIO.read(Thread.currentThread().getContextClassLoader().getResourceAsStream("./no/hist/aitel/chess/resources/knightw.gif"));
-            rookb = ImageIO.read(Thread.currentThread().getContextClassLoader().getResourceAsStream("./no/hist/aitel/chess/resources/rookb.gif"));
-            rookw = ImageIO.read(Thread.currentThread().getContextClassLoader().getResourceAsStream("./no/hist/aitel/chess/resources/rookw.gif"));
-            bishopb = ImageIO.read(Thread.currentThread().getContextClassLoader().getResourceAsStream("./no/hist/aitel/chess/resources/bishopb.gif"));
-            bishopw = ImageIO.read(Thread.currentThread().getContextClassLoader().getResourceAsStream("./no/hist/aitel/chess/resources/bishopw.gif"));
+            pawnb = ImageIO.read(getClass().getResource("/no/hist/aitel/chess/resources/pawnb.gif"));
+            pawnw = ImageIO.read(getClass().getResource("/no/hist/aitel/chess/resources/pawnw.gif"));
+            kingb = ImageIO.read(getClass().getResource("/no/hist/aitel/chess/resources/kingb.gif"));
+            kingw = ImageIO.read(getClass().getResource("/no/hist/aitel/chess/resources/kingw.gif"));
+            queenb = ImageIO.read(getClass().getResource("/no/hist/aitel/chess/resources/queenb.gif"));
+            queenw = ImageIO.read(getClass().getResource("/no/hist/aitel/chess/resources/queenw.gif"));
+            knightb = ImageIO.read(getClass().getResource("/no/hist/aitel/chess/resources/knightb.gif"));
+            knightw = ImageIO.read(getClass().getResource("/no/hist/aitel/chess/resources/knightw.gif"));
+            rookb = ImageIO.read(getClass().getResource("/no/hist/aitel/chess/resources/rookb.gif"));
+            rookw = ImageIO.read(getClass().getResource("/no/hist/aitel/chess/resources/rookw.gif"));
+            bishopb = ImageIO.read(getClass().getResource("/no/hist/aitel/chess/resources/bishopb.gif"));
+            bishopw = ImageIO.read(getClass().getResource("/no/hist/aitel/chess/resources/bishopw.gif"));
         } catch (IOException ioe) {
             System.out.println("IOException: " + ioe.getMessage());
         } 
