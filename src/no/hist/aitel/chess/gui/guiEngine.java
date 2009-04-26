@@ -404,45 +404,38 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
                     // Trenger ikke å bruke setPiece her egentlig, kan sette type direkte på brikken i stedet
                     // så slipper vi å opprette et nytt objekt av Piece.
                     // For eksempel:
-                    // board.getPiece(toPos).setType(QUEEN)
-                    board.setPiece(toPos, new Piece(WHITE, QUEEN, board.getPiece(toPos).getId()));                    
+                    board.getPiece(toPos).setType(QUEEN);                    
                 }
                 else if(picked.equals("rook")) {
-                    boardGui.getStartPos().setPromotedImage(images[0], board.getPiece(toPos).getId());
-                    // For eksempel:
-                    // board.getPiece(toPos).setType(ROOK)
-                    board.setPiece(toPos, new Piece(WHITE, ROOK, board.getPiece(toPos).getId()));
+                    boardGui.getStartPos().setPromotedImage(images[0], board.getPiece(toPos).getId());                    
+                    board.getPiece(toPos).setType(ROOK);                   
                 }
                 else if(picked.equals("knight")) {
-                    boardGui.getStartPos().setPromotedImage(images[1], board.getPiece(toPos).getId());
-                    // For eksempel:
-                    // board.getPiece(toPos).setType(ROOK)
-                    board.setPiece(toPos, new Piece(WHITE, KNIGHT, board.getPiece(toPos).getId()));
+                    boardGui.getStartPos().setPromotedImage(images[1], board.getPiece(toPos).getId());                   
+                    board.getPiece(toPos).setType(KNIGHT);                    
                 }
                 else if(picked.equals("bishop")) {
-                    boardGui.getStartPos().setPromotedImage(images[2], board.getPiece(toPos).getId());
-                    // For eksempel:
-                    // board.getPiece(toPos).setType(ROOK)
-                    board.setPiece(toPos, new Piece(WHITE, BISHOP, board.getPiece(toPos).getId()));
+                    boardGui.getStartPos().setPromotedImage(images[2], board.getPiece(toPos).getId());                    
+                    board.getPiece(toPos).setType(BISHOP);                    
                 }
             }
             
             else if(toPos <= 7) {
                 if(picked.equals("queen")) {
                     boardGui.getStartPos().setPromotedImage(images[59], board.getPiece(toPos).getId());
-                    board.setPiece(toPos, new Piece(BLACK, QUEEN, board.getPiece(toPos).getId()));
+                    board.getPiece(toPos).setType(QUEEN); 
                 }
                 else if(picked.equals("rook")) {
                     boardGui.getStartPos().setPromotedImage(images[56], board.getPiece(toPos).getId());
-                    board.setPiece(toPos, new Piece(BLACK, ROOK, board.getPiece(toPos).getId()));
+                    board.getPiece(toPos).setType(ROOK);
                 }
                 else if(picked.equals("knight")) {
                     boardGui.getStartPos().setPromotedImage(images[57], board.getPiece(toPos).getId());
-                    board.setPiece(toPos, new Piece(BLACK, KNIGHT, board.getPiece(toPos).getId()));
+                    board.getPiece(toPos).setType(KNIGHT);
                 }
                 else if(picked.equals("bishop")) {
                     boardGui.getStartPos().setPromotedImage(images[58], board.getPiece(toPos).getId());
-                    board.setPiece(toPos, new Piece(BLACK, BISHOP, board.getPiece(toPos).getId()));
+                    board.getPiece(toPos).setType(BISHOP);
                 }
             }
             repaint();
