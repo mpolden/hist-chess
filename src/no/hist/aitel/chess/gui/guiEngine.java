@@ -484,7 +484,7 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
                 setCapturedPos(-1);
             } catch (CheckMateException exception) {
                 System.out.println(exception.getMessage());
-                resetPosition();
+                System.out.println("Good game!");
                 setCapturedPos(-1);
             } catch (ArrayIndexOutOfBoundsException exception) {
                 System.out.println(exception.getMessage());
