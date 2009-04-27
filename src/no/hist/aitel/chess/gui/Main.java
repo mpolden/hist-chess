@@ -28,6 +28,7 @@ public class Main implements ActionListener, ItemListener {
     private int timeUsedP1 = 0;
     private int timeUsedP2 = 0;
     private String centerText = "";
+    private boolean p1_turn;
     
 
     public static void createAndShowGui() {
@@ -127,6 +128,7 @@ public class Main implements ActionListener, ItemListener {
                  saveAndLoad.saveIntArray("./src/no/hist/aitel/chess/resources/x_coords.txt", mainWindow.getChessboard().getXcoords());
                  saveAndLoad.saveIntArray("./src/no/hist/aitel/chess/resources/y_coords.txt", mainWindow.getChessboard().getYcoords());
                  saveAndLoad.saveBoard("./src/no/hist/aitel/chess/resources/internal.txt", mainWindow.getBoardObj());
+                 //saveAndLoad.saveGuiEngine("./src/no/hist/aitel/chess/resources/engine.txt", mainWindow);
                  timeUsedP1 = mainWindow.getTimeUsedP1();
                  timeUsedP2 = mainWindow.getTimeUsedP2();
                  centerText = mainWindow.getCenterTextArea();
@@ -138,6 +140,7 @@ public class Main implements ActionListener, ItemListener {
                     mainWindow.setXcoords(saveAndLoad.loadIntArray("./src/no/hist/aitel/chess/resources/x_coords.txt"));
                     mainWindow.setYcoords(saveAndLoad.loadIntArray("./src/no/hist/aitel/chess/resources/y_coords.txt"));
                     mainWindow.setBoardObj(saveAndLoad.loadBoard("./src/no/hist/aitel/chess/resources/internal.txt"));
+                    //mainWindow = saveAndLoad.loadGuiEngine("./src/no/hist/aitel/chess/resources/engine.txt");
                     mainWindow.setTimeUsed(timeUsedP1, timeUsedP2);
                     mainWindow.setCenterTextArea(centerText);
                 } catch (ClassNotFoundException ex) {
@@ -183,9 +186,7 @@ public class Main implements ActionListener, ItemListener {
         }
     }
 
-    public void itemStateChanged(ItemEvent e) {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
+    public void itemStateChanged(ItemEvent e) {}
 
     public static void main(String[] args) {
         javax.swing.SwingUtilities.invokeLater(new Runnable() {

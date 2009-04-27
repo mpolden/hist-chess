@@ -15,6 +15,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.awt.image.BufferedImage;
+import java.io.Serializable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.BorderFactory;
@@ -28,13 +29,12 @@ import no.hist.aitel.chess.board.Board;
 import no.hist.aitel.chess.board.CheckException;
 import no.hist.aitel.chess.board.CheckMateException;
 import no.hist.aitel.chess.board.BoardException;
-import no.hist.aitel.chess.piece.Piece;
 import no.hist.aitel.chess.position.IllegalPositionException;
 import static no.hist.aitel.chess.gui.guiConstants.*;
 import static no.hist.aitel.chess.piece.PieceConstants.*;
 
 
-public class guiEngine extends JFrame implements MouseListener, MouseMotionListener, ActionListener {
+public class guiEngine extends JFrame implements MouseListener, MouseMotionListener, ActionListener, Serializable {
 
     private boolean canDrag = false;
     private Chessboard boardGui = new Chessboard();
@@ -82,19 +82,34 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
     private String picked = "test";
     private String centerText = "";
 
+    /**
+     * Returns the position of a captured piece
+     * @return capturedPos
+     */
     private int getCapturedPos() {
         return capturedPos;
     }
 
+    /**
+     * Stops the running player timers
+     */
     private void stopTimers() {
         timerCheckP1 = false;
         timerCheckP2 = false;
     }
 
+    /**
+     * Sets the position of the captured piece to the given parameter
+     * @param capturedPos
+     */
     private void setCapturedPos(int capturedPos) {
         this.capturedPos = capturedPos;
     }
 
+    /**
+     * Sets the x coordinates
+     * @param newCoords
+     */
     public void setXcoords(int[] newCoords) {
         for(int i=0; i<64; i++) {
            x_coords[i] = newCoords[i];
@@ -102,21 +117,37 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
         this.repaint();
     }
 
+    /**
+     * Sets the y coordinates
+     * @param newCoords
+     */
     public void setYcoords(int[] newCoords) {
         for(int i=0; i<64; i++) {
            y_coords[i] = newCoords[i];
         }
         this.repaint();
     }
+
+    /**
+     * Returns the text of the center area
+     * @return centerText
+     */
     public String getCenterTextArea() {
         return centerText;
     }
 
+    /**
+     * Sets the text of the center area
+     * @param newText
+     */
     public void setCenterTextArea(String newText) {
         centerText = newText;
         centerTextArea.setText(centerText);
     }
 
+    /**
+     * cleans up before a new game
+     */
     public void cleanup() {
         setTimeUsed(0, 0);
         miniMapArea.setText(board.toString());
@@ -125,6 +156,10 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
         stopTimers();
     }
 
+    /**
+     * Creates the diffrent variables and gui
+     * @param title
+     */
     public guiEngine(String title) {
         this.addMouseListener(this);
         this.addMouseMotionListener(this);
@@ -228,48 +263,85 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
         pack();
     }
 
+    /**
+     * Returns the current timer for P1
+     * @return timeUsedP1
+     */
     public int getTimeUsedP1() {
         return timeUsedP1;
     }
+    /**
+     * Returns the current timer for P2
+     * @return timeUsedP2
+     */
     public int getTimeUsedP2() {
         return timeUsedP2;
     }
+    /**
+     * Sets the timer value for each player
+     * @param timeP1
+     * @param timeP2
+     */
     public void setTimeUsed(int timeP1, int timeP2) {
         timeUsedP1 = timeP1;
         stopWatchP1.setText("   " + timeUsedP1 + " sec");
         timeUsedP2 = timeP2;
         stopWatchP2.setText("   " + timeUsedP2 + " sec");        
     }
-    
+
+    /**
+     * Sets the current board to the given parameter
+     * @param board
+     */
     public void setBoardObj(Board board) {
         this.board = board;
     }
-
+    /**
+     * Returns the current board
+     * @return board
+     */
     public Board getBoardObj() {
         return board;
     }
-
+    /**
+     * Returns the current chessboard gui
+     * @return boardGui
+     */
     public Chessboard getChessboard() {
         return boardGui;
     }
 
+    /**
+     * Sets player 1 name to the given parameter
+     * @param newName
+     */
     public void setP1name(String newName) {
         player1Label.setText(newName);
     }
 
+    /**
+     * Sets player 2 name to the given parameter
+     * @param newName
+     */
     public void setP2name(String newName) {
         player2Label.setText(newName);
     }
 
+    /**
+     * Initiates the player names
+     */
     private void players() {
         player1 = "Player 1";
         player2 = "Player 2";
     }
 
+    /**
+     * Calculates which piece is being clicked on
+     * @param e
+     */
     public void mousePressed(MouseEvent e) {
         x = e.getX();
-        y = e.getY();
-        System.out.println(x+" "+y);       
+        y = e.getY();             
         try {
             if(y>=yIn && y <= (height*8)+yIn) {
                 for (int i = 0; i < 64; i++) {
@@ -296,6 +368,10 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
         }
     }
 
+    /**
+     * Moves the piece calculated by the mousePressed method
+     * @param e
+     */
     public void mouseDragged(MouseEvent e) {
         x = e.getX();
         y = e.getY();
@@ -344,7 +420,9 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
             
         }
     }
-
+    /**
+     * Checks if a player is trying to do castling, and if so, moves the rook to the right position
+     */
     private void checkCastling() {
         if(!(board.getPiece(toPos).isMoved()) && fromPos == 4 && board.getPiece(toPos).getId() == 4) {
             if(toPos == 2) {
@@ -369,19 +447,19 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
         miniMapArea.setText(board.toString());
     }
 
+    /**
+     * Checks if a player can promote his pawn, and if so, creates a promotion frame so the player can choose
+     */
     private void checkPromotion() {
         Buttonlistener listener = new Buttonlistener();
        
         if(toPos >= 56 && toPos <=63) {
             frame = new promotionFrame("white");
-            frame.getButton().addActionListener(listener);
-            //frame.setUndecorated(true);           
-        }
-        
+            frame.getButton().addActionListener(listener);                      
+        }        
         else if(toPos <=7 && toPos >=0) {
             frame = new promotionFrame("black");
-            frame.getButton().addActionListener(listener);
-            //frame.setUndecorated(true);
+            frame.getButton().addActionListener(listener);           
         }
     }
 
@@ -391,7 +469,12 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
         }
     }
 
+
     private class Buttonlistener implements ActionListener {
+        /**
+         * Sets the pawn, who is able to promote, to the chosen type
+         * @param event
+         */
         public void actionPerformed(ActionEvent event) {            
             frame.setVisible(false);
             picked = frame.getPicked();
@@ -399,10 +482,7 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
             BufferedImage[] images = boardGui.getStartPos().getImages();
             if(toPos >= 56) {
                 if(picked.equals("queen")) {                    
-                    boardGui.getStartPos().setPromotedImage(images[3], board.getPiece(toPos).getId());
-                    // Trenger ikke å bruke setPiece her egentlig, kan sette type direkte på brikken i stedet
-                    // så slipper vi å opprette et nytt objekt av Piece.
-                    // For eksempel:
+                    boardGui.getStartPos().setPromotedImage(images[3], board.getPiece(toPos).getId());                    
                     board.getPiece(toPos).setType(QUEEN);                    
                 }
                 else if(picked.equals("rook")) {
@@ -442,6 +522,10 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
         }        
     }
 
+    /**
+     * Tries to do the move indicated by the player, and checks if it is legal. Also removes a piece if it is capruted.
+     * @param e
+     */
     public void mouseReleased(MouseEvent e) {        
         if (canDrag) {
             int x_on_release = e.getX();
@@ -483,13 +567,7 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
                 resetPosition();
                 setCapturedPos(-1);
             }
-
-            // Fin shø, andre betingelsen hindrer at brikken "capture"-er seg selv
-            if (getCapturedPos() > -1 && board.getPiece(fromPos).getId() != getCapturedPos()) {
-//            System.out.println("Captured pos: " + getCapturedPos());
-//            System.out.println("toPos ID: " + board.getPiece(toPos).getId());
-//            System.out.println("fromPos ID: " + board.getPiece(fromPos).getId());
-                System.out.println(capturedPiece);
+            if (getCapturedPos() > -1 && board.getPiece(fromPos).getId() != getCapturedPos()) {                
                 if (capturedPiece >= 48) {
                     try {
                         x_coords[capturedPiece] = capturedBlackPieces * width/2;
@@ -509,39 +587,36 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
                     }
                 }
             }
-            this.repaint();
-            //centerText += "\n    test";
-            centerTextArea.setText(centerText);
-            System.out.println(board.toString());          
+            this.repaint();            
+            centerTextArea.setText(centerText);                    
             miniMapArea.setText(board.toString());
         }
     }
-
+    /**
+     * Sets the variable canDrag to false, meaning the player is unable to drag a piece before one is clicked.
+     * @param e
+     */
     public void mouseExited(MouseEvent e) {
         canDrag = false;
     }
-
     public void mouseClicked(MouseEvent e) {}
-
     public void mouseMoved(MouseEvent e) {}
-
     public void mouseEntered(MouseEvent e) {}
-
-    public void actionPerformed(ActionEvent e) {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
+    public void actionPerformed(ActionEvent e) {}
     
     public class Chessboard extends JPanel {
 
         private JLayeredPane layeredPane;
         private drawBoard chessBoard;
-        private drawPos startPos = new drawPos();
-        private int[] x_coords = startPos.getXcoords();
-        private int[] y_coords = startPos.getYcoords();
+        private drawPos drawPos = new drawPos();
+        private int[] x_coords = drawPos.getXcoords();
+        private int[] y_coords = drawPos.getYcoords();
         private int xSize = 480+5;
         private int ySize = 480+yIn;
 
+        /**
+         * Creates the gui
+         */
         public Chessboard() {
             Dimension boardSize = new Dimension(xSize, ySize);
             layeredPane = new JLayeredPane();
@@ -550,34 +625,44 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
             chessBoard = new drawBoard();
             chessBoard.setLayout(new GridLayout(8, 8));
             chessBoard.setPreferredSize(boardSize);
-            startPos.initDrawPos();
-            startPos.setBounds(5, 0, boardSize.width, boardSize.height);
+            drawPos.initDrawPos();
+            drawPos.setBounds(5, 0, boardSize.width, boardSize.height);
             chessBoard.setBounds(5, 0, boardSize.width, boardSize.height);
             chessBoard.setOpaque(true);
             layeredPane.add(chessBoard, JLayeredPane.DEFAULT_LAYER);
-            startPos.setOpaque(false);
-            layeredPane.add(startPos, JLayeredPane.PALETTE_LAYER);
+            drawPos.setOpaque(false);
+            layeredPane.add(drawPos, JLayeredPane.PALETTE_LAYER);
             add(layeredPane);
 
         }
+        /**
+         * Returns the drawPos object
+         * @return drawPos
+         */
         public drawPos getStartPos() {
-            return startPos;
+            return drawPos;
         }
-
+        /**
+         * Returns the drawBoard object
+         * @return chessBoard
+         */
         public drawBoard getDrawBoard() {
             return chessBoard;
         }  
-
+        /**
+         * Returns the array of x coordinates of the pieces
+         * @return x_coords
+         */
         public int[] getXcoords() {
             return x_coords;
         }
-
+        /**
+         * Returns the array of y coordinates of the pieces
+         * @return y_coords
+         */
         public int[] getYcoords() {
             return y_coords;
-        }
-
-        
-    }
-    
+        }        
+    }    
 }
 

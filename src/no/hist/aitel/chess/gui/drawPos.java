@@ -19,42 +19,61 @@ import static no.hist.aitel.chess.gui.guiConstants.*;
 public class drawPos extends JPanel {
     private int[] x_coords;
     private int[] y_coords;
-    private BufferedImage[] sw_images = new BufferedImage[64];
-    private BufferedImage[] classic_images = new BufferedImage[64];
-    private BufferedImage[] images = new BufferedImage[64];    
-    private BufferedImage[] promoteImage = new BufferedImage[64];
-    private boolean classic = true;
+    private BufferedImage[] sw_images = new BufferedImage[boardSize];
+    private BufferedImage[] classic_images = new BufferedImage[boardSize];
+    private BufferedImage[] images = new BufferedImage[boardSize];
+    private BufferedImage[] promoteImages = new BufferedImage[boardSize];
+    private int line=0;
 
+   
+
+    /**
+     * Returns an array of the current images
+     * @return images
+     */
     public BufferedImage[] getImages() {
         return images;
     }
 
+    /**
+     * Resets the images of the promoted pawns to the initial images
+     */
     public void resetPromoteImage() {
         for (int i=0; i<64; i++) {
-            promoteImage[i] = null;
+            promoteImages[i] = null;
         }
     }
 
+    /**
+     * Sets the promoteImages array to the image at the given index
+     * @param img
+     * @param i
+     */
     public void setPromotedImage(BufferedImage img, int i) {
-        promoteImage[i] = img;
+        promoteImages[i] = img;
     }   
 
+    /**
+     * Sets the current used images to star wars images
+     */
     public void setSwImages() {
         images = sw_images;
-        classic = false;
+        
         this.repaint();
     }
 
+    /**
+     * Sets the current used images to classic images
+     */
     public void setClassicImages() {
         images = classic_images;
-        classic = true;
+        
         this.repaint();
-    }
+    }    
 
-    public boolean getClassic() {
-        return classic;
-    }
-
+    /**
+     *
+     */
     public drawPos() {
         x_coords = new int[boardSize];
         y_coords = new int[boardSize];
@@ -67,15 +86,24 @@ public class drawPos extends JPanel {
         // 8   9   10  11  12  13  14  15
         // 0   1   2   3   4   5   6   7
     }    
-
+    /**
+     * Returns the current x coordinates
+     * @return x_coords
+     */
     public int[] getXcoords() {
         return x_coords;
     }
+    /**
+     * Returns the current y coordinates
+     * @return y_coords
+     */
     public int[] getYcoords() {
         return y_coords;
     }    
         
-    int j=0;
+    /**
+     * Initiates the images, the start coordinates and the images arrays
+     */
     public void initDrawPos() {
         try {
             sw_pawnb = ImageIO.read(getClass().getResource("/no/hist/aitel/chess/resources/storm_trooper.gif"));
@@ -111,19 +139,19 @@ public class drawPos extends JPanel {
         } 
 
         for (int i=8; i<16; i++) {
-            x_coords[i] = width*j;
+            x_coords[i] = width*line;
             y_coords[i] = height*7;            
             classic_images[i] = pawnw;
             sw_images[i] = sw_pawnw;            
-            j++;
+            line++;
         }
-        j=0;
+        line=0;
         for (int i=48; i<56; i++) {
-            x_coords[i] = width*j;
+            x_coords[i] = width*line;
             y_coords[i] = height*2;            
             classic_images[i] = pawnb;
             sw_images[i] = sw_pawnb;
-            j++;
+            line++;
         }
         x_coords[60] = width*4;
         y_coords[60] = height;        
@@ -143,89 +171,92 @@ public class drawPos extends JPanel {
         classic_images[3] = queenw;
         sw_images[3] = sw_queenw;
 
-        j=1;
+        line=1;
         for(int i=0; i<2; i++) {
-            x_coords[j] = width*j;
-            y_coords[j] = height*8;            
-            classic_images[j] = knightw;
-            sw_images[j] = sw_knightw;
-            j=6;
+            x_coords[line] = width*line;
+            y_coords[line] = height*8;
+            classic_images[line] = knightw;
+            sw_images[line] = sw_knightw;
+            line=6;
         }
-        j=1;
-        x_coords[57] = width*j;
+        line=1;
+        x_coords[57] = width*line;
         y_coords[57] = height;        
         classic_images[57] = knightb;
         sw_images[57] = sw_knightb;
 
-        j=6;
-        x_coords[62] = width*j;
+        line=6;
+        x_coords[62] = width*line;
         y_coords[62] = height;       
         classic_images[62] = knightb;
         sw_images[62] = sw_knightb;
         
-        j=0;
+        line=0;
         for(int i=0; i<2; i++) {
-            x_coords[j] = width*j;
-            y_coords[j] = height*8;            
-            classic_images[j] = rookw;
-            sw_images[j] = sw_rookw;
-            j=7;
+            x_coords[line] = width*line;
+            y_coords[line] = height*8;
+            classic_images[line] = rookw;
+            sw_images[line] = sw_rookw;
+            line=7;
         }
 
-        j=0;
-        x_coords[56] = width*j;
+        line=0;
+        x_coords[56] = width*line;
         y_coords[56] = height;        
         classic_images[56] = rookb;
         sw_images[56] = sw_rookb;
 
-        j=7;
-        x_coords[63] = width*j;
+        line=7;
+        x_coords[63] = width*line;
         y_coords[63] = height;        
         classic_images[63] = rookb;
         sw_images[63] = sw_rookb;
         
-        j=2;
+        line=2;
         for(int i=0; i<2; i++) {
-            x_coords[j] = width*j;
-            y_coords[j] = height*8;            
-            classic_images[j] = bishopw;
-            sw_images[j] = sw_bishopw;
-            j=5;
+            x_coords[line] = width*line;
+            y_coords[line] = height*8;
+            classic_images[line] = bishopw;
+            sw_images[line] = sw_bishopw;
+            line=5;
         }
 
-        j=2;
-        x_coords[58] = width*j;
+        line=2;
+        x_coords[58] = width*line;
         y_coords[58] = height;        
         classic_images[58] = bishopb;
         sw_images[58] = sw_bishopb;
 
-        j=5;
-        x_coords[61] = width*j;
+        line=5;
+        x_coords[61] = width*line;
         y_coords[61] = height;        
         classic_images[61] = bishopb;
         sw_images[61] = sw_bishopb;
 
         images = classic_images;
     }
-    
+    /**
+     * Keeps track of the drawn graphics
+     * @param g
+     */
     @Override
     public void paintComponent(Graphics g) {        
         //draw pawns        
         for(int i=8; i<16; i++) {
-            if(promoteImage[i] == null) {
+            if(promoteImages[i] == null) {
                 g.drawImage(images[i], x_coords[i], y_coords[i], width, height, this);
             }
             else {
-                g.drawImage(promoteImage[i], x_coords[i], y_coords[i], width, height, this);
+                g.drawImage(promoteImages[i], x_coords[i], y_coords[i], width, height, this);
             }
             
         }        
         for(int i=48; i<56; i++) {
-            if(promoteImage[i] == null) {
+            if(promoteImages[i] == null) {
                 g.drawImage(images[i], x_coords[i], y_coords[i], width, height, this);
             }
             else {
-                g.drawImage(promoteImage[i], x_coords[i], y_coords[i], width, height, this);
+                g.drawImage(promoteImages[i], x_coords[i], y_coords[i], width, height, this);
             }            
         }
         
@@ -236,38 +267,29 @@ public class drawPos extends JPanel {
         g.drawImage(images[59], x_coords[59], y_coords[59], width, height, this);
         g.drawImage(images[3], x_coords[3], y_coords[3], width, height, this);
         //draw knights
-        j=1;
+        line=1;
         for(int i=0; i<2; i++) {            
-            g.drawImage(images[j], x_coords[j], y_coords[j], width, height, this);
-            j=6;
+            g.drawImage(images[line], x_coords[line], y_coords[line], width, height, this);
+            line=6;
         }                
         g.drawImage(images[57], x_coords[57], y_coords[57], width, height, this);
         g.drawImage(images[62], x_coords[62], y_coords[62], width, height, this);
         //draw rooks
-        j=0;
+        line=0;
         for(int i=0; i<2; i++) {
-            g.drawImage(images[j], x_coords[j], y_coords[j], width, height, this);
-            j=7;
+            g.drawImage(images[line], x_coords[line], y_coords[line], width, height, this);
+            line=7;
         }        
         g.drawImage(images[56], x_coords[56], y_coords[56], width, height, this);
         g.drawImage(images[63], x_coords[63], y_coords[63], width, height, this);
         //draw bishops
-        j=2;
+        line=2;
         for(int i=0; i<2; i++) {
-            g.drawImage(images[j], x_coords[j], y_coords[j], width, height, this);
-            j=5;
+            g.drawImage(images[line], x_coords[line], y_coords[line], width, height, this);
+            line=5;
         }        
         g.drawImage(images[58], x_coords[58], y_coords[58], width, height, this);
         g.drawImage(images[61], x_coords[61], y_coords[61], width, height, this);
         
-    }    
-    
-
-    public static void main(String[] args ){
-        drawPos test = new drawPos();
-        test.initDrawPos();
-        System.out.println(test.getXcoords()[8]);
-        System.out.println(test.getYcoords()[8]);
-        
-    }
+    } 
 }
