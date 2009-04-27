@@ -25,6 +25,9 @@ class MainWindow extends JFrame {
 
     public MainWindow(String tittel) {
 
+
+        //MidiPlayer();
+        
         setTitle(tittel);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
@@ -37,7 +40,6 @@ class MainWindow extends JFrame {
         okButtonPanel.add(new OkButton(), BorderLayout.SOUTH);
         yodaPanel.add(yodai, BorderLayout.WEST);
         chessPanel.add(chessi, BorderLayout.EAST);
-
 
         add(okButtonPanel, BorderLayout.SOUTH);
         add(yodaPanel, BorderLayout.WEST);
@@ -94,7 +96,7 @@ class MainWindow extends JFrame {
 
     public void MidiPlayer() {
 
-        File midiFile = new File("./src/no/hist/aitel/chess/resources/sw.mid");
+        File midiFile = new File("./src/no/hist/aitel/chess/resources/swmidi.mid");
 
         if (!midiFile.exists()) {
             System.out.println("finner ikke fil");
@@ -136,7 +138,6 @@ class MainWindow extends JFrame {
 
           //  Settings.swBoard = true;
 
-
             if (kommando.equals("Nytt Spill")) {
                 javax.swing.SwingUtilities.invokeLater(new Runnable() {
 
@@ -146,8 +147,6 @@ class MainWindow extends JFrame {
                 });
             } else {
             }
-
-
         }
     }
 }
