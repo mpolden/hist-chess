@@ -358,6 +358,7 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
                 }
                 x_coordStartPos = x;
                 y_coordStartPos = y;
+                fromPos = getRect.getRectNumber(x_coordStartPos, y_coordStartPos);
             } else {
                 movingPiece = -1;
                 canDrag = false;
@@ -375,17 +376,21 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
     public void mouseDragged(MouseEvent e) {
         x = e.getX();
         y = e.getY();
+        //System.out.println(getHeight());
+        //System.out.println(y);
         if (canDrag) {
             x_coords[movingPiece] = x - dragFromX;
             y_coords[movingPiece] = y - dragFromY;
 
-            x_coords[movingPiece] = Math.max(x_coords[movingPiece], zero);
-            x_coords[movingPiece] = Math.min(x_coords[movingPiece], getWidth() - 360);
-
-            y_coords[movingPiece] = Math.max(y_coords[movingPiece], 50);
-            y_coords[movingPiece] = Math.min(y_coords[movingPiece], getWidth() - 310);
-        }
-       
+            if(x_coords[movingPiece] < -13 || x_coords[movingPiece] > getWidth() - 360) {              
+                resetPosition();
+                canDrag = false;
+            }
+            else if(y_coords[movingPiece] < 5 || y_coords[movingPiece] > 550) {              
+                resetPosition();
+                canDrag = false;
+            }
+        }       
         this.repaint();
     }
 
@@ -530,7 +535,7 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
         if (canDrag) {
             int x_on_release = e.getX();
             int y_on_release = e.getY();
-            fromPos = getRect.getRectNumber(x_coordStartPos, y_coordStartPos);
+            
             toPos = getRect.getRectNumber(x_on_release, y_on_release);           
             try {
                 capturedPiece = board.getPiece(toPos).getId();                              
