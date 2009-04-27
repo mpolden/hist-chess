@@ -605,7 +605,7 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
                 if (capturedPiece >= 48) {
                     try {
                         x_coords[capturedPiece] = capturedBlackPieces * width/2;
-                        y_coords[capturedPiece] = height * 9;
+                        y_coords[capturedPiece] = height * 9 + 15;
                         capturedBlackPieces++;
                         setCapturedPos(-1);
                     } catch (ArrayIndexOutOfBoundsException excep) {
