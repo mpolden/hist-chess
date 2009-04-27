@@ -123,18 +123,18 @@ public class drawPos extends JPanel {
             System.out.println("IOException: " + ioe.getMessage());
         }
         try {
-            pawnb = ImageIO.read(getClass().getResource("/no/hist/aitel/chess/resources/pawnb.png"));
-            pawnw = ImageIO.read(getClass().getResource("/no/hist/aitel/chess/resources/pawnw.png"));
-            kingb = ImageIO.read(getClass().getResource("/no/hist/aitel/chess/resources/kingb.png"));
-            kingw = ImageIO.read(getClass().getResource("/no/hist/aitel/chess/resources/kingw.png"));
-            queenb = ImageIO.read(getClass().getResource("/no/hist/aitel/chess/resources/queenb.png"));
-            queenw = ImageIO.read(getClass().getResource("/no/hist/aitel/chess/resources/queenw.png"));
-            knightb = ImageIO.read(getClass().getResource("/no/hist/aitel/chess/resources/knightb.png"));
-            knightw = ImageIO.read(getClass().getResource("/no/hist/aitel/chess/resources/knightw.png"));
-            rookb = ImageIO.read(getClass().getResource("/no/hist/aitel/chess/resources/rookb.png"));
-            rookw = ImageIO.read(getClass().getResource("/no/hist/aitel/chess/resources/rookw.png"));
-            bishopb = ImageIO.read(getClass().getResource("/no/hist/aitel/chess/resources/bishopb.png"));
-            bishopw = ImageIO.read(getClass().getResource("/no/hist/aitel/chess/resources/bishopw.png"));
+            pawnb = ImageIO.read(getClass().getResource("/no/hist/aitel/chess/resources/pawnb.gif"));
+            pawnw = ImageIO.read(getClass().getResource("/no/hist/aitel/chess/resources/pawnw.gif"));
+            kingb = ImageIO.read(getClass().getResource("/no/hist/aitel/chess/resources/kingb.gif"));
+            kingw = ImageIO.read(getClass().getResource("/no/hist/aitel/chess/resources/kingw.gif"));
+            queenb = ImageIO.read(getClass().getResource("/no/hist/aitel/chess/resources/queenb.gif"));
+            queenw = ImageIO.read(getClass().getResource("/no/hist/aitel/chess/resources/queenw.gif"));
+            knightb = ImageIO.read(getClass().getResource("/no/hist/aitel/chess/resources/knightb.gif"));
+            knightw = ImageIO.read(getClass().getResource("/no/hist/aitel/chess/resources/knightw.gif"));
+            rookb = ImageIO.read(getClass().getResource("/no/hist/aitel/chess/resources/rookb.gif"));
+            rookw = ImageIO.read(getClass().getResource("/no/hist/aitel/chess/resources/rookw.gif"));
+            bishopb = ImageIO.read(getClass().getResource("/no/hist/aitel/chess/resources/bishopb.gif"));
+            bishopw = ImageIO.read(getClass().getResource("/no/hist/aitel/chess/resources/bishopw.gif"));
         } catch (IOException ioe) {
             System.out.println("IOException: " + ioe.getMessage());
         } 
