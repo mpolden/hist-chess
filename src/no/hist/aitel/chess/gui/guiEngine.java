@@ -93,7 +93,7 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
     /**
      * Stops the running player timers
      */
-    private void stopTimers() {
+    public void stopTimers() {
         timerCheckP1 = false;
         timerCheckP2 = false;
     }
@@ -316,7 +316,8 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
      * @param newName
      */
     public void setP1name(String newName) {
-        player1Label.setText(newName);
+        player1 = newName;
+        player1Label.setText(player1);
     }
 
     /**
@@ -324,9 +325,23 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
      * @param newName
      */
     public void setP2name(String newName) {
-        player2Label.setText(newName);
+        player2 = newName;
+        player2Label.setText(player2);
     }
-
+    /**
+     * Returns the name of player1
+     * @return player1
+     */
+    public String getP1name() {
+        return player1;
+    }
+    /**
+     * Returns the name of player2
+     * @return player2
+     */
+    public String getP2name() {
+        return player2;
+    }
     /**
      * Initiates the player names
      */

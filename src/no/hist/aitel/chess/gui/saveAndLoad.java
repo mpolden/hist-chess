@@ -42,7 +42,7 @@ public class saveAndLoad {
         return null;
     }
 
-    public void saveGuiEngine(String filename, guiEngine save) {
+    public void saveStringArray(String filename, String[] save) {
         try {
             FileOutputStream fos = new FileOutputStream(filename);
             ObjectOutputStream out = new ObjectOutputStream(fos);
@@ -55,11 +55,11 @@ public class saveAndLoad {
         }
     }
 
-    public guiEngine loadGuiEngine(String filename) throws ClassNotFoundException {
+    public String[] loadStringArray(String filename) throws ClassNotFoundException {
         try {
             FileInputStream fis = new FileInputStream(filename);
             ObjectInputStream in = new ObjectInputStream(fis);
-            guiEngine read = (guiEngine)in.readObject();
+            String[] read = (String[])in.readObject();
             in.close();
             return read;
         }

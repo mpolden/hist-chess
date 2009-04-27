@@ -24,12 +24,9 @@ import javax.swing.KeyStroke;
 public class Main implements ActionListener, ItemListener {
     private static guiEngine mainWindow = new guiEngine("Chess");
     private static JFrame frame = mainWindow;
-    private saveAndLoad saveAndLoad = new saveAndLoad();
-    private int timeUsedP1 = 0;
-    private int timeUsedP2 = 0;
-    private String centerText = "";
-    private boolean p1_turn;
-    
+    private saveAndLoad saveAndLoad = new saveAndLoad(); 
+    private String[] savedString = new String[5];
+    private String test = "Vegard";
 
     public static void createAndShowGui() {
         
@@ -105,8 +102,7 @@ public class Main implements ActionListener, ItemListener {
 
         menu.add(menuItem);
         
-        return menuBar;
-        
+        return menuBar;       
     }    
 
     protected String getClassName(Object o) {
@@ -124,14 +120,16 @@ public class Main implements ActionListener, ItemListener {
                 + " (an instance of " + getClassName(source) + ")";
         System.out.println(s);
         if(e.getActionCommand().equals("Save game")) {
-             if (JOptionPane.YES_OPTION == JOptionPane.showConfirmDialog(null, "Are you sure you want to save the game?\nPrevious saved game will be lost.")) {
+             if (JOptionPane.YES_OPTION == JOptionPane.showConfirmDialog(null, "Are you sure you want to save the game?\nPrevious save data will be lost.")) {
                  saveAndLoad.saveIntArray("./src/no/hist/aitel/chess/resources/x_coords.txt", mainWindow.getChessboard().getXcoords());
                  saveAndLoad.saveIntArray("./src/no/hist/aitel/chess/resources/y_coords.txt", mainWindow.getChessboard().getYcoords());
-                 saveAndLoad.saveBoard("./src/no/hist/aitel/chess/resources/internal.txt", mainWindow.getBoardObj());
-                 //saveAndLoad.saveGuiEngine("./src/no/hist/aitel/chess/resources/engine.txt", mainWindow);
-                 timeUsedP1 = mainWindow.getTimeUsedP1();
-                 timeUsedP2 = mainWindow.getTimeUsedP2();
-                 centerText = mainWindow.getCenterTextArea();
+                 saveAndLoad.saveBoard("./src/no/hist/aitel/chess/resources/internal.txt", mainWindow.getBoardObj());                 
+                 savedString[0] = Integer.toString(mainWindow.getTimeUsedP1());
+                 savedString[1] = Integer.toString(mainWindow.getTimeUsedP2());
+                 savedString[2] = mainWindow.getCenterTextArea();
+                 savedString[3] = mainWindow.getP1name();
+                 savedString[4] = mainWindow.getP2name();                 
+                 saveAndLoad.saveStringArray("./src/no/hist/aitel/chess/resources/stringArray.txt", savedString);
              }
         }
         else if(e.getActionCommand().equals("Load game")) {
@@ -140,9 +138,12 @@ public class Main implements ActionListener, ItemListener {
                     mainWindow.setXcoords(saveAndLoad.loadIntArray("./src/no/hist/aitel/chess/resources/x_coords.txt"));
                     mainWindow.setYcoords(saveAndLoad.loadIntArray("./src/no/hist/aitel/chess/resources/y_coords.txt"));
                     mainWindow.setBoardObj(saveAndLoad.loadBoard("./src/no/hist/aitel/chess/resources/internal.txt"));
-                    //mainWindow = saveAndLoad.loadGuiEngine("./src/no/hist/aitel/chess/resources/engine.txt");
-                    mainWindow.setTimeUsed(timeUsedP1, timeUsedP2);
-                    mainWindow.setCenterTextArea(centerText);
+                    savedString = saveAndLoad.loadStringArray("./src/no/hist/aitel/chess/resources/stringArray.txt");
+                    mainWindow.setTimeUsed(Integer.parseInt(savedString[0]), Integer.parseInt(savedString[1]));
+                    mainWindow.setCenterTextArea(savedString[2]);
+                    mainWindow.setP1name(savedString[3]);
+                    mainWindow.setP2name(savedString[4]);
+                    mainWindow.stopTimers();
                 } catch (ClassNotFoundException ex) {
                     Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -185,9 +186,8 @@ public class Main implements ActionListener, ItemListener {
             }
         }
     }
-
     public void itemStateChanged(ItemEvent e) {}
-
+    
     public static void main(String[] args) {
         javax.swing.SwingUtilities.invokeLater(new Runnable() {
             public void run() {
