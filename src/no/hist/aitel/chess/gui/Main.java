@@ -25,18 +25,15 @@ public class Main implements ActionListener, ItemListener {
     private static guiEngine mainWindow = new guiEngine("Chess");
     private static JFrame frame = mainWindow;
     private saveAndLoad saveAndLoad = new saveAndLoad(); 
-    private String[] savedString = new String[5];
-    private String test = "Vegard";
+    private String[] savedString = new String[5];    
 
-    public static void createAndShowGui() {
-        
+    public static void createAndShowGui() {        
         Main gui = new Main();
         frame.setJMenuBar(gui.addJMenu());
         frame.setVisible(true);
         frame.setResizable(false);
         frame.setLocationRelativeTo(null);
-        frame.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-        
+        frame.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));        
     }
 
     private JMenuBar addJMenu() {
@@ -112,13 +109,7 @@ public class Main implements ActionListener, ItemListener {
     }   
 
 
-    public void actionPerformed(ActionEvent e) {
-        JMenuItem source = (JMenuItem)(e.getSource());
-        String s = "Action event detected."
-                + "\n"
-                + "    Event source: " + source.getText()
-                + " (an instance of " + getClassName(source) + ")";
-        System.out.println(s);
+    public void actionPerformed(ActionEvent e) {        
         if(e.getActionCommand().equals("Save game")) {
              if (JOptionPane.YES_OPTION == JOptionPane.showConfirmDialog(null, "Are you sure you want to save the game?\nPrevious save data will be lost.")) {
                  saveAndLoad.saveIntArray("./src/no/hist/aitel/chess/resources/x_coords.txt", mainWindow.getChessboard().getXcoords());
