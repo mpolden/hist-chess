@@ -8,7 +8,9 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.Graphics;
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -19,6 +21,8 @@ import java.io.Serializable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.BorderFactory;
+import javax.swing.GrayFilter;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
@@ -65,7 +69,7 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
     private JPanel northPanel;
     private JPanel westPanel;
     private JPanel eastPanel;
-    private JTextArea p1textArea;
+    private JTextArea topArea;
     private JTextArea miniMapArea;
     private JTextArea centerTextArea;
     private int capturedPos = -1;
@@ -81,6 +85,7 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
     private promotionFrame frame;
     private String picked = "test";
     private String centerText = "";
+    private ImageIcon imageIcon = new ImageIcon("/no/hist/aitel/chess/resources/Sjakk.jpg");
 
     /**
      * Returns the position of a captured piece
@@ -183,21 +188,30 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
         centerTextArea = new JTextArea(10, 25);
         JScrollPane centerScrollPane = new JScrollPane(centerTextArea);
         centerScrollPane.createHorizontalScrollBar();
-        p1textArea = new JTextArea(10, 25);
+        topArea = new JTextArea(10, 25) {                    
+            {
+                setOpaque(false);
+            }
+            @Override
+            public void paint(Graphics g) {
+                g.drawImage(Chess, -40, -50, this);
+                super.paint(g);
+            }
+        };
         miniMapArea = new JTextArea(10, 10);
-        p1textArea.setEditable(false);
+        topArea.setEditable(false);
         miniMapArea.setEditable(false);
         centerTextArea.setEditable(false);
-        p1textArea.setBorder(BorderFactory.createLineBorder( Color.black));
+        topArea.setBorder(BorderFactory.createLineBorder( Color.black));
         miniMapArea.setBorder(BorderFactory.createLineBorder( Color.black));
         centerTextArea.setBorder(BorderFactory.createLineBorder( Color.black));
         miniMapArea.setBackground(new Color(0xD8D8BF));
-        p1textArea.setBackground(new Color(0xD8D8BF));
+        topArea.setBackground(new Color(0xD8D8BF));
         centerTextArea.setBackground(new Color(0xD8D8BF));
         centerTextArea.setAutoscrolls(true);
         miniMapArea.setFont(timer);
-        miniMapArea.setText(board.toString());
-        new JScrollPane(p1textArea);
+        miniMapArea.setText(board.toString());      
+
 
         stopWatchP1.setFont(timer);
         stopWatchP1.setBorder(BorderFactory.createEmptyBorder());
@@ -217,7 +231,7 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
         boardGui.setBorder(BorderFactory.createLineBorder( Color.black));
         
         westPanel.add(boardGui, BorderLayout.WEST);       
-        eastPanel.add(p1textArea, BorderLayout.NORTH);        
+        eastPanel.add(topArea, BorderLayout.NORTH);
         centerTextArea.setText(centerText);
         eastPanel.add(centerScrollPane, BorderLayout.CENTER);
         eastPanel.add(miniMapArea, BorderLayout.SOUTH);

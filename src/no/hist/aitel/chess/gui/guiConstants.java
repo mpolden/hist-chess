@@ -31,6 +31,8 @@ public final class guiConstants {
     public static final Color dark_wood = new Color (0x855E42);
     public static final Color light_wood = new Color (0xE9C2A6);
     public static final Color dark_brown = new Color (0x5C3317);
+
+    public static BufferedImage Chess;
     
     public static BufferedImage pawnb;
     public static BufferedImage pawnw;
