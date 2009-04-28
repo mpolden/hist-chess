@@ -96,9 +96,6 @@ public class Position implements Serializable {
 
         // Direction
         int direction = getDirection(type);
-//        if (from == 58 && to == 4) {
-//            System.out.println("direction: " + direction);
-//        }
 
         // Check if path is clear, not checking for type == 2 (Knight) since it can jump over pieces
         if (type != KNIGHT && !isValidPath(direction)) {
@@ -315,8 +312,7 @@ public class Position implements Serializable {
                                             // invalid warning to be displayed
             }
             default: {
-                throw new IllegalTypeException("Invalid type: "
-                        + type);
+                throw new IllegalTypeException("Invalid type: " + type);
             }
         }
     }
@@ -442,6 +438,7 @@ public class Position implements Serializable {
 
     /**
      * Get the color of a field
+     * @param position
      * @return Integer representing the color
      */
     private int getFieldColor(int position) {

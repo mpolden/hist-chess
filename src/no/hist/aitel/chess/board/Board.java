@@ -455,6 +455,7 @@ public class Board implements Serializable, Cloneable {
             }
             default: {
                 file = '_';
+                break;
             }
         }
 
