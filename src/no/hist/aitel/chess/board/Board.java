@@ -321,6 +321,14 @@ public class Board implements Serializable, Cloneable {
     }
 
     /**
+     * Get current player
+     * @return Current player
+     */
+    public int getTurn() {
+        return turn;
+    }
+
+    /**
      * Get the position of a king
      * @param color
      * @return The position
