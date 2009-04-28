@@ -25,8 +25,8 @@ public class Board implements Serializable, Cloneable {
     private int turn = WHITE;
     private boolean inCheck = false;
     private boolean checkMate = false;
-    private Position p = new Position(this);
     private boolean fake = false;
+    private Position p = new Position(this);
     
     /**
      * Creates the board and makes it ready for a new game
@@ -60,16 +60,8 @@ public class Board implements Serializable, Cloneable {
      * @param position
      * @param piece
      */
-    public void setPiece(int position, Piece piece) {
+    private void setPiece(int position, Piece piece) {
         board[position] = piece;
-    }
-
-    /**
-     * Set board
-     * @param board
-     */
-    public void setBoard(Piece[] board) {
-        this.board = board;
     }
 
     /**
@@ -84,6 +76,7 @@ public class Board implements Serializable, Cloneable {
      * Move a piece
      * @param from
      * @param to
+     * @throws BoardException
      */
     public void movePiece(int from, int to) throws BoardException {
 
@@ -120,7 +113,7 @@ public class Board implements Serializable, Cloneable {
         }
 
         // Check if player is in check after move, but wasn't initially in check
-        if (!isInCheck() && inCheckAfterMove()) {
+        if (!isInCheck() && inCheckAfterMove() && !isCheckMate()) {
             // Undo move
             setPiece(from, fromPiece);
             setPiece(to, toPiece);
@@ -140,13 +133,14 @@ public class Board implements Serializable, Cloneable {
         }
 
         // Check if player is check mate
+        // Redundant: GUI calls isCheckMate() after each move
         if (isCheckMate()) {
             throw new CheckMateException("Game over");
         }
 
         // Update check and check mate state
         updateInCheck();
-        if (!fake) { // Calling updateCheckMate() on fake boards will cause a StackOverflow
+        if (!fake) { // Calling updateCheckMate() on fake boards will cause a stack overflow
             updateCheckMate();
         }
 
@@ -189,6 +183,7 @@ public class Board implements Serializable, Cloneable {
             setPiece(rookFrom, new Piece());
         }
     }
+
     /**
      * Perform en passant move
      * @param from
@@ -223,18 +218,12 @@ public class Board implements Serializable, Cloneable {
      */
     private void updateInCheck() {
         int opponent = turn ^ 1;
-//        if (fake) {
-//            System.out.println("checking if any of player " + opponent + " can put my king in check");
-//        }
         // Check any of the current players pieces has put opponent in check
         for (int position = 0; position < board.length; position++) {
             if (getPiece(position).getColor() == turn) {
                 try {
                     p.setPositions(position, getKing(opponent));
                     p.verifyPositions(true);
-//                    if (fake) {
-//                        System.out.println(position + " can get my king in " + getKing(opponent));
-//                    }
                     inCheck = true;
                     break;
                 } catch (IllegalPositionException e) {
@@ -265,16 +254,16 @@ public class Board implements Serializable, Cloneable {
     }
 
     /**
-     * Clone current board
+     * Get a deep clone of current board
      * @return The board
      */
     private Board getFakeBoard() {
         Board fakeBoard;
         try {
             fakeBoard = (Board)this.clone();
-            fakeBoard.setBoard(board.clone());
-            fakeBoard.p = new Position(fakeBoard);
             fakeBoard.fake = true;
+            fakeBoard.board = board.clone(); // Arrays implement Cloneable by default
+            fakeBoard.p = new Position(fakeBoard); // Position doesn't need to implement Cloneable
         } catch (CloneNotSupportedException e) {
             fakeBoard = null;
         }
@@ -352,6 +341,11 @@ public class Board implements Serializable, Cloneable {
         turn ^= 1; // Bitwise flip between 0 and 1
     }
 
+    /**
+     * Get algebraic chess notation of a position
+     * @param position
+     * @return The notation (e.g. A1)
+     */
     public String getNotation(int position) {
         int rank = 0;
         for (int i = 0; i <= position; i++) {
@@ -460,8 +454,8 @@ public class Board implements Serializable, Cloneable {
     }
 
     /**
-     * Get a string format of the board state
-     * @return Values of turn, inCheck, checkMate and fake
+     * Get a string containing the current board state
+     * @return String containing values of turn, inCheck, checkMate and fake
      */
     public String getStateStr() {
         String out = "turn: " + turn + "\ninCheck: " + inCheck +
@@ -470,8 +464,8 @@ public class Board implements Serializable, Cloneable {
     }
 
     /**
-     * Produces a string representation of the chess board
-     * @return Fancy ascii drawing of the board, colors and types
+     * Get a string representation of the chess board
+     * @return String which is an ascii drawing of the board, colors and types
      */
     @Override
     public String toString() {

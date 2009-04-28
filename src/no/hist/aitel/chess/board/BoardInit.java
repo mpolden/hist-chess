@@ -1,6 +1,6 @@
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+ * BoardInit.java
+ *
  */
 
 package no.hist.aitel.chess.board;

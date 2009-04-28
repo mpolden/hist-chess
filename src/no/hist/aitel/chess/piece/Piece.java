@@ -99,7 +99,7 @@ public class Piece implements Serializable {
 
     /**
      * Get a string representation of this piece
-     * @return A string containing piece position, color and type
+     * @return A string containing piece position, color, type and id
      */
     @Override
     public String toString() {

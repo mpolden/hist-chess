@@ -348,6 +348,7 @@ public class Position implements Serializable {
     /**
      * Check if pawn can be promoted
      * @return True if pawn can be promoted
+     * @deprecated
      */
     @Deprecated
     public boolean isPromotion() {
