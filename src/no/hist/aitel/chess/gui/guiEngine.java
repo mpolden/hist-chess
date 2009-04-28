@@ -80,11 +80,12 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
     private Font player = new Font("VERDANA", Font.BOLD, 20);
     private Font timer = new Font("VERDANA", Font.ITALIC, 14);
     private Font miniMap = new Font("COURIER NEW", Font.PLAIN, 16);
+    private Font centerArea = new Font("COURIER NEW", Font.PLAIN, 12);
     private promotionFrame frame;   
     private String centerText = "";
     private String picked;
     private String notation = "";
-    private String intro = "\n  Welcome to Chess version 1.0\n\n";
+    private String intro = "\n Welcome to Chess 1.0\n\n";
     
 
     /**
@@ -186,6 +187,7 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
         player2Label.setFont(player);        
 
         centerTextArea = new JTextArea(10, 25);
+        centerTextArea.setFont(centerArea);
         JScrollPane centerScrollPane = new JScrollPane(centerTextArea);
         centerScrollPane.createHorizontalScrollBar();
         topArea = new JTextArea(10, 25) {                    
@@ -626,7 +628,7 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
                 changePosition();
                 System.out.println(toPos);
                 if(!from.equals(to)) {
-                centerText += "\n  "+board.getPiece(toPos).getColorStr() + " " + board.getPiece(toPos).getTypeStr()+" from "+from+" to "+to+notation;
+                centerText += "\n "+board.getPiece(toPos).getColorStr() + " " + board.getPiece(toPos).getTypeStr()+" from "+from+" to "+to+notation;
                 notation = "";
             }             
                 
@@ -688,7 +690,7 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
     public void mouseEntered(MouseEvent e) {}
     public void actionPerformed(ActionEvent e) {}
     
-    public class Chessboard extends JPanel {
+    private class Chessboard extends JPanel {
 
         private JLayeredPane layeredPane;
         private drawBoard chessBoard;
