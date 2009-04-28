@@ -85,7 +85,7 @@ public class Position implements Serializable {
 
         // Can't capture fromPiece of same color
         if (fromPiece.getColor() == toPiece.getColor()) {
-            throw new IllegalPositionException("Can't capture piece of same type.\n" +
+            throw new IllegalPositionException("Can't capture piece of same color.\n" +
                     "Type: " + fromPiece.getType() +
                     "\nFrom: " + from +
                     "\nTo: " + to);

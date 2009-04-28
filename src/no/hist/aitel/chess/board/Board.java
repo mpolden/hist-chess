@@ -48,7 +48,7 @@ public class Board implements Serializable, Cloneable {
 
     /**
      * Get piece
-     * @param from
+     * @param position
      * @return The piece in the given from
      */
     public Piece getPiece(int position) {
@@ -57,7 +57,7 @@ public class Board implements Serializable, Cloneable {
 
     /**
      * Set piece
-     * @param from
+     * @param position
      * @param piece
      */
     public void setPiece(int position, Piece piece) {
@@ -73,8 +73,8 @@ public class Board implements Serializable, Cloneable {
     }
 
     /**
-     * Get enPassant
-     * @return True or false
+     * Get enPassant from Position object
+     * @return True if previous move was a pawn moving two fields forward (from initial position)
      */
     public boolean getEnPassant() {
         return p.getEnPassant();
@@ -223,12 +223,18 @@ public class Board implements Serializable, Cloneable {
      */
     private void updateInCheck() {
         int opponent = turn ^ 1;
+//        if (fake) {
+//            System.out.println("checking if any of player " + opponent + " can put my king in check");
+//        }
         // Check any of the current players pieces has put opponent in check
         for (int position = 0; position < board.length; position++) {
             if (getPiece(position).getColor() == turn) {
                 try {
                     p.setPositions(position, getKing(opponent));
                     p.verifyPositions(true);
+//                    if (fake) {
+//                        System.out.println(position + " can get my king in " + getKing(opponent));
+//                    }
                     inCheck = true;
                     break;
                 } catch (IllegalPositionException e) {
@@ -252,32 +258,10 @@ public class Board implements Serializable, Cloneable {
                     p.verifyPositions(true);
                     return true;
                 } catch (IllegalPositionException e) {
-
                 }
             }
         }
         return false;
-    }
-
-    /**
-     * Get piece which has the king in check
-     * @return Position of the piece
-     */
-    private int getAttacker() {
-        int opponent = turn ^ 1;
-        for (int position = 0; position < board.length; position++) {
-            if (getPiece(position).getColor() == turn) {
-                try {
-                    // Check if any opponent piece can move to my king
-                    p.setPositions(position, getKing(opponent));
-                    p.verifyPositions(true);
-                    return position;
-                } catch (IllegalPositionException e) {
-
-                }
-            }
-        }
-        return -1;
     }
 
     /**
@@ -289,6 +273,7 @@ public class Board implements Serializable, Cloneable {
         try {
             fakeBoard = (Board)this.clone();
             fakeBoard.setBoard(board.clone());
+            fakeBoard.p = new Position(fakeBoard);
             fakeBoard.fake = true;
         } catch (CloneNotSupportedException e) {
             fakeBoard = null;

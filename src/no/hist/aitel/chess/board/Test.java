@@ -26,8 +26,7 @@ public class Test {
 //        b.movePiece(14, 22);
 //        b.movePiece(53, 45);
 //        b.movePiece(19, 46);
-
-//        b.movePiece(55, 46); // Allowed
+//
 //        System.out.println(b.getStateStr());
 //        System.out.println(b.toString());
 
@@ -45,14 +44,26 @@ public class Test {
 
         // Check mate in 4 moves
 //        b.reset();
-        b.movePiece(13, 21);
-        b.movePiece(52, 36);
-        b.movePiece(14, 30);
-        b.movePiece(59, 31);
+//        b.movePiece(13, 21);
+//        b.movePiece(52, 36);
+//        b.movePiece(14, 30);
+//        b.movePiece(59, 31);
+//
+//        System.out.println(b.getStateStr());
+//        System.out.println(b.toString());
 
-        b.movePiece(8, 16);
-        System.out.println(b.getStateStr());
-        System.out.println(b.toString());
+        // Check mate in 6 moves
+//        b.reset();
+//        b.movePiece(12, 28);
+//        b.movePiece(52, 36);
+//        b.movePiece(3, 39);
+//        b.movePiece(48, 40);
+//        b.movePiece(5, 26);
+//        b.movePiece(40, 32);
+//        b.movePiece(39, 53);
+//
+//        System.out.println(b.getStateStr());
+//        System.out.println(b.toString());
         
 
         // En passant
