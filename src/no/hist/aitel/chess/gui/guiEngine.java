@@ -10,7 +10,6 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.GridLayout;
-import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -21,8 +20,6 @@ import java.io.Serializable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.BorderFactory;
-import javax.swing.GrayFilter;
-import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
@@ -82,10 +79,11 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
     private Font player = new Font("VERDANA", Font.BOLD, 20);
     private Font timer = new Font("VERDANA", Font.ITALIC, 14);
     private Font miniMap = new Font("COURIER NEW", Font.PLAIN, 16);
-    private promotionFrame frame;
-    private String picked = "test";
+    private promotionFrame frame;   
     private String centerText = "";
-    private ImageIcon imageIcon = new ImageIcon("/no/hist/aitel/chess/resources/Sjakk.jpg");
+    private String picked;
+    private String intro = "\n  Welcome to Chess version 1.0\n\n";
+    
 
     /**
      * Returns the position of a captured piece
@@ -157,7 +155,7 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
         setTimeUsed(0, 0);
         miniMapArea.setText(board.toString());
         getChessboard().getStartPos().resetPromoteImage();
-        setCenterTextArea("");
+        setCenterTextArea(intro);
         stopTimers();
     }
 
@@ -232,6 +230,7 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
         
         westPanel.add(boardGui, BorderLayout.WEST);       
         eastPanel.add(topArea, BorderLayout.NORTH);
+        centerText+=intro;
         centerTextArea.setText(centerText);
         eastPanel.add(centerScrollPane, BorderLayout.CENTER);
         eastPanel.add(miniMapArea, BorderLayout.SOUTH);
@@ -496,19 +495,19 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
             frame.getButton().addActionListener(listener);           
         }
     }
-
+    /**
+     * Checks if a player has done en passant, and if so, removes the captured piece
+     */
     private void checkEnPassant() {
         if(toPos-fromPos == 7 || toPos-fromPos == 9) {            
-            if(board.getPiece(toPos-8).getType() == PAWN && board.getPiece(toPos-8).getColor() == BLACK) {
-                System.out.println(toPos-8);
+            if(board.getPiece(toPos-8).getType() == PAWN && board.getPiece(toPos-8).getColor() == BLACK) {                
                 try {
                     x_coords[board.getPiece(toPos-8).getId()] = capturedBlackPieces * width/2;
                     y_coords[board.getPiece(toPos-8).getId()] = height * 9 + 15;
                     capturedBlackPieces++;                    
                 } catch (ArrayIndexOutOfBoundsException excep) {
                 }
-            }
-            
+            }            
         }
         else if(toPos-fromPos == -7 || toPos-fromPos == -9) {
             if(board.getPiece(toPos+8).getType() == PAWN && board.getPiece(toPos+8).getColor() == WHITE) {
