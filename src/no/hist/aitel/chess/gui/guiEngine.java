@@ -86,7 +86,7 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
     private String centerText = "";
     private String picked;
     private String notation = "";
-    private String intro = "\n Welcome to Chess version 1.0 \n Created by team 9\n Last Updated: 28/04/09\n\n";
+    private String intro = "\n Welcome to Chess\n Version 1.0 build 384\n Created by team 9\n Last Updated: 28/04/09\n\n";
     private Buttonlistener listener = new Buttonlistener();
 
     /**
@@ -441,8 +441,9 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
                 if(board.getPiece(fromPos).getType() == PAWN) {
                     checkEnPassant();
                 }
-                capturedPiece = board.getPiece(toPos).getId();                
-                board.movePiece(fromPos, toPos);                
+                capturedPiece = board.getPiece(toPos).getId();              
+                board.movePiece(fromPos, toPos);
+               
                 if(board.getPiece(toPos).getType() == PAWN) {
                     checkPromotion();
                 }
@@ -472,7 +473,8 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
                 resetPosition();
                 setCapturedPos(-1);
             } catch (CheckMateException exception) {               
-            } catch (ArrayIndexOutOfBoundsException exception) {                
+            } catch (ArrayIndexOutOfBoundsException exception) {
+                System.out.println(exception.getMessage());
                 resetPosition();
                 setCapturedPos(-1);
             }
@@ -567,20 +569,19 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
     /**
      * Checks if a player can promote his pawn, and if so, creates a promotion promotionFrame so the player can choose
      */
-    private void checkPromotion() {
-        
+    private void checkPromotion() {      
        
-        if(toPos >= 56 && toPos <=63) {
-            canPlay = false;
+        if(toPos >= 56 && toPos <=63) {            
             notation = "(Promotion)";
             promotionFrame = new promotionFrame("white");
             promotionFrame.getButton().addActionListener(listener);
-        }        
-        else if(toPos <=7 && toPos >=0) {
             canPlay = false;
+        }        
+        else if(toPos <=7 && toPos >=0) {            
             notation = "(Promotion)";
             promotionFrame = new promotionFrame("black");
             promotionFrame.getButton().addActionListener(listener);
+            canPlay = false;
         }
     }    
     /**
