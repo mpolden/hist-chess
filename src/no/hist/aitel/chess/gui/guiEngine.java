@@ -37,6 +37,7 @@ import static no.hist.aitel.chess.piece.PieceConstants.*;
 
 public class guiEngine extends JFrame implements MouseListener, MouseMotionListener, ActionListener, Serializable {
 
+    private boolean canPlay = true;
     private boolean canDrag = false;
     private Chessboard boardGui = new Chessboard();
     private Board board = new Board();
@@ -99,6 +100,7 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
         players();
+        initNewGameSave();
 
         southPanel = new JPanel(new BorderLayout());
         northPanel = new JPanel(new BorderLayout());
@@ -201,6 +203,11 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
         };
         stopWatchP2.setText("   " + timeUsedP2 + " sec");
         pack();
+    }
+    private void initNewGameSave() {
+        saveAndLoad.saveIntArray("./src/no/hist/aitel/chess/resources/new_game_x_coords.txt", getChessboard().getXcoords());
+        saveAndLoad.saveIntArray("./src/no/hist/aitel/chess/resources/new_game_y_coords.txt", getChessboard().getYcoords());
+        saveAndLoad.saveBoard("./src/no/hist/aitel/chess/resources/new_game_internal.txt", getBoardObj());
     }
     /**
      * Returns the position of a captured piece
@@ -357,32 +364,35 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
      * @param e
      */
     public void mousePressed(MouseEvent e) {
-        x = e.getX();
-        y = e.getY();             
-        try {
-            if(y>=yIn && y <= (height*8)+yIn) {
-                for (int i = 0; i < 64; i++) {
-                    if (x - xIn > x_coords[i] && x - xIn < x_coords[i] + (width) && y - yIn + y_calibrate > y_coords[i] && y - yIn + y_calibrate < y_coords[i] + (height)) {
-                        movingPiece = i;                        
-                        canDrag = true;
-                        dragFromX = x - x_coords[i];
-                        dragFromY = y - y_coords[i];
-                        break;
-                    } else {
-                        movingPiece = -1;
-                        canDrag = false;
+        if(canPlay) {
+            x = e.getX();
+            y = e.getY();
+            try {
+                if(y>=yIn && y <= (height*8)+yIn) {
+                    for (int i = 0; i < 64; i++) {
+                        if (x - xIn > x_coords[i] && x - xIn < x_coords[i] + (width) && y - yIn + y_calibrate > y_coords[i] && y - yIn + y_calibrate < y_coords[i] + (height)) {
+                            movingPiece = i;
+                            canDrag = true;
+                            dragFromX = x - x_coords[i];
+                            dragFromY = y - y_coords[i];
+                            break;
+                        } else {
+                            movingPiece = -1;
+                            canDrag = false;
+                        }
                     }
+                    x_coordStartPos = x;
+                    y_coordStartPos = y;
+                    fromPos = getRect.getRectNumber(x_coordStartPos, y_coordStartPos);
+                } else {
+                    movingPiece = -1;
+                    canDrag = false;
                 }
-                x_coordStartPos = x;
-                y_coordStartPos = y;
-                fromPos = getRect.getRectNumber(x_coordStartPos, y_coordStartPos);
-            } else {
-                movingPiece = -1;
-                canDrag = false;
+
+            } catch (ArrayIndexOutOfBoundsException outOfBoundsException) {
             }
-            
-        } catch (ArrayIndexOutOfBoundsException outOfBoundsException) {            
         }
+        
     }
     /**
      * Moves the piece calculated by the mousePressed method
@@ -391,7 +401,7 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
     public void mouseDragged(MouseEvent e) {
         x = e.getX();
         y = e.getY();       
-        if (canDrag) {
+        if (canDrag && canPlay) {
             x_coords[movingPiece] = x - dragFromX;
             y_coords[movingPiece] = y - dragFromY;
 
@@ -411,7 +421,7 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
      * @param e
      */
     public void mouseReleased(MouseEvent e) {
-        if (canDrag) {
+        if (canDrag && canPlay) {
             int x_on_release = e.getX();
             int y_on_release = e.getY();
             toPos = getRect.getRectNumber(x_on_release, y_on_release);
@@ -554,11 +564,13 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
         
        
         if(toPos >= 56 && toPos <=63) {
+            canPlay = false;
             notation = "(Promotion)";
             promotionFrame = new promotionFrame("white");
             promotionFrame.getButton().addActionListener(listener);
         }        
         else if(toPos <=7 && toPos >=0) {
+            canPlay = false;
             notation = "(Promotion)";
             promotionFrame = new promotionFrame("black");
             promotionFrame.getButton().addActionListener(listener);
@@ -605,12 +617,13 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
      */
     private void checkCheckMate() {
         if(board.isCheckMate()) {
+            canPlay = false;
+            stopTimers();
             checkMateFrame = new checkMateFrame();            
             checkMateFrame.getNewGameButton().addActionListener(listener);
             checkMateFrame.getQuitButton().addActionListener(listener);
         }       
     }
-
     private class Buttonlistener implements ActionListener {
         /**
          * Sets the pawn, who is able to promote, to the chosen type
@@ -618,7 +631,8 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
          */
         public void actionPerformed(ActionEvent event) {
             
-            if(event.getActionCommand().equals("okButton")) {
+            if(event.getActionCommand().equals("Ok")) {
+                canPlay = true;
                 promotionFrame.setVisible(false);
                 picked = promotionFrame.getPicked();
                 BufferedImage[] images = boardGui.getStartPos().getImages();
@@ -670,6 +684,7 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
                     setYcoords(saveAndLoad.loadIntArray("./src/no/hist/aitel/chess/resources/new_game_y_coords.txt"));
                     setBoardObj(saveAndLoad.loadBoard("./src/no/hist/aitel/chess/resources/new_game_internal.txt"));
                     cleanup();
+                    canPlay = true;
                 } catch (ClassNotFoundException ex) {
                     Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
                 }
