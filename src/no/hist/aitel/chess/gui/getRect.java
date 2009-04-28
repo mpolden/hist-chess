@@ -12,11 +12,7 @@ import static no.hist.aitel.chess.gui.guiConstants.*;
 public class getRect {
     private int rectNumber;
     private int rectCoordX;
-    private int rectCoordY;
-
-    /*public int getCapturedPiece(int rectNumber) {
-
-    }*/
+    private int rectCoordY;    
 
     public int getRectNumber(int x, int y) { 
         int xNumber;
@@ -110,11 +106,4 @@ public class getRect {
         }
         return rectCoordY;
     }
-    public static void main(String[] args) {
-        getRect getRect = new getRect();
-        System.out.println(getRect.getRectNumber(400, 400));
-        System.out.println(getRect.getRectCoordX(8));
-        System.out.println(getRect.getRectCoordY(8));
-    }
-
 }

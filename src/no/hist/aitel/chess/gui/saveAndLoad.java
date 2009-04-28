@@ -23,8 +23,7 @@ public class saveAndLoad {
             out.flush();
             out.close();
         }
-        catch (IOException e) {
-            System.out.println(e);
+        catch (IOException e) {            
         }
     }
 
@@ -36,8 +35,7 @@ public class saveAndLoad {
             in.close();
             return read;
         }
-        catch (IOException e) {
-            System.out.println(e);
+        catch (IOException e) {            
         }
         return null;
     }
@@ -50,8 +48,7 @@ public class saveAndLoad {
             out.flush();
             out.close();
         }
-        catch (IOException e) {
-            System.out.println(e);
+        catch (IOException e) {            
         }
     }
 
@@ -63,8 +60,7 @@ public class saveAndLoad {
             in.close();
             return read;
         }
-        catch (IOException e) {
-            System.out.println(e);
+        catch (IOException e) {            
         }
         return null;
     }
@@ -77,8 +73,7 @@ public class saveAndLoad {
             out.flush();
             out.close();
         }
-        catch (IOException e) {
-            System.out.println(e);
+        catch (IOException e) {            
         }
     }
     
@@ -90,8 +85,7 @@ public class saveAndLoad {
             in.close();
             return load;
         }
-        catch (IOException e) {
-            System.out.println(e);
+        catch (IOException e) {            
         }
         return null;
     }

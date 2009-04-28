@@ -119,8 +119,7 @@ public class drawPos extends JPanel {
             sw_rookw = ImageIO.read(getClass().getResource("/no/hist/aitel/chess/resources/c3po.gif"));
             sw_bishopb = ImageIO.read(getClass().getResource("/no/hist/aitel/chess/resources/darth_maul.gif"));
             sw_bishopw = ImageIO.read(getClass().getResource("/no/hist/aitel/chess/resources/obi_wan_kenobi.gif"));
-        } catch (IOException ioe) {
-            System.out.println("IOException: " + ioe.getMessage());
+        } catch (IOException ioe) {            
         }
         try {
             pawnb = ImageIO.read(getClass().getResource("/no/hist/aitel/chess/resources/pawnb.gif"));
@@ -135,8 +134,7 @@ public class drawPos extends JPanel {
             rookw = ImageIO.read(getClass().getResource("/no/hist/aitel/chess/resources/rookw.gif"));
             bishopb = ImageIO.read(getClass().getResource("/no/hist/aitel/chess/resources/bishopb.gif"));
             bishopw = ImageIO.read(getClass().getResource("/no/hist/aitel/chess/resources/bishopw.gif"));
-        } catch (IOException ioe) {
-            System.out.println("IOException: " + ioe.getMessage());
+        } catch (IOException ioe) {            
         } 
 
         for (int i=8; i<16; i++) {
