@@ -498,8 +498,27 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
     }
 
     private void checkEnPassant() {
-        if (board.getPiece(toPos).getType() == PAWN) {
+        if(toPos-fromPos == 7 || toPos-fromPos == 9) {            
+            if(board.getPiece(toPos-8).getType() == PAWN && board.getPiece(toPos-8).getColor() == BLACK) {
+                System.out.println(toPos-8);
+                try {
+                    x_coords[board.getPiece(toPos-8).getId()] = capturedBlackPieces * width/2;
+                    y_coords[board.getPiece(toPos-8).getId()] = height * 9 + 15;
+                    capturedBlackPieces++;                    
+                } catch (ArrayIndexOutOfBoundsException excep) {
+                }
+            }
             
+        }
+        else if(toPos-fromPos == -7 || toPos-fromPos == -9) {
+            if(board.getPiece(toPos+8).getType() == PAWN && board.getPiece(toPos+8).getColor() == WHITE) {
+                try {
+                    x_coords[board.getPiece(toPos+8).getId()] = capturedWhitePieces * width/2;
+                    y_coords[board.getPiece(toPos+8).getId()] = zero;
+                    capturedWhitePieces++;                    
+                } catch (ArrayIndexOutOfBoundsException excep) {
+                }
+            }
         }
     }
 
@@ -563,10 +582,12 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
     public void mouseReleased(MouseEvent e) {        
         if (canDrag) {
             int x_on_release = e.getX();
-            int y_on_release = e.getY();
-            
+            int y_on_release = e.getY();            
             toPos = getRect.getRectNumber(x_on_release, y_on_release);           
             try {
+                if(board.getPiece(fromPos).getType() == PAWN) {                    
+                    checkEnPassant();
+                }
                 capturedPiece = board.getPiece(toPos).getId();                              
                 board.movePiece(fromPos, toPos);
                 if(board.getPiece(toPos).getType() == PAWN) {
@@ -574,7 +595,7 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
                 }
                 if(board.getPiece(toPos).getType() == KING) {
                     checkCastling();
-                }
+                }                
                 setCapturedPos(board.getPiece(toPos).getId());
                 changePosition();
                 String from = board.getNotation(fromPos);
