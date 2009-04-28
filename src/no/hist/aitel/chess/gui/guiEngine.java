@@ -605,7 +605,7 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
      */
     private void checkCheckMate() {
         if(board.isCheckMate()) {
-            checkMateFrame = new checkMateFrame();
+            checkMateFrame = new checkMateFrame();            
             checkMateFrame.getNewGameButton().addActionListener(listener);
             checkMateFrame.getQuitButton().addActionListener(listener);
         }       

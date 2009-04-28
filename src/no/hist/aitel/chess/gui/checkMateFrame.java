@@ -50,7 +50,7 @@ public class checkMateFrame extends JFrame {
             public void paint(Graphics g) {
                 g.drawImage(Chess, 0, -5, this);
                 g.setFont(text);
-                g.drawString("CONGRATULATIONS", 60, 25);
+                g.drawString("CONGRATULATIONS!", 60, 25);
                 super.paint(g);
             }
         };      
@@ -75,9 +75,4 @@ public class checkMateFrame extends JFrame {
     public JButton getQuitButton() {
         return quit;
     }
-    
-    public static void main(String[] args) {
-        new checkMateFrame();
-    }
-
 }
