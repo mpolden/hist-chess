@@ -23,6 +23,7 @@ public class checkMateFrame extends JFrame {
     private JButton quit;
     private JTextArea topField;
     private Font text = new Font("VERDANA", Font.BOLD, 20);
+    private String message;
 
     /**
      * Creates the check mate frame
@@ -50,7 +51,7 @@ public class checkMateFrame extends JFrame {
             public void paint(Graphics g) {
                 g.drawImage(Chess, 0, -5, this);
                 g.setFont(text);
-                g.drawString("CONGRATULATIONS!", 60, 25);
+                g.drawString(message, 90, 25);
                 super.paint(g);
             }
         };      
@@ -60,6 +61,10 @@ public class checkMateFrame extends JFrame {
         setResizable(false);
         pack();
         setVisible(true);
+    }
+    public void setMessage(String message) {
+        this.message = message;
+        this.repaint();
     }
     /**
      * Returns the new game button

@@ -451,7 +451,7 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
                 }
                 setCapturedPos(board.getPiece(toPos).getId());
                 changePosition();
-                if(board.isInCheck()) {
+                if(board.isInCheck() && !board.isCheckMate()) {
                     notation = "(Check)";
                 }
                 checkCheckMate();
@@ -467,13 +467,12 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
                 setCapturedPos(-1);
             } catch (CheckException exception) {
                 if(board.getPiece(fromPos).getType() == KING) {
-                    centerText+="\n You can put yourself in check";
+                    centerText+="\n You can't put yourself in check";
                 }                
                 resetPosition();
                 setCapturedPos(-1);
-            } catch (CheckMateException exception) {                
-                System.out.println("Good game!");
-                setCapturedPos(-1);
+            } catch (CheckMateException exception) {   
+               
             } catch (ArrayIndexOutOfBoundsException exception) {                
                 resetPosition();
                 setCapturedPos(-1);
@@ -631,6 +630,13 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
             checkMateFrame = new checkMateFrame();            
             checkMateFrame.getNewGameButton().addActionListener(listener);
             checkMateFrame.getQuitButton().addActionListener(listener);
+            int player = board.getTurn() ^ 1;
+            if(player == zero) {
+                checkMateFrame.setMessage(player1+" Wins!");
+            }
+            else if(player == 1) {
+                checkMateFrame.setMessage(player2+" Wins!");
+            }
         }       
     }
     private class Buttonlistener implements ActionListener {
