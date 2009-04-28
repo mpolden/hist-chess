@@ -481,7 +481,7 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
             if (getCapturedPos() > -1 && board.getPiece(fromPos).getId() != getCapturedPos()) {
                 if (capturedPiece >= 48) {
                     try {
-                        x_coords[capturedPiece] = capturedBlackPieces * width/2;
+                        x_coords[capturedPiece] = (capturedBlackPieces * width/2) + (capturedBlackPieces * 7);
                         y_coords[capturedPiece] = height * 9 + 15;
                         capturedBlackPieces++;
                         setCapturedPos(-1);
@@ -490,7 +490,7 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
 
                 } else if (capturedPiece <= 15) {
                     try {
-                        x_coords[capturedPiece] = capturedWhitePieces * width/2;
+                        x_coords[capturedPiece] = (capturedWhitePieces * width/2) + (capturedWhitePieces * 7);
                         y_coords[capturedPiece] = zero;
                         capturedWhitePieces++;
                         setCapturedPos(-1);
@@ -596,7 +596,7 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
                     Piece blackPawn = board.getPiece(toPos - 8);                    
                     if (blackPawn.getColor() == BLACK && board.getEnPassant()) {
                         try {
-                            x_coords[board.getPiece(toPos-8).getId()] = (capturedBlackPieces * width) + 15;
+                            x_coords[board.getPiece(toPos-8).getId()] = (capturedBlackPieces * width/2) + (capturedBlackPieces * 7);
                             y_coords[board.getPiece(toPos-8).getId()] = height * 9 + 15;
                             capturedBlackPieces++;
                             notation = "(EnPassant)";
@@ -609,7 +609,7 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
                     Piece whitePawn = board.getPiece(toPos + 8);
                     if (whitePawn.getColor() == WHITE && board.getEnPassant()) {
                         try {
-                            x_coords[board.getPiece(toPos+8).getId()] = (capturedWhitePieces * width) + 15;
+                            x_coords[board.getPiece(toPos+8).getId()] = (capturedWhitePieces * width/2) + (capturedWhitePieces * 7);
                             y_coords[board.getPiece(toPos+8).getId()] = zero;
                             capturedBlackPieces++;
                             notation = "(EnPassant)";
