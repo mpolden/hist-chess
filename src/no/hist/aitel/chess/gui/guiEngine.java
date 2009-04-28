@@ -85,9 +85,122 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
     private String centerText = "";
     private String picked;
     private String notation = "";
-    private String intro = "\n Welcome to Chess 1.0\n\n";
-    
+    private String intro = "\n Welcome to Chess version 1.0\n Created by team 9\n Last Updated: 28/04/09\n\n";
 
+    /**
+     * Creates the diffrent variables and gui
+     * @param title
+     */
+    public guiEngine(String title) {
+        this.addMouseListener(this);
+        this.addMouseMotionListener(this);
+        setTitle(title);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLayout(new BorderLayout());
+        players();
+
+        southPanel = new JPanel(new BorderLayout());
+        northPanel = new JPanel(new BorderLayout());
+        westPanel = new JPanel(new BorderLayout());
+        eastPanel = new JPanel(new BorderLayout());
+
+        player1Label = new JLabel(player1, JLabel.LEFT);
+        player2Label = new JLabel(player2, JLabel.LEFT);
+
+        player1Label.setFont(player);
+        player2Label.setFont(player);
+
+        centerTextArea = new JTextArea(10, 25);
+        centerTextArea.setFont(centerArea);
+        centerTextArea.setEditable(false);
+        centerTextArea.setBorder(BorderFactory.createLineBorder( Color.black));
+        centerTextArea.setBackground(background);
+        centerTextArea.setAutoscrolls(true);
+        centerText+=intro;
+        centerTextArea.setText(centerText);
+        JScrollPane centerScrollPane = new JScrollPane(centerTextArea);
+        centerScrollPane.createHorizontalScrollBar();
+
+        topArea = new JTextArea(10, 25) {
+            {
+                setOpaque(false);
+            }
+            @Override
+            public void paint(Graphics g) {
+                g.drawImage(Chess, -40, -50, this);
+                super.paint(g);
+            }
+        };
+        topArea.setEditable(false);
+        topArea.setBorder(BorderFactory.createLineBorder( Color.black));
+        topArea.setBackground(background);
+
+        miniMapArea = new JTextArea(10, 10);
+        miniMapArea.setEditable(false);
+        miniMapArea.setBorder(BorderFactory.createLineBorder( Color.black));
+        miniMapArea.setBackground(background);
+        miniMapArea.setFont(miniMap);
+        miniMapArea.setText(board.toString());
+
+        stopWatchP1.setFont(timer);
+        stopWatchP1.setBorder(BorderFactory.createEmptyBorder());
+
+        stopWatchP2.setFont(timer);
+        stopWatchP2.setBorder(BorderFactory.createEmptyBorder());
+
+        southPanel.add(player1Label, BorderLayout.SOUTH);
+        southPanel.add(stopWatchP1, BorderLayout.NORTH);
+        southPanel.setBackground(new Color(0xC0D9D9));
+
+        northPanel.add(player2Label, BorderLayout.NORTH);
+        northPanel.add(stopWatchP2, BorderLayout.SOUTH);
+        northPanel.setBackground(new Color(0xFF2400));
+
+        boardGui.setBackground(background);
+        boardGui.setBorder(BorderFactory.createLineBorder(Color.black));
+
+        westPanel.add(boardGui, BorderLayout.WEST);
+        eastPanel.add(topArea, BorderLayout.NORTH);
+
+        eastPanel.add(centerScrollPane, BorderLayout.CENTER);
+        eastPanel.add(miniMapArea, BorderLayout.SOUTH);
+
+        add(eastPanel, BorderLayout.EAST);
+        add(westPanel, BorderLayout.WEST);
+        add(southPanel, BorderLayout.SOUTH);
+        add(northPanel, BorderLayout.NORTH);
+
+        player1timer = new Runnable () {
+            public void run () {
+                while(timerCheckP1) {
+                    try {
+                        Thread.currentThread().sleep(1000);
+                        stopWatchP1.setText("   " + timeUsedP1 + " sec");
+                        timeUsedP1++;
+                    } catch (InterruptedException ex) {
+                        Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+            }
+        };
+        stopWatchP1.setText("   " + timeUsedP1 + " sec");
+
+        player2timer = new Runnable () {
+            public void run () {
+                while(timerCheckP2) {
+                    try {
+                        Thread.currentThread().sleep(1000);
+                        stopWatchP2.setText("   " + timeUsedP2 + " sec");
+                        timeUsedP2++;
+                    } catch (InterruptedException ex) {
+                        Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+            }
+        };
+        stopWatchP2.setText("   " + timeUsedP2 + " sec");
+        pack();
+    }
     /**
      * Returns the position of a captured piece
      * @return capturedPos
@@ -95,7 +208,6 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
     private int getCapturedPos() {
         return capturedPos;
     }
-
     /**
      * Stops the running player timers
      */
@@ -103,7 +215,6 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
         timerCheckP1 = false;
         timerCheckP2 = false;
     }
-
     /**
      * Sets the position of the captured piece to the given parameter
      * @param capturedPos
@@ -150,136 +261,16 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
         centerText = newText;
         centerTextArea.setText(centerText);
     }
-
     /**
      * cleans up before a new game
      */
     public void cleanup() {
-        setTimeUsed(0, 0);
+        setTimeUsed(zero, zero);
         miniMapArea.setText(board.toString());
         getChessboard().getStartPos().resetPromoteImage();
         setCenterTextArea(intro);
         stopTimers();
-    }
-
-    /**
-     * Creates the diffrent variables and gui
-     * @param title
-     */
-    public guiEngine(String title) {
-        this.addMouseListener(this);
-        this.addMouseMotionListener(this);
-        setTitle(title);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setLayout(new BorderLayout());
-        players();
-
-        southPanel = new JPanel(new BorderLayout());
-        northPanel = new JPanel(new BorderLayout());
-        westPanel = new JPanel(new BorderLayout());
-        eastPanel = new JPanel(new BorderLayout());
-        
-
-        player1Label = new JLabel(player1, JLabel.LEFT);
-        player2Label = new JLabel(player2, JLabel.LEFT);
-
-        player1Label.setFont(player);
-        player2Label.setFont(player);        
-
-        centerTextArea = new JTextArea(10, 25);
-        centerTextArea.setFont(centerArea);
-        JScrollPane centerScrollPane = new JScrollPane(centerTextArea);
-        centerScrollPane.createHorizontalScrollBar();
-        topArea = new JTextArea(10, 25) {                    
-            {
-                setOpaque(false);
-            }
-            @Override
-            public void paint(Graphics g) {
-                g.drawImage(Chess, -40, -50, this);
-                super.paint(g);
-            }
-        };
-        miniMapArea = new JTextArea(10, 10);
-        topArea.setEditable(false);
-        miniMapArea.setEditable(false);
-        centerTextArea.setEditable(false);
-        topArea.setBorder(BorderFactory.createLineBorder( Color.black));
-        miniMapArea.setBorder(BorderFactory.createLineBorder( Color.black));
-        centerTextArea.setBorder(BorderFactory.createLineBorder( Color.black));
-        miniMapArea.setBackground(new Color(0xD8D8BF));
-        topArea.setBackground(new Color(0xD8D8BF));
-        centerTextArea.setBackground(new Color(0xD8D8BF));
-        centerTextArea.setAutoscrolls(true);
-        miniMapArea.setFont(timer);
-        miniMapArea.setText(board.toString());      
-
-
-        stopWatchP1.setFont(timer);
-        stopWatchP1.setBorder(BorderFactory.createEmptyBorder());
-
-        stopWatchP2.setFont(timer);
-        stopWatchP2.setBorder(BorderFactory.createEmptyBorder());      
-        
-        southPanel.add(player1Label, BorderLayout.SOUTH);
-        southPanel.add(stopWatchP1, BorderLayout.NORTH);
-        southPanel.setBackground(new Color(0xC0D9D9));
-
-        northPanel.add(player2Label, BorderLayout.NORTH);
-        northPanel.add(stopWatchP2, BorderLayout.SOUTH);
-        northPanel.setBackground(new Color(0xFF2400));
-
-        boardGui.setBackground(new Color(0xD8D8BF));
-        boardGui.setBorder(BorderFactory.createLineBorder( Color.black));
-        
-        westPanel.add(boardGui, BorderLayout.WEST);       
-        eastPanel.add(topArea, BorderLayout.NORTH);
-        centerText+=intro;
-        centerTextArea.setText(centerText);
-        eastPanel.add(centerScrollPane, BorderLayout.CENTER);
-        eastPanel.add(miniMapArea, BorderLayout.SOUTH);
-
-        miniMapArea.setFont(miniMap);
-
-        add(eastPanel, BorderLayout.EAST);
-        add(westPanel, BorderLayout.WEST);
-        add(southPanel, BorderLayout.SOUTH);
-        add(northPanel, BorderLayout.NORTH);
-        
-        
-        player1timer = new Runnable () {
-            public void run () {                
-                while(timerCheckP1) {
-                    try {
-                        Thread.currentThread().sleep(1000);
-                        stopWatchP1.setText("   " + timeUsedP1 + " sec");
-                        timeUsedP1++;
-                    } catch (InterruptedException ex) {
-                        Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                }
-            }
-        };
-        stopWatchP1.setText("   " + timeUsedP1 + " sec");
-        
-
-        player2timer = new Runnable () {
-            public void run () {                
-                while(timerCheckP2) {
-                    try {
-                        Thread.currentThread().sleep(1000);
-                        stopWatchP2.setText("   " + timeUsedP2 + " sec");
-                        timeUsedP2++;
-                    } catch (InterruptedException ex) {
-                        Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                }
-            }
-        };
-        stopWatchP2.setText("   " + timeUsedP2 + " sec");
-        pack();
-    }
-
+    }    
     /**
      * Returns the current timer for P1
      * @return timeUsedP1
@@ -305,7 +296,6 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
         timeUsedP2 = timeP2;
         stopWatchP2.setText("   " + timeUsedP2 + " sec");        
     }
-
     /**
      * Sets the current board to the given parameter
      * @param board
@@ -327,7 +317,6 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
     public Chessboard getChessboard() {
         return boardGui;
     }
-
     /**
      * Sets player 1 name to the given parameter
      * @param newName
@@ -336,7 +325,6 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
         player1 = newName;
         player1Label.setText(player1);
     }
-
     /**
      * Sets player 2 name to the given parameter
      * @param newName
@@ -366,7 +354,6 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
         player1 = "Player 1";
         player2 = "Player 2";
     }
-
     /**
      * Calculates which piece is being clicked on
      * @param e
@@ -400,16 +387,13 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
             System.out.println(outOfBoundsException);
         }
     }
-
     /**
      * Moves the piece calculated by the mousePressed method
      * @param e
      */
     public void mouseDragged(MouseEvent e) {
         x = e.getX();
-        y = e.getY();
-        //System.out.println(getHeight());
-        //System.out.println(y);
+        y = e.getY();       
         if (canDrag) {
             x_coords[movingPiece] = x - dragFromX;
             y_coords[movingPiece] = y - dragFromY;
@@ -425,7 +409,85 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
         }       
         this.repaint();
     }
+    /**
+     * Tries to do the move indicated by the player, and checks if it is legal. Also removes a piece if it is capruted.
+     * @param e
+     */
+    public void mouseReleased(MouseEvent e) {
+        if (canDrag) {
+            int x_on_release = e.getX();
+            int y_on_release = e.getY();
+            toPos = getRect.getRectNumber(x_on_release, y_on_release);
 
+            String from = board.getNotation(fromPos);
+            String to = board.getNotation(toPos);
+            try {
+                if(board.getPiece(fromPos).getType() == PAWN) {
+                    checkEnPassant();
+                }
+                capturedPiece = board.getPiece(toPos).getId();
+
+                System.out.println(fromPos +" "+ toPos);
+                board.movePiece(fromPos, toPos);
+                System.out.println(toPos);
+                if(board.getPiece(toPos).getType() == PAWN) {
+                    checkPromotion();
+                }
+                if(board.getPiece(toPos).getType() == KING) {
+                    checkCastling();
+                }
+                setCapturedPos(board.getPiece(toPos).getId());
+                changePosition();
+                if(!from.equals(to)) {
+                centerText += "\n "+board.getPiece(toPos).getColorStr() + " " + board.getPiece(toPos).getTypeStr()+" from "+from+" to "+to+notation;
+                notation = "";
+            }
+            } catch (BoardException exception) {
+                System.out.println(exception.getMessage());
+                resetPosition();
+                setCapturedPos(-1);
+            } catch (IllegalPositionException exception) {
+                System.out.println(exception.getMessage());
+                resetPosition();
+                setCapturedPos(-1);
+            } catch (CheckException exception) {
+                System.out.println(exception.getMessage());
+                resetPosition();
+                setCapturedPos(-1);
+            } catch (CheckMateException exception) {
+                System.out.println(exception.getMessage());
+                System.out.println("Good game!");
+                setCapturedPos(-1);
+            } catch (ArrayIndexOutOfBoundsException exception) {
+                System.out.println(exception.getMessage());
+                resetPosition();
+                setCapturedPos(-1);
+            }
+            if (getCapturedPos() > -1 && board.getPiece(fromPos).getId() != getCapturedPos()) {
+                if (capturedPiece >= 48) {
+                    try {
+                        x_coords[capturedPiece] = capturedBlackPieces * width/2;
+                        y_coords[capturedPiece] = height * 9 + 15;
+                        capturedBlackPieces++;
+                        setCapturedPos(-1);
+                    } catch (ArrayIndexOutOfBoundsException excep) {
+                    }
+
+                } else if (capturedPiece <= 15) {
+                    try {
+                        x_coords[capturedPiece] = capturedWhitePieces * width/2;
+                        y_coords[capturedPiece] = zero;
+                        capturedWhitePieces++;
+                        setCapturedPos(-1);
+                    } catch (ArrayIndexOutOfBoundsException excep) {
+                    }
+                }
+            }
+            this.repaint();
+            centerTextArea.setText(centerText);
+            miniMapArea.setText(board.toString());
+        }
+    }
     /**
      * Resets the piece position if the move is invalid
      */
@@ -514,8 +576,7 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
         if (fromPiece.getType() == PAWN && toPiece.isEmpty()) {
             if (fromPiece.getColor() == WHITE) {
                 if (toPos == fromPos + 9 || toPos == fromPos + 7) {
-                    Piece blackPawn = board.getPiece(toPos - 8);
-                    
+                    Piece blackPawn = board.getPiece(toPos - 8);                    
                     if (blackPawn.getColor() == BLACK && board.getEnPassant()) {
                         try {
                             x_coords[board.getPiece(toPos-8).getId()] = capturedBlackPieces * width/2;
@@ -595,89 +656,7 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
             repaint();
             miniMapArea.setText(board.toString());
         }        
-    }
-
-    /**
-     * Tries to do the move indicated by the player, and checks if it is legal. Also removes a piece if it is capruted.
-     * @param e
-     */
-    public void mouseReleased(MouseEvent e) {        
-        if (canDrag) {
-            int x_on_release = e.getX();
-            int y_on_release = e.getY();            
-            toPos = getRect.getRectNumber(x_on_release, y_on_release);
-            System.out.println(toPos);
-            String from = board.getNotation(fromPos);
-            String to = board.getNotation(toPos);            
-            try {
-                if(board.getPiece(fromPos).getType() == PAWN) {                    
-                    checkEnPassant();
-                }
-                System.out.println(toPos);
-                capturedPiece = board.getPiece(toPos).getId();
-                System.out.println(toPos);
-                board.movePiece(fromPos, toPos);
-                System.out.println(toPos);
-                if(board.getPiece(toPos).getType() == PAWN) {
-                    checkPromotion();
-                }
-                if(board.getPiece(toPos).getType() == KING) {
-                    checkCastling();
-                }                
-                setCapturedPos(board.getPiece(toPos).getId());
-                changePosition();
-                System.out.println(toPos);
-                if(!from.equals(to)) {
-                centerText += "\n "+board.getPiece(toPos).getColorStr() + " " + board.getPiece(toPos).getTypeStr()+" from "+from+" to "+to+notation;
-                notation = "";
-            }             
-                
-            } catch (BoardException exception) { 
-                System.out.println(exception.getMessage());
-                resetPosition();
-                setCapturedPos(-1);
-            } catch (IllegalPositionException exception) {
-                System.out.println(exception.getMessage());
-                resetPosition();
-                setCapturedPos(-1);
-            } catch (CheckException exception) {
-                System.out.println(exception.getMessage());
-                resetPosition();
-                setCapturedPos(-1);
-            } catch (CheckMateException exception) {
-                System.out.println(exception.getMessage());
-                System.out.println("Good game!");
-                setCapturedPos(-1);
-            } catch (ArrayIndexOutOfBoundsException exception) {
-                System.out.println(exception.getMessage());
-                resetPosition();
-                setCapturedPos(-1);
-            }
-            if (getCapturedPos() > -1 && board.getPiece(fromPos).getId() != getCapturedPos()) {                
-                if (capturedPiece >= 48) {
-                    try {
-                        x_coords[capturedPiece] = capturedBlackPieces * width/2;
-                        y_coords[capturedPiece] = height * 9 + 15;
-                        capturedBlackPieces++;
-                        setCapturedPos(-1);
-                    } catch (ArrayIndexOutOfBoundsException excep) {
-                    }
-
-                } else if (capturedPiece <= 15) {
-                    try {
-                        x_coords[capturedPiece] = capturedWhitePieces * width/2;
-                        y_coords[capturedPiece] = zero;
-                        capturedWhitePieces++;
-                        setCapturedPos(-1);
-                    } catch (ArrayIndexOutOfBoundsException excep) {
-                    }
-                }
-            }
-            this.repaint();            
-            centerTextArea.setText(centerText);                    
-            miniMapArea.setText(board.toString());
-        }
-    }
+    }    
     /**
      * Sets the variable canDrag to false, meaning the player is unable to drag a piece before one is clicked.
      * @param e
@@ -690,7 +669,7 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
     public void mouseEntered(MouseEvent e) {}
     public void actionPerformed(ActionEvent e) {}
     
-    private class Chessboard extends JPanel {
+    public class Chessboard extends JPanel {
 
         private JLayeredPane layeredPane;
         private drawBoard chessBoard;
