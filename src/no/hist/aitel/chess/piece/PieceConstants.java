@@ -11,7 +11,7 @@ package no.hist.aitel.chess.piece;
  * @author martin
  */
 
-public final class PieceConstants {
+public class PieceConstants {
 
     // Don't allow instances of this class
     private PieceConstants() {

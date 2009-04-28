@@ -631,10 +631,10 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
             checkMateFrame.getQuitButton().addActionListener(listener);
             int player = board.getTurn() ^ 1;
             if(player == zero) {
-                checkMateFrame.setMessage(player1+" Wins!");
+                checkMateFrame.setMessage(player1+" wins!");
             }
             else if(player == 1) {
-                checkMateFrame.setMessage(player2+" Wins!");
+                checkMateFrame.setMessage(player2+" wins!");
             }
         }       
     }
