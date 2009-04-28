@@ -24,7 +24,7 @@ import javax.swing.KeyStroke;
 public class Main implements ActionListener, ItemListener {
     private static guiEngine mainWindow = new guiEngine("Chess");
     private static JFrame frame = mainWindow;
-    private saveAndLoad saveAndLoad = new saveAndLoad(); 
+    private saveAndLoad saveAndLoad = mainWindow.getSaveAndLoad();
     private String[] savedString = new String[5];    
 
     public static void createAndShowGui() {        

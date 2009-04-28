@@ -204,10 +204,20 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
         stopWatchP2.setText("   " + timeUsedP2 + " sec");
         pack();
     }
+    /**
+     * Initiates new game, so it equals a saved game when the game is started
+     */
     private void initNewGameSave() {
         saveAndLoad.saveIntArray("./src/no/hist/aitel/chess/resources/new_game_x_coords.txt", getChessboard().getXcoords());
         saveAndLoad.saveIntArray("./src/no/hist/aitel/chess/resources/new_game_y_coords.txt", getChessboard().getYcoords());
         saveAndLoad.saveBoard("./src/no/hist/aitel/chess/resources/new_game_internal.txt", getBoardObj());
+    }
+    /**
+     * Returns the saveAndLoad object
+     * @return saveAndLoad
+     */
+    public saveAndLoad getSaveAndLoad() {
+        return saveAndLoad;
     }
     /**
      * Returns the position of a captured piece
@@ -230,7 +240,6 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
     private void setCapturedPos(int capturedPos) {
         this.capturedPos = capturedPos;
     }
-
     /**
      * Sets the x coordinates
      * @param newCoords
