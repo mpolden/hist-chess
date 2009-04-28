@@ -471,8 +471,7 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
                 }                
                 resetPosition();
                 setCapturedPos(-1);
-            } catch (CheckMateException exception) {   
-               
+            } catch (CheckMateException exception) {               
             } catch (ArrayIndexOutOfBoundsException exception) {                
                 resetPosition();
                 setCapturedPos(-1);
