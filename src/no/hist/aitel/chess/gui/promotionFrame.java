@@ -4,6 +4,7 @@ package no.hist.aitel.chess.gui;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.Panel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -37,14 +38,26 @@ public class promotionFrame extends JFrame implements ActionListener {
     static String picked = "queen";
     JLabel picture;
 
+    /**
+     * Returns the name of the picked piece
+     * @return picked
+     */
     public String getPicked() {
         return picked;
     }
 
+    /**
+     * Returns the ok button
+     * @return okbutton
+     */
     public JButton getButton() {
         return okButton;
     }
 
+    /**
+     * Creates the promotion frame gui, the parameter check which player is able to promote
+     * @param color
+     */
     public promotionFrame(String color) {
         if(color.equals("white")) {
             blackOrWhite = "w";
@@ -113,12 +126,17 @@ public class promotionFrame extends JFrame implements ActionListener {
     protected static ImageIcon createImageIcon(String path) {
         File test = new File(path);
         if (test != null) {
-            return new ImageIcon(path);
+            ImageIcon image = new ImageIcon(path);
+            Image img = image.getImage();
+            Image newimg = img.getScaledInstance(WIDTH, HEIGHT, java.awt.Image.SCALE_SMOOTH);
+            image = new ImageIcon(newimg);
+            return image;
         } else {
             System.err.println("Couldn't find file: " + path);
             return null;
         }
     }
+
 
     public void actionPerformed(ActionEvent e) {
         picked = e.getActionCommand();
