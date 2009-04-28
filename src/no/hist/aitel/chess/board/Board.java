@@ -327,7 +327,7 @@ public class Board implements Serializable, Cloneable {
      * Check if player is check mate
      * @return True if check mate and false otherwise
      */
-    private boolean isCheckMate() {
+    public boolean isCheckMate() {
         return checkMate;
     }
 
@@ -461,7 +461,7 @@ public class Board implements Serializable, Cloneable {
 
     /**
      * Get a string format of the board state
-     * @return Values of turn, inCheck and checkMate
+     * @return Values of turn, inCheck, checkMate and fake
      */
     public String getStateStr() {
         String out = "turn: " + turn + "\ninCheck: " + inCheck +

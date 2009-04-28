@@ -54,16 +54,16 @@ public class Test {
 
         // Check mate in 6 moves
 //        b.reset();
-//        b.movePiece(12, 28);
-//        b.movePiece(52, 36);
-//        b.movePiece(3, 39);
-//        b.movePiece(48, 40);
-//        b.movePiece(5, 26);
-//        b.movePiece(40, 32);
-//        b.movePiece(39, 53);
-//
-//        System.out.println(b.getStateStr());
-//        System.out.println(b.toString());
+        b.movePiece(12, 28);
+        b.movePiece(52, 36);
+        b.movePiece(3, 39);
+        b.movePiece(48, 40);
+        b.movePiece(5, 26);
+        b.movePiece(40, 32);
+        b.movePiece(39, 53);
+
+        System.out.println(b.getStateStr());
+        System.out.println(b.toString());
         
 
         // En passant
