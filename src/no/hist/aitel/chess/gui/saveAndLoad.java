@@ -14,12 +14,11 @@ import no.hist.aitel.chess.board.Board;
  * @author Vegard
  */
 public class saveAndLoad {
-
     /**
-     * Serialize an int array and save to file
+     * Serializes an int array and stores it to the given file
      * @param filename
      * @param input
-     */
+     */    
     public void saveIntArray(String filename, int[] input) {
         try {
             FileOutputStream fos = new FileOutputStream(filename);           
@@ -30,8 +29,7 @@ public class saveAndLoad {
         }
         catch (IOException e) {            
         }
-    }
-
+    }    
     /**
      * Load a serialized int array from file
      * @param filename
@@ -50,12 +48,11 @@ public class saveAndLoad {
         }
         return null;
     }
-
     /**
-     * Serialize a string array and save to file
+     * Serializes a String array and stores it to the given file
      * @param filename
      * @param save
-     */
+     */    
     public void saveStringArray(String filename, String[] save) {
         try {
             FileOutputStream fos = new FileOutputStream(filename);
@@ -66,8 +63,7 @@ public class saveAndLoad {
         }
         catch (IOException e) {            
         }
-    }
-
+    }    
     /**
      * Load a serialized string array from file
      * @param filename
@@ -86,12 +82,11 @@ public class saveAndLoad {
         }
         return null;
     }
-
     /**
-     * Save a serialized board to file
+     * Serializes a given board object and stores it to the given file
      * @param filename
      * @param save
-     */
+     */  
     public void saveBoard(String filename, Board save) {
         try {
             FileOutputStream fos = new FileOutputStream(filename);            
@@ -103,9 +98,8 @@ public class saveAndLoad {
         catch (IOException e) {            
         }
     }
-
     /**
-     * Load a serialized board from file
+     * Loads a serialized board object
      * @param filename
      * @return
      * @throws java.lang.ClassNotFoundException

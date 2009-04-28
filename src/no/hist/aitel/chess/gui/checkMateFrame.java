@@ -62,9 +62,8 @@ public class checkMateFrame extends JFrame {
         pack();
         setVisible(true);
     }
-
     /**
-     * Set the message shown in checkMateFrame()
+     * Sets the message drawed in the check mate frame
      * @param message
      */
     public void setMessage(String message) {

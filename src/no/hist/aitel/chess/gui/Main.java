@@ -25,10 +25,11 @@ public class Main implements ActionListener, ItemListener {
     private static guiEngine mainWindow = new guiEngine("Chess");
     private static JFrame frame = mainWindow;
     private saveAndLoad saveAndLoad = mainWindow.getSaveAndLoad();
-    private String[] savedString = new String[5];    
+    private String[] savedString = new String[5];   
+
 
     /**
-     * Creates and shows GUI
+     * Creates the main gui frame and shows it
      */
     public static void createAndShowGui() {        
         Main gui = new Main();
@@ -39,6 +40,10 @@ public class Main implements ActionListener, ItemListener {
         frame.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));        
     }
 
+    /**
+     * Creates a JMenu
+     * @return JMenu
+     */
     private JMenuBar addJMenu() {
         JMenuBar menuBar = new JMenuBar();
         JMenu menu = new JMenu("File"), submenu = new JMenu("Set player names"), submenu2 = new JMenu("Change pieces");
@@ -103,8 +108,11 @@ public class Main implements ActionListener, ItemListener {
         menu.add(menuItem);
         
         return menuBar;       
-    }    
-
+    }
+    /**
+     * Checks for actions performed from the dropdown menu, and if so, executes them
+     * @param e
+     */
     public void actionPerformed(ActionEvent e) {        
         if(e.getActionCommand().equals("Save game")) {
              if (JOptionPane.YES_OPTION == JOptionPane.showConfirmDialog(null, "Are you sure you want to save the game?\nPrevious save data will be lost.")) {

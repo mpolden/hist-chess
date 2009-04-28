@@ -10,49 +10,48 @@ import static no.hist.aitel.chess.gui.guiConstants.*;
  * @author Vegard
  */
 public class getRect {
-    private int rectNumber;
+    private int squareNumber;
     private int rectCoordX;
     private int rectCoordY;    
-
     /**
-     * Gets field number based on x and y coordinates
+     * Returns the chess square number at the given coordinates
      * @param x
      * @param y
-     * @return The field number
+     * @return
      */
-    public int getRectNumber(int x, int y) { 
+    public int getSquareNumber(int x, int y) {
         int xNumber;
         int yNumber;
         xNumber = (x-xIn) / width;
         yNumber = (y-yIn) / height;
         if(yNumber == 0) {
-            rectNumber = xNumber+(8*7);
+            squareNumber = xNumber+(8*7);
         }
         else if(yNumber == 1) {
-            rectNumber = xNumber+(8*6);
+            squareNumber = xNumber+(8*6);
         }
         else if(yNumber == 2) {
-            rectNumber = xNumber+(8*5);
+            squareNumber = xNumber+(8*5);
         }
         else if(yNumber == 3) {
-            rectNumber = xNumber+(8*4);
+            squareNumber = xNumber+(8*4);
         }
         else if(yNumber == 4) {
-            rectNumber = xNumber+(8*3);
+            squareNumber = xNumber+(8*3);
         }
         else if(yNumber == 5) {
-            rectNumber = xNumber+(8*2);
+            squareNumber = xNumber+(8*2);
         }
         else if(yNumber == 6) {
-            rectNumber = xNumber+(8*1);
+            squareNumber = xNumber+(8*1);
         }
         else if(yNumber == 7) {
-            rectNumber = xNumber+(8*0);
+            squareNumber = xNumber+(8*0);
         }
         else {
-            rectNumber = -1;
+            squareNumber = -1;
         }
-        return rectNumber;
+        return squareNumber;
     }
 
     /**

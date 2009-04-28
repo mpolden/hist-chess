@@ -392,7 +392,7 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
                     }
                     x_coordStartPos = x;
                     y_coordStartPos = y;
-                    fromPos = getRect.getRectNumber(x_coordStartPos, y_coordStartPos);
+                    fromPos = getRect.getSquareNumber(x_coordStartPos, y_coordStartPos);
                 } else {
                     movingPiece = -1;
                     canDrag = false;
@@ -433,7 +433,7 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
         if (canDrag && canPlay) {
             int x_on_release = e.getX();
             int y_on_release = e.getY();
-            toPos = getRect.getRectNumber(x_on_release, y_on_release);
+            toPos = getRect.getSquareNumber(x_on_release, y_on_release);
 
             String from = board.getNotation(fromPos);
             String to = board.getNotation(toPos);
