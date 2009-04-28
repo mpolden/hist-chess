@@ -596,7 +596,7 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
                     Piece blackPawn = board.getPiece(toPos - 8);                    
                     if (blackPawn.getColor() == BLACK && board.getEnPassant()) {
                         try {
-                            x_coords[board.getPiece(toPos-8).getId()] = (capturedBlackPieces * width/2) + 15;
+                            x_coords[board.getPiece(toPos-8).getId()] = (capturedBlackPieces * width) + 15;
                             y_coords[board.getPiece(toPos-8).getId()] = height * 9 + 15;
                             capturedBlackPieces++;
                             notation = "(EnPassant)";
@@ -609,7 +609,7 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
                     Piece whitePawn = board.getPiece(toPos + 8);
                     if (whitePawn.getColor() == WHITE && board.getEnPassant()) {
                         try {
-                            x_coords[board.getPiece(toPos+8).getId()] = (capturedWhitePieces * width/2) + 15;
+                            x_coords[board.getPiece(toPos+8).getId()] = (capturedWhitePieces * width) + 15;
                             y_coords[board.getPiece(toPos+8).getId()] = zero;
                             capturedBlackPieces++;
                             notation = "(EnPassant)";
