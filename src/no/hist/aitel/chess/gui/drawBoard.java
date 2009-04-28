@@ -10,8 +10,7 @@ import static no.hist.aitel.chess.gui.guiConstants.*;
  */
 public class drawBoard extends JPanel { 
     
-    private Font arial = new Font("Arial", Font.PLAIN, 16);
-    
+    private Font text = new Font("COURIER NEW", Font.PLAIN, 16);    
     
     public drawBoard() {        
     }
@@ -60,7 +59,7 @@ public class drawBoard extends JPanel {
         String number;
         for (int i = 0; i<8; i++) {            
             number = String.valueOf(j);
-            g.setFont(arial);
+            g.setFont(text);
             g.setColor(black);
             g.drawString(number, 2, ((i+2)*height)-15);
             j--;
@@ -69,7 +68,7 @@ public class drawBoard extends JPanel {
         for (int i = 0; i<8; i++) {
             String letter;
             letter = abcdefgh.substring(i, i+1);
-            g.setFont(arial);
+            g.setFont(text);
             g.setColor(black);
             g.drawString(letter, (width*i)+(width-35), (height*9)+15);
         }

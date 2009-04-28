@@ -1,5 +1,4 @@
 package no.hist.aitel.chess.gui;
-
 /**
  *
  * @author Vegard
@@ -43,8 +42,7 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
     private Board board = new Board();
     private getRect getRect = new getRect();
     private int[] x_coords = boardGui.getXcoords();
-    private int[] y_coords = boardGui.getYcoords();
-    
+    private int[] y_coords = boardGui.getYcoords();    
     private int dragFromX = zero;
     private int dragFromY = zero;
     private int movingPiece = -1;
@@ -233,7 +231,6 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
         }
         this.repaint();
     }
-
     /**
      * Sets the y coordinates
      * @param newCoords
@@ -244,7 +241,6 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
         }
         this.repaint();
     }
-
     /**
      * Returns the text of the center area
      * @return centerText
@@ -252,7 +248,6 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
     public String getCenterTextArea() {
         return centerText;
     }
-
     /**
      * Sets the text of the center area
      * @param newText
@@ -383,8 +378,7 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
                 canDrag = false;
             }
             
-        } catch (ArrayIndexOutOfBoundsException outOfBoundsException) {
-            System.out.println(outOfBoundsException);
+        } catch (ArrayIndexOutOfBoundsException outOfBoundsException) {            
         }
     }
     /**
@@ -425,11 +419,8 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
                 if(board.getPiece(fromPos).getType() == PAWN) {
                     checkEnPassant();
                 }
-                capturedPiece = board.getPiece(toPos).getId();
-
-                System.out.println(fromPos +" "+ toPos);
-                board.movePiece(fromPos, toPos);
-                System.out.println(toPos);
+                capturedPiece = board.getPiece(toPos).getId();                
+                board.movePiece(fromPos, toPos);                
                 if(board.getPiece(toPos).getType() == PAWN) {
                     checkPromotion();
                 }
@@ -442,27 +433,23 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
                 centerText += "\n "+board.getPiece(toPos).getColorStr() + " " + board.getPiece(toPos).getTypeStr()+" from "+from+" to "+to+notation;
                 notation = "";
             }
-            } catch (BoardException exception) {
-                System.out.println(exception.getMessage());
+            } catch (BoardException exception) {               
                 resetPosition();
                 setCapturedPos(-1);
             } catch (IllegalPositionException exception) {
-                System.out.println(exception.getMessage());
                 resetPosition();
                 setCapturedPos(-1);
-            } catch (CheckException exception) {
-                System.out.println(exception.getMessage());
+            } catch (CheckException exception) {                
                 resetPosition();
                 setCapturedPos(-1);
-            } catch (CheckMateException exception) {
-                System.out.println(exception.getMessage());
+            } catch (CheckMateException exception) {                
                 System.out.println("Good game!");
                 setCapturedPos(-1);
-            } catch (ArrayIndexOutOfBoundsException exception) {
-                System.out.println(exception.getMessage());
+            } catch (ArrayIndexOutOfBoundsException exception) {                
                 resetPosition();
                 setCapturedPos(-1);
             }
+            // Moves the captured pieces
             if (getCapturedPos() > -1 && board.getPiece(fromPos).getId() != getCapturedPos()) {
                 if (capturedPiece >= 48) {
                     try {
@@ -605,7 +592,6 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
        
     }
 
-
     private class Buttonlistener implements ActionListener {
         /**
          * Sets the pawn, who is able to promote, to the chosen type
@@ -613,8 +599,7 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
          */
         public void actionPerformed(ActionEvent event) {            
             frame.setVisible(false);
-            picked = frame.getPicked();
-            System.out.println(picked);
+            picked = frame.getPicked();            
             BufferedImage[] images = boardGui.getStartPos().getImages();
             if(toPos >= 56 && toPos <= 63) {
                 if(picked.equals("queen")) {                    
@@ -730,4 +715,3 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
         }        
     }    
 }
-
