@@ -140,9 +140,9 @@ public class Board implements Serializable, Cloneable {
         }
 
         // Check if player is check mate
-//        if (isCheckMate()) {
-//            throw new CheckMateException("Game over");
-//        }
+        if (isCheckMate()) {
+            throw new CheckMateException("Game over");
+        }
 
         // Update check and check mate state
         updateInCheck();
@@ -300,43 +300,34 @@ public class Board implements Serializable, Cloneable {
      * Update check mate state
      */
     private void updateCheckMate() {
-        // Clone Board object so we can simulate moves
-        Board fakeBoard = getFakeBoard();
-
-//        System.out.println(fakeBoard.getStateStr());
-//        System.out.println(fakeBoard.toString());
-//        out: {
-//            for (int from = 0; from < fakeBoard.board.length; from++) {
-//                if (fakeBoard.getPiece(from).getColor() == fakeBoard.turn)
-//            }
-//        }
-//        out: {
-//            for (int from = 0; from < fakeBoard.board.length; from++) {
-//                if (fakeBoard.getPiece(from).getColor() == fakeBoard.turn) {
-//                    for (int to = 0; to < fakeBoard.board.length; to++) {
-//                        try {
-//                            fakeBoard.movePiece(from, to);
-//                            System.out.println(fakeBoard.toString());
-//                            if (!fakeBoard.isInCheck()) {
-//                                checkMate = false;
-//                                System.out.println("moving from " + from + " to " + to + " gets me out of check");
-//                                System.out.println("check mate set to false and returned");
-//                                break out;
-//                            }
-//                            fakeBoard = getFakeBoard();
-//                        } catch (BoardException e) {
-//                        } catch (IllegalPositionException e) {
-//                        } catch (IllegalTypeException e) {
-//                        } catch (CheckException e) {
-//                        }
-////                        System.out.println("check mate set to true");
-//                        checkMate = true;
-//                        // Restore original board before next move
-////                        fakeBoard = getFakeBoard();
-//                    }
-//                }
-//            }
-//        }
+        if (!isInCheck()) {
+            checkMate = false;
+        } else {
+            // Clone Board object so we can simulate moves
+            Board fakeBoard = getFakeBoard();
+            fakeBoard.switchTurn();
+            out: {
+                for (int from = 0; from < fakeBoard.board.length; from++) {
+                    if (fakeBoard.getPiece(from).getColor() == fakeBoard.turn) {
+                        for (int to = 0; to < fakeBoard.board.length; to++) {
+                            try {
+                                fakeBoard.movePiece(from, to);
+                                if (!fakeBoard.isInCheck()) {
+                                    checkMate = false;
+                                    break out;
+                                }
+                                fakeBoard = getFakeBoard();
+                            } catch (BoardException e) {
+                            } catch (IllegalPositionException e) {
+                            } catch (IllegalTypeException e) {
+                            } catch (CheckException e) {
+                            }
+                            checkMate = true;
+                        }
+                    }
+                }
+            }
+        }
     }
 
     /**
