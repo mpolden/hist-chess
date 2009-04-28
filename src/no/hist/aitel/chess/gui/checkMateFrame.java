@@ -62,10 +62,16 @@ public class checkMateFrame extends JFrame {
         pack();
         setVisible(true);
     }
+
+    /**
+     * Set the message shown in checkMateFrame()
+     * @param message
+     */
     public void setMessage(String message) {
         this.message = message;
         this.repaint();
     }
+
     /**
      * Returns the new game button
      * @return newGame
@@ -73,6 +79,7 @@ public class checkMateFrame extends JFrame {
     public JButton getNewGameButton() {
         return newGame;
     }
+    
     /**
      * Returns the quit button
      * @return quit

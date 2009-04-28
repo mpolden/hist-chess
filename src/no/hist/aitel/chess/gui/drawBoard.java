@@ -11,7 +11,10 @@ import static no.hist.aitel.chess.gui.guiConstants.*;
 public class drawBoard extends JPanel { 
     
     private Font text = new Font("COURIER NEW", Font.PLAIN, 16);    
-    
+
+    /**
+     * Draws the board in GUI
+     */
     public drawBoard() {        
     }
     

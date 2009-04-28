@@ -2,18 +2,24 @@
 
 package no.hist.aitel.chess.gui;
 
+import static no.hist.aitel.chess.gui.guiConstants.*;
+
+
 /**
  *
  * @author Vegard
  */
-
-import static no.hist.aitel.chess.gui.guiConstants.*;
-
 public class getRect {
     private int rectNumber;
     private int rectCoordX;
     private int rectCoordY;    
 
+    /**
+     * Gets field number based on x and y coordinates
+     * @param x
+     * @param y
+     * @return The field number
+     */
     public int getRectNumber(int x, int y) { 
         int xNumber;
         int yNumber;
@@ -49,6 +55,11 @@ public class getRect {
         return rectNumber;
     }
 
+    /**
+     * Get x coordinate based on field number
+     * @param rectNumber
+     * @return The x coordinate
+     */
     public int getRectCoordX(int rectNumber) {
         if(rectNumber == 0 || rectNumber == 8 || rectNumber == 16 || rectNumber == 24 || rectNumber == 32 || rectNumber == 40 || rectNumber == 48 || rectNumber == 56) {
             rectCoordX = (width*0);
@@ -79,6 +90,11 @@ public class getRect {
         return rectCoordX;
     }
 
+    /**
+     * Get y coordinate based on field number
+     * @param rectNumber
+     * @return The y coordinate
+     */
     public int getRectCoordY(int rectNumber) {
         if(rectNumber >= 0 && rectNumber <= 7) {
             rectCoordY = (height*8);

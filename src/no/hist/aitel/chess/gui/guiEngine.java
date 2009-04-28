@@ -1,8 +1,5 @@
 package no.hist.aitel.chess.gui;
-/**
- *
- * @author Vegard
- */
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -34,7 +31,10 @@ import no.hist.aitel.chess.position.IllegalPositionException;
 import static no.hist.aitel.chess.gui.guiConstants.*;
 import static no.hist.aitel.chess.piece.PieceConstants.*;
 
-
+/**
+ *
+ * @author Vegard
+ */
 public class guiEngine extends JFrame implements MouseListener, MouseMotionListener, ActionListener, Serializable {
 
     private boolean canPlay = true;
@@ -720,7 +720,10 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
     public void mouseMoved(MouseEvent e) {}
     public void mouseEntered(MouseEvent e) {}
     public void actionPerformed(ActionEvent e) {}
-    
+
+    /**
+     * Creates the chessboard
+     */
     public class Chessboard extends JPanel {
 
         private JLayeredPane layeredPane;

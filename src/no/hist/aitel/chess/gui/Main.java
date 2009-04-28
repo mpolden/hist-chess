@@ -27,6 +27,9 @@ public class Main implements ActionListener, ItemListener {
     private saveAndLoad saveAndLoad = mainWindow.getSaveAndLoad();
     private String[] savedString = new String[5];    
 
+    /**
+     * Creates and shows GUI
+     */
     public static void createAndShowGui() {        
         Main gui = new Main();
         frame.setJMenuBar(gui.addJMenu());
@@ -102,13 +105,6 @@ public class Main implements ActionListener, ItemListener {
         return menuBar;       
     }    
 
-    protected String getClassName(Object o) {
-        String classString = o.getClass().getName();
-        int dotIndex = classString.lastIndexOf(".");
-        return classString.substring(dotIndex+1);
-    }   
-
-
     public void actionPerformed(ActionEvent e) {        
         if(e.getActionCommand().equals("Save game")) {
              if (JOptionPane.YES_OPTION == JOptionPane.showConfirmDialog(null, "Are you sure you want to save the game?\nPrevious save data will be lost.")) {
@@ -178,7 +174,11 @@ public class Main implements ActionListener, ItemListener {
         }
     }
     public void itemStateChanged(ItemEvent e) {}
-    
+
+    /**
+     * Sets up and runs our application
+     * @param args
+     */
     public static void main(String[] args) {
         javax.swing.SwingUtilities.invokeLater(new Runnable() {
             public void run() {

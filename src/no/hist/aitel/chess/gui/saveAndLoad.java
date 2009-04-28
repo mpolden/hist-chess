@@ -15,6 +15,11 @@ import no.hist.aitel.chess.board.Board;
  */
 public class saveAndLoad {
 
+    /**
+     * Serialize an int array and save to file
+     * @param filename
+     * @param input
+     */
     public void saveIntArray(String filename, int[] input) {
         try {
             FileOutputStream fos = new FileOutputStream(filename);           
@@ -27,6 +32,12 @@ public class saveAndLoad {
         }
     }
 
+    /**
+     * Load a serialized int array from file
+     * @param filename
+     * @return The int array
+     * @throws java.lang.ClassNotFoundException
+     */
     public int[] loadIntArray(String filename) throws ClassNotFoundException {
         try {
             FileInputStream fis = new FileInputStream(filename);            
@@ -40,6 +51,11 @@ public class saveAndLoad {
         return null;
     }
 
+    /**
+     * Serialize a string array and save to file
+     * @param filename
+     * @param save
+     */
     public void saveStringArray(String filename, String[] save) {
         try {
             FileOutputStream fos = new FileOutputStream(filename);
@@ -52,6 +68,12 @@ public class saveAndLoad {
         }
     }
 
+    /**
+     * Load a serialized string array from file
+     * @param filename
+     * @return A string array
+     * @throws java.lang.ClassNotFoundException
+     */
     public String[] loadStringArray(String filename) throws ClassNotFoundException {
         try {
             FileInputStream fis = new FileInputStream(filename);
@@ -65,6 +87,11 @@ public class saveAndLoad {
         return null;
     }
 
+    /**
+     * Save a serialized board to file
+     * @param filename
+     * @param save
+     */
     public void saveBoard(String filename, Board save) {
         try {
             FileOutputStream fos = new FileOutputStream(filename);            
@@ -76,7 +103,13 @@ public class saveAndLoad {
         catch (IOException e) {            
         }
     }
-    
+
+    /**
+     * Load a serialized board from file
+     * @param filename
+     * @return
+     * @throws java.lang.ClassNotFoundException
+     */
     public Board loadBoard(String filename) throws ClassNotFoundException {
         try {
             FileInputStream fis = new FileInputStream(filename);            
