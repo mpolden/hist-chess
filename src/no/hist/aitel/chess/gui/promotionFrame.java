@@ -128,7 +128,7 @@ public class promotionFrame extends JFrame implements ActionListener {
         if (test != null) {
             ImageIcon image = new ImageIcon(path);
             Image img = image.getImage();
-            Image newimg = img.getScaledInstance(WIDTH, HEIGHT, java.awt.Image.SCALE_SMOOTH);
+            Image newimg = img.getScaledInstance(100, 100, java.awt.Image.SCALE_SMOOTH);
             image = new ImageIcon(newimg);
             return image;
         } else {
@@ -143,9 +143,5 @@ public class promotionFrame extends JFrame implements ActionListener {
         picture.setIcon(createImageIcon("./src/no/hist/aitel/chess/resources/"
                                         + e.getActionCommand() + blackOrWhite
                                         + ".gif"));        
-    }    
-
-    public static void main(String[] args) {
-        new promotionFrame("black");
     }
 }
