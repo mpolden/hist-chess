@@ -6,6 +6,7 @@
 package no.hist.aitel.chess.board;
 
 import java.io.Serializable;
+import no.hist.aitel.chess.piece.IllegalTypeException;
 import no.hist.aitel.chess.piece.Piece;
 import no.hist.aitel.chess.position.IllegalPositionException;
 import no.hist.aitel.chess.position.IllegalSpecialPositionException;
@@ -25,6 +26,7 @@ public class Board implements Serializable, Cloneable {
     private boolean inCheck = false;
     private boolean checkMate = false;
     private Position p = new Position(this);
+    private boolean fake = false;
     
     /**
      * Creates the board and makes it ready for a new game
@@ -71,20 +73,21 @@ public class Board implements Serializable, Cloneable {
     }
 
     /**
+     * Get enPassant
+     * @return True or false
+     */
+    public boolean getEnPassant() {
+        return p.getEnPassant();
+    }
+
+    /**
      * Move a piece
      * @param from
      * @param to
      */
     public void movePiece(int from, int to) throws BoardException {
 
-        // Check if any of the positions are outside the board
-        if ((from < 0 || from > 63) || (to < 0 || from > 63)) {
-            throw new BoardException("Can't move pieces outside of the board.\n"
-                    + "\nFrom: " + from
-                    + "\nTo: " + to);
-        }
-
-        // Check if piece in 'from' from is empty
+        // Check if piece in 'from' is empty
         if (getPiece(from).isEmpty()) {
             throw new BoardException("Can't move empty piece.\n" +
                     "\nFrom: " + from +
@@ -96,7 +99,7 @@ public class Board implements Serializable, Cloneable {
             throw new BoardException("Not allowed to move now.");
         }
 
-        // Save the pieces we're moving, in case we need to "revert" it
+        // Save the pieces we're moving, in case we need to revert the move
         Piece fromPiece = getPiece(from);
         Piece toPiece = getPiece(to);
 
@@ -117,7 +120,7 @@ public class Board implements Serializable, Cloneable {
         }
 
         // Check if player is in check after move, but wasn't initially in check
-        if (!isInCheck() && inCheckAfterMove() && !isCheckMate()) {
+        if (!isInCheck() && inCheckAfterMove()) {
             // Undo move
             setPiece(from, fromPiece);
             setPiece(to, toPiece);
@@ -136,17 +139,16 @@ public class Board implements Serializable, Cloneable {
                     "\nTo: " + to);
         }
 
-//        if (!isInCheck() && isCheckMate()) {
-//            throw new CheckMateException("Stalemate! Not in check, but can't move anywhere.");
-//        }
-//
+        // Check if player is check mate
 //        if (isCheckMate()) {
-//            throw new CheckMateException("Game over dude!");
+//            throw new CheckMateException("Game over");
 //        }
 
         // Update check and check mate state
         updateInCheck();
-//        updateCheckMate();
+        if (!fake) { // Calling updateCheckMate() on fake boards will cause a StackOverflow
+            updateCheckMate();
+        }
 
         // Switch turn
         switchTurn();
@@ -258,31 +260,83 @@ public class Board implements Serializable, Cloneable {
     }
 
     /**
-     * Update check mate state
+     * Get piece which has the king in check
+     * @return Position of the piece
      */
-    private void updateCheckMate() {
-        boolean checkState = isInCheck();
-        // Simulate moves on the fake board to see if we can get out of check
-        out: {
-            for (int from = 0; from < board.length; from++) {
-                if (getPiece(from).getColor() == turn) {
-                    for (int to = 0; to < board.length; to++) {
-                        try {
-                            p.setPositions(from, to);
-                            p.verifyPositions(true);
-                            updateInCheck();
-                            if (isInCheck()) {
-                                checkMate = false;
-                                break out;
-                            }
-                        } catch (IllegalPositionException e) {
-                            checkMate = true;
-                        }
-                    }
+    private int getAttacker() {
+        int opponent = turn ^ 1;
+        for (int position = 0; position < board.length; position++) {
+            if (getPiece(position).getColor() == turn) {
+                try {
+                    // Check if any opponent piece can move to my king
+                    p.setPositions(position, getKing(opponent));
+                    p.verifyPositions(true);
+                    return position;
+                } catch (IllegalPositionException e) {
+
                 }
             }
         }
-        inCheck = checkState;
+        return -1;
+    }
+
+    /**
+     * Clone current board
+     * @return The board
+     */
+    private Board getFakeBoard() {
+        Board fakeBoard;
+        try {
+            fakeBoard = (Board)this.clone();
+            fakeBoard.setBoard(board.clone());
+            fakeBoard.fake = true;
+        } catch (CloneNotSupportedException e) {
+            fakeBoard = null;
+        }
+        return fakeBoard;
+    }
+
+    /**
+     * Update check mate state
+     */
+    private void updateCheckMate() {
+        // Clone Board object so we can simulate moves
+        Board fakeBoard = getFakeBoard();
+
+//        System.out.println(fakeBoard.getStateStr());
+//        System.out.println(fakeBoard.toString());
+//        out: {
+//            for (int from = 0; from < fakeBoard.board.length; from++) {
+//                if (fakeBoard.getPiece(from).getColor() == fakeBoard.turn)
+//            }
+//        }
+//        out: {
+//            for (int from = 0; from < fakeBoard.board.length; from++) {
+//                if (fakeBoard.getPiece(from).getColor() == fakeBoard.turn) {
+//                    for (int to = 0; to < fakeBoard.board.length; to++) {
+//                        try {
+//                            fakeBoard.movePiece(from, to);
+//                            System.out.println(fakeBoard.toString());
+//                            if (!fakeBoard.isInCheck()) {
+//                                checkMate = false;
+//                                System.out.println("moving from " + from + " to " + to + " gets me out of check");
+//                                System.out.println("check mate set to false and returned");
+//                                break out;
+//                            }
+//                            fakeBoard = getFakeBoard();
+//                        } catch (BoardException e) {
+//                        } catch (IllegalPositionException e) {
+//                        } catch (IllegalTypeException e) {
+//                        } catch (CheckException e) {
+//                        }
+////                        System.out.println("check mate set to true");
+//                        checkMate = true;
+//                        // Restore original board before next move
+////                        fakeBoard = getFakeBoard();
+//                    }
+//                }
+//            }
+//        }
     }
 
     /**
@@ -435,7 +489,7 @@ public class Board implements Serializable, Cloneable {
      */
     public String getStateStr() {
         String out = "turn: " + turn + "\ninCheck: " + inCheck +
-                "\ncheckMate: " + checkMate;
+                "\ncheckMate: " + checkMate + "\nfake: " + fake;
         return out;
     }
 

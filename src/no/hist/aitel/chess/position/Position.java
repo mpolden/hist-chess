@@ -54,10 +54,26 @@ public class Position implements Serializable {
     }
 
     /**
+     * Check if enPassant is possible (pawn moved two fields forward from initial postiion)
+     * @return True if possible and false otherwise
+     */
+    public boolean getEnPassant() {
+        return enPassant;
+    }
+
+    /**
      * Verifies positions
+     * @param simulated
      * @throws IllegalPositionException
      */
     public void verifyPositions(boolean simulated) throws IllegalPositionException {
+
+        // Check if any of the positions are outside the board
+        if ((from < 0 || from > 63) || (to < 0 || from > 63)) {
+            throw new IllegalPositionException("Can't move pieces outside of the board.\n"
+                    + "\nFrom: " + from
+                    + "\nTo: " + to);
+        }
         
         if (!simulated) {
             enPassant = false;

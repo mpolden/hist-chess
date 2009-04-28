@@ -24,9 +24,12 @@ public class Test {
 //        b.movePiece(3, 19);
 //        b.movePiece(49, 41);
 //        b.movePiece(14, 22);
-//        b.movePiece(55, 47);
-//        b.movePiece(19, 46);
 //        b.movePiece(53, 45);
+//        b.movePiece(19, 46);
+//
+//        b.movePiece(55, 46); // Allowed
+//        System.out.println(b.getStateStr());
+//        System.out.println(b.toString());
 
         // In check, but trying to move piece which won't me out of check
 //        b.movePiece(11, 27);
@@ -36,23 +39,25 @@ public class Test {
 //        b.movePiece(14, 22);
 //        b.movePiece(53, 45);
 //        b.movePiece(19, 46);
-//        b.movePiece(55, 47);
+//        b.movePiece(55, 46); // Not allowed
 
         // Check mate in 4 moves
-        b.movePiece(13, 21);
-        b.movePiece(52, 36);
-        b.movePiece(14, 30);
-        b.movePiece(59, 31);
-//        b.movePiece(8, 16); // Invalid move -> check mate
+//        b.reset();
+//        b.movePiece(13, 21);
+//        b.movePiece(52, 36);
+//        b.movePiece(14, 30);
+//        b.movePiece(59, 31);
 
+//        System.out.println(b.getStateStr());
+//        System.out.println(b.toString());
         
 
         // En passant
-//        b.movePiece(10, 26);
-//        b.movePiece(48, 40);
-//        b.movePiece(26, 34);
-//        b.movePiece(51, 35);
-//        b.movePiece(34, 43);
+        b.movePiece(10, 26);
+        b.movePiece(48, 40);
+        b.movePiece(26, 34);
+        b.movePiece(51, 35);
+        b.movePiece(34, 43);
 //        b.movePiece(52, 45);
 
         System.out.println(b.getStateStr());
