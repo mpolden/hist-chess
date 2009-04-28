@@ -432,6 +432,9 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
                 if(!from.equals(to)) {
                 centerText += "\n "+board.getPiece(toPos).getColorStr() + " " + board.getPiece(toPos).getTypeStr()+" from "+from+" to "+to+notation;
                 notation = "";
+                if(board.isCheckMate()) {
+                    System.out.println("HEI!");
+                }
             }
             } catch (BoardException exception) {               
                 resetPosition();
