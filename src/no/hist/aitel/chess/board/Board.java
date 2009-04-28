@@ -43,6 +43,7 @@ public class Board implements Serializable, Cloneable {
         turn = WHITE;
         inCheck = false;
         checkMate = false;
+        fake = false;
         p = new Position(this);
     }
 
@@ -132,7 +133,7 @@ public class Board implements Serializable, Cloneable {
                     "\nTo: " + to);
         }
 
-        // Check if player is check mate
+        // Check if current player is check mate
         // Redundant: GUI calls isCheckMate() after each move
         if (isCheckMate()) {
             throw new CheckMateException("Game over");
@@ -234,7 +235,8 @@ public class Board implements Serializable, Cloneable {
     }
 
     /**
-     * Check if player is in check after move
+     * Check if player is in check after move.
+     * Essentially the same as updateInCheck, but this method doesn't modify board state
      * @return True if player is in check after move and false otherwise
      */
     private boolean inCheckAfterMove() {
@@ -321,8 +323,8 @@ public class Board implements Serializable, Cloneable {
     }
 
     /**
-     * Get current player
-     * @return Current player
+     * Get current turn
+     * @return Integer which represents the current turn
      */
     public int getTurn() {
         return turn;
@@ -466,7 +468,7 @@ public class Board implements Serializable, Cloneable {
      * Get a string containing the current board state
      * @return String containing values of turn, inCheck, checkMate and fake
      */
-    public String getStateStr() {
+    public String getState() {
         String out = "turn: " + turn + "\ninCheck: " + inCheck +
                 "\ncheckMate: " + checkMate + "\nfake: " + fake;
         return out;
@@ -474,7 +476,7 @@ public class Board implements Serializable, Cloneable {
 
     /**
      * Get a string representation of the chess board
-     * @return String which is an ascii drawing of the board, colors and types
+     * @return String which contains an ascii drawing of the board, colors and types
      */
     @Override
     public String toString() {
