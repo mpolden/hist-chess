@@ -122,15 +122,19 @@ public class promotionFrame extends JFrame implements ActionListener {
         setVisible(true);
         
     }
-
+    /**
+     * Creates and resizes the imageicon used in the promotion frame
+     * @param path
+     * @return imageicon
+     */
     protected static ImageIcon createImageIcon(String path) {
         File test = new File(path);
         if (test != null) {
-            ImageIcon image = new ImageIcon(path);
-            Image img = image.getImage();
+            ImageIcon imageicon = new ImageIcon(path);
+            Image img = imageicon.getImage();
             Image newimg = img.getScaledInstance(100, 100, java.awt.Image.SCALE_SMOOTH);
-            image = new ImageIcon(newimg);
-            return image;
+            imageicon = new ImageIcon(newimg);
+            return imageicon;
         } else {
             System.err.println("Couldn't find file: " + path);
             return null;
