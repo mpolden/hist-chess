@@ -96,6 +96,9 @@ public class Position implements Serializable {
 
         // Direction
         int direction = getDirection(type);
+//        if (from == 58 && to == 4) {
+//            System.out.println("direction: " + direction);
+//        }
 
         // Check if path is clear, not checking for type == 2 (Knight) since it can jump over pieces
         if (type != KNIGHT && !isValidPath(direction)) {
@@ -160,7 +163,7 @@ public class Position implements Serializable {
                 break;
             }
             case BISHOP: {
-                if (diff % 7 == 0 || diff % 9 == 0) {
+                if ((diff % 7 == 0 || diff % 9 == 0) && getFieldColor(to) == getFieldColor(from)) {
                     break;
                 } else {
                     throw new IllegalPositionException("Bishop can only move diagonally.\n" +
@@ -435,6 +438,27 @@ public class Position implements Serializable {
             }
         }
         return false;
+    }
+
+    /**
+     * Get the color of a field
+     * @return Integer representing the color
+     */
+    private int getFieldColor(int position) {
+        int rank = getRank(position);
+        if (rank % 2 == 0) {
+            if (position % 2 == 0) {
+                return WHITE;
+            } else {
+                return BLACK;
+            }
+        } else {
+            if (position % 2 == 0) {
+                return BLACK;
+            } else {
+                return WHITE;
+            }
+        }
     }
 
     /**

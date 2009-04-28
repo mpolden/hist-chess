@@ -54,16 +54,37 @@ public class Test {
 
         // Check mate in 6 moves
 //        b.reset();
-        b.movePiece(12, 28);
-        b.movePiece(52, 36);
-        b.movePiece(3, 39);
-        b.movePiece(48, 40);
-        b.movePiece(5, 26);
-        b.movePiece(40, 32);
-        b.movePiece(39, 53);
+//        b.movePiece(12, 28);
+//        b.movePiece(52, 36);
+//        b.movePiece(3, 39);
+//        b.movePiece(48, 40);
+//        b.movePiece(5, 26);
+//        b.movePiece(40, 32);
+//        b.movePiece(39, 53);
+
+//White Pawn from B2 to B4
+// Black Pawn from C7 to C5
+// White Pawn from E2 to E3
+// Black Pawn from C5 to C4
+// White Pawn from F2 to F3
+// Black Pawn from C4 to C3
+// White Pawn from D2 to D4
+// Black Pawn from B7 to B5(Check)
+
+        // Possible bug
+        b.movePiece(9, 25);
+        b.movePiece(50, 34);
+        b.movePiece(12, 20);
+        b.movePiece(34, 26);
+        b.movePiece(13, 21);
+        b.movePiece(26, 18);
+        b.movePiece(11, 27);
+        b.movePiece(49, 33);
 
         System.out.println(b.getStateStr());
         System.out.println(b.toString());
+       
+
         
 
         // En passant
@@ -85,6 +106,7 @@ public class Test {
         // 16  17  18  19  20  21  22  23
         // 8   9   10  11  12  13  14  15
         // 0   1   2   3   4   5   6   7
+
     }
 
 
