@@ -41,6 +41,7 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
     private Chessboard boardGui = new Chessboard();
     private Board board = new Board();
     private getRect getRect = new getRect();
+    private saveAndLoad saveAndLoad = new saveAndLoad();
     private int[] x_coords = boardGui.getXcoords();
     private int[] y_coords = boardGui.getYcoords();    
     private int dragFromX = zero;
@@ -78,12 +79,14 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
     private Font player = new Font("VERDANA", Font.BOLD, 20);
     private Font timer = new Font("VERDANA", Font.ITALIC, 14);
     private Font miniMap = new Font("COURIER NEW", Font.PLAIN, 16);
-    private Font centerArea = new Font("COURIER NEW", Font.PLAIN, 12);
-    private promotionFrame frame;   
+    private Font centerArea = new Font("COURIER NEW", Font.PLAIN, 11);
+    private promotionFrame promotionFrame;
+    private checkMateFrame checkMateFrame;
     private String centerText = "";
     private String picked;
     private String notation = "";
-    private String intro = "\n Welcome to Chess version 1.0\n Created by team 9\n Last Updated: 28/04/09\n\n";
+    private String intro = "\n Welcome to Chess version 1.0 \n Created by team 9\n Last Updated: 28/04/09\n\n";
+    private Buttonlistener listener = new Buttonlistener();
 
     /**
      * Creates the diffrent variables and gui
@@ -429,12 +432,13 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
                 }
                 setCapturedPos(board.getPiece(toPos).getId());
                 changePosition();
+                if(board.isInCheck()) {
+                    notation = "(Check)";
+                }
+                checkCheckMate();
                 if(!from.equals(to)) {
                 centerText += "\n "+board.getPiece(toPos).getColorStr() + " " + board.getPiece(toPos).getTypeStr()+" from "+from+" to "+to+notation;
-                notation = "";
-                if(board.isCheckMate()) {
-                    System.out.println("HEI!");
-                }
+                notation = "";                
             }
             } catch (BoardException exception) {               
                 resetPosition();
@@ -442,7 +446,10 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
             } catch (IllegalPositionException exception) {
                 resetPosition();
                 setCapturedPos(-1);
-            } catch (CheckException exception) {                
+            } catch (CheckException exception) {
+                if(board.getPiece(fromPos).getType() == KING) {
+                    centerText+="\n You can put yourself in check";
+                }                
                 resetPosition();
                 setCapturedPos(-1);
             } catch (CheckMateException exception) {                
@@ -517,46 +524,46 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
             if(toPos == 2) {
                 x_coords[0] = getRect.getRectCoordX(3);
                 y_coords[0] = getRect.getRectCoordY(3);
-                notation = " (Castling)";
+                notation = "(Castling)";
             }
             else if(toPos == 6) {
                 x_coords[7] = getRect.getRectCoordX(5);
                 y_coords[7] = getRect.getRectCoordY(5);
-                notation = " (Castling)";
+                notation = "(Castling)";
             }
         }
         else if(!(board.getPiece(toPos).isMoved()) && fromPos == 60 && board.getPiece(toPos).getId() == 60) {
             if(toPos == 62) {
                 x_coords[63] = getRect.getRectCoordX(61);
                 y_coords[63] = getRect.getRectCoordY(61);
-                notation = " (Castling)";
+                notation = "(Castling)";
             }
             else if(toPos == 58) {
                 x_coords[56] = getRect.getRectCoordX(59);
                 y_coords[56] = getRect.getRectCoordY(59);
-                notation = " (Castling)";
+                notation = "(Castling)";
             }
         }
         miniMapArea.setText(board.toString());
     }
 
     /**
-     * Checks if a player can promote his pawn, and if so, creates a promotion frame so the player can choose
+     * Checks if a player can promote his pawn, and if so, creates a promotion promotionFrame so the player can choose
      */
     private void checkPromotion() {
-        Buttonlistener listener = new Buttonlistener();
+        
        
         if(toPos >= 56 && toPos <=63) {
-            notation = " (Promotion)";
-            frame = new promotionFrame("white");
-            frame.getButton().addActionListener(listener);                      
+            notation = "(Promotion)";
+            promotionFrame = new promotionFrame("white");
+            promotionFrame.getButton().addActionListener(listener);
         }        
         else if(toPos <=7 && toPos >=0) {
-            notation = " (Promotion)";
-            frame = new promotionFrame("black");
-            frame.getButton().addActionListener(listener);           
+            notation = "(Promotion)";
+            promotionFrame = new promotionFrame("black");
+            promotionFrame.getButton().addActionListener(listener);
         }
-    }
+    }    
     /**
      * Checks if a player has done en passant, and if so, removes the captured piece
      */
@@ -572,7 +579,7 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
                             x_coords[board.getPiece(toPos-8).getId()] = capturedBlackPieces * width/2;
                             y_coords[board.getPiece(toPos-8).getId()] = height * 9 + 15;
                             capturedBlackPieces++;
-                            notation = " (En Passant)";
+                            notation = "(EnPassant)";
                         } catch (ArrayIndexOutOfBoundsException excep) {
                         }
                     }
@@ -585,14 +592,23 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
                             x_coords[board.getPiece(toPos+8).getId()] = capturedWhitePieces * width/2;
                             y_coords[board.getPiece(toPos+8).getId()] = zero;
                             capturedBlackPieces++;
-                            notation = " (En Passant)";
+                            notation = "(EnPassant)";
                         } catch (ArrayIndexOutOfBoundsException excep) {
                         }
                     }
                 }
             }
-        } 
-       
+        }
+    }
+    /**
+     * Checks if a player is check mate, and if so, creates a checkmate frame
+     */
+    private void checkCheckMate() {
+        if(board.isCheckMate()) {
+            checkMateFrame = new checkMateFrame();
+            checkMateFrame.getNewGameButton().addActionListener(listener);
+            checkMateFrame.getQuitButton().addActionListener(listener);
+        }       
     }
 
     private class Buttonlistener implements ActionListener {
@@ -600,49 +616,68 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
          * Sets the pawn, who is able to promote, to the chosen type
          * @param event
          */
-        public void actionPerformed(ActionEvent event) {            
-            frame.setVisible(false);
-            picked = frame.getPicked();            
-            BufferedImage[] images = boardGui.getStartPos().getImages();
-            if(toPos >= 56 && toPos <= 63) {
-                if(picked.equals("queen")) {                    
-                    boardGui.getStartPos().setPromotedImage(images[3], board.getPiece(toPos).getId());                    
-                    board.getPiece(toPos).setType(QUEEN);                    
+        public void actionPerformed(ActionEvent event) {
+            
+            if(event.getActionCommand().equals("okButton")) {
+                promotionFrame.setVisible(false);
+                picked = promotionFrame.getPicked();
+                BufferedImage[] images = boardGui.getStartPos().getImages();
+                if(toPos >= 56 && toPos <= 63) {
+                    if(picked.equals("queen")) {
+                        boardGui.getStartPos().setPromotedImage(images[3], board.getPiece(toPos).getId());
+                        board.getPiece(toPos).setType(QUEEN);
+                    }
+                    else if(picked.equals("rook")) {
+                        boardGui.getStartPos().setPromotedImage(images[0], board.getPiece(toPos).getId());
+                        board.getPiece(toPos).setType(ROOK);
+                    }
+                    else if(picked.equals("knight")) {
+                        boardGui.getStartPos().setPromotedImage(images[1], board.getPiece(toPos).getId());
+                        board.getPiece(toPos).setType(KNIGHT);
+                    }
+                    else if(picked.equals("bishop")) {
+                        boardGui.getStartPos().setPromotedImage(images[2], board.getPiece(toPos).getId());
+                        board.getPiece(toPos).setType(BISHOP);
+                    }
                 }
-                else if(picked.equals("rook")) {
-                    boardGui.getStartPos().setPromotedImage(images[0], board.getPiece(toPos).getId());                    
-                    board.getPiece(toPos).setType(ROOK);                   
+
+                else if(toPos <= 7 && toPos >= 0) {
+                    if(picked.equals("queen")) {
+                        boardGui.getStartPos().setPromotedImage(images[59], board.getPiece(toPos).getId());
+                        board.getPiece(toPos).setType(QUEEN);
+                    }
+                    else if(picked.equals("rook")) {
+                        boardGui.getStartPos().setPromotedImage(images[56], board.getPiece(toPos).getId());
+                        board.getPiece(toPos).setType(ROOK);
+                    }
+                    else if(picked.equals("knight")) {
+                        boardGui.getStartPos().setPromotedImage(images[57], board.getPiece(toPos).getId());
+                        board.getPiece(toPos).setType(KNIGHT);
+                    }
+                    else if(picked.equals("bishop")) {
+                        boardGui.getStartPos().setPromotedImage(images[58], board.getPiece(toPos).getId());
+                        board.getPiece(toPos).setType(BISHOP);
+                    }
                 }
-                else if(picked.equals("knight")) {
-                    boardGui.getStartPos().setPromotedImage(images[1], board.getPiece(toPos).getId());                   
-                    board.getPiece(toPos).setType(KNIGHT);                    
+                repaint();
+                miniMapArea.setText(board.toString());
+            }
+
+            else if(event.getActionCommand().equals("New game")) {
+                checkMateFrame.setVisible(false);
+                try {                    
+                    setXcoords(saveAndLoad.loadIntArray("./src/no/hist/aitel/chess/resources/new_game_x_coords.txt"));
+                    setYcoords(saveAndLoad.loadIntArray("./src/no/hist/aitel/chess/resources/new_game_y_coords.txt"));
+                    setBoardObj(saveAndLoad.loadBoard("./src/no/hist/aitel/chess/resources/new_game_internal.txt"));
+                    cleanup();
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                else if(picked.equals("bishop")) {
-                    boardGui.getStartPos().setPromotedImage(images[2], board.getPiece(toPos).getId());                    
-                    board.getPiece(toPos).setType(BISHOP);                    
-                }
+            }
+            else if(event.getActionCommand().equals("Quit")) {
+                System.exit(0);
             }
             
-            else if(toPos <= 7 && toPos >= 0) {
-                if(picked.equals("queen")) {
-                    boardGui.getStartPos().setPromotedImage(images[59], board.getPiece(toPos).getId());
-                    board.getPiece(toPos).setType(QUEEN); 
-                }
-                else if(picked.equals("rook")) {
-                    boardGui.getStartPos().setPromotedImage(images[56], board.getPiece(toPos).getId());
-                    board.getPiece(toPos).setType(ROOK);
-                }
-                else if(picked.equals("knight")) {
-                    boardGui.getStartPos().setPromotedImage(images[57], board.getPiece(toPos).getId());
-                    board.getPiece(toPos).setType(KNIGHT);
-                }
-                else if(picked.equals("bishop")) {
-                    boardGui.getStartPos().setPromotedImage(images[58], board.getPiece(toPos).getId());
-                    board.getPiece(toPos).setType(BISHOP);
-                }
-            }
-            repaint();
-            miniMapArea.setText(board.toString());
         }        
     }    
     /**

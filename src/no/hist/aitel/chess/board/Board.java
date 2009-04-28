@@ -308,7 +308,7 @@ public class Board implements Serializable, Cloneable {
      * Check if player is in check
      * @return True if in check and false otherwise
      */
-    private boolean isInCheck() {
+    public boolean isInCheck() {
         return inCheck;
     }
 

@@ -12,11 +12,8 @@ import java.io.File;
 import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JDesktopPane;
 import javax.swing.JFrame;
-import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
-import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 
@@ -25,9 +22,7 @@ import javax.swing.JRadioButton;
  * @author Vegard
  */
 public class promotionFrame extends JFrame implements ActionListener {
-    private JButton okButton;
-    private JLayeredPane desktop;
-    private JInternalFrame internalFrame;
+    private JButton okButton;   
     static int openFrameCount = 0;
     static final int xOffset = 30, yOffset = 30;
     static String queenString = "queen";
@@ -64,9 +59,8 @@ public class promotionFrame extends JFrame implements ActionListener {
         }
         else {
             blackOrWhite = "b";
-        }
-        
-        internalFrame = new JInternalFrame();
+        }        
+       
         okButton = new JButton("Ok");
        
         Panel button = new Panel();
@@ -107,12 +101,7 @@ public class promotionFrame extends JFrame implements ActionListener {
                                              + ".gif"));
         
         add(radioButtons, BorderLayout.LINE_START);
-        add(picture, BorderLayout.CENTER);       
-        
-
-        desktop = new JDesktopPane();
-        desktop.setOpaque(true);
-        internalFrame.add(desktop, BorderLayout.CENTER);
+        add(picture, BorderLayout.CENTER);     
 
         setTitle("Promotion");
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
