@@ -453,7 +453,7 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
                 setCapturedPos(board.getPiece(toPos).getId());
                 changePosition();
                 if(board.isInCheck() && !board.isCheckMate()) {
-                    notation = "(Check)";
+                    notation = " (Check)";
                 }
                 checkCheckMate();
                 if(!from.equals(to)) {
@@ -559,7 +559,7 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
             else if(toPos == 58) {
                 x_coords[56] = getRect.getRectCoordX(59);
                 y_coords[56] = getRect.getRectCoordY(59);
-                notation = "(Castling)";
+                notation = " (Castling)";
             }
         }
         miniMapArea.setText(board.toString());
@@ -571,13 +571,13 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
     private void checkPromotion() {      
        
         if(toPos >= 56 && toPos <=63) {            
-            notation = "(Promotion)";
+            notation = " (Promotion)";
             promotionFrame = new promotionFrame("white");
             promotionFrame.getButton().addActionListener(listener);
             canPlay = false;
         }        
         else if(toPos <=7 && toPos >=0) {            
-            notation = "(Promotion)";
+            notation = " (Promotion)";
             promotionFrame = new promotionFrame("black");
             promotionFrame.getButton().addActionListener(listener);
             canPlay = false;

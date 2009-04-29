@@ -194,20 +194,6 @@ public class Position implements Serializable {
                 if (diff % 8 == 0 || getRank(from) == getRank(to)) {
                     break;
                 } else {
-                    // No idea why, but this seems to be working
-//                    int position = from;
-//                    while (position % 8 != 0) { // Find closest previous field that is dividable by 8
-//                        position--;
-//                    }
-//                    int myDiff = to - position;
-//                    if ((myDiff == 8 || myDiff == -8) || ((myDiff > 7 || myDiff < -7) && myDiff % 8 != 0)) {
-//                        throw new IllegalPositionException("Rook can only move forward, backward, left or right.\n" +
-//                                "Type: " + fromPiece.getType() +
-//                                "\nFrom: " + from +
-//                                "\nTo: " + to);
-//                    } else {
-//                        break;
-//                    }
                     throw new IllegalPositionException("Rook can only move forward, backward, left or right.\n" +
                             "Type: " + fromPiece.getType() +
                             "\nFrom: " + from +
@@ -256,7 +242,7 @@ public class Position implements Serializable {
     /**
      * Get the current direction for a type (not for Knight)
      * @param type
-     * @return The direction or -2 if something bad happens
+     * @return The direction or -1 if something bad happens
      */
     private int getDirection(int type) {
         int[] directions = getDirections(type);
@@ -324,20 +310,15 @@ public class Position implements Serializable {
      */
     private boolean isValidPath(int direction) {
         // Could not find a vertical or horizontal direction, but rank is still different
-        if (direction == -1 && getRank(from) != getRank(to)) {
-            return true;
+        if (direction == -1) {
+            if (getRank(from) != getRank(to)) {
+                return true;
+            } else {
+                return false;
+            }
         }
         if (to < from) { // Black moves in a negative direction
             for (int position = from - direction; position > to; position -= direction) {
-//                if (position == 54 && board.getPiece(position).getType() == PAWN) {
-//                    System.out.println("to: " + to);
-//                }
-                if (from > 63) {
-                    System.out.println("direction: " + direction);
-                    System.out.println("position: " + direction);
-                    System.out.println("from: " + from);
-                    System.out.println("to: " + to);
-                }
                 if (!board.getPiece(position).isEmpty()) {
                     return false;
                 }

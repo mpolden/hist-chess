@@ -229,7 +229,6 @@ public class Board implements Serializable, Cloneable {
                     break;
                 } catch (IllegalPositionException e) {
                     inCheck = false;
-                } catch (ArrayIndexOutOfBoundsException e) {
                 }
             }
         }

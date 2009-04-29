@@ -110,6 +110,18 @@ public class Test {
         System.out.println(b.getState());
         System.out.println(b.toString());
 
+//        int from = 63;
+//        int to = 60;
+//        int direction = -1;
+//
+////        System.out.println(from - direction);
+//        for (int position = from - direction; position > to; position -= direction) {
+//            System.out.println(position);
+//        }
+//        for (int i = 54; i > 60; i--) {
+//            System.out.println(i);
+//        }
+
         // 56  57  58  59  60  61  62  63
         // 48  49  50  51  52  53  54  55
         // 40  41  42  43  44  45  46  47
