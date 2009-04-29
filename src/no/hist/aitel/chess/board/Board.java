@@ -77,8 +77,9 @@ public class Board implements Serializable, Cloneable {
      * Move a piece using algebraic notation
      * @param notationFrom
      * @param notationTo
+     * @throws BoardException
      */
-    public void movePiece(String notationFrom, String notationTo) {
+    public void movePiece(String notationFrom, String notationTo) throws BoardException {
         int from = getPosition(notationFrom);
         int to = getPosition(notationTo);
         this.movePiece(from, to);
@@ -480,9 +481,11 @@ public class Board implements Serializable, Cloneable {
      * @param notation
      * @return The position
      */
-    public int getPosition(String notation) {
+    private int getPosition(String notation) {
         char file;
-        int rank, start, position;
+        int rank;
+        int position;
+        
         if (notation.length() == 2) {
             file = notation.charAt(0);
             try {
@@ -491,46 +494,17 @@ public class Board implements Serializable, Cloneable {
                 throw new IllegalArgumentException("Rank in notation is NaN");
             }
         } else {
-            throw new IllegalArgumentException("Length of notation is not 2");
+            throw new IllegalArgumentException("Length of notation must be 2");
         }
 
-        switch (rank) {
-            case 1: {
-                start = 0;
-                break;
-            }
-            case 2: {
-                start = 8;
-                break;
-            }
-            case 3: {
-                start = 16;
-                break;
-            }
-            case 4: {
-                start = 24;
-                break;
-            }
-            case 5: {
-                start = 32;
-                break;
-            }
-            case 6: {
-                start = 40;
-                break;
-            }
-            case 7: {
-                start = 48;
-                break;
-            }
-            case 8: {
-                start = 56;
-                break;
-            }
-            default: {
-                throw new IllegalArgumentException("Invalid rank in notation: " + rank +
-                        " (valid ranks are 1-8)");
-            }
+        if (rank < 1 || rank > 8) {
+            throw new IllegalArgumentException("Invalid rank in notation: " + rank +
+                    " (valid ranks are 1-8)");
+        }
+
+        int start = 0;
+        for (int i = 1; i < rank; i++) {
+            start += 8;
         }
 
         switch (file) {

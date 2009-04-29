@@ -104,7 +104,7 @@ public class Test {
 //        System.out.println(b.toString());
 
         // Testing moving pieces using algebraic notation
-        b.movePiece("A2", "A4");
+        b.movePiece("B2", "B4");
         System.out.println(b.getState());
         System.out.println(b.toString());
 
@@ -118,7 +118,6 @@ public class Test {
         // 0   1   2   3   4   5   6   7
 
     }
-
 
 }
 
