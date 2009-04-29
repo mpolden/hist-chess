@@ -74,7 +74,18 @@ public class Board implements Serializable, Cloneable {
     }
 
     /**
-     * Move a piece
+     * Move a piece using algebraic notation
+     * @param notationFrom
+     * @param notationTo
+     */
+    public void movePiece(String notationFrom, String notationTo) {
+        int from = getPosition(notationFrom);
+        int to = getPosition(notationTo);
+        this.movePiece(from, to);
+    }
+
+    /**
+     * Move a piece using positions
      * @param from
      * @param to
      * @throws BoardException
@@ -462,6 +473,106 @@ public class Board implements Serializable, Cloneable {
         }
 
         return file + "" + rank;
+    }
+
+    /**
+     * Get position from algebraic notation, this is essentially getNotation() reversed
+     * @param notation
+     * @return The position
+     */
+    public int getPosition(String notation) {
+        char file;
+        int rank, start, position;
+        if (notation.length() == 2) {
+            file = notation.charAt(0);
+            try {
+                rank = Integer.parseInt(notation.substring(1));
+            } catch (NumberFormatException e) {
+                throw new IllegalArgumentException("Rank in notation is NaN");
+            }
+        } else {
+            throw new IllegalArgumentException("Length of notation is not 2");
+        }
+
+        switch (rank) {
+            case 1: {
+                start = 0;
+                break;
+            }
+            case 2: {
+                start = 8;
+                break;
+            }
+            case 3: {
+                start = 16;
+                break;
+            }
+            case 4: {
+                start = 24;
+                break;
+            }
+            case 5: {
+                start = 32;
+                break;
+            }
+            case 6: {
+                start = 40;
+                break;
+            }
+            case 7: {
+                start = 48;
+                break;
+            }
+            case 8: {
+                start = 56;
+                break;
+            }
+            default: {
+                throw new IllegalArgumentException("Invalid rank in notation: " + rank +
+                        " (valid ranks are 1-8)");
+            }
+        }
+
+        switch (file) {
+            case 'A': {
+                position = start;
+                break;
+            }
+            case 'B': {
+                position = start + 1;
+                break;
+            }
+            case 'C': {
+                position = start + 2;
+                break;
+            }
+            case 'D': {
+                position = start + 3;
+                break;
+            }
+            case 'E': {
+                position = start + 4;
+                break;
+            }
+            case 'F': {
+                position = start + 5;
+                break;
+            }
+            case 'G': {
+                position = start + 6;
+                break;
+            }
+            case 'H': {
+                position = start + 7;
+                break;
+            }
+            default: {
+                throw new IllegalArgumentException("Invalid file in notation: " + file +
+                        " (valid files are A-H)");
+            }
+        }
+
+        return position;
     }
 
     /**

@@ -18,7 +18,7 @@ public class Test {
     public static void main(String[] args) {
         Board b  = new Board();
 
-        // Putting myself in check
+        // Putting myself in check (works)
 //        b.movePiece(11, 27);
 //        b.movePiece(48, 40);
 //        b.movePiece(3, 19);
@@ -26,11 +26,10 @@ public class Test {
 //        b.movePiece(14, 22);
 //        b.movePiece(53, 45);
 //        b.movePiece(19, 46);
-//
 //        System.out.println(b.getState());
 //        System.out.println(b.toString());
 
-        // In check, but trying to move piece which won't me out of check
+        // In check, but trying to move piece which won't me out of check (works)
 //        b.movePiece(11, 27);
 //        b.movePiece(48, 40);
 //        b.movePiece(3, 19);
@@ -42,17 +41,16 @@ public class Test {
 //        System.out.println(b.getState());
 //        System.out.println(b.toString());
 
-        // Check mate in 4 moves
+        // Check mate in 4 moves (works)
 //        b.reset();
 //        b.movePiece(13, 21);
 //        b.movePiece(52, 36);
 //        b.movePiece(14, 30);
 //        b.movePiece(59, 31);
-//
 //        System.out.println(b.getState());
 //        System.out.println(b.toString());
 
-        // Check mate in 6 moves
+        // Check mate in 6 moves (works)
 //        b.reset();
 //        b.movePiece(12, 28);
 //        b.movePiece(52, 36);
@@ -61,11 +59,10 @@ public class Test {
 //        b.movePiece(5, 26);
 //        b.movePiece(40, 32);
 //        b.movePiece(39, 53);
-//
 //        System.out.println(b.getState());
 //        System.out.println(b.toString());
 
-        // Possible bug (fixed)
+        // Bug with check (fixed)
 //        b.reset();
 //        b.movePiece(9, 25);
 //        b.movePiece(50, 34);
@@ -75,7 +72,6 @@ public class Test {
 //        b.movePiece(26, 18);
 //        b.movePiece(11, 27);
 //        b.movePiece(49, 33);
-//
 //        System.out.println(b.getState());
 //        System.out.println(b.toString());
 
@@ -87,40 +83,30 @@ public class Test {
 //        b.movePiece(51, 35);
 //        b.movePiece(34, 43);
 //        b.movePiece(52, 45);
-
 //        System.out.println(b.getState());
 //        System.out.println(b.toString());
 
-        // Bug with promotion
-        b.movePiece(14, 30);
-        b.movePiece(55, 39);
-        b.movePiece(15, 31);
-        b.movePiece(54, 38);
-        b.movePiece(31, 38);
-        b.movePiece(53, 45);
-        b.movePiece(30, 39);
-        b.movePiece(45, 37);
-        b.movePiece(38, 46);
-        b.movePiece(37, 29);
-        b.movePiece(46, 54);
-        b.movePiece(51, 43);
-        b.movePiece(54, 63);
+        // Bug with promotion (fixed)
+//        b.movePiece(14, 30);
+//        b.movePiece(55, 39);
+//        b.movePiece(15, 31);
+//        b.movePiece(54, 38);
+//        b.movePiece(31, 38);
+//        b.movePiece(53, 45);
+//        b.movePiece(30, 39);
+//        b.movePiece(45, 37);
+//        b.movePiece(38, 46);
+//        b.movePiece(37, 29);
+//        b.movePiece(46, 54);
+//        b.movePiece(51, 43);
+//        b.movePiece(54, 63);
+//        System.out.println(b.getState());
+//        System.out.println(b.toString());
 
-
+        // Testing moving pieces using algebraic notation
+        b.movePiece("A2", "A4");
         System.out.println(b.getState());
         System.out.println(b.toString());
-
-//        int from = 63;
-//        int to = 60;
-//        int direction = -1;
-//
-////        System.out.println(from - direction);
-//        for (int position = from - direction; position > to; position -= direction) {
-//            System.out.println(position);
-//        }
-//        for (int i = 54; i > 60; i--) {
-//            System.out.println(i);
-//        }
 
         // 56  57  58  59  60  61  62  63
         // 48  49  50  51  52  53  54  55
