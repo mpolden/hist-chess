@@ -329,6 +329,15 @@ public class Position implements Serializable {
         }
         if (to < from) { // Black moves in a negative direction
             for (int position = from - direction; position > to; position -= direction) {
+//                if (position == 54 && board.getPiece(position).getType() == PAWN) {
+//                    System.out.println("to: " + to);
+//                }
+                if (from > 63) {
+                    System.out.println("direction: " + direction);
+                    System.out.println("position: " + direction);
+                    System.out.println("from: " + from);
+                    System.out.println("to: " + to);
+                }
                 if (!board.getPiece(position).isEmpty()) {
                     return false;
                 }
