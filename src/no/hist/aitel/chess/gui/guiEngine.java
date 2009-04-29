@@ -86,7 +86,7 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
     private String centerText = "";
     private String picked;
     private String notation = "";
-    private String intro = "\n Welcome to Chess\n Version 1.0 build 384\n Created by team 9\n Last Updated: 28/04/09\n\n";
+    private String intro = "\n Welcome to Chess\n Version 1.0 build 385\n Created by team 9\n Last Updated: 28/04/09\n\n";
     private Buttonlistener listener = new Buttonlistener();
 
     /**
@@ -473,8 +473,7 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
                 resetPosition();
                 setCapturedPos(-1);
             } catch (CheckMateException exception) {               
-            } catch (ArrayIndexOutOfBoundsException exception) {
-                System.out.println(exception.getMessage());
+            } catch (ArrayIndexOutOfBoundsException exception) {                
                 resetPosition();
                 setCapturedPos(-1);
             }
