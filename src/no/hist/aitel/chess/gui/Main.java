@@ -116,24 +116,24 @@ public class Main implements ActionListener, ItemListener {
     public void actionPerformed(ActionEvent e) {        
         if(e.getActionCommand().equals("Save game")) {
              if (JOptionPane.YES_OPTION == JOptionPane.showConfirmDialog(null, "Are you sure you want to save the game?\nPrevious save data will be lost.")) {
-                 saveAndLoad.saveIntArray("./Save/x_coords.txt", mainWindow.getChessboard().getXcoords());
-                 saveAndLoad.saveIntArray("./Save/y_coords.txt", mainWindow.getChessboard().getYcoords());
-                 saveAndLoad.saveBoard("./Save/internal.txt", mainWindow.getBoardObj());
+                 saveAndLoad.saveIntArray("./src/no/hist/aitel/chess/resources//x_coords.txt", mainWindow.getChessboard().getXcoords());
+                 saveAndLoad.saveIntArray("./src/no/hist/aitel/chess/resources//y_coords.txt", mainWindow.getChessboard().getYcoords());
+                 saveAndLoad.saveBoard("./src/no/hist/aitel/chess/resources//internal.txt", mainWindow.getBoardObj());
                  savedString[0] = Integer.toString(mainWindow.getTimeUsedP1());
                  savedString[1] = Integer.toString(mainWindow.getTimeUsedP2());
                  savedString[2] = mainWindow.getCenterTextArea();
                  savedString[3] = mainWindow.getP1name();
                  savedString[4] = mainWindow.getP2name();                 
-                 saveAndLoad.saveStringArray("./Save/stringArray.txt", savedString);
+                 saveAndLoad.saveStringArray("./src/no/hist/aitel/chess/resources/stringArray.txt", savedString);
              }
         }
         else if(e.getActionCommand().equals("Load game")) {
             if (JOptionPane.YES_OPTION == JOptionPane.showConfirmDialog(null, "Are you sure you want to load game?\nUnsaved progress will be lost.")) {
                 try {
-                    mainWindow.setXcoords(saveAndLoad.loadIntArray("./Save/x_coords.txt"));
-                    mainWindow.setYcoords(saveAndLoad.loadIntArray("./Save/y_coords.txt"));
-                    mainWindow.setBoardObj(saveAndLoad.loadBoard("./Save/internal.txt"));
-                    savedString = saveAndLoad.loadStringArray("./Save/stringArray.txt");
+                    mainWindow.setXcoords(saveAndLoad.loadIntArray("./src/no/hist/aitel/chess/resources/x_coords.txt"));
+                    mainWindow.setYcoords(saveAndLoad.loadIntArray("./src/no/hist/aitel/chess/resources/y_coords.txt"));
+                    mainWindow.setBoardObj(saveAndLoad.loadBoard("./src/no/hist/aitel/chess/resources/internal.txt"));
+                    savedString = saveAndLoad.loadStringArray("./src/no/hist/aitel/chess/resources/stringArray.txt");
                     mainWindow.setTimeUsed(Integer.parseInt(savedString[0]), Integer.parseInt(savedString[1]));
                     mainWindow.setCenterTextArea(savedString[2]);
                     mainWindow.setP1name(savedString[3]);
@@ -165,9 +165,9 @@ public class Main implements ActionListener, ItemListener {
         else if(e.getActionCommand().equals("New game")) {
             if (JOptionPane.YES_OPTION == JOptionPane.showConfirmDialog(null, "Are you sure you want to create a new game?\nUnsaved progress will be lost.")) {
                 try {
-                    mainWindow.setXcoords(saveAndLoad.loadIntArray("./Save/new_game_x_coords.txt"));
-                    mainWindow.setYcoords(saveAndLoad.loadIntArray("./Save/new_game_y_coords.txt"));
-                    mainWindow.setBoardObj(saveAndLoad.loadBoard("./Save/new_game_internal.txt"));
+                    mainWindow.setXcoords(saveAndLoad.loadIntArray("./src/no/hist/aitel/chess/resources/new_game_x_coords.txt"));
+                    mainWindow.setYcoords(saveAndLoad.loadIntArray("./src/no/hist/aitel/chess/resources/new_game_y_coords.txt"));
+                    mainWindow.setBoardObj(saveAndLoad.loadBoard("./src/no/hist/aitel/chess/resources/new_game_internal.txt"));
                     mainWindow.cleanup();
                    
                 } catch (ClassNotFoundException ex) {

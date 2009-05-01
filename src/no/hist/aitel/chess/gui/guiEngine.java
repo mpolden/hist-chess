@@ -86,7 +86,7 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
     private String centerText = "";
     private String picked;
     private String notation = "";
-    private String intro = "\n Welcome to Chess\n Version 1.0 build 385\n Created by team 9\n Last Updated: 28/04/09\n\n";
+    private String intro = "\n Welcome to Chess\n Version 1.0 build 392\n Created by team 9\n Last Updated: 28/04/09\n\n";
     private Buttonlistener listener = new Buttonlistener();
 
     /**
@@ -208,9 +208,9 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
      * Initiates new game, so it equals a saved game when the game is started
      */
     private void initNewGameSave() {
-        saveAndLoad.saveIntArray("./Save/new_game_x_coords.txt", getChessboard().getXcoords());
-        saveAndLoad.saveIntArray("./Save/new_game_y_coords.txt", getChessboard().getYcoords());
-        saveAndLoad.saveBoard("./Save/new_game_internal.txt", getBoardObj());
+        saveAndLoad.saveIntArray("./src/no/hist/aitel/chess/resources/new_game_x_coords.txt", getChessboard().getXcoords());
+        saveAndLoad.saveIntArray("./src/no/hist/aitel/chess/resources/new_game_y_coords.txt", getChessboard().getYcoords());
+        saveAndLoad.saveBoard("./src/no/hist/aitel/chess/resources/new_game_internal.txt", getBoardObj());
     }
     /**
      * Returns the saveAndLoad object
