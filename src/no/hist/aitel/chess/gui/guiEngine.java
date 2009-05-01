@@ -208,9 +208,9 @@ public class guiEngine extends JFrame implements MouseListener, MouseMotionListe
      * Initiates new game, so it equals a saved game when the game is started
      */
     private void initNewGameSave() {
-        saveAndLoad.saveIntArray("./src/no/hist/aitel/chess/resources/new_game_x_coords.txt", getChessboard().getXcoords());
-        saveAndLoad.saveIntArray("./src/no/hist/aitel/chess/resources/new_game_y_coords.txt", getChessboard().getYcoords());
-        saveAndLoad.saveBoard("./src/no/hist/aitel/chess/resources/new_game_internal.txt", getBoardObj());
+        saveAndLoad.saveIntArray("./Save/new_game_x_coords.txt", getChessboard().getXcoords());
+        saveAndLoad.saveIntArray("./Save/new_game_y_coords.txt", getChessboard().getYcoords());
+        saveAndLoad.saveBoard("./Save/new_game_internal.txt", getBoardObj());
     }
     /**
      * Returns the saveAndLoad object
