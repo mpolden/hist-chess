@@ -1,0 +1,6 @@
+*.log
+*.swp
+*~
+*.class
+build
+dist
