@@ -9,6 +9,7 @@
 <!-- in the project's Project Properties dialog box.-->
 <project name="Chess" default="default" basedir=".">
     <description>Builds, tests, and runs the project Chess.</description>
+    <property name="libs.junit_4.classpath" value="lib/junit.jar" />
     <import file="nbproject/build-impl.xml"/>
     <!--
 
